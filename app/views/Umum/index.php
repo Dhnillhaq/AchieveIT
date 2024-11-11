@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistem Pencatatan Prestasi Mahasiswa</title>
-    <link href="../../../public/css/output.css" rel="stylesheet" />
-  </head>
   <body>
     <div class="relative h-screen bg-cover bg-center" style="background-image: url('../../../public/img/gedung-jti.png');">
       <div class="absolute inset-0 bg-[#132145] bg-opacity-70"></div>
@@ -30,7 +22,7 @@
       </nav>
 
       <section
-        id="selamat-datang"
+         id="selamat-datang"
         class="relative text-justify flex justify-items-start items-center">
         <div class="p-10 mt-20 ml-10">
           <h1 class="text-white text-7xl mb-2 font-bold">Selamat Datang di</h1>
@@ -54,6 +46,3 @@
     </div>
 
     <?php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php'; ?>
-
-  </body>
-</html>
