@@ -1,5 +1,5 @@
 <?php 
-class ProgramStudi 
+class DosenPembimbingModel
 {
     private $db;
 

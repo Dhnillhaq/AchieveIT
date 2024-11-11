@@ -1,5 +1,5 @@
 <?php 
-class Prestasi {
+class PrestasiModel {
     private $db;
 
     public function __construct() {

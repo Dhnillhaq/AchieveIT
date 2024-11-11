@@ -5,7 +5,7 @@ class Admin extends Controller
     {
         $this->view('templates/header');
         $this->view('Admin/index');
-        $this->model('Prestasi')->getAllPrestasi();
+        $this->model('PrestasiModel')->getAllPrestasi();
         $this->view('templates/footer');
     }
 }

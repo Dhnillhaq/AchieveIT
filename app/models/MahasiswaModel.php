@@ -1,31 +1,37 @@
-<?php 
-class Admin_model{
+<?php
+
+
+
+class MahasiswaModel
+{
     private $db;
 
-    // Get All Data Admin
-    public function getAllDataAdmin()
-    {
+    public function __construct() {
         $this->db = new Connection;
-        $stmt = "SELECT * FROM admin";
+    }
+
+    // Get All Mahasiswa
+    public function getAllDataMahasiswa()
+    {
+        $stmt = "SELECT * FROM mahasiswa";
         $result = sqlsrv_query($this->db->conn, $stmt);
 
         $data = [];
-        
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
         return $data;
     }
 
-    // Get All Log Admin
-    public function getAllLogAdmin()
+    // Get Prestasi ber-Anggota kan Mahasiswa
+    public function getPrestasiMhs()
     {
-        $this->db = new Connection;
-        $stmt = "SELECT * FROM log_admin";
+        $stmt = "SELECT * FROM prestasi_mahasiswa";
         $result = sqlsrv_query($this->db->conn, $stmt);
 
         $data = [];
-        
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }

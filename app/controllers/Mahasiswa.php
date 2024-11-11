@@ -5,7 +5,7 @@ class Mahasiswa extends Controller
     {
 
         $this->view('templates/header');
-        $data['mhs'] = $this->model('Mahasiswa_model')->getAllDataMahasiswa();
+        $data['mhs'] = $this->model('MahasiswaModel')->getAllDataMahasiswa();
         $this->view('Mahasiswa/index', $data);
         $this->view('templates/footer');
     }
