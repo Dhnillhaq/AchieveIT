@@ -9,7 +9,6 @@
   <body class="bg-white rounded-lg">
     <section id="daftar-prestasi" class="">
       <div class="p-5 mt-20 mx-10">
-        <h1 class="text-4xl mb-2 font-bold">Daftar Mahasiswa Berprestasi</h1>
         <div class="flex justify-between">
           <div class="flex">
             <input
