@@ -22,7 +22,7 @@
             <div class="flex items-center mr-3">
               <span class="text-gray-600">Lihat</span>
               <select
-                class="mx-2 border rounded px-2 py-1 text-sm bg-white shadow-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="10">10</option>
                 <option value="20">20</option>
@@ -32,7 +32,7 @@
             </div>
             <div class="flex items-center mx-10">
               <select
-                class="right-0 mx-2 border rounded px-2 py-1 text-sm bg-white shadow-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="2023-2024">2023</option>
                 <option value="2024-2025">2024</option>

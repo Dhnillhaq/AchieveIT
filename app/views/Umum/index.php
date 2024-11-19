@@ -10,8 +10,8 @@
     </style>
   </head>
   <body class="font-[poppins]">
-    <div class="relative h-screen bg-cover bg-center" style="background-image: url('../../../public/img/gedung-jti.png');">
-      <div class="absolute inset-0 bg-[#132145] bg-opacity-82"></div>
+    <section class="relative bg-cover bg-center h-min-screen" style="background-image: url('../../../public/img/gedung-jti.png');">
+      <div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
       <nav
         class="text-white p-4 container mx-auto flex justify-between items-center relative z-10 px-8 py-8"
       >
@@ -35,8 +35,8 @@
 
       <section
         id="selamat-datang"
-        class="relative text-justify flex justify-items-start items-center">
-        <div class="p-10 mt-20 ml-10">
+        class="relative text-justify flex justify-items-start items-center ">
+        <div class="p-10 mt-20 ml-10 pb-32">
           <h1 class="text-white text-7xl mb-2 font-bold">Selamat Datang di</h1>
           <h1 class="text-[#FEC01A] text-7xl mb-2 font-bold">AchieveIt!</h1>
           <p class="max-w-3xl m-0 text-white text-[18px]">
@@ -48,14 +48,17 @@
             pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
             culpa qui officia desereutn.
           </p>
-          <button
+          <a href="login.html">
+            <button
             class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10"
           >
             Masuk
           </button>
+          </a>
         </div>
       </section>
-    </div>
+    </section> 
+      
 
     <section id="fitur-utama" class="py-32 bg-blue-50 grid grid-rows-3 grid-flow-col gap-x-10 gap-y-24 px-28">
       <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
@@ -119,10 +122,9 @@
           </a> 
         </div>
       </div>
-      
-      
     </section>
-    
 
+    <?php include __DIR__ . '/../../components/Footer.php'; ?>
+  
   </body>
 </html>
