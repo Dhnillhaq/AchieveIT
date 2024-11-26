@@ -8,32 +8,31 @@
   </head>
   <body class="bg-white rounded-lg">
     <section id="daftar-prestasi" class="">
-      <div class="p-5 mt-20 mx-10">
-        <h1 class="text-4xl mb-2 font-bold">Daftar Mahasiswa Berprestasi</h1>
+      <div class="p-5 mb-10 ">
         <div class="flex justify-between">
           <div class="flex">
             <input
               type="text"
               id="cari-mhs"
               placeholder="Cari mahasiswa berdasarkan nama/NIM"
-              class="bg-blue-100 w-96 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="bg-white w-96 p-2 rounded-md border shadow-md"
             />
           </div>
           <div class="flex right-0">
             <div class="flex items-center mr-3">
-              <span class="text-gray-600">Lihat</span>
+              <span class="">Lihat</span>
               <select
-                class="mx-2 border rounded px-2 py-1 text-sm bg-white shadow-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="50">50</option>
               </select>
-              <span class="text-gray-600">entri</span>
+              <span class="">entri</span>
             </div>
             <div class="flex items-center mx-10">
               <select
-                class="right-0 mx-2 border rounded px-2 py-1 text-sm bg-white shadow-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="2023-2024">2023</option>
                 <option value="2024-2025">2024</option>
