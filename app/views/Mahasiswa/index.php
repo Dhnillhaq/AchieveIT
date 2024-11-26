@@ -7,5 +7,12 @@
 </head>
 <body>
     <h1>Halo Mahasiswa</h1>
+    <?php foreach ($data['mhs'] as $row) { ?>
+                        <ul>
+                            <li><?= $row['nim']; ?></li>
+                            <li><?= $row['nama']; ?></li>
+                            <li>Rp. <?= $row['tempat_lahir']; ?></li>
+                        </ul>
+                    <?php } ?>
 </body>
 </html>
