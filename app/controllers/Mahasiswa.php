@@ -9,5 +9,13 @@ class Mahasiswa extends Controller
         $this->view('Mahasiswa/index', $data);
         $this->view('templates/footer');
     }
+
+    public function formPrestasi()
+    {
+
+        $this->view('templates/header');
+        $this->view('Mahasiswa/formPrestasi');
+        $this->view('templates/footer');
+    }
 }
 ?>

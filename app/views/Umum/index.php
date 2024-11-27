@@ -14,17 +14,17 @@
 <body class="font-[poppins]">
   <section class="relative bg-cover bg-center h-min-screen"
     style="background-image: url('../../../public/img/gedung-jti.png');">
-    <div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
+    <div class="absolute inset-0 bg-[#5c71a6d4] bg-opacity-80"></div>
     <nav class="text-white p-4 container mx-auto flex justify-between items-center relative z-10 px-8 py-8">
       <div class="navbar-text flex justify-between gap-6">
         <img src="../../../public/img/logo-polinema-jti.png" alt="logo" />
         <h1 class="font-extrabold text-4xl">AchieveIt</h1>
       </div>
       <div class="navbar-button flex right-0 text-[16px]">
-        <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Beranda</a>
+        <a href="<?=BASEURL;?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
         <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
         <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
-        <a href="login.html">
+        <a href="<?=BASEURL;?>/Umum/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>
@@ -45,7 +45,7 @@
           pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
           culpa qui officia desereutn.
         </p>
-        <a href="login.html">
+        <a href="<?=BASEURL;?>/Umum/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
             Masuk
           </button>

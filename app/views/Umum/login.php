@@ -36,6 +36,11 @@
       <!-- left side -->
       <section class="w-1/2 flex items-center justify-center px-10 text-white">
         <h1 class="text-6xl font-bold">Selamat datang di <span class="text-[#FEC01A]">ArchieveIT!</span></h1>
+        <a href="<?=BASEURL;?>/">
+          <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
+            Balik
+          </button>
+        </a>
       </section>
 
       <!-- right side -->

@@ -20,6 +20,8 @@ class PrestasiModel {
         return $data;
     }
 
+    
+
     // Get All Kategori Prestasi
     public function getAllKategori()
     {
@@ -78,7 +80,7 @@ class PrestasiModel {
         }
         return $data;
     }
-    
+  
 
 
 }

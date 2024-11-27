@@ -27,7 +27,7 @@
           </li>
           <li>
             <a
-              href="#"
+              href="<?=BASEURL;?>/Mahasiswa/"
               class="flex items-center p-2 mt-10 text-white rounded-lg hover:bg-[#3063C559]"
             >
               <span class="flex-1 ms-3 whitespace-nowrap">Beranda</span>
