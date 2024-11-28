@@ -107,12 +107,16 @@
       <div class="p-5 mb-10 ">
         <div class="flex justify-between">
           <div class="flex">
-            <input
+            <form id="formFilter" action="<?=BASEURL;?>/#daftar-prestasi" method="POST">
+              <input
               type="text"
               id="cari-mhs"
               placeholder="Cari mahasiswa berdasarkan nama/NIM"
               class="bg-white w-96 p-2 rounded-md border shadow-md"
-            />
+              name="keyword"
+              />
+              <button type="submit" name="submit" class="mt-4 w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900">Submit</button>
+            </form>
           </div>
           <div class="flex right-0">
             <div class="flex items-center mr-3">

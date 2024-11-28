@@ -96,9 +96,19 @@ class PrestasiModel extends Connection{
 
     public function searchPrestasi($keyword)
     {
-        $stmt = "SELECT * FROM mahasiswa WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%';";
+        $stmt = "SELECT m.nim, m.nama, p.nama_prodi, m.total_poin
+            FROM mahasiswa m
+            JOIN program_studi p ON m.id_prodi = p.id_prodi
+            WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%'
+            ORDER BY total_poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
 
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $this->data[] = $row;
+        }
+
+        return $this->data;
     }
 
 }
