@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Prestasi</title>
     <link href="../../../public/css/output.css" rel="stylesheet" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
     </style>
-  </head>
-  <body class="font-[poppins]">
+</head>
+<body class="font-[poppins]">
     <!-- sidebar -->
     <aside
       id="default-sidebar"
@@ -40,7 +40,7 @@
           </li>
           <li>
             <a
-              href="formPrestasi.php"
+              href="formPrestasi.html"
               class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]"
             >
               <img
@@ -61,7 +61,20 @@
                 alt="logo"
                 class="w-5 h-5"
               />
-              <span class="flex-1 ms-3 whitespace-nowrap">Prestasi Saya</span>
+              <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]"
+            >
+              <img
+                src="../../../public/img/Administrasi-data.png"
+                alt="logo"
+                class="w-5 h-5"
+              />
+              <span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
             </a>
           </li>
           <li>
@@ -82,9 +95,9 @@
     </aside>
 
     <section class="sm:ml-64 bg-blue-50 min-h-screen">
-      <!-- profil -->
+        <!-- profil -->
       <section class="flex justify-end items-center p-8 space-x-3">
-        <p class="font-bold">Haikal Muhammad Rafli</p>
+        <p class="font-bold">Admin12345</p>
         <img
           src="../../../public/img/Logo_archhieveIT.png"
           alt="logo"
@@ -96,6 +109,15 @@
       <section class="flex-col justify-start pl-6">
         <p class="font-bold text-3xl">Detail prestasi</p>
       </section>
+
+      <!-- btn edit -->
+       <section class="flex justify-end pr-6">
+            <a href="#">
+                <button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+                  <img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
+                  <p>edit</p></button>
+            </a>
+       </section>
 
       <!-- data kompetisi -->
       <section class="relative p-6">
@@ -222,14 +244,17 @@
                 <!-- Row 1 -->
                 <tr>
                   <td class="py-2 px-4 border border-blue-950">1</td>
-                  <td class="py-2 px-4 border border-blue-950">2341720001</td>
+                  <td class="py-2 px-4 border border-blue-950">
+                    <a href="profilMahasiswa.html">2341720001</a></td>
                   <td class="py-2 px-4 border border-blue-950">Haikal</td>
                   <td class="py-2 px-4 border border-blue-950">Ketua</td>
                 </tr>
                 <!-- Row 2 -->
                 <tr>
                   <td class="py-2 px-4 border border-blue-950">1</td>
-                  <td class="py-2 px-4 border border-blue-950">2341720002</td>
+                  <td class="py-2 px-4 border border-blue-950">
+                    <a href="profilMahasiswa.html">2341720002</a>
+                  </td>
                   <td class="py-2 px-4 border border-blue-950">Restu</td>
                   <td class="py-2 px-4 border border-blue-950">Anggota</td>
                 </tr>
@@ -382,10 +407,20 @@
             </button>
           </a>
         </div>
+        
+           <div class="justify-center p-2">
+            <a href="">
+                <button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+                  <img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+                  <p>Hapus</p></button>
+
+            </a>
+           </div>
+     
       </section>
     </section>
 
     <!-- footer -->
-    <?php include __DIR__ . '/../../components/Footer.php'; ?>
-  </body>
+    <?php include __DIR__ . '/../../components/Footer.php'; ?><section class="sm:ml-64 bg-blue-50">
+</body>
 </html>

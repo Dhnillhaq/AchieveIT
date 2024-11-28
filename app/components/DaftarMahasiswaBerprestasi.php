@@ -10,12 +10,13 @@
     <section id="daftar-prestasi" class="">
       <div class="p-5 mb-10 ">
         <div class="flex justify-between">
-          <div class="flex">
+          <div class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+            <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
             <input
               type="text"
               id="cari-mhs"
               placeholder="Cari mahasiswa berdasarkan nama/NIM"
-              class="bg-white w-96 p-2 rounded-md border shadow-md"
+              class="bg-white flex focus:outline-none"
             />
           </div>
           <div class="flex right-0">
@@ -77,10 +78,8 @@
               <?php
               // Data dummy untuk mahasiswa
               $dataMahasiswa = [
-                  ['rangking' => 1, 'nim' => '123456789', 'nama' => 'Fais Restu', 'prodi' => 'Informatika', 'poin' => 95],
-                  ['rangking' => 2, 'nim' => '987654321', 'nama' => 'Nur Aini', 'prodi' => 'Sistem Informasi', 'poin' => 90],
-                  ['rangking' => 3, 'nim' => '112233445', 'nama' => 'Andi Syahputra', 'prodi' => 'Teknik Komputer', 'poin' => 88],
-                  ['rangking' => 4, 'nim' => '556677889', 'nama' => 'Dewi Lestari', 'prodi' => 'Teknik Elektro', 'poin' => 85]
+                  ['rangking' => 1, 'nim' => '987654321', 'nama' => 'Haikal Muhammad', 'prodi' => 'Informatika', 'poin' => 120],
+                  ['rangking' => 2, 'nim' => '123456789', 'nama' => 'Fais Restu', 'prodi' => 'Informatika', 'poin' => 95],
               ];
 
               // Looping data mahasiswa ke dalam tabel
