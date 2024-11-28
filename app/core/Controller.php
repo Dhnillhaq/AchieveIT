@@ -1,4 +1,5 @@
 <?php 
+
 class Controller {
 
     public function view($view, $data = []){
@@ -10,5 +11,7 @@ class Controller {
 
         return new $model;
     }
+
+
 }
 ?>

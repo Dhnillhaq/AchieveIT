@@ -1,8 +1,12 @@
-<?php 
-class Admin extends Controller{
-    public function index(){
+<?php
+class Admin extends Controller
+{
+    public function index()
+    {
+        $this->view('templates/header');
         $this->view('Admin/index');
-        $this->model('Prestasi_model')->getAllPrestasi();
+        $this->model('Prestasi')->getAllPrestasi();
+        $this->view('templates/footer');
     }
 }
 ?>
