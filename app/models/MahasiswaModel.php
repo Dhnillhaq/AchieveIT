@@ -1,41 +1,34 @@
 <?php
 
-
-
-class MahasiswaModel
+class MahasiswaModel extends Connection
 {
-    private $db;
-
-    public function __construct() {
-        $this->db = new Connection;
-    }
+    private $data = [];
 
     // Get All Mahasiswa
     public function getAllDataMahasiswa()
     {
         $stmt = "SELECT * FROM mahasiswa";
-        $result = sqlsrv_query($this->db->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            $this->data[] = $row;
         }
-        return $data;
+        return $this->data;
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa
     public function getPrestasiMhs()
     {
         $stmt = "SELECT * FROM prestasi_mahasiswa";
-        $result = sqlsrv_query($this->db->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            $this->data[] = $row;
         }
-        return $data;
+        return $this->data;
     }
 }
 ?>

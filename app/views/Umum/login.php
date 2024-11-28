@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -20,7 +20,7 @@
     </div>
 </body>
 </html>
-=======
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AchieveIT Login</title>
@@ -36,11 +36,7 @@
       <!-- left side -->
       <section class="w-1/2 flex items-center justify-center px-10 text-white">
         <h1 class="text-6xl font-bold">Selamat datang di <span class="text-[#FEC01A]">ArchieveIT!</span></h1>
-        <a href="<?=BASEURL;?>/">
-          <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
-            Balik
-          </button>
-        </a>
+        
       </section>
 
       <!-- right side -->
@@ -51,18 +47,16 @@
             <!-- Title -->
             <h1 class="text-4xl font-bold text-center mb-8">Masuk</h1>
             <!-- Form -->
-            <form class="space-y-4">
+            <form method="post" action="<?=BASEURL;?>/Home/isLogin" class="space-y-4">
               <div class="relative">  
-                <input type="text" id="Nama pengguna" placeholder="Nama Pengguna" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                <input type="text" id="Nama pengguna" name="username" placeholder="Nama Pengguna" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required title="Mohon ini wajib diisi!">
               </div>
 
               <div class="relative">
-                <input type="text" id="Kata sandi" placeholder="Kata sandi" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                <input type="text" id="Kata sandi" name="password" placeholder="Kata sandi" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>
               </div>
+              <button type="submit" name="submit" class="mt-4 w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900">Masuk</button>
             </form>
-            <!-- button -->
-            <button type="submit" class="mt-4 w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900">Masuk</button>
-            
           </div>
           
         </div>
@@ -72,4 +66,3 @@
 
 </body>
 </html>
->>>>>>> 2a90e17f246d3fc79399521d30e487d0c9d1790c

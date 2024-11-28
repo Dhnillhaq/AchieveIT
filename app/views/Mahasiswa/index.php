@@ -34,12 +34,12 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+          <a href="<?=BASEURL;?>/Mahasiswa/prestasiSaya" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
             <span class="flex-1 ms-3 whitespace-nowrap">Prestasi Saya</span>
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+          <a href="<?=BASEURL;?>/Mahasiswa/profil" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
           </a>
         </li>

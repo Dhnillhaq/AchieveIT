@@ -1,35 +1,34 @@
 <?php 
-class AdminModel{
-    private $db;
-
+class AdminModel extends Connection
+{
+    private $data = [];
     // Get All Data Admin
     public function getAllDataAdmin()
     {
-        $this->db = new Connection;
         $stmt = "SELECT * FROM admin";
-        $result = sqlsrv_query($this->db->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        
         
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            $this->data[] = $row;
         }
-        return $data;
+        return $this->data;
     }
 
     // Get All Log Admin
     public function getAllLogAdmin()
     {
-        $this->db = new Connection;
+     
         $stmt = "SELECT * FROM log_admin";
-        $result = sqlsrv_query($this->db->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        
         
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            $this->data[] = $row;
         }
-        return $data;
+        return $this->data;
     }
 }
 ?>
