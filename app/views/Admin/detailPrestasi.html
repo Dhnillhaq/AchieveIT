@@ -137,7 +137,7 @@
               </p>
             </div>
 
-            <div class="flex flex-row justify-start items-start space-x-40">
+            <div class="flex flex-row justify-start items-start space-x-24">
               <div class="flex flex-col space-y-4">
                 <div class="flex flex-col justify-start items-start pt-5">
                   <p class="text-[#757575]">Kategori Prestasi</p>
@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="flex flex-col justify-start items-start pt-5">
-                  <p class="text-[#757575]">Penyelenggara Kompetisi</p>
+                  <p class="text-[#757575]">Tingkat Penyelenggara</p>
                   <p class="font-semibold">Pemerintah</p>
                 </div>
 
@@ -175,12 +175,22 @@
                   <p class="text-[#757575]">Tempat Kompetisi</p>
                   <p class="font-semibold">Jakarta</p>
                 </div>
+
+                <div class="flex flex-col justify-start items-start pt-5">
+                  <p class="text-[#757575]">Penyelenggara Kompetisi</p>
+                  <p class="font-semibold">Kementrian Pendidikan dan Kebudayaan </p>
+                </div>
               </div>
 
               <div class="flex flex-col space-y-4">
                 <div class="flex flex-col justify-start items-start pt-5">
                   <p class="text-[#757575]">File Surat Tugas</p>
                   <p class="font-semibold text-[#3063C5]">suratTugas.pdf</p>
+                </div>
+
+                <div class="flex flex-col justify-start items-start pt-5">
+                  <p class="text-[#757575]">File Poster</p>
+                  <p class="font-semibold text-[#3063C5]">poster.pdf</p>
                 </div>
 
                 <div class="flex flex-col justify-start items-start pt-5">
@@ -330,6 +340,13 @@
         <div
           class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2"
         >
+        <div class="flex flex-col space-y-0 justify-start items-start py-3">
+          <p class="text-[#757575] font-light">Status</p>
+          <p class="font-bold">VALID</p>
+        </div>
+
+        <h2 class="text-[#757575]">Perhitungan Poin</h2>
+
           <!-- tabel -->
           <div class="mt-6 overflow-x-auto bg-white shadow-md rounded-2xl">
             <table class="min-w-full table-auto">
@@ -388,6 +405,8 @@
               </tbody>
             </table>
           </div>
+
+          <h2 class="font-bold ">Total Poin : 12</h2>
         </div>
       </section>
 
