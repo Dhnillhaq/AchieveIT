@@ -7,19 +7,22 @@ class Home extends Controller
 
     public function index()
     {
+        $this->view('templates/header');
+
         if (isset($_POST['limit'])) {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
-        } else if (isset($_POST['keyword'])) {
+        } else if (isset($_POST['keyword'])){
             $data['prestasi'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
         } else {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
         }
-        $this->view('index', $data);
-        if (isset($_POST['login'])) {
-        }
+        $this->view('Umum/index', $data);
+        $this->view('templates/footer');
     }
     public function tampilSort()
     {
+        $this->view('templates/header');
+
         if (isset($_POST['limit'])) {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
         } else {
@@ -65,13 +68,14 @@ class Home extends Controller
 
     public function setSession()
     {
-        $_SESSION['username'] = $this->userDB['nip'];
-        $_SESSION['password'] = $this->userDB['password'];
         if (isset($this->userDB['role'])) {
+            $_SESSION['username'] = $this->userDB['nip'];
             $_SESSION['role'] = $this->userDB['role'];
         } else {
+            $_SESSION['username'] = $this->userDB['nim'];
             $_SESSION['role'] = "Mahasiswa";
         }
+        $_SESSION['password'] = $this->userDB['password'];
 
     }
     public function isSuperAdmin()
