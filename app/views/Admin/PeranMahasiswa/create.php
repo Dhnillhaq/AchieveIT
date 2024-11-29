@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tambah Peran Mahasiswa</title>
-	<link href="../../../../public/css/output.css" rel="stylesheet" />
-	<style>
-		@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-	</style>
-</head>
-
-<body class="font-poppins">
 	<!-- sidebar -->
 	<aside id="default-sidebar"
 		class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -72,7 +58,7 @@
 
 		<!-- btn back -->
 		<section class="flex justify-end pr-6">
-			<a href="#">
+			<a href="<?=BASEURL;?>./">
 				<button
 					class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 					<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -102,7 +88,7 @@
 		<!-- btn -->
 		<section class="flex space-x-4 justify-start pl-4 pb-6">
 			<div class="justify-center p-2">
-				<a href="">
+				<a href="<?=BASEURL;?>./">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 						<img src="../../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 						<p>Simpan</p>
@@ -111,7 +97,7 @@
 			</div>
 
 			<div class="justify-center p-2">
-				<a href="">
+				<a href="<?=BASEURL;?>./">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 						<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 						<p>Reset</p>
@@ -121,8 +107,3 @@
 			</div>
 		</section>
 	</section>
-	<!-- footer -->
-	<?php include __DIR__ . '/../../components/Footer.php'; ?>
-</body>
-
-</html>

@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Detail Mahasiswa</title>
-	<link href="../../../../public/css/output.css" rel="stylesheet" />
-	<style>
-		@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-	</style>
-</head>
-</head>
-
-<body class="font-[poppins]">
 	<!-- sidebar -->
 	<aside id="default-sidebar"
 		class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -146,7 +131,7 @@
 
 		<!-- btn -->
 		<section class="justify-center p-6">
-			<a href="">
+			<a href="<?=BASEURL;?>./">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 					<img src="../../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 					<p>Kembali</p>
