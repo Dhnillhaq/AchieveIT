@@ -7,17 +7,14 @@ class Home extends Controller
 
     public function index()
     {
-        $this->view('templates/header');
-
         if (isset($_POST['limit'])) {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
-        } else if (isset($_POST['keyword'])){
+        } else if (isset($_POST['keyword'])) {
             $data['prestasi'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
         } else {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
         }
-        $this->view('Umum/index', $data);
-        $this->view('templates/footer');
+        $this->view('index', $data);
     }
 
     public function login()
