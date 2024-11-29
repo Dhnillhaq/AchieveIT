@@ -9,23 +9,33 @@ class Home extends Controller
     {
         $this->view('templates/header');
 
-        if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year']) ) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
+        if (isset($_POST['limit'])) {
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
+        } else if (isset($_POST['keyword'])){
+            $data['prestasi'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
         } else {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
         }
         $this->view('Umum/index', $data);
         $this->view('templates/footer');
+    }
+    public function tampilSort()
+    {
+        $this->view('templates/header');
+
+        if (isset($_POST['limit'])) {
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
+        } else {
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
+        }
+        $this->view('index', $data);
         if (isset($_POST['login'])) {
         }
     }
-    
+
     public function login()
     {
-        $this->view('templates/header');
-        $this->view('Umum/login');
-        $this->view('templates/footer');
-
+        $this->view('Auth/login');
     }
 
     public function isLogin()

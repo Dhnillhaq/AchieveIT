@@ -3,7 +3,7 @@ class Mahasiswa extends Controller
 {
     public function index()
     {
-        if (isset($_SESSION['role'])) {   
+        if (isset($_SESSION['role'])) {
             $role = $_SESSION['role'];
             if ($role == "Mahasiswa") {
                 $this->view('templates/header');
@@ -15,9 +15,8 @@ class Mahasiswa extends Controller
                 }
 
                 $this->view('Mahasiswa/index', $data);
-                $this->view('templates/footer');
             } else {
-                header('Location:'.BASEURL.'/Umum/Login');
+                header('Location:' . BASEURL . '/Umum/Login');
             }
         } else {
             header("location:http://localhost/public");
@@ -27,9 +26,7 @@ class Mahasiswa extends Controller
 
     public function formPrestasi()
     {
-        $this->view('templates/header');
         $this->view('Mahasiswa/formPrestasi');
-        $this->view('templates/footer');
     }
 
     public function prestasiSaya()
@@ -39,7 +36,7 @@ class Mahasiswa extends Controller
 
     public function profil()
     {
-        
+
     }
 }
 ?>
