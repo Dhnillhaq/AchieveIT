@@ -158,8 +158,8 @@
             <select
               class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option>TRUE</option>
-              <option>FALSE</option>
+              <option>VALID</option>
+              <option>INVALID</option>
             </select>
           </div>
         </div>

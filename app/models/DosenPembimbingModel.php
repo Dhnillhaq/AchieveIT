@@ -1,21 +1,20 @@
 <?php 
-class ProgramStudi 
+class DosenPembimbingModel extends Connection
 {
-    private $db;
+    private $data = [];
 
     // Get All Dosen Pembimbing
     public function getAllDosenPembimbing()
     {
-        $this->db = new Connection;
+ 
         $stmt = "SELECT * FROM dosen_pembimbing";
-        $result = sqlsrv_query($this->db->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
-
+        
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            $this->data[] = $row;
         }
-        return $data;
+        return $this->data;
     }
 }
 
