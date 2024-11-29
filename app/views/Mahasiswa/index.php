@@ -46,7 +46,7 @@
 
 			<!-- btn tambah prestasi -->
 			<section class="p-6">
-				<a href="<?= BASEURL; ?>./">
+				<a href="<?= BASEURL; ?>/">
 					<button class="bg-[#132145] rounded-lg text-white p-2 font-semibold">Tambahkan Prestasi</button>
 				</a>
 			</section>
