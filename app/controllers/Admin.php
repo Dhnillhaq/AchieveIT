@@ -1,16 +1,18 @@
 <?php
 class Admin extends Controller
 {
+    
+    
     public function index()
     {
-        if (isset($_SESSION['role'])) {
+        if ($this->checkRole()) {
             $role = $_SESSION['role'];
             if ($role == "Admin") {
                 $this->view('Admin/index');
                 $this->model('PrestasiModel')->getAllPrestasi();
                 exit;
             } else {
-                header('Location:' . BASEURL . '/Auth/Login');
+                header('location:' . BASEURL . '/Auth/Login');
             }
         } else {
             header('location:' . BASEURL);
