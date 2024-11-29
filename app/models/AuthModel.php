@@ -1,5 +1,5 @@
 <?php 
-class Auth extends Connection {
+class AuthModel extends Connection {
     private $data;
     public function getSuperAdmin(){
         $stmt = "SELECT * FROM admin WHERE role = 'Super Admin'";

@@ -28,15 +28,30 @@ class Mahasiswa extends Controller
     {
         $this->view('Mahasiswa/formPrestasi');
     }
-
+    
     public function prestasiSaya()
     {
+        $this->view('Mahasiswa/prestasiSaya');
+        
+    }
+    
+    public function profil()
+    {
+        $this->view('Mahasiswa/profilMahasiswa');
 
     }
 
-    public function profil()
-    {
-
+    public function create(){
+        $this->view("Admin/Mahasiswa/create");
+    }
+    public function edit(){
+        $this->view("Admin/Mahasiswa/edit");
+    }
+    public function indexC(){
+        $this->view("Admin/Mahasiswa/index");
+    }
+    public function show(){
+        $this->view("Admin/Mahasiswa/show");
     }
 }
 ?>
