@@ -1,13 +1,15 @@
-<?php 
-class ProgramStudiModel extends Connection
+<?php
+class DosenModel extends Connection
 {
     private $data = [];
-    
-    // Get All Dosen Pembimbing
-    public function getAllDosenPembimbing()
+
+    // Get All Dosen
+    public function getAllDosen()
     {
-        $stmt = "SELECT * FROM dosen_pembimbing";
+
+        $stmt = "SELECT * FROM dosen";
         $result = sqlsrv_query($this->conn, $stmt);
+
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;
