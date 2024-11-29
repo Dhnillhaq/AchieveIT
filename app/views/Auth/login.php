@@ -30,7 +30,7 @@
 					<!-- Title -->
 					<h1 class="text-4xl font-bold text-center mb-8">Masuk</h1>
 					<!-- Form -->
-					<form method="post" action="<?= BASEURL; ?>/Home/isLogin" class="space-y-4">
+					<form method="post" action="<?= BASEURL; ?>/Auth/isLogin" class="space-y-4">
 						<div class="relative">
 							<input type="text" id="Nama pengguna" name="username" placeholder="Nama Pengguna"
 								class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"

@@ -2,7 +2,6 @@
 class Admin extends Controller
 {
     
-    
     public function index()
     {
         if ($this->checkRole()) {
@@ -20,13 +19,13 @@ class Admin extends Controller
     }
     public function superAdmin()
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if (isset($_SESSION['user']['role'])) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Super Admin") {
                 $this->view('Admin/index');
                 exit;
             } else {
-                header("location:http://localhost/public");
+                header("location:".BASEURL."/Auth/login");
             }
         } else {
             header("location:http://localhost/public");
@@ -45,6 +44,16 @@ class Admin extends Controller
         } else {
             header("location:http://localhost/public");
         }
+    }
+
+    public function administrasiData(){
+        $this->view("Admin/administrasiData");
+    }
+    public function pengaturanPrestasi(){
+        $this->view("Admin/pengaturanPrestasi");
+    }
+    public function profilAdmin(){
+        $this->view("Admin/profilAdmin");
     }
 }
 ?>

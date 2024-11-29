@@ -62,7 +62,7 @@ class Auth extends Controller
     }
     public function isSuperAdmin()
     {
-        $this->userDB = $this->model("UserModel")->getSuperAdmin();
+        $this->userDB = $this->model("AuthModel")->getSuperAdmin();
         if ($this->usernameInp == $this->userDB['nip'] && $this->passwordInp == $this->userDB['password']) {
             return true;
         }
@@ -71,16 +71,16 @@ class Auth extends Controller
 
     public function isAdmin()
     {
-        $this->userDB = $this->model("UserModel")->getAdmin();
+        $this->userDB = $this->model("AuthModel")->getAdmin();
         if ($this->usernameInp == $this->userDB['nip'] && $this->passwordInp == $this->userDB['password']) {
-            return true;
+               return true;
         }
         return false;
     }
 
     public function isKajur()
     {
-        $this->userDB = $this->model("UserModel")->getKajur();
+        $this->userDB = $this->model("AuthModel")->getKajur();
         if ($this->usernameInp == $this->userDB['nip'] && $this->passwordInp == $this->userDB['password']) {
             return true;
         } else {
@@ -90,7 +90,7 @@ class Auth extends Controller
 
     public function isMahasiswa()
     {
-        $this->userDB = $this->model("UserModel")->getMahasiswa($this->usernameInp);
+        $this->userDB = $this->model("AuthModel")->getMahasiswa($this->usernameInp);
         if ($this->usernameInp == $this->userDB['nim'] && $this->passwordInp == $this->userDB['password']) {
             return true;
         } else {
