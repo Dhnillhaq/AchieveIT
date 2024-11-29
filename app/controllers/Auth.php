@@ -11,8 +11,8 @@ class Auth extends Controller
 
     public function isLogin()
     {
-        $this->usernameInp = $_POST["username"];
-        $this->passwordInp = $_POST["password"];
+        $this->usernameInp = htmlspecialchars($_POST["username"]);
+        $this->passwordInp = htmlspecialchars($_POST["password"]);
         $url = BASEURL;
 
         if ($this->isSuperAdmin()) {
@@ -40,14 +40,25 @@ class Auth extends Controller
     public function setSession()
     {
         if (isset($this->userDB['role'])) {
-            $_SESSION['username'] = $this->userDB['nip'];
-            $_SESSION['role'] = $this->userDB['role'];
+            $_SESSION['user'] = [
+                "nip" => $this->userDB['nip'],
+                "nama" => $this->userDB['nama'],
+                "password" => $this->userDB['password'],
+                "role" => $this->userDB['role'],
+            ];
         } else {
-            $_SESSION['username'] = $this->userDB['nim'];
-            $_SESSION['role'] = "Mahasiswa";
+            $_SESSION['user'] = [
+                "nim" => $this->userDB['nim'],
+                "password" => $this->userDB['password'],
+                "nama" => $this->userDB['nama'],
+                "tempat_lahir" => $this->userDB['tempat_lahir'],
+                "tanggal_lahir" => $this->userDB['tanggal_lahir'],
+                "agama" => $this->userDB['agama'],
+                "jenis_kelamin" => $this->userDB['jenis_kelamin'],
+                "email" => $this->userDB['email'],
+                "total_poin" => $this->userDB['total_poin']
+            ];
         }
-        $_SESSION['password'] = $this->userDB['password'];
-
     }
     public function isSuperAdmin()
     {

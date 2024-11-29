@@ -29,7 +29,7 @@ class Auth extends Connection {
     }
 
     public function getMahasiswa($nim){
-        $stmt = "SELECT nim, password FROM mahasiswa WHERE nim LIKE '%$nim%'";
+        $stmt = "SELECT * FROM mahasiswa WHERE nim LIKE '%$nim%'";
         $result = sqlsrv_query($this->conn, $stmt);
 
         $this->data  =  sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
