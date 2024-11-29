@@ -19,19 +19,6 @@ class Home extends Controller
         $this->view('Umum/index', $data);
         $this->view('templates/footer');
     }
-    public function tampilSort()
-    {
-        $this->view('templates/header');
-
-        if (isset($_POST['limit'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
-        } else {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
-        }
-        $this->view('index', $data);
-        if (isset($_POST['login'])) {
-        }
-    }
 
     public function login()
     {
