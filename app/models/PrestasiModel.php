@@ -1,6 +1,7 @@
 <?php
-class PrestasiModel extends Connection{
-    
+class PrestasiModel extends Connection
+{
+
     private $data = [];
 
     // Get All Prestasi Mahasiswa
@@ -16,14 +17,22 @@ class PrestasiModel extends Connection{
         return $this->data;
     }
 
-    public function printPrestasiUmum($limit = "10")
+    public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {
-        $stmt = "SELECT TOP $limit m.nim, m.nama, p.nama_prodi, m.total_poin
-                FROM mahasiswa m
-                JOIN program_studi p ON m.id_prodi = p.id_prodi
-                ORDER BY total_poin DESC;";
-        $result = sqlsrv_query($this->conn, $stmt);
-        
+        if ($keyword == "") {
+            $stmt = "SELECT TOP $filterQ m.nim, m.nama, p.nama_prodi, m.total_poin
+                        FROM mahasiswa m
+                        JOIN program_studi p ON m.id_prodi = p.id_prodi
+                        ORDER BY total_poin DESC;";
+            $result = sqlsrv_query($this->conn, $stmt);
+        } else {
+            $stmt = "SELECT TOP $filterQ m.nim, m.nama, p.nama_prodi, m.total_poin
+                    FROM mahasiswa m
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi
+                    WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%'
+                    ORDER BY total_poin DESC;";
+            $result = sqlsrv_query($this->conn, $stmt);
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;

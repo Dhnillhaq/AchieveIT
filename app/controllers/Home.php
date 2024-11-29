@@ -9,24 +9,8 @@ class Home extends Controller
     {
         $this->view('templates/header');
 
-        if (isset($_POST['limit'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
-        } else if (isset($_POST['keyword'])){
-            $data['prestasi'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
-        } else {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
-        }
-        $this->view('Umum/index', $data);
-        $this->view('templates/footer');
-        if (isset($_POST['login'])) {
-        }
-    }
-    public function tampilSort()
-    {
-        $this->view('templates/header');
-
-        if (isset($_POST['limit'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
+        if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year']) ) {
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
         } else {
             $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
         }
@@ -74,16 +58,17 @@ class Home extends Controller
 
     public function setSession()
     {
-        $_SESSION['username'] = $this->userDB['nip'];
-        $_SESSION['password'] = $this->userDB['password'];
         if (isset($this->userDB['role'])) {
+            $_SESSION['username'] = $this->userDB['nip'];
             $_SESSION['role'] = $this->userDB['role'];
         } else {
+            $_SESSION['username'] = $this->userDB['nim'];
             $_SESSION['role'] = "Mahasiswa";
         }
+        $_SESSION['password'] = $this->userDB['password'];
 
     }
-    public function isSuperAdmin()    
+    public function isSuperAdmin()
     {
         $this->userDB = $this->model("UserModel")->getSuperAdmin();
         if ($this->usernameInp == $this->userDB['nip'] && $this->passwordInp == $this->userDB['password']) {
@@ -91,7 +76,7 @@ class Home extends Controller
         }
         return false;
     }
-    
+
     public function isAdmin()
     {
         $this->userDB = $this->model("UserModel")->getAdmin();
@@ -100,7 +85,7 @@ class Home extends Controller
         }
         return false;
     }
-    
+
     public function isKajur()
     {
         $this->userDB = $this->model("UserModel")->getKajur();
@@ -121,7 +106,8 @@ class Home extends Controller
         }
     }
 
-    public function search(){
+    public function search()
+    {
         $data['search'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
     }
 }

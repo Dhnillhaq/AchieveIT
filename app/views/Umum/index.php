@@ -21,10 +21,10 @@
         <h1 class="font-extrabold text-4xl">AchieveIt</h1>
       </div>
       <div class="navbar-button flex right-0 text-[16px]">
-        <a href="<?=BASEURL;?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
+        <a href="<?= BASEURL; ?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
         <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
         <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
-        <a href="<?=BASEURL;?>/Home/login">
+        <a href="<?= BASEURL; ?>/Home/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>
@@ -45,7 +45,7 @@
           pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
           culpa qui officia desereutn.
         </p>
-        <a href="<?=BASEURL;?>/Home/login">
+        <a href="<?= BASEURL; ?>/Home/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
             Masuk
           </button>
@@ -103,91 +103,75 @@
       </div>
 
       <!-- dari Components -->
-    <section id="daftar-prestasi" class="">
-      <div class="p-5 mb-10 ">
-        <div class="flex justify-between">
-          <div class="flex">
-            <form id="formFilter" action="<?=BASEURL;?>/#daftar-prestasi" method="POST">
-              <input
-              type="text"
-              id="cari-mhs"
-              placeholder="Cari mahasiswa berdasarkan nama/NIM"
-              class="bg-white w-96 p-2 rounded-md border shadow-md"
-              name="keyword"
-              />
-              <button type="submit" name="submit" class="mt-4 w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900">Submit</button>
-            </form>
-          </div>
-          <div class="flex right-0">
-            <div class="flex items-center mr-3">
-              <span class="">Lihat</span>
-              <form id="formFilter" action="<?=BASEURL;?>/#daftar-prestasi" method="POST">
-                <select name="limit" onchange="submitForm()"
-                class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                <option value="10" selected>10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-            </form>
-
-            <script>
-              function submitForm() {
-                document.getElementById("formFilter").submit();
-              }
-            </script>
-
-              <span class="">entri</span>
-            </div>
-            <div class="flex items-center mx-10">
-              <select
-                class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="2023-2024">2023</option>
-                <option value="2024-2025">2024</option>
-                <option value="2022-2023">2022</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
-          <table class="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th
-                  class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950"
-                >
-                  RANKING
-                </th>
-                <th
-                  class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950"
-                >
-                  NIM
-                </th>
-                <th
-                  class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950"
-                >
-                  NAMA MAHASISWA
-                </th>
-                <th
-                  class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950"
-                >
-                  PRODI
-                </th>
-                <th
-                  class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950"
-                >
-                  TOTAL POIN
-                </th>
-              </tr>
-            </thead>
-            <tbody class="text-gray-700">
-              <?php
+      <section id="daftar-prestasi" class="">
+        <div class="p-5 mb-10 ">
+          <div class="flex justify-between">
+            <div class="flex">
+            <form id="formFilter" action="<?= BASEURL; ?>/#daftar-prestasi" method="POST">
+                <input type="text" id="cari-mhs" placeholder="Cari mahasiswa berdasarkan nama/NIM"
+                  class="bg-white w-96 p-2 rounded-md border shadow-md" name="keyword" />
               
-              // Looping data mahasiswa ke dalam tabel
-              $rank = 1;
-              foreach ($data['prestasi'] as $mahasiswa) { 
+            </div>
+            <div class="flex right-0">
+              <div class="flex items-center mr-3">                  
+
+                  <span class="">Lihat</span>
+                  <select name="limit" onchange="submitForm()"
+                    class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                  </select>
+
+                  <span class="">entri</span>
+                  <select name="year" onchange="submitForm()"
+                    class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="2025">2022</option>
+                    <option value="2026">2023</option>
+                    <option value="2024" selected>2024</option>
+                  </select>
+
+                </form>
+              </div>
+
+
+              <!-- Function js untuk submit form select ketika opsi yang lain dipilih -->
+              <script>
+                function submitForm() {
+                  document.getElementById("formFilter").submit();
+                }
+              </script>
+
+            </div>
+          </div>
+
+          <div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
+            <table class="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+                    RANKING
+                  </th>
+                  <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+                    NIM
+                  </th>
+                  <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+                    NAMA MAHASISWA
+                  </th>
+                  <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+                    PRODI
+                  </th>
+                  <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+                    TOTAL POIN
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <?php
+
+                // Looping data mahasiswa ke dalam tabel
+                $rank = 1;
+                foreach ($data['prestasi'] as $mahasiswa) {
                   echo "<tr>";
                   echo "<td class='py-2 px-4 border border-blue-950'>$rank</td>";
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nim']}</td>";
@@ -196,14 +180,14 @@
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['total_poin']}</td>";
                   echo "</tr>";
                   $rank++;
-              }
-              
-              ?>
-            </tbody>
-          </table>
+                }
+
+                ?>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
       <!-- //php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php';  -->
     </div>
   </section>
@@ -215,7 +199,7 @@
       </div>
 
       <div class="flex right-0 text-[16px]">
-        <a href="<?=BASEURL;?>/Home/login">
+        <a href="<?= BASEURL; ?>/Home/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>
