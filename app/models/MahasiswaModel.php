@@ -7,13 +7,12 @@ class MahasiswaModel extends Connection
     // Get All Mahasiswa
     public function getAllDataMahasiswa($nim)
     {
-        $stmt = "SELECT * FROM mahasiswa WHERE nim = $nim";
+        $stmt = "SELECT * FROM mahasiswa WHERE nim = '$nim'";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
-        $this->data[] = $this->countPrestMhs($_SESSION['nim']);
+        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $this->data[] = $this->countPrestMhs($nim);;
+        
         return $this->data;
     }
 
@@ -33,10 +32,9 @@ class MahasiswaModel extends Connection
 
     public function countPrestMhs($nim)
     {
-        $stmt = "SELECT dbo.HitungTotalPrestasi('$nim')";
+        $stmt = "SELECT dbo.HitungTotalPrestasi('$nim') AS total";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;

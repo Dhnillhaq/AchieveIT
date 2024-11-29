@@ -54,7 +54,7 @@
   <div class=" sm:ml-64 bg-blue-50">
     <!-- profil -->
     <section class="flex justify-end items-center p-8 space-x-3">
-      <p class="font-bold">Haikal Muhammad Rafli</p>
+    <p class="font-bold"><?=$data['mhs']['0']['nama']?></p>
       <img src="../../../public/img/Logo_archhieveIT.png" alt="logo" class="w-8 h-auto">
     </section>
 
@@ -62,78 +62,7 @@
     <section class="flex-col justify-start p-6 space-y-4">
       <p class="font-bold text-4xl">Selamat Datang</p>
       <p class="font-semibold text-2xl text-[#F99D1C]">
-        Haikal Muhammad Rafli / 2341720001
-      </p>
-    </section>
-
-    <!-- prestasi -->
-    <section class="flex justify-start p-6 space-x-10 ">
-      <!-- total prestasi -->
-      <div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-        <div class="flex justify-start space-x-4">
-          <img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-auto h-12">
-          <div class="flex-col">
-            <p class="font-semibold text-[#757575] text-[12px]">Total Prestasi Saat Ini</p>
-            <p class="font-bold">11</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- total poin -->
-      <div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-        <div class="flex justify-start space-x-4">
-          <img src="../../../public/img/Total_poin.png" alt="logo" class="w-auto h-12">
-          <div class="flex-col">
-            <p class="font-semibold text-[#757575] text-[12px]">Total Poin Saat Ini</p>
-            <p class="font-bold">24</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- peringkat mapres -->
-      <div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-        <div class="flex justify-start space-x-4">
-          <img src="../../../public/img/Perankingan_Mhs.png" alt="logo" class="w-auto h-12">
-          <div class="flex-col">
-            <p class="font-semibold text-[#757575] text-[12px]">Peringkat MaPres</p>
-            <p class="font-bold">24</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- btn tambah prestasi -->
-    <section class="p-6">
-      <a href="#">
-        <button class="bg-[#132145] rounded-lg text-white p-2 font-semibold">Tambahkan Prestasi</button>
-      </a>
-    </section>
-
-    <section class="p-6 justify-start">
-      <h1 class="text-4xl font-bold ">Daftar Mahasiswa Berprestasi</h1>
-    </section>
-
-    <!-- table maPres -->
-    <?php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php'; ?>
-
-    <!-- footer -->
-    <?php include __DIR__ . '/../../components/Footer.php'; ?>
-  </div>
-  </aside>
-
-  <div class=" sm:ml-64 bg-blue-50">
-    <!-- profil -->
-    <section class="flex justify-end p-8">
-      <p class="font-bold">Haikal Muhammad Rafli</p>
-    </section>
-
-    <!-- selamat datang -->
-    <section class="flex-col justify-start p-6 space-y-4">
-      <p class="font-bold text-4xl">Selamat Datang</p>
-      <p class="font-semibold text-2xl text-[#F99D1C]">
-        Haikal Muhammad Rafli / 2341720001
-      </p>
-    </section>
+      <?=$data['mhs']['0']['nama']?> / <?=$data['mhs']['0']['nim']?>
 
     <!-- prestasi -->
     <section class="flex justify-start p-6 space-x-10 ">
@@ -143,7 +72,7 @@
           <!-- gambar disini -->
           <div class="flex-col">
             <p class="font-semibold text-[#757575] text-[12px]">Total Prestasi Saat Ini</p>
-            <p class="font-bold"><?= $data['mhs']['0']['nama']?></p>
+            <p class="font-bold"><?= $data['mhs']['1']['total']?></p>
           </div>
         </div>
       </div>

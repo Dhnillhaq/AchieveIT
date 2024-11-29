@@ -12,17 +12,6 @@ class Home extends Controller
         }
         $this->view('index', $data);
     }
-    public function tampilSort()
-    {
-        if (isset($_POST['limit'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['limit']);
-        } else {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
-        }
-        $this->view('index', $data);
-        if (isset($_POST['login'])) {
-        }
-    }
 
     public function search()
     {
