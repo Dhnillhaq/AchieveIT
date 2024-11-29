@@ -16,7 +16,8 @@
 	<div class="absolute inset-0 bg-[#132145D4] bg-opacity-82"></div>
 
 	<!-- kembali -->
-	<a href="index.html"
+	<a href="<?= BASEURL; ?>"
+
 		class="absolute top-4 left-4 flex items-center space-x-2 text-white px-4 py-2 rounded-lg hover:underline">
 		<img src="../../../public/img/Sign_out_squre.png" alt="back" class="w-4 h-4" />
 		<span class="font-light">Kembali</span>
@@ -26,7 +27,9 @@
 		<!-- left side -->
 		<section class="w-1/2 flex items-center justify-center px-10 text-white">
 			<h1 class="text-6xl font-bold">
-				Selamat datang di <span class="text-[#FEC01A]">ArchieveIT!</span>
+
+				Selamat datang di <span class="text-[#FEC01A]">AchieveIT!</span>
+
 			</h1>
 		</section>
 
