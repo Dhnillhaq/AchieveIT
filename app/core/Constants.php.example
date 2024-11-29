@@ -1,0 +1,3 @@
+<?php
+define('BASEURL', 'http://localhost/public');
+define('SERVER_NAME', 'YOUR_SERVER_NAME_HERE\SQLEXPRESS');
