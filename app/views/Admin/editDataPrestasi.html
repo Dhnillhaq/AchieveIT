@@ -138,6 +138,17 @@
             <option>Internasional</option>
           </select>
 
+          <!-- tingkatan -->
+          <label for="nama" class="block text-gray-700 font-medium pt-6"
+            >Tingkatan Penyelenggara <span class="text-red-600">*</span></label
+          >
+          <select
+            class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
+          >
+            <option>Pemerintah</option>
+            <option>Lorem ipsum</option>
+          </select>
+
           <!-- nama kompetisi -->
           <label for="nama" class="block text-gray-700 font-medium pt-6"
             >Nama Kompetisi <span class="text-red-600">*</span></label
@@ -171,12 +182,11 @@
           <label for="nama" class="block text-gray-700 font-medium pt-6"
             >Penyelenggara Kompetisi <span class="text-red-600">*</span></label
           >
-          <select
-            class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
-          >
-            <option>Pemerintah</option>
-            <option>Kampus</option>
-          </select>
+          <input
+            type="text"
+            placeholder="Kementrian Pendidikan dan Kebudayaan "
+            class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm"
+          />
 
           <!-- tempat kompetisi -->
           <label for="nama" class="block text-gray-700 font-medium pt-6"
@@ -223,6 +233,36 @@
                 >
                   <p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
                   <p class="text-xs">suratTugas.pdf</p>
+                </div>
+                <p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
+              </div>
+              <input type="file" class="hidden" />
+            </label>
+          </div>
+
+          <!-- poster -->
+          <label for="nama" class="block text-gray-700 font-medium pt-6"
+            >File Poster <span class="text-red-600">*</span></label
+          >
+          <div class="flex items-center">
+            <label
+              class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10"
+            >
+              <div class="flex flex-col items-center justify-center py-10">
+                <img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
+                <p class="mb-2 text-sm font-semibold">
+                  Seret & lepas atau telusuri
+                </p>
+                <p class="text-xs text-gray-500">
+                  Ekstensi (.jpg,.jpeg,.png,.pdf,.docx)
+                </p>
+              </div>
+              <div class="flex flex-col items-start py-6 space-y-1">
+                <div
+                  class="flex flex-row justify-center items-center space-x-2"
+                >
+                  <p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
+                  <p class="text-xs">poster.pdf</p>
                 </div>
                 <p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
               </div>
