@@ -24,7 +24,7 @@
         <a href="<?= BASEURL; ?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
         <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
         <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
-        <a href="<?= BASEURL; ?>/Home/login">
+        <a href="<?= BASEURL; ?>/Auth/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>
