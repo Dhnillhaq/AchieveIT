@@ -18,7 +18,7 @@
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 			<!-- btn tambah -->
 			<section class="flex justify-end pr-6">
-				<a href="<?=BASEURL;?>/">
+				<a href="<?=BASEURL;?>/Dosen/Create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
