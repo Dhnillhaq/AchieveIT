@@ -10,7 +10,7 @@
                 </div>
             </li>
             <li>
-                <a href="<?= BASEURL; ?>./"
+                <a href="<?= BASEURL; ?>/"
                     class="flex items-center  p-2 mt-10 text-[#FEC01A] rounded-lg bg-[#3063C559]">
                     <img src="../../../public/img/Home_fill.png" alt="logo" class="w-5 h-5">
                     <span class="flex-1 ms-3 whitespace-nowrap">Beranda</span>
@@ -29,13 +29,13 @@
                 </a>
             </li>
             <li>
-                <a href="<?= BASEURL; ?>./" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                <a href="<?= BASEURL; ?>/" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
                     <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5" />
                     <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
                 </a>
             </li>
             <li>
-                <a href="<?= BASEURL; ?>./" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                <a href="<?= BASEURL; ?>/" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
                     <img src="../../../public/img/Administrasi-data.png" alt="logo" class="w-5 h-5" />
                     <span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
                 </a>
