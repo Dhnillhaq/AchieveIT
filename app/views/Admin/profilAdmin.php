@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Profil Admin</title>
+	<link href="../../../public/css/output.css" rel="stylesheet" />
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+	</style>
+</head>
+
+<body class="font-[poppins]">
+	<!-- sidebar -->
+	<aside id="default-sidebar"
+		class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+		aria-label="Sidebar">
+		<div class="h-full px-3 py-4 overflow-y-auto bg-[#132145]">
+			<ul class="space-y-2 font-medium">
+				<li>
+					<div class="flex items-center justify-center text-4xl p-4 text-white rounded-lg">
+						<span class="ms-3 font-bold">AchieveIT</span>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="flex items-center p-2 mt-10 text-white rounded-lg hover:bg-[#3063C559]">
+						<img src="../../../public/img/Home_fill (1).png" alt="logo" class="w-5 h-5" />
+						<span class="flex-1 ms-3 whitespace-nowrap">Beranda</span>
+					</a>
+				</li>
+				<li>
+					<a href="formPrestasi.html"
+						class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+						<img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5" />
+						<span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+						<img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5" />
+						<span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+						<img src="../../../public/img/Administrasi-data.png" alt="logo" class="w-5 h-5" />
+						<span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="flex items-center p-2 text-[#FEC01A] rounded-lg bg-[#3063C559]">
+						<img src="../../../public/img/User_circle (1).png" alt="logo" class="w-5 h-5" />
+						<span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+
+	<section class="sm:ml-64 bg-blue-50 min-h-screen">
+		<!-- profil -->
+		<section class="flex justify-end items-center p-8 space-x-3">
+			<p class="font-bold">Admin12345</p>
+			<img src="../../../public/img/Logo_archhieveIT.png" alt="logo" class="w-8 h-auto" />
+		</section>
+
+		<!-- Profil -->
+		<section class="flex-col justify-start pl-6">
+			<p class="font-bold text-3xl">Profil</p>
+		</section>
+
+		<!-- informasi admin -->
+		<section class="relative p-6">
+			<!-- Static parent -->
+			<div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
+				Informasi Admin
+			</div>
+			<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
+				<div class="flex flex-col justify-start items-start">
+					<div class="flex flex-col justify-start items-start pt-5">
+						<p class="text-[#757575]">NIP</p>
+						<p class="font-semibold">2341720001</p>
+					</div>
+
+					<div class="flex flex-col justify-start items-start pt-5">
+						<p class="text-[#757575]">Nama</p>
+						<p class="font-semibold">Admin12345</p>
+					</div>
+				</div>
+				<!-- btn ubah kt sandi -->
+				<section class="justify-center pt-6">
+					<a href="ubahKataSandi.html">
+						<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+							<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5" />
+							<p>Ubah Kata Sandi</p>
+						</button>
+					</a>
+				</section>
+			</div>
+		</section>
+
+		<!-- log admin -->
+		<section class="relative p-6">
+			<!-- Static parent -->
+			<div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
+				Log Admin
+			</div>
+			<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
+				<!-- entri -->
+				<div class="flex justify-end right-0">
+					<div class="flex items-center mr-3">
+						<span class="">Lihat</span>
+						<select
+							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+						</select>
+						<span class="">entri</span>
+					</div>
+				</div>
+
+				<!-- table -->
+				<div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
+					<table class="min-w-full bg-white text-center">
+						<thead>
+							<tr>
+								<th
+									class="py-2 px-4 w-1/5 bg-blue-950 italic text-white font-semibold border border-blue-950">
+									Timestamp
+								</th>
+								<th
+									class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
+									Aksi
+								</th>
+								<th
+									class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
+									Keterangan
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950">
+									<div>2024-11-27</div>
+									<div>09:15:00</div>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">Login</td>
+								<td class="py-2 px-4 border border-blue-950">
+									User berhasil login
+								</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950">
+									<div>2024-11-27</div>
+									<div>09:30:00</div>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">Logout</td>
+								<td class="py-2 px-4 border border-blue-950">
+									User keluar dari sistem
+								</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950">
+									<div>2024-11-27</div>
+									<div>10:00:00</div>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">Update Profile</td>
+								<td class="py-2 px-4 border border-blue-950">
+									User mengubah data profil
+								</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950">
+									<div>2024-11-27</div>
+									<div>11:00:00</div>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">Download</td>
+								<td class="py-2 px-4 border border-blue-950">
+									User mengunduh file laporan
+								</td>
+							</tr>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950">
+									<div>2024-11-27</div>
+									<div>11:30:00</div>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">Upload</td>
+								<td class="py-2 px-4 border border-blue-950">
+									User mengunggah dokumen
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+
+		<!-- btn -->
+		<section class="justify-center p-6">
+			<a href="">
+				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg w-auto">
+					<img src="../../../public/img/Sign_out.png" alt="logo" class="w-5 h-5" />
+					<p>Keluar</p>
+				</button>
+			</a>
+		</section>
+	</section>
+
+	<!-- footer -->
+	<?php include __DIR__ . '/../../components/Footer.php'; ?>
+</body>
+
+</html>
