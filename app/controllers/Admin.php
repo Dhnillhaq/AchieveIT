@@ -55,5 +55,20 @@ class Admin extends Controller
     public function profilAdmin(){
         $this->view("Admin/profilAdmin");
     }
+    public function create(){
+        $this->view("Admin/Admin/create");
+    }
+
+    public function store(){
+        $this->view("Admin/Admin/create");
+    }
+    public function edit(){
+        $this->view("Admin/Admin/edit");
+    }
+    public function adminList(){
+        $this->view("Admin/Admin/index");
+    }
+
+
 }
 ?>

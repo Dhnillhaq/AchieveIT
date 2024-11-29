@@ -1,3 +1,3 @@
 <?php
 define('BASEURL', 'http://localhost/public');
-define('SERVER_NAME', 'LAPTOP-EB30BL56\SQLEXPRESS');
+define('SERVER_NAME', 'DESKTOP-2SVDLK3\SQLEXPRESS');

@@ -47,7 +47,7 @@ class Mahasiswa extends Controller
     public function edit(){
         $this->view("Admin/Mahasiswa/edit");
     }
-    public function indexC(){
+    public function listMhs(){
         $this->view("Admin/Mahasiswa/index");
     }
     public function show(){
