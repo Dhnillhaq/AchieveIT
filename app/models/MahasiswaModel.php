@@ -5,28 +5,36 @@ class MahasiswaModel extends Connection
     private $data = [];
 
     // Get All Mahasiswa
-    public function getAllDataMahasiswa($nim)
+    public function getMahasiswa()
+    {
+        $stmt = "SELECT * FROM mahasiswa";
+        $result = sqlsrv_query($this->conn, $stmt);
+
+        
+        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        
+        return $this->data;
+    }
+    public function getMahasiswaByNim($nim)
     {
         $stmt = "SELECT * FROM mahasiswa WHERE nim = '$nim'";
         $result = sqlsrv_query($this->conn, $stmt);
 
         $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        $this->data[] = $this->countPrestMhs($nim);;
+        $this->data[] = $this->getStatistikMhs($nim);;
         
         return $this->data;
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   
-    public function getPrestasiMhs()
+    public function getStatistikMhs($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = '?';";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = '$nim';";
+        $params = array($nim);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
         
+            $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
         
-        
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
         return $this->data;
     }
 
