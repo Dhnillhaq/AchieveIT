@@ -175,8 +175,8 @@
                   echo "<tr>";
                   echo "<td class='py-2 px-4 border border-blue-950'>$rank</td>";
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nim']}</td>";
-                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama']}</td>";
-                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_prodi']}</td>";
+                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_mahasiswa']}</td>";
+                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['prodi']}</td>";
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['total_poin']}</td>";
                   echo "</tr>";
                   $rank++;

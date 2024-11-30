@@ -5,18 +5,11 @@ class Controller
 
     public function view($view, $data = [])
     {
-        if (isset($_SESSION['user'])) {
-            require_once '../app/views/templates/header.php';
-            require_once '../app/views/templates/sidebar.php';
-            require_once '../app/views/' . $view . '.php';
-            require_once '../app/views/templates/footer.php';
-        } else {
-            require_once '../app/views/templates/header.php';
-            require_once '../app/views/' . $view . '.php';
-            require_once '../app/views/templates/footer.php';
 
-        }
-
+        require_once '../app/views/templates/header.php';
+        require_once '../app/views/templates/sidebar.php';
+        require_once '../app/views/' . $view . '.php';
+        require_once '../app/views/templates/footer.php';
     }
 
     public function model($model)

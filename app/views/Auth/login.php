@@ -25,11 +25,13 @@
 	<div class="relative z-10 flex">
 		<!-- left side -->
 		<section class="w-1/2 flex items-center justify-center px-10 text-white">
-			<h1 class="text-6xl font-bold">
+			<a href="<?= BASEURL; ?>">
+				 <h1 class="text-6xl font-bold">
 
 				Selamat datang di <span class="text-[#FEC01A]">AchieveIT!</span>
 
-			</h1>
+				</h1>
+			</a>
 		</section>
 
 		<!-- right side -->
