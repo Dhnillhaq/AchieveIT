@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- tambah prestasi -->
 	<section class="flex-col justify-start pl-6">
@@ -18,23 +18,39 @@
 			<label for="nama" class="block text-gray-700 font-medium mt-6">Kategori Prestasi <span
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
-				<option>Sains</option>
-				<option>Sains</option>
-				<option>Sains</option>
+				<?php
+				foreach ($data['kp'] as $kp) {
+					echo "<option>{$kp['kategori']}</option>";
+				}
+				?>
 			</select>
 
 			<!-- tingkatan -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Tingkatan Kompetisi <span
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
-				<option>Nasional</option>
-				<option>Internasional</option>
+				<?php
+				foreach ($data['tk'] as $tk) {
+					echo "<option>{$tk['tingkat_kompetisi']}</option>";
+				}
+				?>
+			</select>
+
+			<!-- tingkatan -->
+			<label for="nama" class="block text-gray-700 font-medium pt-6">Tingkatan Penyelenggara<span
+					class="text-red-600">*</span></label>
+			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<?php
+				foreach ($data['tp'] as $tp) {
+					echo "<option>{$tp['tingkat_penyelenggara']}</option>";
+				}
+				?>
 			</select>
 
 			<!-- nama kompetisi -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama Kompetisi <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="Olimpiade Nasional Matematika dan Ilmu Pengetahuan Alam Perguruan Tinggi"
+			<input type="text"
 				class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- tanggal mulai -->
@@ -52,24 +68,25 @@
 			<!-- penyelenggara -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Penyelenggara Kompetisi <span
 					class="text-red-600">*</span></label>
-			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
-				<option>Pemerintah</option>
-				<option>Kampus</option>
-			</select>
+			<input type="text"
+				class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
+
 
 			<!-- tempat kompetisi -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Tempat Kompetisi <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="Jakarta"
+			<input type="text"
 				class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- juara -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Juara <span
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
-				<option>Juara 1 / Medali Emas</option>
-				<option>Juara 2 / Medali Perak</option>
-				<option>Juara 3 / Medali Perunggu</option>
+				<?php
+				foreach ($data['juara'] as $juara) {
+					echo "<option>{$juara['juara']}</option>";
+				}
+				?>
 			</select>
 
 			<!-- surat tugas -->
@@ -214,12 +231,14 @@
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">2341720001</option>
-									<option value="2021002">2341720002</option>
-									<option value="2021003">2341720003</option>
+									<?php
+									foreach ($data['mahasiswa'] as $mhs) {
+										echo "<option>{$mhs['nim']}</option>";
+									}
+									?>
 								</select>
 							</td>
-							<td class="py-2 px-4 border border-blue-950">Haikal</td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['mahasiswa']['0']['nama'] ?></td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
 									<option value="Ketua">Ketua</option>
@@ -237,9 +256,11 @@
 							<td class="py-2 px-4 border border-blue-950">2</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">2341720001</option>
-									<option value="2021002">2341720002</option>
-									<option value="2021003">2341720003</option>
+									<?php
+									foreach ($data['mahasiswa'] as $mhs) {
+										echo "<option>{$mhs['nim']}</option>";
+									}
+									?>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950">Restu</td>
