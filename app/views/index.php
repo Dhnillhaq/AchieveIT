@@ -45,7 +45,7 @@
           pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
           culpa qui officia desereutn.
         </p>
-        <a href="<?= BASEURL; ?>/Home/login">
+        <a href="<?= BASEURL; ?>/Auth/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
             Masuk
           </button>
@@ -199,7 +199,7 @@
       </div>
 
       <div class="flex right-0 text-[16px]">
-        <a href="<?= BASEURL; ?>/Home/login">
+        <a href="<?= BASEURL; ?>/Auth/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>

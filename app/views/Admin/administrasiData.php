@@ -1,7 +1,7 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 	<!-- profil -->
 
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- adm data -->
 	<section class="flex-col justify-start pl-6">

@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50">
 
-	<!--  require_once 'templates/profile.php';  -->
+	 <?php require_once __DIR__. '/../templates/profiles.php'; ?> 
 
 	<!-- selamat datang -->
 	<section class="flex-col justify-start p-6 space-y-4">
