@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50">
 
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- edit prestasi -->
 	<section class="flex-col justify-start pl-6">
@@ -293,7 +293,7 @@
 
 			<!-- btn tambah -->
 			<section class="justify-center p-4">
-				<a href="<?= BASEURL; ?>./">
+				<a href="<?= BASEURL; ?>/">
 					<button class="py-2 px-6 text-white bg-[#132145] rounded-lg">+ Tambah Mahasiswa</button>
 				</a>
 			</section>
@@ -363,7 +363,7 @@
 
 			<!-- btn tambah -->
 			<section class="justify-center p-4">
-				<a href="<?= BASEURL; ?>./">
+				<a href="<?= BASEURL; ?>/">
 					<button class="py-2 px-6 text-white bg-[#132145] rounded-lg">+ Tambah Pembimbing</button>
 				</a>
 			</section>
@@ -373,7 +373,7 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>./">
+			<a href="<?= BASEURL; ?>/">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 					<img src="../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 					<p>Simpan</p>
@@ -382,7 +382,7 @@
 		</div>
 
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>./">
+			<a href="<?= BASEURL; ?>/">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 					<img src="../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 					<p>Reset</p>

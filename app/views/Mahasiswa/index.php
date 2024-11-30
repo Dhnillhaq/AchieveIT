@@ -1,6 +1,6 @@
 <div class=" sm:ml-64 bg-blue-50">
 	<!-- profil -->
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- selamat datang -->
 	<section class="flex-col justify-start p-6 space-y-4">
@@ -46,7 +46,7 @@
 
 			<!-- btn tambah prestasi -->
 			<section class="p-6">
-				<a href="<?= BASEURL; ?>./">
+				<a href="<?= BASEURL; ?>/">
 					<button class="bg-[#132145] rounded-lg text-white p-2 font-semibold">Tambahkan Prestasi</button>
 				</a>
 			</section>
@@ -125,8 +125,8 @@
 									echo "<tr>";
 									echo "<td class='py-2 px-4 border border-blue-950'>$rank</td>";
 									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nim']}</td>";
-									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama']}</td>";
-									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_prodi']}</td>";
+									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_mahasiswa']}</td>";
+									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['prodi']}</td>";
 									echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['total_poin']}</td>";
 									echo "</tr>";
 									$rank++;

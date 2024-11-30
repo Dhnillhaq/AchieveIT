@@ -1,16 +1,17 @@
 <?php
 class Admin extends Controller
 {
+    
     public function index()
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if ($this->checkRole()) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Admin") {
                 $this->view('Admin/index');
                 $this->model('PrestasiModel')->getAllPrestasi();
                 exit;
             } else {
-                header('Location:' . BASEURL . '/Auth/Login');
+                header('location:' . BASEURL . '/Auth/Login');
             }
         } else {
             header('location:' . BASEURL);
@@ -18,13 +19,13 @@ class Admin extends Controller
     }
     public function superAdmin()
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if (isset($_SESSION['user']['role'])) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Super Admin") {
                 $this->view('Admin/index');
                 exit;
             } else {
-                header("location:http://localhost/public");
+                header("location:".BASEURL."/Auth/login");
             }
         } else {
             header("location:http://localhost/public");
@@ -33,8 +34,8 @@ class Admin extends Controller
 
     public function kajur($nama = "Dhanil")
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if (isset($_SESSION['user']['role'])) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Ketua Jurusan") {
                 $this->view('Kajur/index', $nama);
             } else {
@@ -44,5 +45,30 @@ class Admin extends Controller
             header("location:http://localhost/public");
         }
     }
+
+    public function administrasiData(){
+        $this->view("Admin/administrasiData");
+    }
+    public function pengaturanPrestasi(){
+        $this->view("Admin/pengaturanPrestasi");
+    }
+    public function profilAdmin(){
+        $this->view("Admin/profilAdmin");
+    }
+    public function create(){
+        $this->view("Admin/Admin/create");
+    }
+
+    public function store(){
+        $this->view("Admin/Admin/create");
+    }
+    public function edit(){
+        $this->view("Admin/Admin/edit");
+    }
+    public function adminList(){
+        $this->view("Admin/Admin/index");
+    }
+
+
 }
 ?>

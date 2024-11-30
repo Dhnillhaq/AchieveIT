@@ -1,19 +1,21 @@
-<?php 
-class Connection 
+<?php
+class Connection
 {
-    private $serverName = "DESKTOP-2SVDLK3\SQLEXPRESS";
+    private $serverName = SERVER_NAME;
     private $connectionInfo = ["Database" => "achieveit"];
     public $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Inisialisasi koneksi di dalam konstruktor
         $this->conn = sqlsrv_connect($this->serverName, $this->connectionInfo);
         $this->ifNotConnect(); // Panggil fungsi cek koneksi setelah inisialisasi
     }
 
-    function ifNotConnect() {
+    function ifNotConnect()
+    {
         if ($this->conn === false) {
-            die(print_r(sqlsrv_errors(), true)); 
+            die(print_r(sqlsrv_errors(), true));
         }
     }
 }
