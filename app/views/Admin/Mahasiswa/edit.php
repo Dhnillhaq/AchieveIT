@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- Edit Data Mahasiswa-->
 	<section class="flex-col justify-start pl-6">

@@ -29,10 +29,10 @@ class Auth extends Controller
             exit;
         } else if ($this->isMahasiswa()) {
             $this->setSession();
-            header("location:$url/Mahasiswa");
+            header("location:$url/Mahasiswa/index");
             exit;
         } else {
-            header("location:$url/Umum/login");
+            header("location:$url/Auth/login");
             exit;
         }
     }
@@ -56,7 +56,8 @@ class Auth extends Controller
                 "agama" => $this->userDB['agama'],
                 "jenis_kelamin" => $this->userDB['jenis_kelamin'],
                 "email" => $this->userDB['email'],
-                "total_poin" => $this->userDB['total_poin']
+                "total_poin" => $this->userDB['total_poin'],
+                "role" => "Mahasiswa"
             ];
         }
     }
@@ -96,5 +97,12 @@ class Auth extends Controller
         } else {
             return false;
         }
+    }
+
+    public function deleteSession()
+    {
+        session_unset();
+        session_destroy();
+        header("location:".BASEURL.'/Auth/login');
     }
 }

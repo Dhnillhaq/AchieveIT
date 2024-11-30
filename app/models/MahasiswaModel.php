@@ -19,7 +19,7 @@ class MahasiswaModel extends Connection
     // Get Prestasi ber-Anggota kan Mahasiswa   
     public function getPrestasiMhs()
     {
-        $stmt = "SELECT * FROM prestasi_mahasiswa";
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = '?';";
         $result = sqlsrv_query($this->conn, $stmt);
         
         
@@ -32,7 +32,7 @@ class MahasiswaModel extends Connection
 
     public function countPrestMhs($nim)
     {
-        $stmt = "SELECT dbo.HitungTotalPrestasi('$nim') AS total";
+        $stmt = "SELECT dbo.fn_HitungTotalPrestasi('$nim') AS total";
         $result = sqlsrv_query($this->conn, $stmt);
 
 

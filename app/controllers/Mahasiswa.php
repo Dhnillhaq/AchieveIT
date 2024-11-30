@@ -3,11 +3,11 @@ class Mahasiswa extends Controller
 {
     public function index()
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if (isset($_SESSION['user']['role'])) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Mahasiswa") {
                 $this->view('templates/header');
-                $data['mhs'] = $this->model('MahasiswaModel')->getAllDataMahasiswa($_SESSION['username']);
+                $data['mhs'] = $this->model('MahasiswaModel')->getAllDataMahasiswa($_SESSION['user']['nim']);
                 if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year']) ) {
                     $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
                 } else {
@@ -16,7 +16,7 @@ class Mahasiswa extends Controller
 
                 $this->view('Mahasiswa/index', $data);
             } else {
-                header('Location:' . BASEURL . '/Umum/Login');
+                header('Location:' . BASEURL . '/Auth/Login');
             }
         } else {
             header("location:http://localhost/public");
@@ -47,7 +47,7 @@ class Mahasiswa extends Controller
     public function edit(){
         $this->view("Admin/Mahasiswa/edit");
     }
-    public function indexC(){
+    public function listMhs(){
         $this->view("Admin/Mahasiswa/index");
     }
     public function show(){

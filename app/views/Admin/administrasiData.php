@@ -1,7 +1,7 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 	<!-- profil -->
 
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- adm data -->
 	<section class="flex-col justify-start pl-6">
@@ -12,7 +12,7 @@
 		<div class="flex flex-col space-y-4 w-1/3">
 			<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
 				<img src="../../../public/img/Data-Dosen.png" alt="logo" class="w-32 mx-auto">
-				<a href="<?= BASEURL; ?>/">
+				<a href="<?= BASEURL; ?>/Admin/Dosen/index">
 					<button
 						class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Data
 						Dosen</button>
@@ -21,7 +21,7 @@
 
 			<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
 				<img src="../../../public/img/pengaturan.png" alt="logo" class="w-32 mx-auto">
-				<a href="<?= BASEURL; ?>/">
+				<a href="<?= BASEURL; ?>/Admin">
 					<button
 						class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Pengaturan
 						Prestasi</button>

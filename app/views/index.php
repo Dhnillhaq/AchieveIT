@@ -45,7 +45,7 @@
           pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
           culpa qui officia desereutn.
         </p>
-        <a href="<?= BASEURL; ?>/Home/login">
+        <a href="<?= BASEURL; ?>/Auth/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mt-8 w-24 h-10">
             Masuk
           </button>
@@ -175,8 +175,8 @@
                   echo "<tr>";
                   echo "<td class='py-2 px-4 border border-blue-950'>$rank</td>";
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nim']}</td>";
-                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama']}</td>";
-                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_prodi']}</td>";
+                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_mahasiswa']}</td>";
+                  echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['prodi']}</td>";
                   echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['total_poin']}</td>";
                   echo "</tr>";
                   $rank++;
@@ -199,7 +199,7 @@
       </div>
 
       <div class="flex right-0 text-[16px]">
-        <a href="<?= BASEURL; ?>/Home/login">
+        <a href="<?= BASEURL; ?>/Auth/login">
           <button class="border-spacing-2 bg-white text-blue-500 rounded-lg py-2 mx-2 w-24 h-10">
             Masuk
           </button>

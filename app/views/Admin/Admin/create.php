@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once 'templates/profile.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- data Admin-->
 	<section class="flex-col justify-start pl-6">
@@ -59,7 +59,7 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
+			<a href="<?= BASEURL; ?>/Admin/store">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 					<img src="../../../public/img/simpan.png" alt="logo" class="w-5 h-5" />
 					<p>Simpan</p>
