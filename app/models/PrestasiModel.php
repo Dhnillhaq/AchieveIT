@@ -20,16 +20,12 @@ class PrestasiModel extends Connection
     public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {
         if ($keyword == "") {
-            $stmt = "SELECT TOP $filterQ m.nim, m.nama, p.nama_prodi, m.total_poin
-                        FROM mahasiswa m
-                        JOIN program_studi p ON m.id_prodi = p.id_prodi
-                        ORDER BY total_poin DESC;";
+            $stmt = "SELECT TOP $filterQ * FROM vw_RankingMahasiswa
+            ORDER BY total_poin DESC;";
             $result = sqlsrv_query($this->conn, $stmt);
         } else {
-            $stmt = "SELECT TOP $filterQ m.nim, m.nama, p.nama_prodi, m.total_poin
-                    FROM mahasiswa m
-                    JOIN program_studi p ON m.id_prodi = p.id_prodi
-                    WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%'
+            $stmt = "SELECT TOP $filterQ * FROM vw_RankingMahasiswa
+                    WHERE nim LIKE '%$keyword%' OR nama_mahasiswa LIKE '%$keyword%'
                     ORDER BY total_poin DESC;";
             $result = sqlsrv_query($this->conn, $stmt);
         }

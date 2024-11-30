@@ -5,7 +5,7 @@ class Admin extends Controller
     public function index()
     {
         if ($this->checkRole()) {
-            $role = $_SESSION['role'];
+            $role = $_SESSION['user']['role'];
             if ($role == "Admin") {
                 $this->view('Admin/index');
                 $this->model('PrestasiModel')->getAllPrestasi();
@@ -34,8 +34,8 @@ class Admin extends Controller
 
     public function kajur($nama = "Dhanil")
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
+        if (isset($_SESSION['user']['role'])) {
+            $role = $_SESSION['user']['role'];
             if ($role == "Ketua Jurusan") {
                 $this->view('Kajur/index', $nama);
             } else {
@@ -55,5 +55,20 @@ class Admin extends Controller
     public function profilAdmin(){
         $this->view("Admin/profilAdmin");
     }
+    public function create(){
+        $this->view("Admin/Admin/create");
+    }
+
+    public function store(){
+        $this->view("Admin/Admin/create");
+    }
+    public function edit(){
+        $this->view("Admin/Admin/edit");
+    }
+    public function adminList(){
+        $this->view("Admin/Admin/index");
+    }
+
+
 }
 ?>
