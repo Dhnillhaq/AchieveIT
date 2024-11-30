@@ -16,6 +16,28 @@ class PrestasiModel extends Connection
         }
         return $this->data;
     }
+    
+    public function getTingkatPrestasi(){
+        $stmt = "SELECT * FROM prestasi";
+        $result = sqlsrv_query($this->conn, $stmt);
+    
+    
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $this->data[] = $row;
+        }
+        return $this->data;
+    }
+
+    public function getDetailPrestasi($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = '?'";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
+        return $this->data;
+    }
 
     public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {

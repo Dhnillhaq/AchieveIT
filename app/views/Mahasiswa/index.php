@@ -16,7 +16,7 @@
 						<!-- gambar disini -->
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Total Prestasi Saat Ini</p>
-							<p class="font-bold"><?= $data['mhs']['1']['total'] ?></p>
+							<p class="font-bold"><?= $data['mhs']['1']['total_prestasi'] ?></p>
 						</div>
 					</div>
 				</div>
@@ -27,7 +27,7 @@
 						<!-- gambar disini -->
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Total Poin Saat Ini</p>
-							<p class="font-bold"><?= $data['mhs']['0']['total_poin'] ?></p>
+							<p class="font-bold"><?= $data['mhs']['1']['total_poin'] ?></p>
 						</div>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 						<!-- gambar disini -->
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Peringkat MaPres</p>
-							<p class="font-bold">24</p>
+							<p class="font-bold"><?= $data['mhs']['1']['peringkat_mapres'] ?></p>
 						</div>
 					</div>
 				</div>

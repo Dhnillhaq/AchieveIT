@@ -4,9 +4,8 @@ class DosenModel extends Connection
     private $data = [];
 
     // Get All Dosen
-    public function getAllDosen()
+    public function getDosen()
     {
-
         $stmt = "SELECT * FROM dosen";
         $result = sqlsrv_query($this->conn, $stmt);
 
