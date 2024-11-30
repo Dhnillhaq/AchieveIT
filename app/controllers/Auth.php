@@ -55,6 +55,7 @@ class Auth extends Controller
                 "tanggal_lahir" => $this->userDB['tanggal_lahir'],
                 "agama" => $this->userDB['agama'],
                 "jenis_kelamin" => $this->userDB['jenis_kelamin'],
+                "no_telepon" => $this->userDB['no_telepon'],
                 "email" => $this->userDB['email'],
                 "total_poin" => $this->userDB['total_poin'],
                 "role" => "Mahasiswa"
@@ -97,6 +98,11 @@ class Auth extends Controller
         } else {
             return false;
         }
+    }
+
+    public function changePass()
+    {
+        $this->view('Auth/ubahKataSandi');       
     }
 
     public function deleteSession()

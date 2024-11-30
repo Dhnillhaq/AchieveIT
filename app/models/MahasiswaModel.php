@@ -5,14 +5,14 @@ class MahasiswaModel extends Connection
     private $data = [];
 
     // Get All Mahasiswa
-    public function getMahasiswa()
+    public function getAllDataMahasiswa()
     {
         $stmt = "SELECT * FROM mahasiswa";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        
-        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
+         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $this->data[] = $row;
+        }
         return $this->data;
     }
     public function getMahasiswaByNim($nim)
@@ -22,6 +22,17 @@ class MahasiswaModel extends Connection
 
         $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
         $this->data[] = $this->getStatistikMhs($nim);;
+        
+        return $this->data;
+    }
+    public function getPrestasiMahasiswaByNim($nim)
+    {
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = $nim;";
+        $result = sqlsrv_query($this->conn, $stmt);
+        
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $this->data[] = $row;
+        }
         
         return $this->data;
     }

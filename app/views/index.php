@@ -143,9 +143,9 @@
                   <span class="">entri</span>
                   <select name="year" onchange="submitForm()"
                     class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="2025">2022</option>
-                    <option value="2026">2023</option>
-                    <option value="2024" selected>2024</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024" selected >2024</option>
                   </select>
 
                 </form>
