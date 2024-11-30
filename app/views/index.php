@@ -11,7 +11,7 @@
   </style>
 </head>
 
-<body class="font-[poppins]">
+<body class="font-[poppins] bg-blue-500">
   <section class="relative bg-cover bg-center h-min-screen"
     style="background-image: url('../../../public/img/gedung-jti.png');">
     <div class="absolute inset-0 bg-[#5c71a6d4] bg-opacity-80"></div>
@@ -54,44 +54,61 @@
     </section>
   </section>
 
-  <section id="fitur-utama" class="py-32 bg-blue-50 grid grid-rows-3 grid-flow-col gap-x-10 gap-y-24 px-28">
-    <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-      Manajemen Prestasi<br> Mahasiswa JTI
+  <div class="relative -mt-52 -mb-20  flex justify-end mr-10 z-10">
+    <!-- Gambar di antara dua section -->
+    <img src="../../../public/img/Logo_archhieveIT.png" alt="Gambar di antara section" class="w-48 h-auto" />
+  </div>
+
+  <section id="fitur-utama" class="relative pt-32 flex flex-col space-y-10 px-28">
+    <div class=" flex flex-col items-center text-center">
+      <h2 class="text-2xl font-bold text-[#132145] mb-4 bg-[#FEC01A] rounded-lg px-4 py-1 ">Fitur Utama Kami</h2>
+      <p class="text-[#132145] mt-2 ">
+        <span class="font-semibold">Archieve IT</span> dirancang khusus untuk membantu<br>
+        pengelolaan dan pelaporan prestasi<br> mahasiswa secara terstruktur dan efisien.
+      </p>
+    </div>
     </div>
 
-    <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-      Perankingan Mahasiswa<br> JTI Berprestasi
-    </div>
+    <div class="flex flex-row justify-between">
+      <div
+        class="bg-white w-1/4 p-4 rounded-lg shadow-sm flex flex-col justify-center items-center text-center font-semibold">
+        <img src="../../../public/img/Manajemen_Prestasi.png" alt="logo" class="w-10 h-auto py-3">
+        Manajemen Prestasi<br> Mahasiswa JTI
+      </div>
 
-    <div class="grid grid-rows-subgrid gap-1 row-span-2">
-      <div class="row-start-2 flex flex-col items-center text-center">
-        <h2 class="text-2xl font-bold text-[#132145] mb-4 bg-[#FEC01A] rounded-lg px-4 py-1 ">Fitur Utama Kami</h2>
-        <p class="text-[#132145] mt-2 ">
-          <span class="font-semibold">Archieve IT</span> dirancang khusus untuk membantu<br>
-          pengelolaan dan pelaporan prestasi<br> mahasiswa secara terstruktur dan efisien.
-        </p>
+      <div
+        class="bg-white w-1/4 p-4 rounded-lg shadow-sm flex flex-col justify-center items-center text-center font-semibold">
+        <img src="../../../public/img/Perankingan_Mhs.png" alt="logo" class="w-10 h-auto py-3">
+        Perankingan Mahasiswa<br> JTI Berprestasi
+      </div>
+
+      <div
+        class="bg-white w-1/4 p-4 rounded-lg shadow-sm flex flex-col justify-center items-center text-center font-semibold">
+        <img src="../../../public/img/Riwayat.png" alt="logo" class="w-10 h-auto py-3">
+        Riwayat atau Daftar<br> Prestasi Mahasiswa JTI
       </div>
     </div>
 
-    <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-      Laporan Prestasi<br> Mahasiswa JTI
-    </div>
+    <div class="flex flex-ro justify-center space-x-24">
+      <div
+        class="bg-white w-1/4 p-4 rounded-lg shadow-sm flex flex-col justify-center items-center text-center font-semibold">
+        <img src="../../../public/img/Laporan.png" alt="logo" class="w-10 h-auto py-3">
+        Laporan Prestasi<br> Mahasiswa JTI
+      </div>
 
-    <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-      Riwayat atau Daftar<br> Prestasi Mahasiswa JTI
+      <div
+        class="bg-white w-1/4 p-4 rounded-lg shadow-sm flex flex-col justify-center items-center text-center font-semibold">
+        <img src="../../../public/img/Analisis.png" alt="logo" class="w-10 h-auto py-3">
+        Analisis Prestasi<br> Mahasiswa JTI
+      </div>
     </div>
-
-    <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center text-center">
-      Analisis Prestasi<br> Mahasiswa JTI
-    </div>
-
     </div>
   </section>
 
-  <section id="daftar-prestasi" class="bg-[#132145D4] flex items-center justify-center min-h-screen">
+  <section id="daftar-prestasi" class="pt-20 flex items-center justify-center min-h-screen">
     <div class="">
       <div class="row-start-2 flex flex-col items-center text-center">
-        <h2 class="text-center text-2xl font-bold text-[#132145] mb-4 bg-[#FEC01A] rounded-lg px-4 py-1 ">Daftar
+        <h2 class="text-center text-2xl font-bold text-[#132145] mb-2 bg-[#FEC01A] rounded-lg px-4 py-1 ">Daftar
           Mahasiswa JTI Berprestasi</h2>
         <p class="text-center text-white text-[16px]"><span class="font-bold">Achieve IT</span> menghadirkan daftar
           mahasiswa berprestasi dari Jurusan Teknologi Informasi yang tersusun <br>
@@ -207,3 +224,44 @@
       </div>
     </div>
   </section>
+
+  <footer class="bg-[#132145] text-white flex flex-col items-center  py-10 px-16 ">
+    <div class="flex flex-row justify-between w-full">
+      <div class="flex justify-start">
+        <img src="../../../public/img/Logo_archhieveIT.png" alt="logo" class="w-8 h-10">
+        <div class="flex-col">
+          <p class="font-extrabold text-2xl">Archieve IT</p>
+          <p class="font-extralight text-sm">Jurusan Teknologi Informatika <br>
+            Politeknik Negeri Malang</p>
+        </div>
+      </div>
+
+      <div class="w-0.5 h-20 bg-white"></div>
+
+      <div class="flex justify-center items-start">
+        <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Beranda</a>
+        <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
+        <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
+      </div>
+
+      <div class="flex justify-start space-x-2">
+        <img src="../../../public/img/location_pin.png" alt="logo" class="w-5 h-5">
+        <p class="font-extralight text-sm">Jl. Soekarno-Hatta No. 9 Malang 65141 <br>Po.Box 04 Malang <br>Telepon : +62
+          (0341) 404424 – 404425 <br>Faks : +62 (0341) 404420</p>
+      </div>
+    </div>
+
+    <div class="flex justify-center space-x-5 pt-10">
+      <img src="../../../public/img/Instagram.png" alt="logo" class="w-5 h-5">
+      <img src="../../../public/img/Globe.png" alt="logo" class="w-5 h-5">
+      <img src="../../../public/img/Youtube.png" alt="logo" class="w-5 h-5">
+    </div>
+
+    <div class=" flex justify-center pt-5">
+      <p class="font-semibold">
+        2024 &copy; ArchieveIT
+      </p>
+    </div>
+  </footer>
+			</body>
+			</html>
