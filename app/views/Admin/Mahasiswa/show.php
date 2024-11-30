@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
 
 	<!-- Detail Mahasiswa-->
 	<section class="flex-col justify-start pl-6">
@@ -90,9 +90,3 @@
 		</a>
 	</section>
 </section>
-
-<!-- footer -->
-<?php include __DIR__ . '/../../components/Footer.php'; ?>
-</body>
-
-</html>

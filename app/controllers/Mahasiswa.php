@@ -7,8 +7,8 @@ class Mahasiswa extends Controller
             $role = $_SESSION['user']['role'];
             if ($role == "Mahasiswa") {
                 $this->view('templates/header');
-                $data['mhs'] = $this->model('MahasiswaModel')->getAllDataMahasiswa($_SESSION['user']['nim']);
-                if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year']) ) {
+                $data['mhs'] = $this->model('MahasiswaModel')->getMahasiswaByNim($_SESSION['user']['nim']);
+                if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year'])) {
                     $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
                 } else {
                     $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
@@ -28,29 +28,38 @@ class Mahasiswa extends Controller
     {
         $this->view('Mahasiswa/formPrestasi');
     }
-    
+
     public function prestasiSaya()
     {
-        $this->view('Mahasiswa/prestasiSaya');
-        
+        $data = [
+            'kp' => $this->model("KategoriModel")->getKategori(),
+            'tk' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'mahasiswa' => $this->model("MahasiswaModel")->getPrestasiMahasiswaByNim($_SESSION['user']['nim'])
+        ];
+        $this->view('Mahasiswa/prestasiSaya', $data);
+
     }
-    
+
     public function profil()
     {
         $this->view('Mahasiswa/profilMahasiswa');
 
     }
 
-    public function create(){
+    public function create()
+    {
         $this->view("Admin/Mahasiswa/create");
     }
-    public function edit(){
+    public function edit()
+    {
         $this->view("Admin/Mahasiswa/edit");
     }
-    public function listMhs(){
+    public function listMhs()
+    {
         $this->view("Admin/Mahasiswa/index");
     }
-    public function show(){
+    public function show()
+    {
         $this->view("Admin/Mahasiswa/show");
     }
 }

@@ -230,19 +230,22 @@
 						<tr>
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
-								<select class="w-full border rounded px-2 py-1">
+								<select class="w-full border rounded px-2 py-1" onchange=>
 									<?php
-									foreach ($data['mahasiswa'] as $mhs) {
+									foreach ($data['mahasiswa']['all'] as $mhs) {
 										echo "<option>{$mhs['nim']}</option>";
 									}
 									?>
 								</select>
 							</td>
-							<td class="py-2 px-4 border border-blue-950"><?= $data['mahasiswa']['0']['nama'] ?></td>
+							<td class="py-2 px-4 border border-blue-950">Haikal</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="Ketua">Ketua</option>
-									<option value="Anggota">Anggota</option>
+								<?php
+									foreach ($data['peranMhs'] as $peranMhs) {
+										echo "<option>{$peranMhs['peran']}</option>";
+									}
+									?>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
@@ -257,7 +260,7 @@
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
 									<?php
-									foreach ($data['mahasiswa'] as $mhs) {
+									foreach ($data['mahasiswa']['all'] as $mhs) {
 										echo "<option>{$mhs['nim']}</option>";
 									}
 									?>
@@ -266,8 +269,11 @@
 							<td class="py-2 px-4 border border-blue-950">Restu</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="Anggota">Anggota</option>
-									<option value="Ketua">Ketua</option>
+								<?php
+									foreach ($data['peranMhs'] as $peranMhs) {
+										echo "<option>{$peranMhs['peran']}</option>";
+									}
+									?>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
@@ -324,20 +330,21 @@
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">Dimas Wahyu Wibowo, S.T., M.T.</option>
-									<option value="2021002">Dimas Wahyu Wibowo, S.T., M.T.</option>
-									<option value="2021003">Dimas Wahyu Wibowo, S.T., M.T.</option>
+								<?php
+									foreach ($data['dosen'] as $dosen) {
+										echo "<option>{$dosen['nama']}</option>";
+									}
+									?>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950">198406102008121004</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option>Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) dan
-										kemahasiswaan (BEM,
-										Maperwa, dan lain-lain)</option>
-									<option>Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) dan
-										kemahasiswaan (BEM,
-										Maperwa, dan lain-lain)</option>
+								<?php
+									foreach ($data['peranDosen'] as $peranDsn) {
+										echo "<option>{$peranDsn['peran']}</option>";
+									}
+									?>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
@@ -370,8 +377,8 @@
 			</a>
 		</div>
 
-		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
+		<div class="justify-center p-2" id="reset">
+			<a href="<?= BASEURL; ?>/Prestasi/Create/#reset">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 					<img src="../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 					<p>Reset</p>

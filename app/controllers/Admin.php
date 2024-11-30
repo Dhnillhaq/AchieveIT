@@ -28,7 +28,7 @@ class Admin extends Controller
                 header("location:".BASEURL."/Auth/login");
             }
         } else {
-            header("location:http://localhost/public");
+            header("location:".BASEURL);
         }
     }
 
@@ -42,7 +42,7 @@ class Admin extends Controller
                 header('Location:' . BASEURL . '/Auth/Login');
             }
         } else {
-            header("location:http://localhost/public");
+            header("location:".BASEURL);
         }
     }
 
@@ -52,23 +52,23 @@ class Admin extends Controller
     public function pengaturanPrestasi(){
         $this->view("Admin/pengaturanPrestasi");
     }
-    public function profilAdmin(){
+    public function profil(){
         $this->view("Admin/profilAdmin");
     }
-    public function create(){
+    public function createAdmin(){
         $this->view("Admin/Admin/create");
     }
 
-    public function store(){
+    // Proses
+    public function storeAdmin(){
         $this->view("Admin/Admin/create");
     }
-    public function edit(){
+
+    public function editAdmin(){
         $this->view("Admin/Admin/edit");
     }
     public function adminList(){
         $this->view("Admin/Admin/index");
     }
-
-
 }
 ?>

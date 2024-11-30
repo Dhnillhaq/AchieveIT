@@ -280,7 +280,7 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
+			<a href="<?= BASEURL; ?>/Prestasi/index">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 					<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 					<p>Kembali</p>

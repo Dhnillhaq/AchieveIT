@@ -28,15 +28,21 @@
 			<div class="flex items-center">
 				<select
 					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option>Tingkat</option>
-					<option>Provinsi</option>
+					<?php
+				foreach ($data['tk'] as $tk) {
+					echo "<option>{$tk['tingkat_kompetisi']}</option>";
+				}
+				?>
 				</select>
 			</div>
 			<div class="flex items-center">
 				<select
 					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option>Kategori</option>
-					<option>Kategori</option>
+					<?php
+				foreach ($data['kp'] as $kp) {
+					echo "<option>{$kp['kategori']}</option>";
+				}
+				?>
 				</select>
 			</div>
 		</div>
@@ -71,32 +77,24 @@
 				</tr>
 			</thead>
 			<tbody class="text-gray-700">
+					<?php 
+					foreach ($data['mahasiswa'] as $mhs) { ?>
 				<tr>
-					<td class="py-2 px-4 border border-blue-950">1</td>
-					<td class="py-2 px-4 border border-blue-950">COMFEST</td>
-					<td class="py-2 px-4 border border-blue-950">Nasional</td>
-					<td class="py-2 px-4 border border-blue-950">SAINS</td>
-					<td class="py-2 px-4 border border-blue-950">Juara 1</td>
-					<td class="py-2 px-4 border border-blue-950">100</td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['id_prestasi']?></td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['nama_kompetisi']?></td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['tingkat_kompetisi']?></td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['kategori_kompetisi']?></td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['juara']?></td>
+					<td class="py-2 px-4 border border-blue-950"><?=$mhs['poin']?></td>
 					<td class="py-2 px-4 border border-blue-950">
 						<button class="">
 							<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
 						</button>
 					</td>
 				</tr>
-				<tr>
-					<td class="py-2 px-4 border border-blue-950">2</td>
-					<td class="py-2 px-4 border border-blue-950">PKM</td>
-					<td class="py-2 px-4 border border-blue-950">Nasional</td>
-					<td class="py-2 px-4 border border-blue-950">SAINS</td>
-					<td class="py-2 px-4 border border-blue-950">Juara 2</td>
-					<td class="py-2 px-4 border border-blue-950">75</td>
-					<td class="py-2 px-4 border border-blue-950">
-						<button class="">
-							<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-						</button>
-					</td>
-				</tr>
+					<?php }
+					?>
+				
 			</tbody>
 		</table>
 	</section>
