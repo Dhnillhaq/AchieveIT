@@ -1,61 +1,58 @@
 <?php
 class Admin extends Controller
 {
-    
+
     public function index()
     {
-        if ($this->checkRole()) {
-            $role = $_SESSION['user']['role'];
-            if ($role == "Admin") {
-                $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
-                $this->view('Admin/index', $data);
-                exit;
-            } else {
-                header('location:' . BASEURL . '/Auth/Login');
-            }
-        } else {
-            header('location:' . BASEURL);
-        }
+        $this->checkRole("Admin", "Super Admin");
+        $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
+        $this->view('Admin/index', $data);
+
     }
-    public function superAdmin()
+
+    public function administrasiData()
     {
-        if (isset($_SESSION['user']['role'])) {
-            $role = $_SESSION['user']['role'];
-            if ($role == "Super Admin") {
-                $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
-                $this->view('Admin/index', $data);
-                exit;
-            } else {
-                header("location:".BASEURL."/Auth/login");
-            }
-        } else {
-            header("location:".BASEURL);
-        }
-    }
-
-
-    public function administrasiData(){
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/administrasiData");
     }
-    public function pengaturanPrestasi(){
-        $this->view("Admin/pengaturanPrestasi");
+    public function pengaturanPrestasi()
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $data = [
+            'kategoriKompetisi' => $this->model('KategoriModel')->getKategori(),
+            'tingkatKompetisi' => $this->model('TingkatKompetisiModel')->getTingkatKompetisi(),
+            'tingkatPenyelenggara' => $this->model('TingkatPenyelenggaraModel')->getTingkatPenyelenggara(),
+            'juara' => $this->model('JuaraModel')->getJuara()
+        ];
+
+        $this->view("Admin/pengaturanPrestasi", $data);
     }
-    public function profil(){
+    public function profil()
+    {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/profilAdmin");
     }
-    public function createAdmin(){
+    public function create()
+    {
+        $this->checkRole("Super Admin");
         $this->view("Admin/Admin/create");
     }
 
     // Proses
-    public function storeAdmin(){
+    public function store()
+    {
+        $this->checkRole("Super Admin");
         $this->view("Admin/Admin/create");
     }
 
-    public function editAdmin(){
+    public function edit()
+    {
+        $this->checkRole("Super Admin");
         $this->view("Admin/Admin/edit");
     }
-    public function adminList(){
+    public function adminList()
+    {
+        $this->checkRole("Super Admin");
         $this->view("Admin/Admin/index");
     }
 }
