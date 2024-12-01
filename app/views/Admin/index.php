@@ -150,5 +150,5 @@
 
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="../../components/Diagram.js"></script>
+	<script src="../../app/components/Diagram.js"></script>
 </section>
