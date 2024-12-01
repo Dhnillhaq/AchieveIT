@@ -90,7 +90,7 @@
 			</select>
 		</div>
 		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
-			<canvas id="DiagramPie"></canvas>
+			<canvas id="DiagramLingkar"></canvas>
 		</div>
 	</section>
 
