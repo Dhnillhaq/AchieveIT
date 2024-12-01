@@ -28,7 +28,7 @@
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Program Studi</p>
-						<p class="font-semibold"><?= $_SESSION['user']['id_prodi']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['prodi']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
@@ -40,7 +40,7 @@
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tanggal Lahir</p>
-						<!-- <p class="font-semibold">< $_SESSION['user']['tanggal_lahir']?></p> -->
+						<p class="font-semibold"><?= $_SESSION['user']['tanggal_lahir']->format('d-m-Y')?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">

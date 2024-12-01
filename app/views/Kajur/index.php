@@ -1,12 +1,12 @@
-<section class="sm:ml-64 bg-blue-50 min-h-screen">
+<section class="sm:ml-64 bg-blue-50">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	 <?php require_once __DIR__. '/../templates/profiles.php'; ?> 
 
 	<!-- selamat datang -->
 	<section class="flex-col justify-start p-6 space-y-4">
 		<p class="font-bold text-4xl">Selamat Datang</p>
 		<p class="font-semibold text-2xl text-[#F99D1C]">
-			Kajur12345 / 2341720001
+			<?=$_SESSION['user']['nama']?> / <?= $_SESSION['user']['nip']?>
 		</p>
 	</section>
 
@@ -20,7 +20,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Prestasi
 					</p>
-					<p class="font-bold">500</p>
+					<p class="font-bold"><?=$data['statistik']['0']['total_prestasi']?></p>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Mahasiswa JTI
 					</p>
-					<p class="font-bold">1500</p>
+					<p class="font-bold"><?=$data['statistik']['0']['total_mahasiswa']?></p>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Rata-rata Per Tahun
 					</p>
-					<p class="font-bold">100</p>
+					<p class="font-bold"><?=round($data['statistik']['0']['rata_rata'])?></p>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total MaPres
 					</p>
-					<p class="font-bold">250</p>
+					<p class="font-bold"><?=$data['statistik']['0']['total_mapres']?></p>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,8 @@ class Prestasi extends Controller
 {
     public function index()
     {
-        $this->view("Prestasi/index");
+        $data['daftar_prestasi'] = $this->model("PrestasiModel")->getDaftarPrestasi();
+        $this->view("Prestasi/index", $data);
     }
     public function create()
     {

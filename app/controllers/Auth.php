@@ -25,7 +25,7 @@ class Auth extends Controller
             exit;
         } else if ($this->isKajur()) {
             $this->setSession();
-            header("location:$url/Admin/Kajur");
+            header("location:$url/Kajur/index");
             exit;
         } else if ($this->isMahasiswa()) {
             $this->setSession();
@@ -48,16 +48,17 @@ class Auth extends Controller
             ];
         } else {
             $_SESSION['user'] = [
-                "nim" => $this->userDB['nim'],
-                "password" => $this->userDB['password'],
-                "nama" => $this->userDB['nama'],
-                "tempat_lahir" => $this->userDB['tempat_lahir'],
-                "tanggal_lahir" => $this->userDB['tanggal_lahir'],
-                "agama" => $this->userDB['agama'],
-                "jenis_kelamin" => $this->userDB['jenis_kelamin'],
-                "no_telepon" => $this->userDB['no_telepon'],
-                "email" => $this->userDB['email'],
-                "total_poin" => $this->userDB['total_poin'],
+                "nim" => $this->userDB['0']['nim'],
+                "password" => $this->userDB['0']['password'],
+                "nama" => $this->userDB['0']['nama'],
+                "tempat_lahir" => $this->userDB['0']['tempat_lahir'],
+                "tanggal_lahir" => $this->userDB['0']['tanggal_lahir'],
+                "agama" => $this->userDB['0']['agama'],
+                "jenis_kelamin" => $this->userDB['0']['jenis_kelamin'],
+                "no_telepon" => $this->userDB['0']['no_telepon'],
+                "email" => $this->userDB['0']['email'],
+                "total_poin" => $this->userDB['0']['total_poin'],
+                "prodi" => $this->userDB['0']['nama_prodi'],
                 "role" => "Mahasiswa"
             ];
         }
@@ -92,8 +93,8 @@ class Auth extends Controller
 
     public function isMahasiswa()
     {
-        $this->userDB = $this->model("AuthModel")->getMahasiswa($this->usernameInp);
-        if ($this->usernameInp == $this->userDB['nim'] && $this->passwordInp == $this->userDB['password']) {
+        $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
+        if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
             return true;
         } else {
             return false;
