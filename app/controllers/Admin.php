@@ -7,8 +7,8 @@ class Admin extends Controller
         if ($this->checkRole()) {
             $role = $_SESSION['user']['role'];
             if ($role == "Admin") {
-                $this->view('Admin/index');
-                $this->model('PrestasiModel')->getAllPrestasi();
+                $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
+                $this->view('Admin/index', $data);
                 exit;
             } else {
                 header('location:' . BASEURL . '/Auth/Login');
@@ -22,7 +22,8 @@ class Admin extends Controller
         if (isset($_SESSION['user']['role'])) {
             $role = $_SESSION['user']['role'];
             if ($role == "Super Admin") {
-                $this->view('Admin/index');
+                $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
+                $this->view('Admin/index', $data);
                 exit;
             } else {
                 header("location:".BASEURL."/Auth/login");
@@ -32,19 +33,6 @@ class Admin extends Controller
         }
     }
 
-    public function kajur($nama = "Dhanil")
-    {
-        if (isset($_SESSION['user']['role'])) {
-            $role = $_SESSION['user']['role'];
-            if ($role == "Ketua Jurusan") {
-                $this->view('Kajur/index', $nama);
-            } else {
-                header('Location:' . BASEURL . '/Auth/Login');
-            }
-        } else {
-            header("location:".BASEURL);
-        }
-    }
 
     public function administrasiData(){
         $this->view("Admin/administrasiData");

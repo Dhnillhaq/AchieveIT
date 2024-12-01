@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- daftar prestasi -->
 	<section class="flex-col justify-start pl-6">
@@ -49,18 +49,22 @@
 					<option>Kategori</option>
 				</select>
 			</div>
-			<div class="flex items-center">
-				<select
-					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option>VALID</option>
-					<option>INVALID</option>
-				</select>
-			</div>
+
+			<?php 
+			if ($_SESSION['user']['role'] == 'Super Admin') { ?>
+				<div class="flex items-center">
+					<select
+						class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+						<option>VALID</option>
+						<option>INVALID</option>
+					</select>
+				</div>
+			<?php } ?>
 		</div>
 	</section>
 
 	<!-- table -->
-	<section class="mx-6 overflow-x-auto bg-white shadow-md rounded-2xl">
+	<section class="mx-6 overflow-x-auto mb-5 bg-white shadow-md rounded-2xl">
 		<table class="min-w-full bg-white text-center">
 			<thead>
 				<tr>
@@ -88,32 +92,26 @@
 				</tr>
 			</thead>
 			<tbody class="text-gray-700">
-				<tr>
-					<td class="py-2 px-4 border border-blue-950">1</td>
-					<td class="py-2 px-4 border border-blue-950">COMFEST</td>
-					<td class="py-2 px-4 border border-blue-950">Nasional</td>
-					<td class="py-2 px-4 border border-blue-950">SAINS</td>
-					<td class="py-2 px-4 border border-blue-950">Juara 1</td>
-					<td class="py-2 px-4 border border-blue-950">100</td>
-					<td class="py-2 px-4 border border-blue-950">
-						<button class="">
-							<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td class="py-2 px-4 border border-blue-950">2</td>
-					<td class="py-2 px-4 border border-blue-950">PKM</td>
-					<td class="py-2 px-4 border border-blue-950">Nasional</td>
-					<td class="py-2 px-4 border border-blue-950">SAINS</td>
-					<td class="py-2 px-4 border border-blue-950">Juara 2</td>
-					<td class="py-2 px-4 border border-blue-950">75</td>
-					<td class="py-2 px-4 border border-blue-950">
-						<button class="">
-							<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-						</button>
-					</td>
-				</tr>
+				<?php
+				$no = 1;
+				foreach ($data['daftar_prestasi'] as $dp) { ?>
+					<tr>
+						<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $dp['nama_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $dp['tingkat_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $dp['kategori_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $dp['juara'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $dp['poin'] ?></td>
+						<td class="py-2 px-4 border border-blue-950">
+							<button class="">
+								<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
+							</button>
+						</td>
+					</tr>
+					<?php
+					$no++;
+				}
+				?>
 			</tbody>
 		</table>
 	</section>
