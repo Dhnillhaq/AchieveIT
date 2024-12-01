@@ -11,7 +11,9 @@ class Controller
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';
-        require_once '../app/views/templates/footer.php';
+        if ($view != 'index' && $view != 'Auth/login') {
+            require_once '../app/views/templates/footer.php';
+        }
     }
 
     public function model($model)
