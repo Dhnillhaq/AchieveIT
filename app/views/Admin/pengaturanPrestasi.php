@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- pengaturan kompetisi-->
 	<section class="flex-col justify-start pl-6">
@@ -49,48 +49,33 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								SAINS
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Seni
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Olahraga
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+
+						<?php
+						$no = 1;
+						foreach ($data['kategoriKompetisi'] as $kategori) {
+							?>
+
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $kategori['kategori'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href="<?= BASEURL; ?>/Kategori/edit/<?= $kategori['id_kategori'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Kategori/delete/<?= $kategori['id_kategori'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="Delete" class="" />
+										</button>
+									</a>
+								</td>
+							</tr>
+
+						<?php } ?>
+
 					</tbody>
 				</table>
 			</div>
@@ -142,51 +127,38 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Internasional
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">3</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Nasional
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">2</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Regional
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">1</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+
+						<?php
+						$no = 1;
+						foreach ($data['tingkatKompetisi'] as $tingkatKompetisi) {
+							?>
+
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $tingkatKompetisi['tingkat_kompetisi'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $tingkatKompetisi['poin'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a
+										href="<?= BASEURL; ?>/TingkatKompetisi/edit/<?= $tingkatKompetisi['id_tingkat_kompetisi'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
+										</button>
+									</a>
+									<a
+										href="<?= BASEURL; ?>/TingkatKompetisi/delete/<?= $tingkatKompetisi['id_tingkat_kompetisi'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="Delete" class="" />
+										</button>
+									</a>
+								</td>
+							</tr>
+
+						<?php } ?>
+
 					</tbody>
 				</table>
 			</div>
@@ -238,51 +210,38 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Pemerintah
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">4</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Lorem Ipsum
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">3</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Lorem Ipsum
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">2</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+
+						<?php
+						$no = 1;
+						foreach ($data['tingkatPenyelenggara'] as $tingkatPenyelenggara) {
+							?>
+
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $tingkatPenyelenggara['tingkat_penyelenggara'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $tingkatPenyelenggara['poin'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a
+										href="<?= BASEURL; ?>/TingkatPenyelenggara/edit/<?= $tingkatPenyelenggara['id_tingkat_penyelenggara'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
+										</button>
+									</a>
+									<a
+										href="<?= BASEURL; ?>/TingkatPenyelenggara/delete/<?= $tingkatPenyelenggara['id_tingkat_penyelenggara'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="Delete" class="" />
+										</button>
+									</a>
+								</td>
+							</tr>
+
+						<?php } ?>
+
 					</tbody>
 				</table>
 			</div>
@@ -334,51 +293,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Juara 1 / Medali Emas
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">5</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Lorem Ipsum
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">4</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Lorem Ipsum
-							</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">3</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+
+						<?php
+						$no = 1;
+						foreach ($data['juara'] as $juara) {
+							?>
+
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $juara['juara'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950 text-left">
+									<?= $juara['poin'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href="<?= BASEURL; ?>/Juara/edit/<?= $juara['id_juara'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Juara/delete/<?= $juara['id_juara'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="Delete" class="" />
+										</button>
+									</a>
+								</td>
+							</tr>
+
+						<?php } ?>
+
 					</tbody>
 				</table>
 			</div>
