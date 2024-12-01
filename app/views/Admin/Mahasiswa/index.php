@@ -23,7 +23,7 @@
 				</div>
 
 				<!-- btn tambah -->
-				<a href="<?= BASEURL; ?>/">
+				<a href="<?= BASEURL; ?>/Prodi/create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
@@ -40,6 +40,9 @@
 							<th class="py-2 px-4 w-1/12 bg-blue-950 text-white font-semibold border border-blue-950">
 								No
 							</th>
+							<th class="py-2 px-4 w-1/12 bg-blue-950 text-white font-semibold border border-blue-950">
+								Kode
+							</th>
 							<th class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
 								Program Studi
 							</th>
@@ -54,14 +57,20 @@
 						foreach ($data['prodi'] as $prodi) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $prodi['kode_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $prodi['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-									</button>
-									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-										<img src="../../../public/img/Trash.png" alt="logo" class="">
-									</button>
+									<a href="<?= BASEURL; ?>/Prodi/edit/<?= $prodi['id_prodi'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+										</button>
+									</a>
+
+									<a href="<?= BASEURL; ?>/Prodi/delete/<?= $prodi['id_prodi'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="logo" class="">
+										</button>
+									</a>
 								</td>
 							</tr>
 							<?php
@@ -89,7 +98,7 @@
 				</div>
 
 				<!-- btn tambah -->
-				<a href="<?= BASEURL; ?>/">
+				<a href="<?= BASEURL; ?>/Mahasiswa/create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
@@ -130,15 +139,21 @@
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nim'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-										<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-									</button>
-									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-									</button>
-									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-										<img src="../../../public/img/Trash.png" alt="logo" class="">
-									</button>
+									<a href="<?= BASEURL; ?>/Mahasiswa/listMhs/<?= $mhs['id_mahasiswa'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Mahasiswa/edit/<?= $mhs['id_mahasiswa'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Mahasiswa/delete/<?= $mhs['id_mahasiswa'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="logo" class="">
+										</button>
+									</a>
 								</td>
 							</tr>
 							<?php
@@ -167,7 +182,7 @@
 				</div>
 
 				<!-- btn tambah -->
-				<a href="<?= BASEURL; ?>/">
+				<a href="<?= BASEURL; ?>/PeranMahasiswa/Create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
@@ -193,19 +208,23 @@
 						</tr>
 					</thead>
 					<tbody>
-					<?php
+						<?php
 						$no = 1;
 						foreach ($data['peranMhs'] as $pm) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $pm['peran'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-									</button>
-									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-										<img src="../../../public/img/Trash.png" alt="logo" class="">
-									</button>
+									<a href="<?= BASEURL; ?>/PeranMahasiswa/edit/<?= $pm['id_peran'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Prodi/edit/<?= $pm['id_peran'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="logo" class="">
+										</button>
+									</a>
 								</td>
 							</tr>
 							<?php

@@ -4,9 +4,9 @@ class ProdiModel extends Connection
     private $data = [];
 
     // Get All Dosen Pembimbing
-    public function getAllDosenPembimbing()
+    public function getAllProdi()
     {
-        $stmt = "SELECT * FROM dosen_pembimbing";
+        $stmt = "SELECT * FROM program_studi";
         $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
