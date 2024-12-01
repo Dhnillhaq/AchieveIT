@@ -2,24 +2,33 @@
 
 class Prestasi extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $this->view("Prestasi/index");
     }
-    public function create(){
-        $data['kp'] = $this->model("KategoriModel")->getKategori();
-        $data['tp'] = $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara();
-        $data['tk'] = $this->model("TingkatKompetisiModel")->getTingkatKompetisi();
-        $data['juara'] = $this->model("JuaraModel")->getJuara();
-        $data['mahasiswa'] = $this->model("MahasiswaModel")->getMahasiswa();    
-        $data['peranMhs'] = $this->model("PeranMahasiswaModel")->getPeranMhs();
-        $data['dosen'] = $this->model("DosenModel")->getDosen();
-        $data['juara'] = $this->model("PeranDosenModel")->getPeranDosen();
+    public function create()
+    {
+        $data = [
+            'kp' => $this->model("KategoriModel")->getKategori(),
+            'tp' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
+            'tk' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'juara' => $this->model("JuaraModel")->getJuara(),
+            'mahasiswa' => [
+                'all' => $this->model("MahasiswaModel")->getAllDataMahasiswa()
+                // 'byNim' => $this->model("MahasiswaModel")->getMahasiswaByNim($_SESSION['user']['nim'])
+            ],
+            'peranMhs' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
+            'dosen' => $this->model("DosenModel")->getDosen(),
+            'peranDosen' => $this->model("PeranDosenModel")->getPeranDosen()
+        ];
         $this->view("Prestasi/create", $data);
     }
-    public function edit(){
+    public function edit()
+    {
         $this->view("Prestasi/edit");
     }
-    public function show(){
+    public function show()
+    {
         $this->view("Prestasi/show");
     }
 }

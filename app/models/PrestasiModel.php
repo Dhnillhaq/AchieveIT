@@ -10,7 +10,6 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM prestasi";
         $result = sqlsrv_query($this->conn, $stmt);
 
-
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;
         }
@@ -42,13 +41,10 @@ class PrestasiModel extends Connection
     public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {
         if ($keyword == "") {
-            $stmt = "SELECT TOP $filterQ * FROM vw_RankingMahasiswa
-            ORDER BY total_poin DESC;";
+            $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
             $result = sqlsrv_query($this->conn, $stmt);
         } else {
-            $stmt = "SELECT TOP $filterQ * FROM vw_RankingMahasiswa
-                    WHERE nim LIKE '%$keyword%' OR nama_mahasiswa LIKE '%$keyword%'
-                    ORDER BY total_poin DESC;";
+            $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = '$filterY';";
             $result = sqlsrv_query($this->conn, $stmt);
         }
 
