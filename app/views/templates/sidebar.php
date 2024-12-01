@@ -21,6 +21,7 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/create"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
                         </a>
                     </li>
@@ -41,6 +42,7 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/profil"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>
@@ -71,13 +73,14 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/create"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/index"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5" />
+                            <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
                         </a>
                     </li>
@@ -91,6 +94,7 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/profil"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>
@@ -131,6 +135,7 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Kajur/profilKajur"
                             class="flex items-center p-2 <?= strpos($currentUrl, '/Kajur/profilKajur') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>
@@ -163,18 +168,21 @@
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/create"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Mahasiswa/prestasiSaya"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5" />
                             <span class="flex-1 ms-3 whitespace-nowrap">Prestasi Saya</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Mahasiswa/profil"
                             class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
+                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>

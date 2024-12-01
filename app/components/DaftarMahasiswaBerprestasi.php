@@ -10,15 +10,10 @@
     <section id="daftar-prestasi" class="">
       <div class="p-5 mb-10 ">
         <div class="flex justify-between">
-          <div class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
-            <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
-            <input
-              type="text"
-              id="cari-mhs"
-              placeholder="Cari mahasiswa berdasarkan nama/NIM"
-              class="bg-white flex focus:outline-none"
-            />
-          </div>
+          <div class="flex items-center bg-white w-1/3 p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+									<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+									<input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword"/>
+								</div>
           <div class="flex right-0">
             <div class="flex items-center mr-3">
               <span class="">Lihat</span>

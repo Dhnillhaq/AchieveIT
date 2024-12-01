@@ -18,6 +18,7 @@
 		</a>
 	</section>
 
+	<form action="<?=BASEURL;?>/Dosen/Store" method="post">
 	<!-- tambah dosen -->
 	<section class="relative p-6">
 		<!-- Static parent -->
@@ -29,13 +30,13 @@
 			<!-- nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="nama"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- NIP -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">NIP <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="nip"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 		</div>
@@ -44,12 +45,10 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
+				<button name="submit" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 					<img src="../../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 					<p>Simpan</p>
 				</button>
-			</a>
 		</div>
 
 		<div class="justify-center p-2">
@@ -62,4 +61,5 @@
 			</a>
 		</div>
 	</section>
+	</form>
 </section>

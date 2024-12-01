@@ -90,7 +90,7 @@
 			</select>
 		</div>
 		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
-			<canvas id="DiagramPie"></canvas>
+			<canvas id="DiagramLingkar"></canvas>
 		</div>
 	</section>
 
@@ -150,5 +150,5 @@
 
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="../../components/Diagram.js"></script>
+	<script src="../../app/components/Diagram.js"></script>
 </section>

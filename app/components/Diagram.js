@@ -1,4 +1,4 @@
-const ctx = document.getElementById("DiagramPie");
+const ctx = document.getElementById("DiagramLingkar");
 
 new Chart(ctx, {
   type: "doughnut",
@@ -21,13 +21,6 @@ new Chart(ctx, {
         ],
       },
     ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
   },
 });
 

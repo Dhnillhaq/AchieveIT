@@ -67,6 +67,10 @@
 								class="py-2 px-4 w-1/5 bg-blue-950 italic text-white font-semibold border border-blue-950">
 								Timestamp
 							</th>
+							<th
+								class="py-2 px-4 w-1/5 bg-blue-950 italic text-white font-semibold border border-blue-950">
+								Oleh
+							</th>
 							<th class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
 								Aksi
 							</th>
@@ -81,6 +85,7 @@
 								<div>2024-11-27</div>
 								<div>09:15:00</div>
 							</td>
+							<td class="py-2 px-4 border border-blue-950">Admin1</td>
 							<td class="py-2 px-4 border border-blue-950">Login</td>
 							<td class="py-2 px-4 border border-blue-950">
 								User berhasil login
@@ -91,6 +96,7 @@
 								<div>2024-11-27</div>
 								<div>09:30:00</div>
 							</td>
+							<td class="py-2 px-4 border border-blue-950">Admin1</td>
 							<td class="py-2 px-4 border border-blue-950">Logout</td>
 							<td class="py-2 px-4 border border-blue-950">
 								User keluar dari sistem
@@ -101,6 +107,7 @@
 								<div>2024-11-27</div>
 								<div>10:00:00</div>
 							</td>
+							<td class="py-2 px-4 border border-blue-950">Admin1</td>
 							<td class="py-2 px-4 border border-blue-950">Update Profile</td>
 							<td class="py-2 px-4 border border-blue-950">
 								User mengubah data profil
@@ -111,6 +118,7 @@
 								<div>2024-11-27</div>
 								<div>11:00:00</div>
 							</td>
+							<td class="py-2 px-4 border border-blue-950">Admin1</td>
 							<td class="py-2 px-4 border border-blue-950">Download</td>
 							<td class="py-2 px-4 border border-blue-950">
 								User mengunduh file laporan
@@ -121,6 +129,7 @@
 								<div>2024-11-27</div>
 								<div>11:30:00</div>
 							</td>
+							<td class="py-2 px-4 border border-blue-950">Admin1</td>
 							<td class="py-2 px-4 border border-blue-950">Upload</td>
 							<td class="py-2 px-4 border border-blue-950">
 								User mengunggah dokumen

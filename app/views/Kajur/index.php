@@ -11,7 +11,7 @@
 	</section>
 
 	<!-- prestasi -->
-	<section class="flex justify-start p-6 space-x-10">
+	<section class="flex justify-start p-6 space-x-4">
 		<!-- total prestasi -->
 		<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
 			<div class="flex justify-start space-x-4">
@@ -90,7 +90,7 @@
 			</select>
 		</div>
 		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
-			<canvas id="DiagramPie"></canvas>
+			<canvas id="DiagramLingkar"></canvas>
 		</div>
 	</section>
 
@@ -149,5 +149,5 @@
 	<?php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php'; ?>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="../../components/Diagram.js"></script>
+	<script src="../../app/components/Diagram.js"></script>
 </section>
