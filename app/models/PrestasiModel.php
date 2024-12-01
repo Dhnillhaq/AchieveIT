@@ -15,17 +15,18 @@ class PrestasiModel extends Connection
         }
         return $this->data;
     }
-    
-    public function getTingkatPrestasi(){
-        $stmt = "SELECT * FROM prestasi";
+
+    public function getDaftarPrestasi()
+    {
+        $stmt = "SELECT * FROM vw_PrestasiMahasiswa ORDER BY poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
-    
-    
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;
         }
         return $this->data;
     }
+    
 
     public function getDetailPrestasi($id)
     {
@@ -54,60 +55,13 @@ class PrestasiModel extends Connection
         return $this->data;
     }
 
-
-
-    // Get All Kategori Prestasi
-    public function getAllKategori()
+    public function getStatistikPrestasi()
     {
-        $stmt = "SELECT * FROM kategori_prestasi";
+        $stmt = "SELECT * FROM vw_StatistikPrestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
-
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
-        return $this->data;
-    }
-
-
-
-    // Get All Data Juara
-    public function getAllJuara()
-    {
-
-        $stmt = "SELECT * FROM juara";
-        $result = sqlsrv_query($this->conn, $stmt);
-
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
-        return $this->data;
-    }
-
-    // Get All Data Tingkat Kompetisi
-    public function getAllTingkatKompetisi()
-    {
-        $stmt = "SELECT * FROM tingkat_kompetisi";
-        $result = sqlsrv_query($this->conn, $stmt);
-
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
-        return $this->data;
-    }
-
-    // Get All Data Tingkat Penyelenggara
-    public function getAllTingkatPenyelenggara()
-    {
-        $stmt = "SELECT * FROM tingkat_penyelenggara";
-        $result = sqlsrv_query($this->conn, $stmt);
-
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
-        }
+        
+            $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        
         return $this->data;
     }
 
