@@ -1,5 +1,4 @@
 <?php
-if (isset($_SESSION['user'])) {
     if ($_SESSION['user']['role'] == "Super Admin") { ?>
         <!-- sidebar -->
         <aside id="default-sidebar"
@@ -185,5 +184,4 @@ if (isset($_SESSION['user'])) {
 
         <?php
     }
-}
 ?>

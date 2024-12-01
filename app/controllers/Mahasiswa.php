@@ -56,7 +56,10 @@ class Mahasiswa extends Controller
     }
     public function listMhs()
     {
-        $this->view("Admin/Mahasiswa/index");
+        $data['mhs'] = $this->model("MahasiswaModel")->getAllDataMahasiswa();
+        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
+        $data['peranMhs'] = $this->model("PeranMahasiswaModel")->getPeranMhs();
+        $this->view("Admin/Mahasiswa/index", $data);
     }
     public function show()
     {
