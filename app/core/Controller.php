@@ -7,7 +7,7 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/templates/header.php';
-        if ($view != 'index') {
+        if ($view != 'index' && $view != 'Auth/login') {
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';
