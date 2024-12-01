@@ -1,19 +1,20 @@
-<div class=" sm:ml-64 bg-blue-50">
+<section class=" sm:ml-64 bg-blue-50 min-h-screen">
 	<!-- profil -->
 	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- selamat datang -->
 	<section class="flex-col justify-start p-6 space-y-4">
 		<p class="font-bold text-4xl">Selamat Datang</p>
-		<class="font-semibold text-2xl text-[#F99D1C]">
+		<p class="font-semibold text-2xl text-[#F99D1C]">
 			<?= $data['mhs']['0']['nama'] ?> / <?= $data['mhs']['0']['nim'] ?>
+	</section>
 
 			<!-- prestasi -->
 			<section class="flex justify-start p-6 space-x-10 ">
 				<!-- total prestasi -->
 				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start">
-						<!-- gambar disini -->
+					<div class="flex justify-start space-x-4">
+						<img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-auto h-12">
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Total Prestasi Saat Ini</p>
 							<p class="font-bold"><?= $data['mhs']['1']['total_prestasi'] ?></p>
@@ -23,8 +24,8 @@
 
 				<!-- total poin -->
 				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start">
-						<!-- gambar disini -->
+					<div class="flex justify-start space-x-4">
+						<img src="../../../public/img/Total_poin.png" alt="logo" class="w-auto h-12">
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Total Poin Saat Ini</p>
 							<p class="font-bold"><?= $data['mhs']['1']['total_poin'] ?></p>
@@ -34,8 +35,8 @@
 
 				<!-- peringkat mapres -->
 				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start">
-						<!-- gambar disini -->
+					<div class="flex justify-start space-x-4">
+						<img src="../../../public/img/Perankingan_Mhs.png" alt="logo" class="w-auto h-12">
 						<div class="flex-col">
 							<p class="font-semibold text-[#757575] text-[12px]">Peringkat MaPres</p>
 							<p class="font-bold"><?= $data['mhs']['1']['peringkat_mapres'] ?></p>
@@ -62,8 +63,10 @@
 					<div class="flex justify-between">
 						<div class="flex">
 							<form id="formFilter" action="<?= BASEURL; ?>/Mahasiswa" method="POST">
-								<input type="text" id="cari-mhs" placeholder="Cari mahasiswa berdasarkan nama/NIM"
-									class="bg-white w-96 p-2 rounded-md border shadow-md" name="keyword" />
+								<div class="flex items-center bg-white w-full p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+									<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+									<input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword"/>
+								</div>
 
 						</div>
 						<div class="flex right-0">
@@ -140,7 +143,7 @@
 			</section>
 			<!-- //php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php';  -->
 	</section>
-</div>
+</section>
 
 <!-- Function js untuk submit form select ketika opsi yang lain dipilih -->
 <script>
