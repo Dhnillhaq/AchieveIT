@@ -44,10 +44,7 @@ class PrestasiModel extends Connection
         if ($keyword == "") {
             $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
             $result = sqlsrv_query($this->conn, $stmt);
-        } else {
-            $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = '$filterY';";
-            $result = sqlsrv_query($this->conn, $stmt);
-        }
+        } 
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $this->data[] = $row;

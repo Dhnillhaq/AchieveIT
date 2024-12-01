@@ -2,7 +2,7 @@
 class Connection
 {
     private $serverName = SERVER_NAME;
-    private $connectionInfo = ["Database" => "achieveit"];
+    private $connectionInfo = ["Database" => DATABASE_NAME];
     public $conn;
 
     public function __construct()
