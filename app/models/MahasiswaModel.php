@@ -7,7 +7,10 @@ class MahasiswaModel extends Connection
     // Get All Mahasiswa
     public function getAllDataMahasiswa()
     {
-        $stmt = "SELECT * FROM mahasiswa";
+        $stmt = "SELECT m.*, 
+		            p.*
+                    FROM mahasiswa m
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi";
         $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {

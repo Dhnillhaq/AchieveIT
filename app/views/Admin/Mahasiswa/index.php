@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Data Mahasiswa-->
 	<section class="flex-col justify-start pl-6">
@@ -49,35 +49,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								D-IV Teknik Informatika
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								D-IV Sistem Informasi Bisnis
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-
+						<?php
+						$no = 1;
+						foreach ($data['prodi'] as $prodi) { ?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $prodi['nama_prodi'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+									</button>
+									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+										<img src="../../../public/img/Trash.png" alt="logo" class="">
+									</button>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 				</table>
 			</div>
@@ -132,176 +121,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">Adam Baskara</td>
-							<td class="py-2 px-4 border border-blue-950">2341720010</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950">Adika Saputra</td>
-							<td class="py-2 px-4 border border-blue-950">2341720012</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950">Arief Prasetyo</td>
-							<td class="py-2 px-4 border border-blue-950">2341720013</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">4</td>
-							<td class="py-2 px-4 border border-blue-950">Abigail Pratama Matadewa</td>
-							<td class="py-2 px-4 border border-blue-950">2341720014</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">5</td>
-							<td class="py-2 px-4 border border-blue-950">Baigon Sidomuncul</td>
-							<td class="py-2 px-4 border border-blue-950">2341720015</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">6</td>
-							<td class="py-2 px-4 border border-blue-950">Balaram Permatasari</td>
-							<td class="py-2 px-4 border border-blue-950">2341720016</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">7</td>
-							<td class="py-2 px-4 border border-blue-950">Cahaya Purnama Indah</td>
-							<td class="py-2 px-4 border border-blue-950">2341720017</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">8</td>
-							<td class="py-2 px-4 border border-blue-950">Citra Kereta Kencana</td>
-							<td class="py-2 px-4 border border-blue-950">2341720018</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">9</td>
-							<td class="py-2 px-4 border border-blue-950">Debaran Mauti</td>
-							<td class="py-2 px-4 border border-blue-950">2341720019</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">10</td>
-							<td class="py-2 px-4 border border-blue-950">Haikal Muhammad Rafli</td>
-							<td class="py-2 px-4 border border-blue-950">2341720011</td>
-							<td class="py-2 px-4 border border-blue-950">DIV Teknik Informatika</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+						<?php
+						$no = 1;
+						foreach ($data['mhs'] as $mhs) { ?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama'] ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nim'] ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama_prodi'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+										<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
+									</button>
+									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+									</button>
+									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+										<img src="../../../public/img/Trash.png" alt="logo" class="">
+									</button>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 
 				</table>
@@ -351,34 +193,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Ketua
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950 text-left">
-								Anggota
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="" />
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="" />
-								</button>
-							</td>
-						</tr>
+					<?php
+						$no = 1;
+						foreach ($data['peranMhs'] as $pm) { ?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left"><?= $pm['peran'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+										<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
+									</button>
+									<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+										<img src="../../../public/img/Trash.png" alt="logo" class="">
+									</button>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 
 					</tbody>
 				</table>
