@@ -2,6 +2,7 @@
 
 	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
 
+	<form action="<?=BASEURL;?>/PeranDosen/Store" method="post">
 	<!-- Tambah peran-->
 	<section class="flex-col justify-start pl-6">
 		<p class="font-bold text-3xl">Tambah Peran Dosen Pembimbing</p>
@@ -29,7 +30,7 @@
 			<!-- nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Peran<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="peran"
 				class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 
@@ -39,12 +40,11 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
+				<button type="submit" name="submit"
+				class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 					<img src="../../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 					<p>Simpan</p>
 				</button>
-			</a>
 		</div>
 
 		<div class="justify-center p-2">
@@ -53,8 +53,8 @@
 					<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 					<p>Reset</p>
 				</button>
-
 			</a>
 		</div>
 	</section>
+	</form>
 </section>
