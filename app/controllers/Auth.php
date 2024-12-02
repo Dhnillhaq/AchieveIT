@@ -4,6 +4,7 @@ class Auth extends Controller
     private $usernameInp;
     private $passwordInp;
     private $userDB;
+
     public function login()
     {
         $this->view('Auth/login');

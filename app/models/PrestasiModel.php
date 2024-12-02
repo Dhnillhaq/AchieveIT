@@ -28,9 +28,8 @@ class PrestasiModel extends Connection
 
     public function getDetailPrestasi($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = '?'";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = '$id'";
+        $result = sqlsrv_query($this->conn, $stmt);
 
         $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 

@@ -2,7 +2,6 @@
 
 class MahasiswaModel extends Connection
 {
-     
 
     // Get All Mahasiswa
     public function getAllDataMahasiswa()
@@ -14,9 +13,9 @@ class MahasiswaModel extends Connection
         $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
-        return $this->data;
+        return $data;
     }
     public function getMahasiswaByNim($nim)
     {
@@ -26,37 +25,32 @@ class MahasiswaModel extends Connection
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
                     WHERE nim = ?";
         $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        $this->data[] = $this->getStatistikMhs($nim);
-        ;
+        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $data[] = $this->getStatistikMhs($nim);
 
-        return $this->data;
+        return $data;
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
-        $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-        
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = '$nim';";
+        $result = sqlsrv_query($this->conn, $stmt);
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
 
-        return $this->data;
+        return $data;
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   
     public function getStatistikMhs($nim)
     {
-        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = ?;";
-        $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-        
-        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
-        return $this->data;
+        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = '$nim';";
+        $result = sqlsrv_query($this->conn, $stmt);
+
+        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
     public function countPrestMhs($nim)
@@ -64,23 +58,25 @@ class MahasiswaModel extends Connection
         $stmt = "SELECT dbo.fn_HitungTotalPrestasi(?) AS total";
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
-        
+
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
-        return $this->data;
+        return $data;
     }
 
-    public function getMahasiswaById($id){
+    public function getMahasiswaById($id)
+    {
         $stmt = "SELECT * FROM mahasiswa WHERE id_mahasiswa = ?;";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
-        
+
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
-    public function store($data){
+    public function store($data)
+    {
         $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, password) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?,?);";
         $params = array(
             $data['id_prodi'],
@@ -106,7 +102,8 @@ class MahasiswaModel extends Connection
         sqlsrv_query($this->conn, $stmt, $params);
     }
 
-    public function update($data){
+    public function update($data)
+    {
         $stmt = "UPDATE mahasiswa
             SET
                 id_prodi = ?,
