@@ -17,6 +17,7 @@ class Kajur extends Controller
 
     public function profilKajur()
     {
+        $this->checkRole("Ketua Jurusan");
         $this->view("Kajur/profilKajur");
     }
 }

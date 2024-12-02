@@ -4,10 +4,12 @@ class Prodi extends Controller
 {
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Prodi/create");
     }
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'kode_prodi' => htmlspecialchars($_POST['kode_prodi']),
@@ -22,6 +24,7 @@ class Prodi extends Controller
 
     public function edit($id_prodi)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_prodi);
 
         $data = $this->model("ProdiModel")->getProdiById($id);

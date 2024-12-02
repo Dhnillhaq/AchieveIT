@@ -5,8 +5,11 @@ class Juara extends Controller
 
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Juara/create");
     }
+
+    // Method proses Create Juara
     public function store()
     {
         if (isset($_POST['submit'])) {
@@ -21,8 +24,10 @@ class Juara extends Controller
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
 
+
     public function edit($id_juara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_juara);
 
         $data = $this->model("JuaraModel")->getJuaraById($id);
@@ -30,6 +35,7 @@ class Juara extends Controller
         $this->view("Admin/Juara/edit", $data);
     }
 
+    // Method proses Update Juara
     public function update()
     {
         if (isset($_POST['submit'])) {
@@ -45,6 +51,7 @@ class Juara extends Controller
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
 
+    // Method proses Delete Juara
     public function delete($id_juara)
     {
         $id = htmlspecialchars($id_juara);
