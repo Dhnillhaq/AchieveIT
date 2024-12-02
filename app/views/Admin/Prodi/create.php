@@ -33,7 +33,7 @@
 				<input type="text" name="kode_prodi"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
-				<label for="nama_prodi" class="block text-gray-700 font-medium pt-6">Nama Program Studi <span
+				<label for="nama_prodi" class="block text-gray-700 font-medium pt-6">Program Studi <span
 						class="text-red-600">*</span></label>
 				<input type="text" name="nama_prodi"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
