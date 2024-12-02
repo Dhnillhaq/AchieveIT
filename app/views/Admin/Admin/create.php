@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
 
 	<!-- data Admin-->
 	<section class="flex-col justify-start pl-6">
@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/">
+		<a href="<?= BASEURL; ?>/Admin/adminList">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -17,7 +17,7 @@
 			</button>
 		</a>
 	</section>
-
+	<form action="<?=BASEURL;?>/Admin/store" method="post">
 	<!-- Tambah Data Admin -->
 	<section class="relative p-6">
 		<!-- Static parent -->
@@ -28,30 +28,30 @@
 			<!-- Nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="nama"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- NIP -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">NIP<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="nip"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- Role -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Role<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder=""
+			<input type="text" placeholder="" name="role"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- Pass -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Password<span
 					class="text-red-600">*</span></label>
-			<input type="password" placeholder=""
+			<input type="password" placeholder="" name="password"
 				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<div class="flex justify-start space-x-1">
-				<input type="checkbox" placeholder="" class="border rounded-lg" />
-				<p class="text-[#757575]">Tampilkan kata sandi</p>
+				<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-lg" />
+				<label class="text-[#757575]" for="tampil-sandi">Tampilkan kata Sandi</label>
 			</div>
 		</div>
 	</section>
@@ -59,12 +59,10 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/Admin/store">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
+				<button type="submit" name="submit" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 					<img src="../../../public/img/simpan.png" alt="logo" class="w-5 h-5" />
 					<p>Simpan</p>
 				</button>
-			</a>
 		</div>
 
 		<div class="justify-center p-2">
@@ -75,5 +73,6 @@
 				</button>
 			</a>
 		</div>
+		</form>
 	</section>
 </section>

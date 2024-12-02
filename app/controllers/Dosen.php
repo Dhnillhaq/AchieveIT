@@ -29,7 +29,8 @@ class Dosen extends Controller
 
     public function edit($id_dosen)
     {
-        $data = $this->model("DosenModel")->getDosenById($id_dosen);
+        $id = htmlspecialchars($id_dosen);
+        $data = $this->model("DosenModel")->getDosenById($id);
         $this->view("Admin/Dosen/edit", $data);
     }
 

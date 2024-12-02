@@ -4,17 +4,15 @@ class Kajur extends Controller
 {
     public function index()
     {
-        if (isset($_SESSION['user']['role'])) {
-            $role = $_SESSION['user']['role'];
-            if ($role == "Ketua Jurusan") {
-                $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
-                $this->view('Kajur/index',$data);
-            } else {
-                header('Location:' . BASEURL . '/Auth/Login');
-            }
+        $this->checkRole("Ketua Jurusan");
+        $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
+        if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year'])) {
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
         } else {
-            header("location:" . BASEURL);
+            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
         }
+        $this->view('Kajur/index', $data);
+
     }
 
     public function profilKajur()

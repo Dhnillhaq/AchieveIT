@@ -30,7 +30,14 @@ class Admin extends Controller
     public function profil()
     {
         $this->checkRole("Admin", "Super Admin");
+        $this->model("AdminModel");
         $this->view("Admin/profilAdmin");
+    }
+    public function adminList()
+    {
+        $this->checkRole("Super Admin");
+        $data['admin'] = $this->model("AdminModel")->getAllDataAdmin();
+        $this->view("Admin/Admin/index", $data);
     }
     public function create()
     {
@@ -42,18 +49,44 @@ class Admin extends Controller
     public function store()
     {
         $this->checkRole("Super Admin");
-        $this->view("Admin/Admin/create");
+        $data = [
+            "nama" => htmlspecialchars($_POST['nama']),
+            "nip" => htmlspecialchars($_POST['nip']),
+            "role" => htmlspecialchars($_POST['role']),
+            "password" => htmlspecialchars($_POST['password'])
+        ];
+        $this->model("AdminModel")->store($data);
+        header("location:" . BASEURL . "/Admin/adminList");
     }
 
-    public function edit()
-    {
+    public function edit($id_admin)
+    {   
         $this->checkRole("Super Admin");
-        $this->view("Admin/Admin/edit");
+        $id = htmlspecialchars($id_admin);
+        $data = $this->model("AdminModel")->getAdminById($id);
+        $this->view("Admin/Admin/edit", $data);
     }
-    public function adminList()
-    {
+
+    public function delete($id_admin)
+    {   
         $this->checkRole("Super Admin");
-        $this->view("Admin/Admin/index");
+        $id = htmlspecialchars($id_admin);
+        $this->model("AdminModel")->Delete($id);
+        header('location:' . BASEURL . '/Admin/adminList');
     }
+
+    public function update()
+    {
+        $data = [
+            'nip' => htmlspecialchars($_POST['nip']),
+            'nama' => htmlspecialchars($_POST['nama']),
+            'role' => htmlspecialchars($_POST['role']),
+            'password' => htmlspecialchars($_POST['password']),
+            'id_admin' => htmlspecialchars($_POST['id_admin'])
+        ];
+        $this->model("AdminModel")->update($data);
+        header('location:' . BASEURL . '/Admin/adminList');
+    }
+
 }
 ?>
