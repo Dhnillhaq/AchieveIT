@@ -259,9 +259,10 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
-								</button>
+								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+									<p>Hapus</p>
+								</div>
 							</td>
 						</tr>
 						<!-- Row 2 -->
@@ -282,9 +283,10 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
-								</button>
+								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+									<p>Hapus</p>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -352,9 +354,10 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
-								</button>
+								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+									<p>Hapus</p>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -379,13 +382,13 @@
 					<p>Simpan</p>
 				</button>
 			</a>
-		</div>
+		</div>x
 
 		<div class="justify-center p-2">
 			<a href="<?= BASEURL; ?>/">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-					<img src="../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
-					<p>Reset</p>
+					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+					<p>Hapus</p>
 				</button>
 
 			</a>
