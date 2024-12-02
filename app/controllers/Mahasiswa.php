@@ -78,7 +78,7 @@ class Mahasiswa extends Controller
     {
         $id = htmlspecialchars($id_mahasiswa);
         $this->model("MahasiswaModel")->delete($id);
-        header('location:' . BASEURL . '/Mahasiswa/index');
+        header('location:' . BASEURL . '/Mahasiswa/listMhs');
     }
 
     public function update()
