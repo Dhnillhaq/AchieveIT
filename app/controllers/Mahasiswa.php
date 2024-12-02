@@ -24,12 +24,12 @@ class Mahasiswa extends Controller
     {
         $this->checkRole("Mahasiswa");
         $data = [
-            'kp' => $this->model("KategoriModel")->getKategori(),
-            'tk' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
-            'mahasiswa' => $this->model("MahasiswaModel")->getPrestasiMahasiswaByNim($_SESSION['user']['nim'])
+            'kategori' => $this->model("KategoriModel")->getKategori(),
+            'tingkatKompetisi' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'prestasi' => $this->model("PrestasiModel")->getPrestasiByNim($_SESSION['user']['nim'])
         ];
-        $this->view('Mahasiswa/prestasiSaya', $data);
 
+        $this->view('Mahasiswa/prestasiSaya', $data);
     }
 
     public function profil()

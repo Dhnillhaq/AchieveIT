@@ -126,13 +126,14 @@
 				</button>
 			</div>
 
-			<!-- Button reset -->
-			<div class="justify-center p-2">
-				<button type="reset" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-					<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
-					<p>Reset</p>
-				</button>
-			</div>
+		<div class="justify-center p-2">
+			<a href="<?=BASEURL;?>/Mahasiswa/delete/<?=$data['mahasiswa']['id_mahasiswa']?>">
+				<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+					<p>Hapus</p>
+				</div>
+			</a>
+		</div>
 		</section>
 	</form>
 </section>

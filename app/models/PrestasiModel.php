@@ -25,11 +25,28 @@ class PrestasiModel extends Connection
         return $data;
     }
 
+    public function getPrestasiByNim($nim)
+    {
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?";
+        $params = array(
+            $nim
+        );
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+
 
     public function getDetailPrestasi($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = '$id'";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = ?";
+        $params = array(
+            $id
+        );
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 

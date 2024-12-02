@@ -54,8 +54,8 @@
 			<div class="justify-center p-2">
 				<a href="<?= BASEURL; ?>/">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-						<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
-						<p>Reset</p>
+						<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+						<p>Hapus</p>
 					</button>
 				</a>
 			</div>

@@ -19,8 +19,8 @@
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
 				<?php
-				foreach ($data['kp'] as $kp) {
-					echo "<option>{$kp['kategori']}</option>";
+				foreach ($data['kategori'] as $kategori) {
+					echo "<option>{$kategori['kategori']}</option>";
 				}
 				?>
 			</select>
@@ -30,8 +30,8 @@
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
 				<?php
-				foreach ($data['tk'] as $tk) {
-					echo "<option>{$tk['tingkat_kompetisi']}</option>";
+				foreach ($data['tingkatKompetisi'] as $tingkatKompetisi) {
+					echo "<option>{$tingkatKompetisi['tingkat_kompetisi']}</option>";
 				}
 				?>
 			</select>
@@ -41,8 +41,8 @@
 					class="text-red-600">*</span></label>
 			<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
 				<?php
-				foreach ($data['tp'] as $tp) {
-					echo "<option>{$tp['tingkat_penyelenggara']}</option>";
+				foreach ($data['tingkatPenyelenggara'] as $tingkatPenyelenggara) {
+					echo "<option>{$tingkatPenyelenggara['tingkat_penyelenggara']}</option>";
 				}
 				?>
 			</select>
@@ -258,8 +258,8 @@
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1" onchange=>
 									<?php
-									foreach ($data['mahasiswa']['all'] as $mhs) {
-										echo "<option>{$mhs['nim']}</option>";
+									foreach ($data['mahasiswa']['all'] as $mahasiswa) {
+										echo "<option>{$mahasiswa['nim']}</option>";
 									}
 									?>
 								</select>
@@ -267,9 +267,9 @@
 							<td class="py-2 px-4 border border-blue-950">Haikal</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-								<?php
-									foreach ($data['peranMhs'] as $peranMhs) {
-										echo "<option>{$peranMhs['peran']}</option>";
+									<?php
+									foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
+										echo "<option>{$peranMahasiswa['peran']}</option>";
 									}
 									?>
 								</select>
@@ -286,8 +286,8 @@
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
 									<?php
-									foreach ($data['mahasiswa']['all'] as $mhs) {
-										echo "<option>{$mhs['nim']}</option>";
+									foreach ($data['mahasiswa']['all'] as $mahasiswa) {
+										echo "<option>{$mahasiswa['nim']}</option>";
 									}
 									?>
 								</select>
@@ -295,9 +295,9 @@
 							<td class="py-2 px-4 border border-blue-950">Restu</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-								<?php
-									foreach ($data['peranMhs'] as $peranMhs) {
-										echo "<option>{$peranMhs['peran']}</option>";
+									<?php
+									foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
+										echo "<option>{$peranMahasiswa['peran']}</option>";
 									}
 									?>
 								</select>
@@ -356,7 +356,7 @@
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-								<?php
+									<?php
 									foreach ($data['dosen'] as $dosen) {
 										echo "<option>{$dosen['nama']}</option>";
 									}
@@ -366,7 +366,7 @@
 							<td class="py-2 px-4 border border-blue-950">198406102008121004</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-								<?php
+									<?php
 									foreach ($data['peranDosen'] as $peranDsn) {
 										echo "<option>{$peranDsn['peran']}</option>";
 									}
