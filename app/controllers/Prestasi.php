@@ -4,7 +4,7 @@ class Prestasi extends Controller
 {
     public function index()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Ketua Jurusan");
         $data['daftar_prestasi'] = $this->model("PrestasiModel")->getDaftarPrestasi();
         $this->view("Prestasi/index", $data);
     }
