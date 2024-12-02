@@ -76,7 +76,7 @@ class Auth extends Controller
     {
         $this->userDB = $this->model("AuthModel")->getAdmin();
         if ($this->usernameInp == $this->userDB['nip'] && $this->passwordInp == $this->userDB['password']) {
-               return true;
+            return true;
         }
         return false;
     }
@@ -103,13 +103,13 @@ class Auth extends Controller
 
     public function changePass()
     {
-        $this->view('Auth/ubahKataSandi');       
+        $this->view('Auth/ubahKataSandi');
     }
 
     public function deleteSession()
     {
         session_unset();
         session_destroy();
-        header("location:".BASEURL.'/Auth/login');
+        header("location:" . BASEURL . '/Auth/login');
     }
 }

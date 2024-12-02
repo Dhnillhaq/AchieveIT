@@ -2,7 +2,9 @@
 
 class PeranDosen extends Controller
 {
-    public function create(){
+    public function create()
+    {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/PeranDosen/create");
     }
 
@@ -17,7 +19,9 @@ class PeranDosen extends Controller
         header("location:" . BASEURL . "/Dosen/index");
     }
 
-    public function edit($id_peran){
+    public function edit($id_peran)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $data = $this->model("PeranDosenModel")->getPeranDosenById($id_peran);
         $this->view("Admin/PeranDosen/edit", $data);
     }

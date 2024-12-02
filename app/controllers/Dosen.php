@@ -4,6 +4,7 @@ class Dosen extends Controller
 {
     public function index()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data['dosen'] = $this->model("DosenModel")->getDosen();
         $data['peranDosen'] = $this->model("PeranDosenModel")->getPeranDosen();
         $this->view("Admin/Dosen/index", $data);
@@ -11,9 +12,11 @@ class Dosen extends Controller
 
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Dosen/create");
     }
 
+    // Method proses Create Dosen
     public function store()
     {
         if (isset($_POST['submit'])) {
@@ -29,12 +32,15 @@ class Dosen extends Controller
 
     public function edit($id_dosen)
     {
-        $data = $this->model("DosenModel")->getDosenById($id_dosen);
+        $this->checkRole("Admin", "Super Admin");
+        $id = htmlspecialchars($id_dosen);
+        $data = $this->model("DosenModel")->getDosenById($id);
         $this->view("Admin/Dosen/edit", $data);
     }
 
     public function delete($id_dosen)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_dosen);
         $this->model("DosenModel")->delete($id);
         header('location:' . BASEURL . '/Dosen/index');
@@ -42,6 +48,7 @@ class Dosen extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data = [
             'nip' => htmlspecialchars($_POST['nip']),
             'nama' => htmlspecialchars($_POST['nama']),
@@ -50,6 +57,5 @@ class Dosen extends Controller
         $this->model("DosenModel")->update($data);
         header('location:' . BASEURL . '/Dosen/index');
     }
-
 
 }
