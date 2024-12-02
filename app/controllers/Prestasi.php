@@ -10,7 +10,7 @@ class Prestasi extends Controller
     }
     public function create()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $data = [
             'kp' => $this->model("KategoriModel")->getKategori(),
             'tp' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
@@ -33,7 +33,7 @@ class Prestasi extends Controller
     }
     public function show()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $this->view("Prestasi/show");
     }
 }
