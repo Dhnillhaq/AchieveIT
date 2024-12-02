@@ -1,10 +1,10 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen ">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
-	<!-- tambah prestasi -->
+	<!-- prestasi saya -->
 	<section class="flex-col justify-start pl-6">
-		<p class="font-bold text-3xl">Tambah prestasi</p>
+		<p class="font-bold text-3xl">Prestasi Saya</p>
 	</section>
 
 	<!-- cari -->
@@ -29,20 +29,20 @@
 				<select
 					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
 					<?php
-				foreach ($data['tk'] as $tk) {
-					echo "<option>{$tk['tingkat_kompetisi']}</option>";
-				}
-				?>
+					foreach ($data['tingkatKompetisi'] as $tingkatKompetisi) {
+						echo "<option>{$tingkatKompetisi['tingkat_kompetisi']}</option>";
+					}
+					?>
 				</select>
 			</div>
 			<div class="flex items-center">
 				<select
 					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
 					<?php
-				foreach ($data['kp'] as $kp) {
-					echo "<option>{$kp['kategori']}</option>";
-				}
-				?>
+					foreach ($data['kategori'] as $kategori) {
+						echo "<option>{$kategori['kategori']}</option>";
+					}
+					?>
 				</select>
 			</div>
 		</div>
@@ -77,24 +77,24 @@
 				</tr>
 			</thead>
 			<tbody class="text-gray-700">
-					<?php 
-					foreach ($data['mahasiswa'] as $mhs) { ?>
-				<tr>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['id_prestasi']?></td>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['nama_kompetisi']?></td>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['tingkat_kompetisi']?></td>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['kategori_kompetisi']?></td>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['juara']?></td>
-					<td class="py-2 px-4 border border-blue-950"><?=$mhs['poin']?></td>
-					<td class="py-2 px-4 border border-blue-950">
-						<button class="">
-							<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-						</button>
-					</td>
-				</tr>
-					<?php }
-					?>
-				
+				<?php
+				foreach ($data['prestasi'] as $prestasi) { ?>
+					<tr>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['id_prestasi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
+						<td class="py-2 px-4 border border-blue-950">
+							<button class="">
+								<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
+							</button>
+						</td>
+					</tr>
+				<?php }
+				?>
+
 			</tbody>
 		</table>
 	</section>
