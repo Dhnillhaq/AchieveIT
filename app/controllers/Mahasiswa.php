@@ -44,11 +44,61 @@ class Mahasiswa extends Controller
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Mahasiswa/create");
     }
-    public function edit()
+
+    public function store()
     {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'id_prodi' => htmlspecialchars($_POST['id_prodi']),
+                'nim' => htmlspecialchars($_POST['nim']),
+                'nama' => htmlspecialchars($_POST['nama']),
+                'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
+                'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+                'agama' => htmlspecialchars($_POST['agama']),
+                'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+                'no_telepon' => htmlspecialchars($_POST['no_telepon']),
+                'email' => htmlspecialchars($_POST['email']),
+                'password' => htmlspecialchars($_POST['password'])
+            ];
+            $this->model("MahasiswaModel")->store($data);
+        }
+        header("location:" . BASEURL . "/Mahasiswa/index");
+    }
+
+    public function edit($id_mahasiswa)
+    {
+
         $this->checkRole("Admin", "Super Admin");
+        $data = $this->model("MahasiswaModel")->getMahasiswaById($id_mahasiswa);
         $this->view("Admin/Mahasiswa/edit");
     }
+
+    public function delete($id_mahasiswa)
+    {
+        $id = htmlspecialchars($id_mahasiswa);
+        $this->model("MahasiswaModel")->delete($id);
+        header('location:' . BASEURL . '/Mahasiswa/index');
+    }
+
+    public function update()
+    {
+        $data = [
+            'id_prodi' => htmlspecialchars($_POST['id_prodi']),
+            'nim' => htmlspecialchars($_POST['nim']),
+            'nama' => htmlspecialchars($_POST['nama']),
+            'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
+            'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+            'agama' => htmlspecialchars($_POST['agama']),
+            'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+            'no_telepon' => htmlspecialchars($_POST['no_telepon']),
+            'email' => htmlspecialchars($_POST['email']),
+            'password' => htmlspecialchars($_POST['password']),
+            'id_mahasiswa' => htmlspecialchars($_POST['id_mahasiswa'])
+        ];
+        $this->model("MahasiswaModel")->update($data);
+        header("location:" . BASEURL . "/Mahasiswa/index");
+    }
+
     public function listMhs()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -57,6 +107,7 @@ class Mahasiswa extends Controller
         $data['peranMhs'] = $this->model("PeranMahasiswaModel")->getPeranMhs();
         $this->view("Admin/Mahasiswa/index", $data);
     }
+
     public function show()
     {
         $this->checkRole("Admin", "Super Admin");
