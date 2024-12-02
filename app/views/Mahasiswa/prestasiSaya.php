@@ -88,9 +88,11 @@
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
 						<td class="py-2 px-4 border border-blue-950">
-							<button class="">
-								<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-							</button>
+							<a href="<?= BASEURL; ?>/Prestasi/show/<?= $prestasi['id_prestasi'] ?>">
+								<button>
+									<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
+								</button>
+							</a>
 						</td>
 					</tr>
 				<?php }
