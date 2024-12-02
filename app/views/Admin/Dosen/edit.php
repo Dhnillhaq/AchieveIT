@@ -30,14 +30,14 @@
 				<!-- nama -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 						class="text-red-600">*</span></label>
-				<input value="<?=$data['nama']?>" type="text" name="nama"
-					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+				<input value="<?=$data['nama']?>" type="text" name="nama" id="nama"
+					class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- NIP -->
-				<label for="nama" class="block text-gray-700 font-medium pt-6">NIP <span
+				<label for="nip" class="block text-gray-700 font-medium pt-6">NIP <span
 						class="text-red-600">*</span></label>
-				<input type="text" value="<?=$data['nip']?>" name="nip"
-					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+				<input type="text" value="<?=$data['nip']?>" name="nip" id="nip"
+					class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 			</div>
 		</section>
 		<input type="hidden" name="id_dosen" value="<?=$data['id_dosen']?>">

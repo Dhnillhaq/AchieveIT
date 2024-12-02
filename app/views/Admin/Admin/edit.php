@@ -30,33 +30,35 @@
 			<!-- Nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 					class="text-red-600">*</span></label>
-			<input type="text" value="<?=$data['nama']?>" name="nama"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<input type="text" value="<?=$data['nama']?>" name="nama" id="nama"
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- NIP -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">NIP<span
+			<label for="nip" class="block text-gray-700 font-medium pt-6">NIP<span
 					class="text-red-600">*</span></label>
-			<input type="text" value="<?=$data['nip']?>" name="nip"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<input type="text" value="<?=$data['nip']?>" name="nip" id="nip"
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- Role -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">Role<span
+			<label for="role" class="block text-gray-700 font-medium pt-6">Role<span
 					class="text-red-600">*</span></label>
-			<input type="text" value="<?=$data['role']?>" name="role"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<select name="role" id="role" class="placeholder-black border rounded-lg px-2 py-1.5.5 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<option value="Ketua Jurusan" <?php if($data['role'] == 'Ketua Jurusan') echo 'selected'; ?>>Ketua Jurusan</option>
+				<option value="Super Admin" <?php if($data['role'] == 'Super Admin') echo 'selected'; ?>>Super Admin</option>
+				<option value="Admin" <?php if($data['role'] == 'Admin') echo 'selected'; ?>>Admin</option>
+			</select>	
 
 			<!-- Pass -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">Password<span
+			<label for="password" class="block text-gray-700 font-medium pt-6">Password<span
 					class="text-red-600">*</span></label>
-			<input type="password" value="<?=$data['password']?>" name="password"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
-
+			<input type="password" value="<?=$data['password']?>" name="password" id="password"
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			
 			<div class="flex justify-start space-x-1">
-				<input id="tampil-sandi"  type="checkbox" placeholder="" class=" border rounded-lg " />
-				<label class="text-[#757575]" for="#tampil-sandi">Tampilkan kata Sandi</label>
+				<input type="checkbox" placeholder="" class=" border rounded-lg" onclick="showPassword()" />
+				<label class="text-[#757575]" for="tampil-sandi">Tampilkan kata Sandi</label>
 			</div>
 			<input type="hidden" name="id_admin" value="<?=$data['id_admin']?>">
-
 
 		</div>
 	</section>
