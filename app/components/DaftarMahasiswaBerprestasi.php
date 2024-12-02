@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daftar Mahasiswa Berprestasi</title>
-    <link href="../../public/css/output.css" rel="stylesheet" />
+    <!-- <link href="../../public/css/output.css" rel="stylesheet" /> -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-white rounded-lg">
     <section id="daftar-prestasi" class="">

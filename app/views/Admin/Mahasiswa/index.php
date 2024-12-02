@@ -19,7 +19,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="myInput1" placeholder="" class="bg-white flex focus:outline-none" />
 				</div>
 
 				<!-- btn tambah -->
@@ -51,7 +51,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="myTable1">
 						<?php
 						$no = 1;
 						foreach ($data['prodi'] as $prodi) { ?>
@@ -94,7 +94,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="myInput2" placeholder="" class="bg-white flex focus:outline-none" />
 				</div>
 
 				<!-- btn tambah -->
@@ -129,7 +129,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="myTable2">
 						<?php
 						$no = 1;
 						foreach ($data['mhs'] as $mhs) { ?>
@@ -178,7 +178,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="myInput3" placeholder="" class="bg-white flex focus:outline-none" />
 				</div>
 
 				<!-- btn tambah -->
@@ -207,7 +207,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="myTable3">
 						<?php
 						$no = 1;
 						foreach ($data['peranMhs'] as $pm) { ?>

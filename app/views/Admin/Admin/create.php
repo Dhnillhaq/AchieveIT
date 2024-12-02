@@ -28,29 +28,32 @@
 			<!-- Nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="nama"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<input type="text" placeholder="" name="nama" id="nama" required
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- NIP -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">NIP<span
+			<label for="nip" class="block text-gray-700 font-medium pt-6">NIP<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="nip"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<input type="text" placeholder="" name="nip" id="nip" required
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- Role -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">Role<span
+			<label for="role" class="block text-gray-700 font-medium pt-6">Role<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="role"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<select name="role" id="role" class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<option value="Ketua Jurusan">Ketua Jurusan</option>
+				<option value="Super Admin">Super Admin</option>
+				<option value="Admin">Admin</option>
+			</select>
 
 			<!-- Pass -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">Password<span
+			<label for="password" class="block text-gray-700 font-medium pt-6">Password<span
 					class="text-red-600">*</span></label>
-			<input type="password" placeholder="" name="password"
-				class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+			<input type="password" placeholder="" name="password" id="password" required
+				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<div class="flex justify-start space-x-1">
-				<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-lg" />
+				<input id="tampil-sandi" type="checkbox" placeholder="" class=" border rounded-lg" onclick="showPassword()" />
 				<label class="text-[#757575]" for="tampil-sandi">Tampilkan kata Sandi</label>
 			</div>
 		</div>
