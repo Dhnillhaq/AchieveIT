@@ -28,11 +28,11 @@
 			<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 
 				<!-- Program Studi -->
-				<label for="kode_prodi" class="block text-gray-700 font-medium pt-6">Nama Program Studi <span
+				<label for="kode_prodi" class="block text-gray-700 font-medium pt-6">Kode Program Studi <span
 						class="text-red-600">*</span></label>
 				<input type="text" name="kode_prodi" value="<?= $data['kode_prodi'] ?>"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
-				<label for="nama_prodi" class="block text-gray-700 font-medium pt-6">Nama Program Studi <span
+				<label for="nama_prodi" class="block text-gray-700 font-medium pt-6">Program Studi <span
 						class="text-red-600">*</span></label>
 				<input type="text" name="nama_prodi" value="<?= $data['nama_prodi'] ?>"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
