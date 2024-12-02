@@ -49,7 +49,7 @@
   <div class=" flex flex-col items-center text-center">
     <h2 class="text-2xl font-bold text-[#132145] mb-4 bg-[#FEC01A] rounded-lg px-4 py-1 ">Fitur Utama Kami</h2>
     <p class="text-[#132145] mt-2 ">
-      <span class="font-semibold">Archieve IT</span> dirancang khusus untuk membantu<br>
+      <span class="font-semibold">Achieve IT</span> dirancang khusus untuk membantu<br>
       pengelolaan dan pelaporan prestasi<br> mahasiswa secara terstruktur dan efisien.
     </p>
   </div>
@@ -209,7 +209,7 @@
     <div class="flex justify-start">
       <img src="../../../public/img/Logo_achieveIT.png" alt="logo" class="w-8 h-10">
       <div class="flex-col">
-        <p class="font-extrabold text-2xl">Archieve IT</p>
+        <p class="font-extrabold text-2xl">Achieve IT</p>
         <p class="font-extralight text-sm">Jurusan Teknologi Informatika <br>
           Politeknik Negeri Malang</p>
       </div>
