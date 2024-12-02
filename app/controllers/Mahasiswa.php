@@ -41,8 +41,9 @@ class Mahasiswa extends Controller
 
     public function create()
     {
+        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->checkRole("Admin", "Super Admin");
-        $this->view("Admin/Mahasiswa/create");
+        $this->view("Admin/Mahasiswa/create", $data);
     }
 
     public function store()
@@ -62,7 +63,7 @@ class Mahasiswa extends Controller
             ];
             $this->model("MahasiswaModel")->store($data);
         }
-        header("location:" . BASEURL . "/Mahasiswa/index");
+        header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
 
     public function edit($id_mahasiswa)
