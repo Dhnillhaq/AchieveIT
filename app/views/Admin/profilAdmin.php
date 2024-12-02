@@ -17,12 +17,12 @@
 			<div class="flex flex-col justify-start items-start">
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">NIP</p>
-					<p class="font-semibold">2341720001</p>
+					<p class="font-semibold"><?=$_SESSION['user']['nip']?></p>
 				</div>
 
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">Nama</p>
-					<p class="font-semibold">Admin12345</p>
+					<p class="font-semibold"><?=$_SESSION['user']['nama']?></p>
 				</div>
 			</div>
 			<!-- btn ubah kt sandi -->

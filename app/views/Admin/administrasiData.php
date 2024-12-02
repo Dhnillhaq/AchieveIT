@@ -1,7 +1,7 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 	<!-- profil -->
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- adm data -->
 	<section class="flex-col justify-start pl-6">
@@ -37,15 +37,21 @@
 						Mahasiswa</button>
 				</a>
 			</div>
+			<?php
+			if ($_SESSION['user']['role'] == "Super Admin") {
+				?>
 
-			<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
-				<img src="../../../public/img/data-Admin.png" alt="logo" class="w-32 mx-auto">
-				<a href="<?= BASEURL; ?>/Admin/adminList">
-					<button
-						class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Data
-						Admin</button>
-				</a>
-			</div>
+				<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
+					<img src="../../../public/img/data-Admin.png" alt="logo" class="w-32 mx-auto">
+					<a href="<?= BASEURL; ?>/Admin/adminList">
+						<button
+							class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Data
+							Admin</button>
+					</a>
+				</div>
+				<?php
+			}
+			?>
 		</div>
 	</section>
 

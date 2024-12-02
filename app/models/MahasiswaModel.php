@@ -2,7 +2,7 @@
 
 class MahasiswaModel extends Connection
 {
-    private $data = [];
+     
 
     // Get All Mahasiswa
     public function getAllDataMahasiswa()

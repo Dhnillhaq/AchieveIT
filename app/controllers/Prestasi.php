@@ -4,11 +4,13 @@ class Prestasi extends Controller
 {
     public function index()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data['daftar_prestasi'] = $this->model("PrestasiModel")->getDaftarPrestasi();
         $this->view("Prestasi/index", $data);
     }
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data = [
             'kp' => $this->model("KategoriModel")->getKategori(),
             'tp' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
@@ -26,10 +28,12 @@ class Prestasi extends Controller
     }
     public function edit()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Prestasi/edit");
     }
     public function show()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Prestasi/show");
     }
 }
