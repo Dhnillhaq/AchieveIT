@@ -45,13 +45,6 @@
 				</div>
 			</section>
 
-			<!-- btn tambah prestasi -->
-			<section class="p-6">
-				<a href="<?= BASEURL; ?>/">
-					<button class="bg-[#132145] rounded-lg text-white p-2 font-semibold">Tambahkan Prestasi</button>
-				</a>
-			</section>
-
 			<section class="p-6 justify-start">
 				<h1 class="text-4xl font-bold ">Daftar Mahasiswa Berprestasi</h1>
 			</section>

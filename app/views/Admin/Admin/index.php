@@ -59,7 +59,7 @@
 					<tbody class="text-left">
 						<?php
 							$no = 1;
-						 foreach ($data['admin'] as $admin) {
+						foreach ($data['admin'] as $admin) {
 							?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no?></td>
