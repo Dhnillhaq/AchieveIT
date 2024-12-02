@@ -150,7 +150,7 @@
           </div>
         </div>
 
-        <div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
+        <section class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
           <table class="min-w-full bg-white">
             <thead>
               <tr>
@@ -190,7 +190,7 @@
               ?>
             </tbody>
           </table>
-        </div>
+            </section>
       </div>
     </section>
     <!-- //php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php';  -->
