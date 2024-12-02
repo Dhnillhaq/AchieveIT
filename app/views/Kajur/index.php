@@ -84,9 +84,8 @@
 		<div class="flex justify-end">
 			<select class="rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm">
 				<option>Kategori</option>
-				<option>Sains</option>
-				<option>Sains</option>
-				>
+				<option>Tingkat Kompetisi</option>
+				<option>Tingkat Penyelenggara</option>
 			</select>
 		</div>
 		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
