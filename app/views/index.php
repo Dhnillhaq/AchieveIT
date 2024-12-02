@@ -42,7 +42,7 @@
 
 <div class="relative -mt-52 -mb-20  flex justify-end mr-10 z-10">
   <!-- Gambar di antara dua section -->
-  <img src="../../../public/img/Logo_archhieveIT.png" alt="Gambar di antara section" class="w-48 h-auto" />
+  <img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-48 h-auto" />
 </div>
 
 <section id="fitur-utama" class="relative pt-32 flex flex-col space-y-10 px-28">
@@ -207,7 +207,7 @@
 <footer class="bg-[#132145] text-white flex flex-col items-center  py-10 px-16 ">
   <div class="flex flex-row justify-between w-full">
     <div class="flex justify-start">
-      <img src="../../../public/img/Logo_archhieveIT.png" alt="logo" class="w-8 h-10">
+      <img src="../../../public/img/Logo_achieveIT.png" alt="logo" class="w-8 h-10">
       <div class="flex-col">
         <p class="font-extrabold text-2xl">Archieve IT</p>
         <p class="font-extralight text-sm">Jurusan Teknologi Informatika <br>
