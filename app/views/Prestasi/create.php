@@ -107,7 +107,7 @@
 					<div class="flex flex-col items-start py-6 space-y-1">
 						<div class="flex flex-row justify-center items-center space-x-2">
 							<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-							<p class="text-xs">suratTugas.pdf</p>
+							<p class="text-xs">tidak ada file yang dipilih</p>
 						</div>
 						<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 					</div>
@@ -133,7 +133,7 @@
 					<div class="flex flex-col items-start py-6 space-y-1">
 						<div class="flex flex-row justify-center items-center space-x-2">
 							<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-							<p class="text-xs">poster.pdf</p>
+							<p class="text-xs">tidak ada file yang dipilih</p>
 						</div>
 						<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 					</div>
@@ -159,7 +159,7 @@
 					<div class="flex flex-col items-start py-6 space-y-1">
 						<div class="flex flex-row justify-center items-center space-x-2">
 							<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-							<p class="text-xs">juara.pdf</p>
+							<p class="text-xs">tidak ada file yang dipilih</p>
 						</div>
 						<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 					</div>
@@ -185,7 +185,7 @@
 					<div class="flex flex-col items-start py-6 space-y-1">
 						<div class="flex flex-row justify-center items-center space-x-2">
 							<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-							<p class="text-xs">sertifikat.pdf</p>
+							<p class="text-xs">tidak ada file yang dipilih</p>
 						</div>
 						<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 					</div>
@@ -275,8 +275,8 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
 								</button>
 							</td>
 						</tr>
@@ -303,8 +303,8 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
 								</button>
 							</td>
 						</tr>
@@ -374,8 +374,8 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<button class="">
-									<img src="../../../public/img/delete.png" alt="logo" class="w-5 h-5">
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
 								</button>
 							</td>
 						</tr>
