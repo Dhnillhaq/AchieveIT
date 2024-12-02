@@ -34,14 +34,14 @@
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
 						<div class="relative">
-							<input type="password" id="Kata sandi" name="password" placeholder="Kata sandi"
+							<input type="password" id="password" name="password" placeholder="Kata sandi"
 								class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
 								required>
 							<img src="../../../public/img/Lock.png" alt="logo"
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
 						<div class="flex justify-start space-x-1">
-							<input type="checkbox" placeholder="" class=" border rounded-l />
+							<input type="checkbox" placeholder="" class="border rounded-l" onclick="showPassword()">
 							<p class="text-[#757575]">Tampilkan kata sandi</p>
 						</div>
 						<button type="submit" name="submit"
