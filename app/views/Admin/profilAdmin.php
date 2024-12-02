@@ -59,7 +59,7 @@
 			</div>
 
 			<!-- table -->
-			<div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
+			<section class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
 				<table class="min-w-full bg-white text-center">
 					<thead>
 						<tr>
@@ -137,7 +137,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+</section>
 		</div>
 	</section>
 

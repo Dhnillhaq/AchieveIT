@@ -9,11 +9,11 @@
 
 
 
-	<!-- informasi admin -->
+	<!-- Data Admin -->
 	<section class="relative p-6">
 		<!-- Static parent -->
 		<div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
-			Informasi Admin
+			Data Admin
 		</div>
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 			<!-- cari -->

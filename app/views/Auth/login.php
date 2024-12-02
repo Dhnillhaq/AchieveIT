@@ -31,8 +31,8 @@
 
 		<!-- right side -->
 		<section class="w-1/2 h-screen flex-col space-y-6 items-start justify-center p-10">
-			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg  h-full ">
-				<div class="px-14 py-20 space-y-6 max-w-screen-xl  w-full">
+			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-full">
+				<div class="px-14 py-20 space-y-6 w-full max-w-screen-xl">
 					<div class="flex justify-center items-start">
 						<img src="../../../public/img/logo_polinema.png" alt="logo" class="w-auto h-32" />
 						<img src="../../../public/img/logo_jti.png" alt="logo" class="w-auto h-32" />
