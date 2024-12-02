@@ -78,9 +78,10 @@
 			</thead>
 			<tbody class="text-gray-700">
 				<?php
+				$no = 1;
 				foreach ($data['prestasi'] as $prestasi) { ?>
 					<tr>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['id_prestasi'] ?></td>
+						<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
