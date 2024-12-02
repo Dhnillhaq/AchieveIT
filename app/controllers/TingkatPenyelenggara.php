@@ -4,6 +4,7 @@ class TingkatPenyelenggara extends Controller
 {
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/TingkatPenyelenggara/create");
     }
     public function store()
@@ -22,6 +23,7 @@ class TingkatPenyelenggara extends Controller
 
     public function edit($id_tingkat_penyelenggara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
         $data = $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggaraById($id);

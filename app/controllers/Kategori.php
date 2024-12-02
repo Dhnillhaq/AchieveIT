@@ -4,9 +4,11 @@ class Kategori extends Controller
 {
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Kategori/create");
     }
 
+    // Method proses Create Kategori
     public function store()
     {
         if (isset($_POST['submit'])) {
@@ -22,6 +24,7 @@ class Kategori extends Controller
 
     public function edit($id_kategori)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_kategori);
 
         $data = $this->model("KategoriModel")->getKategoriById($id);
@@ -29,6 +32,7 @@ class Kategori extends Controller
         $this->view("Admin/Kategori/edit", $data);
     }
 
+    // Method proses Update Kategori
     public function update()
     {
         if (isset($_POST['submit'])) {
@@ -43,6 +47,7 @@ class Kategori extends Controller
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
 
+    // Method proses Delete Kategori
     public function delete($id_kategori)
     {
         $id = htmlspecialchars($id_kategori);

@@ -2,8 +2,6 @@
 class PrestasiModel extends Connection
 {
 
-    private $data = [];
-
     // Get All Prestasi Mahasiswa
     public function getAllPrestasi()
     {
@@ -11,9 +9,9 @@ class PrestasiModel extends Connection
         $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
-        return $this->data;
+        return $data;
     }
 
     public function getDaftarPrestasi()
@@ -22,11 +20,11 @@ class PrestasiModel extends Connection
         $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
-        return $this->data;
+        return $data;
     }
-    
+
 
     public function getDetailPrestasi($id)
     {
@@ -34,38 +32,30 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 
-        return $this->data;
+        return $data;
     }
 
     public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {
-        if ($keyword == "") {
-            $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
-            $result = sqlsrv_query($this->conn, $stmt);
-        } 
+        $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
+        $result = sqlsrv_query($this->conn, $stmt);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
-        return $this->data;
+        return $data;
     }
 
     public function getStatistikPrestasi()
     {
         $stmt = "SELECT * FROM vw_StatistikPrestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
-        
-            $this->data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
-        return $this->data;
-    }
 
-    public function countPrestasi()
-    {
-        $stmt = "SELECT COUNT(id_prestasi) AS total_prestasi FROM prestasi;";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
+        return $data;
     }
 
     public function searchPrestasi($keyword)
@@ -79,10 +69,10 @@ class PrestasiModel extends Connection
 
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $this->data[] = $row;
+            $data[] = $row;
         }
 
-        return $this->data;
+        return $data;
     }
 
 }

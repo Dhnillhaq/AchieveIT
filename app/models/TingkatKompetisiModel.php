@@ -3,7 +3,6 @@ class TingkatKompetisiModel extends Connection
 {
     public function getTingkatKompetisi()
     {
-
         $stmt = "SELECT * FROM tingkat_kompetisi";
         $result = sqlsrv_query($this->conn, $stmt);
 

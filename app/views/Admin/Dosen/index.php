@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- data dosen-->
 	<section class="flex-col justify-start pl-6">
@@ -18,7 +18,7 @@
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 			<!-- btn tambah -->
 			<section class="flex justify-end pr-6">
-				<a href="<?=BASEURL;?>/Dosen/Create">
+				<a href="<?= BASEURL; ?>/Dosen/Create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
@@ -68,45 +68,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">Ahmad Zulkifli</td>
-							<td class="py-2 px-4 border border-blue-950">1987123456</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="logo" class="">
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950">Siti Aisyah</td>
-							<td class="py-2 px-4 border border-blue-950">2001345678</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="logo" class="">
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950">Rahmat Hidayat</td>
-							<td class="py-2 px-4 border border-blue-950">1990123456</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="logo" class="">
-								</button>
-							</td>
-						</tr>
+						<?php
+						$no = 1;
+						foreach ($data['dosen'] as $dosen) { ?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $dosen['nama'] ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $dosen['nip'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href="<?= BASEURL; ?>/Dosen/edit/<?=$dosen['id_dosen']?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="logo">
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/Dosen/delete/<?=$dosen['id_dosen']?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="logo">
+										</button>
+									</a>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 				</table>
 			</div>
@@ -129,7 +113,7 @@
 				</div>
 
 				<!-- btn tambah -->
-				<a href="#">
+				<a href="<?= BASEURL; ?>/PeranDosen/create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
@@ -155,54 +139,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">
-								Membimbing mahasiswa mengikuti kompetisi di bidang akademik dan kemahasiswaan
-								bereputasi dan mencapai
-								juara tingkat Internasional
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="">
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
-							<td class="py-2 px-4 border border-blue-950">
-								Membimbing mahasiswa mengikuti kompetisi di bidang akademik dan kemahasiswaan
-								bereputasi dan mencapai
-								juara tingkat Internasional
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="">
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">3</td>
-							<td class="py-2 px-4 border border-blue-950">
-								Membimbing mahasiswa mengikuti kompetisi di bidang akademik dan kemahasiswaan
-								bereputasi dan mencapai
-								juara tingkat Internasional
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-									<img src="../../../public/img/Edit_fill.png" alt="Edit" class="">
-								</button>
-								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-									<img src="../../../public/img/Trash.png" alt="Delete" class="">
-								</button>
-							</td>
-						</tr>
+						<?php
+						$no = 1;
+						foreach ($data['peranDosen'] as $pd) { ?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $pd['peran'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href="<?= BASEURL; ?>/PeranDosen/edit/<?= $pd['id_peran'] ?>">
+										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
+											<img src="../../../public/img/Edit_fill.png" alt="logo">
+										</button>
+									</a>
+									<a href="<?= BASEURL; ?>/PeranDosen/delete/<?= $pd['id_peran'] ?>">
+										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+											<img src="../../../public/img/Trash.png" alt="logo">
+										</button>
+									</a>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 				</table>
 			</div>
@@ -211,7 +169,7 @@
 
 	<!-- btn -->
 	<section class="justify-center p-6">
-		<a href="<?=BASEURL; ?>/Admin/administrasiData">
+		<a href="<?= BASEURL; ?>/Admin/administrasiData">
 			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 				<p>Kembali</p>

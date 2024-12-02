@@ -4,6 +4,7 @@ class TingkatKompetisi extends Controller
 {
     public function create()
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/TingkatKompetisi/create");
     }
     public function store()
@@ -22,6 +23,7 @@ class TingkatKompetisi extends Controller
 
     public function edit($id_tingkat_kompetisi)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_kompetisi);
 
         $data = $this->model("TingkatKompetisiModel")->getTingkatKompetisiById($id);

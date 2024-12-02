@@ -138,15 +138,6 @@
 
               </form>
             </div>
-
-
-            <!-- Function js untuk submit form select ketika opsi yang lain dipilih -->
-            <script>
-              function submitForm() {
-                document.getElementById("formFilter").submit();
-              }
-            </script>
-
           </div>
         </div>
 
