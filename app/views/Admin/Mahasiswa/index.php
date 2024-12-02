@@ -139,7 +139,7 @@
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nim'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<a href="<?= BASEURL; ?>/Mahasiswa/listMhs/<?= $mhs['id_mahasiswa'] ?>">
+									<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
 										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
 											<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
 										</button>
@@ -220,7 +220,7 @@
 											<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
 										</button>
 									</a>
-									<a href="<?= BASEURL; ?>/Prodi/edit/<?= $pm['id_peran'] ?>">
+									<a href="<?= BASEURL; ?>/PeranMahasiswa/edit/<?= $pm['id_peran'] ?>">
 										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
 											<img src="../../../public/img/Trash.png" alt="logo" class="">
 										</button>
