@@ -259,10 +259,9 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
-									<p>Hapus</p>
-								</div>
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
+								</button>
 							</td>
 						</tr>
 						<!-- Row 2 -->
@@ -283,10 +282,9 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
-									<p>Hapus</p>
-								</div>
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
+								</button>
 							</td>
 						</tr>
 					</tbody>
@@ -354,10 +352,9 @@
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
-								<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-									<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
-									<p>Hapus</p>
-								</div>
+								<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<img src="../../../public/img/Trash.png" alt="logo" class="">
+								</button>
 							</td>
 						</tr>
 					</tbody>
