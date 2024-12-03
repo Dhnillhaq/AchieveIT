@@ -33,7 +33,7 @@ class Prestasi extends Controller
     }
     public function show()
     {
-        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa", "Ketua Jurusan");
         $this->view("Prestasi/show");
     }
 }
