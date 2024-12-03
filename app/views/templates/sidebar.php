@@ -11,38 +11,41 @@
                             <span class="ms-3 font-bold">AchieveIT</span>
                         </div>
                     </li>
+                    <?php
+                    $currentUrl = $_SERVER['REQUEST_URI'];
+                    ?>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/superAdmin"
-                            class="flex items-center  p-2 mt-10 text-[#FEC01A] rounded-lg bg-[#3063C559]">
-                            <img src="../../../public/img/Home_fill.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/superAdmin') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/superAdmin') !== false ? 'Home_fill' : 'Home_fill (1)' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Beranda</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/create"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/create') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/create') !== false ? 'File_dock_add_fill (1)' : 'File_dock_add_fill' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/index"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5" />
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/index') !== false ? 'File_dock_search_fill (1)' : 'File_dock_search_fill' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/administrasiData"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/Administrasi-data.png" alt="logo" class="w-5 h-5" />
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'Administrasi-data (1)' : 'Administrasi-data' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/profil"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/profil') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/profil') !== false ? 'User_circle (1)' : 'User_circle' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>
@@ -63,38 +66,41 @@
                             <span class="ms-3 font-bold">AchieveIT</span>
                         </div>
                     </li>
+                    <?php
+                    $currentUrl = $_SERVER['REQUEST_URI'];
+                    ?>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/index"
-                            class="flex items-center  p-2 mt-10 text-[#FEC01A] rounded-lg bg-[#3063C559]">
-                            <img src="../../../public/img/Home_fill.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/index') !== false ? 'Home_fill' : 'Home_fill (1)' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Beranda</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/create"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/File_dock_add_fill.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/create') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/create') !== false ? 'File_dock_add_fill (1)' : 'File_dock_add_fill' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Form Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Prestasi/index"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/File_dock_search_fill.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/index') !== false ? 'File_dock_search_fill (1)' : 'File_dock_search_fill' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/administrasiData"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/Administrasi-data.png" alt="logo" class="w-5 h-5" />
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'Administrasi-data (1)' : 'Administrasi-data' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
                         </a>
                     </li>
                     <li>
                         <a href="<?= BASEURL; ?>/Admin/profil"
-                            class="flex items-center p-2 text-white rounded-lg hover:bg-[#3063C559]">
-                            <img src="../../../public/img/User_circle.png" alt="logo" class="w-5 h-5">
+                            class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/profil') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                            <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/profil') !== false ? 'User_circle (1)' : 'User_circle' ?>.png" alt="logo" class="w-5 h-5">
                             <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                         </a>
                     </li>
