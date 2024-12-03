@@ -77,7 +77,7 @@ class MahasiswaModel extends Connection
 
     public function store($data)
     {
-        $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, password) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?,?);";
+        $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $params = array(
             $data['id_prodi'],
             $data['nim'],

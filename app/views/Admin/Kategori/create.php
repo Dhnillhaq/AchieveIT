@@ -28,10 +28,10 @@
 			<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 
 				<!-- kategori -->
-				<label for="nama" class="block text-gray-700 font-medium pt-6">Kategori <span
+				<label for="kategori" class="block text-gray-700 font-medium pt-6">Kategori <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="kategori"
-					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
+				<input type="text" name="kategori" id="kategori"
+					class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			</div>
 		</section>

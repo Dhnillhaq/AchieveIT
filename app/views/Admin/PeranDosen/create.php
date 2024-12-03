@@ -28,9 +28,9 @@
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 
 			<!-- nama -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">Peran<span
+			<label for="peran" class="block text-gray-700 font-medium pt-6">Peran<span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="peran"
+			<input type="text" placeholder="" name="peran" id="peran"
 				class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 

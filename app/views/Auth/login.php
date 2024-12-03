@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="relative bg-cover bg-center h-min-screen"
+	style="background-image: url('../../../public/img/gedung-jti.png');">
+	<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>AchieveIT Login</title>
-	<link href="../../../public/css/output.css" rel="stylesheet" />
-	<style>
-		@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-	</style>
-</head>
-
-<body class="font-[poppins]">
-	<section class="relative bg-cover bg-center h-min-screen" style="background-image: url('../../../public/img/gedung-jti.png');">
-		<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
-	
 
 	<!-- kembali -->
 	<a href="<?= BASEURL; ?>"
@@ -26,7 +13,7 @@
 	<div class="relative z-10 flex justify-between">
 		<!-- left side -->
 		<section class="w-1/2 flex items-center justify-center px-10 text-white">
-				<h1 class="text-6xl font-bold">Selamat datang di <span class="text-[#FEC01A]">AchieveIT!</span></h1>
+			<h1 class="text-6xl font-bold">Selamat datang di <span class="text-[#FEC01A]">AchieveIT!</span></h1>
 		</section>
 
 		<!-- right side -->
@@ -43,13 +30,15 @@
 							<input type="text" id="Nama pengguna" name="username" placeholder="Masukkan NIP/NIM"
 								class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
 								required title="Mohon ini wajib diisi!">
-							<img src="../../../public/img/User.png" alt="logo" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer"/>
+							<img src="../../../public/img/User.png" alt="logo"
+								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
 						<div class="relative">
 							<input type="password" id="Kata sandi" name="password" placeholder="Kata sandi"
 								class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
 								required>
-							<img src="../../../public/img/Lock.png" alt="logo" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer"/>
+							<img src="../../../public/img/Lock.png" alt="logo"
+								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
 						<div class="flex justify-start space-x-1">
 							<input type="checkbox" placeholder="" class=" border rounded-l />
@@ -62,7 +51,4 @@
 			</div>
 		</section>
 	</div>
-	</section>
-</body>
-
-</html>
+</section>

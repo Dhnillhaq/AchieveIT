@@ -4,23 +4,23 @@ class Prestasi extends Controller
 {
     public function index()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Ketua Jurusan");
         $data['daftar_prestasi'] = $this->model("PrestasiModel")->getDaftarPrestasi();
         $this->view("Prestasi/index", $data);
     }
     public function create()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $data = [
-            'kp' => $this->model("KategoriModel")->getKategori(),
-            'tp' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
-            'tk' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'kategori' => $this->model("KategoriModel")->getKategori(),
+            'tingkatKompetisi' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'tingkatPenyelenggara' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
             'juara' => $this->model("JuaraModel")->getJuara(),
             'mahasiswa' => [
                 'all' => $this->model("MahasiswaModel")->getAllDataMahasiswa()
                 // 'byNim' => $this->model("MahasiswaModel")->getMahasiswaByNim($_SESSION['user']['nim'])
             ],
-            'peranMhs' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
+            'peranMahasiswa' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
             'dosen' => $this->model("DosenModel")->getDosen(),
             'peranDosen' => $this->model("PeranDosenModel")->getPeranDosen()
         ];
@@ -33,7 +33,7 @@ class Prestasi extends Controller
     }
     public function show()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $this->view("Prestasi/show");
     }
 }
