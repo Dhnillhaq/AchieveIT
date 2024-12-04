@@ -30,7 +30,7 @@
 				<!-- kategori -->
 				<label for="kategori" class="block text-gray-700 font-medium pt-6">Kategori <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="kategori" id="kategori"
+				<input type="text" name="kategori" id="kategori" required
 					class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			</div>

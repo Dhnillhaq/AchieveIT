@@ -29,7 +29,7 @@
 				<!-- nama -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Peran<span
 						class="text-red-600">*</span></label>
-				<input type="text" value="<?= $data['peran'] ?>" name="peran"
+				<input type="text" value="<?= $data['peran'] ?>" name="peran" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 
