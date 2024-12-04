@@ -43,12 +43,48 @@ class PrestasiModel extends Connection
     public function getDetailPrestasi($id)
     {
         $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = ?";
-        $params = array(
-            $id
-        );
+        $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataMahasiswa($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataMahasiswa @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataDosen($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataDosen @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataPoin($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataPoin @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
 
         return $data;
     }

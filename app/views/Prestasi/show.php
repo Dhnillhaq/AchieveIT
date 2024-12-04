@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- detail prestasi -->
 	<section class="flex-col justify-start pl-6">
@@ -28,8 +28,7 @@
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">Nama Kompetisi</p>
 					<p class="font-semibold">
-						Olimpiade Nasional Matematika dan Ilmu Pengetahuan Alam
-						Perguruan Tinggi
+						<?= $data['prestasi']['nama_kompetisi'] ?>
 					</p>
 				</div>
 
@@ -37,71 +36,75 @@
 					<div class="flex flex-col space-y-4">
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Kategori Prestasi</p>
-							<p class="font-semibold">SAINS</p>
+							<p class="font-semibold"><?= $data['prestasi']['kategori_prestasi'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Tingkat Kompetisi</p>
-							<p class="font-semibold">Nasional</p>
+							<p class="font-semibold"><?= $data['prestasi']['tingkat_kompetisi'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Tingkat Penyelenggara</p>
-							<p class="font-semibold">Pemerintah</p>
+							<p class="font-semibold"><?= $data['prestasi']['tingkat_penyelenggara'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Juara</p>
-							<p class="font-semibold">Juara 1 / Medali Emas</p>
+							<p class="font-semibold"><?= $data['prestasi']['juara'] ?></p>
 						</div>
 					</div>
 
 					<div class="flex flex-col space-y-4">
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Tanggal Mulai Kompetisi</p>
-							<p class="font-semibold">02-11-2024</p>
+							<p class="font-semibold">
+								<?= $data['prestasi']['tanggal_mulai_kompetisi']->format("d-m-Y") ?>
+							</p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Tanggal Selesai Kompetisi</p>
-							<p class="font-semibold">11-12-2024</p>
+							<p class="font-semibold">
+								<?= $data['prestasi']['tanggal_selesai_kompetisi']->format("d-m-Y") ?>
+							</p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Tempat Kompetisi</p>
-							<p class="font-semibold">Jakarta</p>
+							<p class="font-semibold"><?= $data['prestasi']['tempat_kompetisi'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">Penyelenggara Kompetisi</p>
-							<p class="font-semibold">Kementrian Pendidikan dan Kebudayaan </p>
+							<p class="font-semibold"><?= $data['prestasi']['penyelenggara_kompetisi'] ?></p>
 						</div>
 					</div>
 
 					<div class="flex flex-col space-y-4">
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Surat Tugas</p>
-							<p class="font-semibold text-[#3063C5]">suratTugas.pdf</p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_surat_tugas'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Poster</p>
-							<p class="font-semibold text-[#3063C5]">poster.pdf</p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_poster'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Foto Juara</p>
-							<p class="font-semibold text-[#3063C5]">juara.pdf</p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_foto_juara'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Sertifikat</p>
-							<p class="font-semibold text-[#3063C5]">sertifikat.pdf</p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_sertifikat'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Proposal</p>
-							<p class="font-semibold text-[#3063C5]">proposal.pdf</p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_proposal'] ?></p>
 						</div>
 					</div>
 				</div>
@@ -138,23 +141,21 @@
 					<!-- data dummy -->
 					<tbody>
 						<!-- Row 1 -->
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<a href="profilMahasiswa.html">2341720001</a>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Haikal</td>
-							<td class="py-2 px-4 border border-blue-950">Ketua</td>
-						</tr>
-						<!-- Row 2 -->
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">
-								<a href="profilMahasiswa.html">2341720002</a>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Restu</td>
-							<td class="py-2 px-4 border border-blue-950">Anggota</td>
-						</tr>
+						<?php
+						$no = 1;
+						foreach ($data['mahasiswa'] as $mhs) {
+							?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href=""><?= $mhs['nim'] ?></a>
+								</td>
+								<td class="py-2 px-4 border border-blue-950"><?= $mhs['nama_mahasiswa'] ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $mhs['peran'] ?></td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 				</table>
 			</div>
@@ -188,20 +189,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- Row 1 -->
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">1</td>
-							<td class="py-2 px-4 border border-blue-950">
-								Dimas Wahyu Wibowo, S.T., M.T.
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								198406102008121004
-							</td>
-							<td class="py-2 px-4 border border-blue-950">
-								Melakukan pembinaan kegiatan mahasiswa di bidang akademik
-								(PA) dan kemahasiswaan (BEM, Maperwa, dan lain-lain)
-							</td>
-						</tr>
+						<?php
+						$no = 1;
+						foreach ($data['dosen'] as $dosen) {
+							?>
+							<tr>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<?= $dosen['nama_dosen'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<?= $dosen['nip'] ?>
+								</td>
+								<td class="py-2 px-4 border border-blue-950">
+									<?= $dosen['peran'] ?>
+								</td>
+							</tr>
+							<?php
+							$no++;
+						} ?>
 					</tbody>
 				</table>
 			</div>
@@ -242,14 +248,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<!-- Row 1 -->
+						<?php
+						$totalPoin = 0;
+						?>
 						<tr>
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								Tingkatan Kompetisi
 							</td>
-							<td class="py-2 px-4 border border-blue-950">Nasional</td>
-							<td class="py-2 px-4 border border-blue-950">4</td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['poin']['tingkat_kompetisi'] ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['poin']['poin_tk'] ?></td>
 						</tr>
 						<!-- Row 2 -->
 						<tr>
@@ -257,23 +265,26 @@
 							<td class="py-2 px-4 border border-blue-950">
 								Penyelenggara
 							</td>
-							<td class="py-2 px-4 border border-blue-950">Pemerintah</td>
-							<td class="py-2 px-4 border border-blue-950">4</td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['poin']['penyelenggara'] ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['poin']['poin_tp'] ?></td>
 						</tr>
 						<!-- Row 3 -->
 						<tr>
 							<td class="py-2 px-4 border border-blue-950">3</td>
 							<td class="py-2 px-4 border border-blue-950">Juara</td>
 							<td class="py-2 px-4 border border-blue-950">
-								Juara 1 / Medali Emas
+								<?= $data['poin']['juara'] ?>
 							</td>
-							<td class="py-2 px-4 border border-blue-950">4</td>
+							<td class="py-2 px-4 border border-blue-950"><?= $data['poin']['poin_j'] ?></td>
 						</tr>
+						<?php
+						$totalPoin = $data['poin']["poin_tk"] + $data['poin']["poin_tp"] + $data['poin']["poin_j"];
+						?>
 					</tbody>
 				</table>
 			</div>
 
-			<h2 class="font-bold ">Total Poin : 12</h2>
+			<h2 class="font-bold ">Total Poin :<?= $totalPoin ?></h2>
 		</div>
 	</section>
 
@@ -289,7 +300,7 @@
 		</div>
 
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
+			<a href="<?= BASEURL; ?>/Prestasi/delete/">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
 					<p>Hapus</p>
