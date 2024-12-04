@@ -16,20 +16,21 @@ class PeranMahasiswa extends Controller
             ];
             $this->model("PeranMahasiswaModel")->store($data);
         }
-        header("location:" . BASEURL . "Mahasiswa/index");
+        header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
-
+    
     public function edit($id_peran)
     {
         $this->checkRole("Admin", "Super Admin");
         $data = $this->model("PeranMahasiswaModel")->getPeranMhsById($id_peran);
         $this->view("Admin/PeranMahasiswa/edit", $data);
     }
-
+    
     public function delete($id_peran)
     {
         $id = htmlspecialchars($id_peran);
         $this->model("PeranMahasiswaModel")->delete($id);
+        header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
 
     public function update()
@@ -39,6 +40,6 @@ class PeranMahasiswa extends Controller
             'id_peran' => htmlspecialchars($_POST['id_peran'])
         ];
         $this->model("PeranMahasiswaModel")->update($data);
-        header('location:' . BASEURL . 'Mahasiswa/index');
+        header('location:' . BASEURL . '/Mahasiswa/listMhs');
     }
 }

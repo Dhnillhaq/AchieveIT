@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/Admin/administrasiData">
+		<a href="<?= BASEURL; ?>/Mahasiswa/listMhs">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -30,12 +30,12 @@
 				<!-- Program Studi -->
 				<label for="kode_prodi" class="block text-gray-700 font-medium pt-6">Kode Program Studi <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="kode_prodi"
+				<input type="text" name="kode_prodi" id="kode_prodi" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 				<label for="nama_prodi" class="block text-gray-700 font-medium pt-6">Program Studi <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="nama_prodi"
+				<input type="text" name="nama_prodi" id="nama_prodi" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			</div>
