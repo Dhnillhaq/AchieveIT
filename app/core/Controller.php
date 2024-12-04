@@ -7,7 +7,7 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/templates/header.php';
-        if ($view != 'index' && $view != 'Auth/login') {
+        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/pageNotFound') {
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';
@@ -25,10 +25,9 @@ class Controller
                 require_once $modelFile;
                 $this->models[$model] = new $model();
             } else {
-                // error handling
+                header("location:".BASEURL."/Auth/pageNotFound");
             }
         }
-
         return $this->models[$model];
     }
 
