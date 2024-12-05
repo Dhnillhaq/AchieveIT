@@ -131,7 +131,7 @@ class PrestasiModel extends Connection
 
     public function getGrafikDiagramLingkaran($type = "Kategori")
     {
-        $stmt = "EXEC usp_GetFilteredPrestasi @type = ?;";
+        $stmt = "EXEC usp_GetAnalisisPrestasi @type = ?;";
         $params = array($type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
