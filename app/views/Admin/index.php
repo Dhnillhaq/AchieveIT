@@ -1,12 +1,12 @@
 <section class="sm:ml-64 bg-blue-50">
 
-	 <?php require_once __DIR__. '/../templates/profiles.php'; ?> 
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- selamat datang -->
 	<section class="flex-col justify-start p-6 space-y-4">
 		<p class="font-bold text-4xl">Selamat Datang</p>
 		<p class="font-semibold text-2xl text-[#F99D1C]">
-			<?=$_SESSION['user']['nama']?> / <?= $_SESSION['user']['nip']?>
+			<?= $_SESSION['user']['nama'] ?> / <?= $_SESSION['user']['nip'] ?>
 		</p>
 	</section>
 
@@ -20,7 +20,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Prestasi
 					</p>
-					<p class="font-bold"><?=$data['statistik']['0']['total_prestasi']?></p>
+					<p class="font-bold"><?= $data['statistik']['0']['total_prestasi'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Mahasiswa JTI
 					</p>
-					<p class="font-bold"><?=$data['statistik']['0']['total_mahasiswa']?></p>
+					<p class="font-bold"><?= $data['statistik']['0']['total_mahasiswa'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Rata-rata Per Tahun
 					</p>
-					<p class="font-bold"><?=round($data['statistik']['0']['rata_rata'])?></p>
+					<p class="font-bold"><?= round($data['statistik']['0']['rata_rata']) ?></p>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total MaPres
 					</p>
-					<p class="font-bold"><?=$data['statistik']['0']['total_mapres']?></p>
+					<p class="font-bold"><?= $data['statistik']['0']['total_mapres'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -205,7 +205,6 @@
 						// Looping data mahasiswa ke dalam tabel
 						$rank = 1;
 						foreach ($data['prestasi'] as $mahasiswa) { ?>
-
 							<tr>
 								<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
 								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
@@ -223,7 +222,131 @@
 		</div>
 	</section>
 
+	<script>
+		const ctx = document.getElementById("DiagramLingkar");
+		new Chart(ctx, {
+			type: "doughnut",
+			data: {
+				labels: [
+					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
+								"<?= $lingkar['Kategori'] ?>",
+					<?php } ?>
+				],
+				datasets: [
+					{
+						data: [
+							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
+								<?= $lingkar['jumlah_prestasi'] ?>,
+							<?php } ?>
+						], // Data untuk setiap kategori
+						borderWidth: 1,
+						backgroundColor: [
+							"#C6E0F7", // Warna untuk Kategori Sains
+							"#70B1EA", // Warna untuk Kategori Seni
+							"#3063C5", // Warna untuk Kategori Olahraga
+							"#1D2C40", // Warna untuk Lain-lain
+							"#1D2C5F", // Warna untuk Lain-lain
+							"#1D2CG7", // Warna untuk Lain-lain
+							"#1D2CG7", // Warna untuk Lain-lain
+						],
+					},
+				],
+			},
+		});
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="../../app/components/Diagram.js"></script>
+
+		const ctx1 = document.getElementById("DiagramBatangPerTahun");
+
+		new Chart(ctx1, {
+			type: "bar",
+			data: {
+				labels: [
+					<?php foreach ($data['tahun'] as $tahun) { ?>
+												"<?= $tahun['tahun']; ?>",
+					<?php } ?>
+				],
+				datasets: [
+					<?php foreach ($data['kategori'] as $kategori) { ?>
+											{
+							label: "<?= $kategori['kategori'] ?>",
+							data: [
+								<?php foreach ($data['perTahun'] as $perTahun) { ?>
+														<?= $perTahun[$kategori['kategori']] ?>,
+								<?php } ?>
+							],
+							borderWidth: 1,
+							backgroundColor: [
+								"#C6E0F7", // Warna untuk Kategori Sains							
+								"#3063C5", // Warna untuk Kategori Olahraga
+								"#1D2C5F", // Warna untuk Lain-lain
+								"#1D2CG7", // Warna untuk Lain-lain
+							],
+						},
+					<?php } ?>
+				],
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+					},
+				},
+			},
+		});
+
+
+
+		const ctx2 = document.getElementById("DiagramBatang1Tahun");
+
+		new Chart(ctx2, {
+			type: "bar",
+			data: {
+				labels: [
+					"Januari",
+					"Februari",
+					"Maret",
+					"April",
+					"Mei",
+					"Juni",
+					"Juli",
+					"Agustus",
+					"September",
+					"Oktober",
+					"November",
+					"Desember",
+				],
+				datasets: [
+					<?php foreach ($data['kategori'] as $kategori) { ?>
+							{
+							label: "<?= $kategori['kategori'] ?>",
+							data: [
+								<?php foreach ($data['perBulan'] as $perBulan) { ?>
+													<?= $perBulan[$kategori['kategori']] ?>,
+								<?php } ?>
+							],
+							borderWidth: 1,
+							backgroundColor: [
+								"#C6E0F7", // Warna untuk Kategori Sains
+								"#70B1EA", // Warna untuk Kategori Seni
+								"#3063C5", // Warna untuk Kategori Olahraga
+								"#1D2C40", // Warna untuk Lain-lain
+								"#1D2C5F", // Warna untuk Lain-lain
+								"#1f2CG7", // Warna untuk Lain-lain
+								"#3D2CG7", // Warna untuk Lain-lain
+								"#1DgCG7", // Warna untuk Lain-lain
+							],
+						},
+					<?php } ?>
+				],
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true,
+					},
+				},
+			},
+		});
+	</script>
+	<!-- <script src="../../app/components/Diagram.js"></script> -->
 </section>

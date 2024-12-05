@@ -110,15 +110,54 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function searchPrestasi($keyword)
+    public function getGrafikPrestasi(){
+        
+    }
+
+    public function getTahunPrestasi()
     {
-        $stmt = "SELECT m.nim, m.nama, p.nama_prodi, m.total_poin
-            FROM mahasiswa m
-            JOIN program_studi p ON m.id_prodi = p.id_prodi
-            WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%'
-            ORDER BY total_poin DESC;";
+        $stmt = "SELECT
+                DISTINCT YEAR(tanggal_selesai_kompetisi) as tahun
+                FROM prestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+            // $data[] = self::getGrafikPertahun("Kategori", $row['tahun']);
+        }
+        return $data;
+
+    }
+
+    public function getGrafikDiagramLingkaran($type = "Kategori")
+    {
+        $stmt = "EXEC usp_GetFilteredPrestasi @type = ?;";
+        $params = array($type);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getGrafikPertahun($type = "Kategori", $year = "2024")
+    {
+        $stmt = "EXEC usp_PrestasiPivot;";
+        $result = sqlsrv_query($this->conn, $stmt);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+    public function getGrafikPerBulan($type = "Kategori", $year = "2024")
+    {
+        $stmt = "EXEC usp_PrestasiPerBulan @tahun = 2023, @type = 'kategori';";
+        $params = array($type, $year);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
