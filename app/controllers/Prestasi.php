@@ -42,7 +42,7 @@ class Prestasi extends Controller
     }
     public function show($id_prestasi)
     {
-        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa", "Ketua Jurusan");
         $id = htmlspecialchars($id_prestasi);
         $data =[
             "prestasi" => $this->model("PrestasiModel")->getDetailPrestasi($id),
