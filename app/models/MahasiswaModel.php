@@ -34,14 +34,13 @@ class MahasiswaModel extends Connection
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = '$nim';";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
+        $params = [
+            $nim
+        ];
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-
-        return $data;
+        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   

@@ -26,16 +26,23 @@ class Prestasi extends Controller
         ];
         $this->view("Prestasi/create", $data);
     }
+
+    public function store()
+    {
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+        header('location:' . BASEURL . '/Prestasi/index');
+    }
+
     public function edit()
     {
         $this->checkRole("Admin", "Super Admin");
         $this->view("Prestasi/edit");
     }
-    
+
     public function delete($id_prestasi)
     {
         $this->checkRole("Admin", "Super Admin");
-     
+
         $id = htmlspecialchars($id_prestasi);
         $this->model("PrestasiModel")->delete($id);
         header('location:' . BASEURL . '/Prestasi/index');
@@ -44,7 +51,7 @@ class Prestasi extends Controller
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa", "Ketua Jurusan");
         $id = htmlspecialchars($id_prestasi);
-        $data =[
+        $data = [
             "prestasi" => $this->model("PrestasiModel")->getDetailPrestasi($id),
             "mahasiswa" => $this->model("PrestasiModel")->getDetailPrestasiDataMahasiswa($id),
             "dosen" => $this->model("PrestasiModel")->getDetailPrestasiDataDosen($id),

@@ -14,12 +14,6 @@ class Mahasiswa extends Controller
         $this->view('Mahasiswa/index', $data);
     }
 
-    public function formPrestasi()
-    {
-        $this->checkRole("Mahasiswa");
-        $this->view('Mahasiswa/formPrestasi');
-    }
-
     public function prestasiSaya()
     {
         $this->checkRole("Mahasiswa");
@@ -41,13 +35,14 @@ class Mahasiswa extends Controller
 
     public function create()
     {
-        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->checkRole("Admin", "Super Admin");
+        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view("Admin/Mahasiswa/create", $data);
     }
-    
+
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -65,7 +60,7 @@ class Mahasiswa extends Controller
         }
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
-    
+
     public function edit($id_mahasiswa)
     {
         $this->checkRole("Admin", "Super Admin");
@@ -73,9 +68,10 @@ class Mahasiswa extends Controller
         $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view("Admin/Mahasiswa/edit", $data);
     }
-    
+
     public function delete($id_mahasiswa)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_mahasiswa);
         $this->model("MahasiswaModel")->delete($id);
         header('location:' . BASEURL . '/Mahasiswa/listMhs');
@@ -83,6 +79,7 @@ class Mahasiswa extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -115,6 +112,21 @@ class Mahasiswa extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Mahasiswa/show");
+    }
+
+    public function getSelectedMahasiswa()
+    {
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nim = htmlspecialchars($_POST['nim']);
+
+            $data = [
+                'selectedMahasiswa' => $this->model("MahasiswaModel")->getMahasiswaByNim($nim)
+            ];
+
+            echo json_encode($data);
+        }
     }
 }
 ?>
