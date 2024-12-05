@@ -47,6 +47,7 @@ class AdminModel extends Connection
         $params = array($data['nip'], $data['nama'], $data['role'], $data['password']);
         sqlsrv_query($this->conn, $stmt, $params);
     }
+    
     public function delete($id_admin)
     {
         $stmt = "DELETE FROM admin WHERE id_admin = ?";

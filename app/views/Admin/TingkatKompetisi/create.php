@@ -30,12 +30,12 @@
 				<!-- Tingkat -->
 				<label for="tingkat_kompetisi" class="block text-gray-700 font-medium pt-6">Tingkat Kompetisi<span
 						class="text-red-600">*</span></label>
-				<input type="text" name="tingkat_kompetisi"
+				<input type="text" name="tingkat_kompetisi" id="tingkat_kompetisi" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 				<!-- Tingkat -->
 				<label for="poin" class="block text-gray-700 font-medium pt-6">Poin<span
 						class="text-red-600">*</span></label>
-				<input type="text" name="poin"
+				<input type="text" name="poin" id="poin" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			</div>

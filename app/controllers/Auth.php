@@ -10,6 +10,11 @@ class Auth extends Controller
         $this->view('Auth/login');
     }
 
+    public function pageNotFound()
+    {
+        $this->view('Auth/pageNotFound');
+    }
+
     public function isLogin()
     {
         $this->usernameInp = htmlspecialchars($_POST["username"]);
@@ -18,11 +23,11 @@ class Auth extends Controller
 
         if ($this->isSuperAdmin()) {
             $this->setSession();
-            header("location:$url/Admin/superAdmin");
+            header("location:$url/Admin/index");
             exit;
         } else if ($this->isAdmin()) {
             $this->setSession();
-            header("location:$url/Admin/");
+            header("location:$url/Admin/index");
             exit;
         } else if ($this->isKajur()) {
             $this->setSession();

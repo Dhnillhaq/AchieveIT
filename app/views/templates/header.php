@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AchieveIT</title>
+    <link rel="icon" href="../../../public/img/Logo_achieveIT.png">
     <!-- <link href="../../../public/css/output.css" rel="stylesheet" /> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../../public/js/script.js"></script>

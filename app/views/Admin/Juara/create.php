@@ -30,12 +30,12 @@
 				<!-- Juara -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Jenis Juara<span
 						class="text-red-600">*</span></label>
-				<input type="text" name="juara"
+				<input type="text" name="juara" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 				<!-- Juara -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Poin<span
 						class="text-red-600">*</span></label>
-				<input type="text" name="poin"
+				<input type="text" name="poin" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 
