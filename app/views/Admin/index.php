@@ -241,13 +241,13 @@
 						], // Data untuk setiap kategori
 						borderWidth: 1,
 						backgroundColor: [
-							"#C6E0F7", // Warna untuk Kategori Sains
-							"#70B1EA", // Warna untuk Kategori Seni
-							"#3063C5", // Warna untuk Kategori Olahraga
+							"#C6E0F7", // Warna untuk Kategori Debat
+							"#70B1EA", // Warna untuk Kategori Essai
+							"#3F84D9", // Warna untuk Lain-lain
+							"#3063C5", // Warna untuk Kategori Karya Ilmiah
+							"#274A9D", // Warna untuk Lain-lain
 							"#1D2C40", // Warna untuk Lain-lain
-							"#1D2C5F", // Warna untuk Lain-lain
-							"#1D2CG7", // Warna untuk Lain-lain
-							"#1D2CG7", // Warna untuk Lain-lain
+							"#CFE6FA", // Warna untuk Lain-lain
 						],
 					},
 				],
@@ -266,7 +266,9 @@
 					<?php } ?>
 				],
 				datasets: [
-					<?php foreach ($data['kategori'] as $kategori) { ?>
+					<?php 
+					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
+						foreach ($data['kategori'] as $kategori) { ?>
 											{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
@@ -275,12 +277,7 @@
 								<?php } ?>
 							],
 							borderWidth: 1,
-							backgroundColor: [
-								"#C6E0F7", // Warna untuk Kategori Sains							
-								"#3063C5", // Warna untuk Kategori Olahraga
-								"#1D2C5F", // Warna untuk Lain-lain
-								"#1D2CG7", // Warna untuk Lain-lain
-							],
+							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>",					
 						},
 					<?php } ?>
 				],

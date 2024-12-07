@@ -25,7 +25,7 @@
 						<img src="../../../public/img/logo_jti.png" alt="logo" class="w-auto h-32" />
 					</div>
 					<h1 class="text-4xl font-bold text-center my-8">Masuk</h1>
-					<form method="post" action="<?= BASEURL; ?>/Auth/isLogin" class="space-y-4 w-full">
+					<form method="post" action="<?= BASEURL; ?>/Auth/login" class="space-y-4 w-full">
 						<div class="relative">
 							<input type="text" id="Nama pengguna" name="username" placeholder="Masukkan NIP/NIM"
 								class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
@@ -40,9 +40,15 @@
 							<img src="../../../public/img/Lock.png" alt="logo"
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
+						<?php
+						if (isset($data['message'])) {
+							echo '<span class="text-red-600 flex justift-center text-center">' . $data['message'] . '</span>';
+						}
+						?>
 						<div class="flex justify-start space-x-1">
-							<input type="checkbox" placeholder="" class="border rounded-l" onclick="showPassword()">
-							<p class="text-[#757575]">Tampilkan kata sandi</p>
+							<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
+								onclick="showPassword()">
+							<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 						</div>
 						<button type="submit" name="submit"
 							class="font-bold mt-4 w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Masuk</button>
@@ -52,3 +58,9 @@
 		</section>
 	</div>
 </section>
+
+<script>
+	<?php 
+        Flasher::flash();
+    ?>
+</script>

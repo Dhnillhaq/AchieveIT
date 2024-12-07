@@ -5,6 +5,13 @@
         </p>
     </div>
 </footer>
+
+<script>
+	<?php 
+        Flasher::flash();
+    ?>
+</script>
+
 </body>
 
 </html>

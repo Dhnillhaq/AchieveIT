@@ -39,24 +39,19 @@
 		<!-- btn -->
 		<section class="flex space-x-4 justify-start pl-4 pb-6">
 			<div class="justify-center p-2">
-				<a href="<?= BASEURL; ?>/">
 					<button type="submit" name="submit"
 						class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 						<img src="../../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 						<p>Simpan</p>
 					</button>
-				</a>
 			</div>
 
 			<div class="justify-center p-2">
-				<a href="<?= BASEURL; ?>/">
 					<button type="reset"
 						class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 						<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 						<p>Reset</p>
 					</button>
-
-				</a>
 			</div>
 		</section>
 	</form>
