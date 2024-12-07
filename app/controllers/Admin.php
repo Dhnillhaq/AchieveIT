@@ -102,6 +102,7 @@ class Admin extends Controller
 
     public function update()
     {
+        $this->checkRole("Super Admin");
         $data = [
             'nip' => htmlspecialchars($_POST['nip']),
             'nama' => htmlspecialchars($_POST['nama']),

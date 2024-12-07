@@ -35,7 +35,7 @@ class TingkatKompetisiModel extends Connection
             $data['tingkat_kompetisi'],
             $data['poin']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -46,7 +46,7 @@ class TingkatKompetisiModel extends Connection
             $data['poin'],
             $data['id_tingkat_kompetisi']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id)
@@ -55,6 +55,6 @@ class TingkatKompetisiModel extends Connection
         $params = array(
             $id
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }

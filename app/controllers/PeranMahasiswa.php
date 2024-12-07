@@ -14,9 +14,14 @@ class PeranMahasiswa extends Controller
             $data = [
                 'peran' => htmlspecialchars($_POST['peran'])
             ];
-            $this->model("PeranMahasiswaModel")->store($data);
+            $isSuccess =  $this->model("PeranMahasiswaModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/PeranMahasiswa/create");
     }
     
     public function edit($id_peran)
@@ -29,7 +34,13 @@ class PeranMahasiswa extends Controller
     public function delete($id_peran)
     {
         $id = htmlspecialchars($id_peran);
-        $this->model("PeranMahasiswaModel")->delete($id);
+
+        $isSuccess =  $this->model("PeranMahasiswaModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
 
@@ -39,7 +50,13 @@ class PeranMahasiswa extends Controller
             'peran' => htmlspecialchars($_POST['peran']),
             'id_peran' => htmlspecialchars($_POST['id_peran'])
         ];
-        $this->model("PeranMahasiswaModel")->update($data);
-        header('location:' . BASEURL . '/Mahasiswa/listMhs');
+
+        $isSuccess =  $this->model("PeranMahasiswaModel")->update($data);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+        }
+        header('location:' . BASEURL . '/PeranMahasiswa/edit/' . $data['id_peran']);
     }
 }

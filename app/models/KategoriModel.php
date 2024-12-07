@@ -34,7 +34,7 @@ class KategoriModel extends Connection
         $params = array(
             $data['kategori']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -44,7 +44,7 @@ class KategoriModel extends Connection
             $data['kategori'],
             $data['id_kategori']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id)
@@ -53,6 +53,6 @@ class KategoriModel extends Connection
         $params = array(
             $id
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
