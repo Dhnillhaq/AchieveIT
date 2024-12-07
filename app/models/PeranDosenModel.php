@@ -26,14 +26,14 @@ class PeranDosenModel extends Connection
     {
         $stmt = "INSERT INTO peran_dosen(peran) VALUES(?)";
         $params = array($data['peran']);
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
     public function delete($id_peran)
     {
         $stmt = "DELETE FROM peran_dosen WHERE id_peran = ?";
         $params = array($id_peran);
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -43,6 +43,6 @@ class PeranDosenModel extends Connection
             $data['peran'],
             $data['id_peran']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }

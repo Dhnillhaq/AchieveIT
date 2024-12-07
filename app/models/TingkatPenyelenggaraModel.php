@@ -36,7 +36,7 @@ class TingkatPenyelenggaraModel extends Connection
             $data['tingkat_penyelenggara'],
             $data['poin']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -47,7 +47,7 @@ class TingkatPenyelenggaraModel extends Connection
             $data['poin'],
             $data['id_tingkat_penyelenggara']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id)
@@ -56,6 +56,6 @@ class TingkatPenyelenggaraModel extends Connection
         $params = array(
             $id
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }

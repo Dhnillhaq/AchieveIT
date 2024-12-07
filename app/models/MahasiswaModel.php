@@ -90,7 +90,7 @@ class MahasiswaModel extends Connection
             $data['password']
         );
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id_mahasiswa)
@@ -98,7 +98,7 @@ class MahasiswaModel extends Connection
         $stmt = "DELETE FROM mahasiswa WHERE id_mahasiswa = ?";
         $params = array($id_mahasiswa);
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -130,7 +130,7 @@ class MahasiswaModel extends Connection
             $data['id_mahasiswa']
         );
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
 ?>

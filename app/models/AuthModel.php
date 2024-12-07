@@ -47,7 +47,7 @@ class AuthModel extends Connection
     public function registrasi($username, $password) {
         $stmt = "INSERT INTO mahasiswa (nim, password) VALUES (?, ?)";
         $params = array($username, $password);
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
 }

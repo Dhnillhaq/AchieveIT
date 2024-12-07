@@ -142,10 +142,11 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function getGrafikPertahun($type = "Kategori", $year = "2024")
+    public function getGrafikPerTahun($type = "kategori")
     {
-        $stmt = "EXEC usp_PrestasiPivot;";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetAnalisisPrestasiPerTahun @type = ?;";
+        $params = array($type);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -155,7 +156,7 @@ class PrestasiModel extends Connection
     }
     public function getGrafikPerBulan($type = "kategori", $year = "2024")
     {
-        $stmt = "EXEC usp_PrestasiPerBulan @tahun = ?, @type = ?;";
+        $stmt = "EXEC usp_GetAnalisisPrestasiPerBulan @tahun = ?, @type = ?;";
         $params = array($year, $type );
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
