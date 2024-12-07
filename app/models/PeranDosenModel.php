@@ -14,8 +14,9 @@ class PeranDosenModel extends Connection
 
     public function getPeranDosenById($id)
     {
-        $stmt = "SELECT * FROM peran_dosen WHERE id_peran = $id";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "SELECT * FROM peran_dosen WHERE id_peran = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
         

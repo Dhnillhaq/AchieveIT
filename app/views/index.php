@@ -1,9 +1,10 @@
-<section class="relative bg-cover bg-center h-min-screen" style="background-image: url('../../../public/img/gedung-jti.png');">
+<section class="relative bg-cover bg-center h-min-screen"
+  style="background-image: url('../../../public/img/gedung-jti.png');">
   <div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
   <nav class="text-white p-4 container mx-auto flex justify-between items-center relative z-10 px-8 py-8">
     <div class="navbar-text flex justify-between items-center gap-2">
-        <img src="../../../public/img/logo-poltek-outline.png" alt="logo" class="w-8 h-8" />
-        <img src="../../../public/img/logo-JTI-outline.png" alt="logo" class="w-8 h-8" />
+      <img src="../../../public/img/logo-poltek-outline.png" alt="logo" class="w-8 h-8" />
+      <img src="../../../public/img/logo-JTI-outline.png" alt="logo" class="w-8 h-8" />
       <h1 class="font-extrabold text-4xl pl-4">AchieveIt</h1>
     </div>
     <div class="navbar-button flex right-0 text-[16px]">
@@ -111,10 +112,11 @@
         <div class="flex justify-between">
           <div class="flex">
             <form id="formFilter" action="<?= BASEURL; ?>/#daftar-prestasi" method="POST">
-              <div class="flex items-center bg-white w-full p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
-									<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
-									<input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword"/>
-								</div>
+              <div
+                class="flex items-center bg-white w-full p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+                <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+                <input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword" />
+              </div>
 
           </div>
           <div class="flex right-0">
@@ -181,7 +183,7 @@
               ?>
             </tbody>
           </table>
-            </section>
+        </section>
       </div>
     </section>
     <!-- //php include __DIR__ . '/../../components/DaftarMahasiswaBerprestasi.php';  -->
@@ -242,6 +244,21 @@
     </p>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script>
+  Swal.fire('Hello world!');
+  Swal.fire({
+    title: 'The Internet?',
+    text: 'That thing is still around?',
+    icon: 'question',
+    allowOutsideClick: false
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Arahkan ke halaman yang diinginkan
+      window.location.href = '<= BASEURL?>/Auth/Login'; // Ganti dengan URL tujuan
+    }
+  });
+</script> -->
 </body>
 
 </html>

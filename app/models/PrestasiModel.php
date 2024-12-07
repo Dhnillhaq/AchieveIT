@@ -153,10 +153,10 @@ class PrestasiModel extends Connection
 
         return $data;
     }
-    public function getGrafikPerBulan($type = "Kategori", $year = "2024")
+    public function getGrafikPerBulan($type = "kategori", $year = "2024")
     {
-        $stmt = "EXEC usp_PrestasiPerBulan @tahun = 2023, @type = 'kategori';";
-        $params = array($type, $year);
+        $stmt = "EXEC usp_PrestasiPerBulan @tahun = ?, @type = ?;";
+        $params = array($year, $type );
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {

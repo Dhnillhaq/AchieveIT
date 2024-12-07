@@ -66,8 +66,16 @@ class Admin extends Controller
             "role" => htmlspecialchars($_POST['role']),
             "password" => htmlspecialchars($_POST['password'])
         ];
-        $this->model("AdminModel")->store($data);
-        header("location:" . BASEURL . "/Admin/adminList");
+
+        $isSuccess = $this->model("AdminModel")->store($data);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/adminList");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/adminList");
+        }
+
+        header('location:' . BASEURL . '/Admin/create');
     }
 
     public function edit($id_admin)
@@ -82,7 +90,13 @@ class Admin extends Controller
     {
         $this->checkRole("Super Admin");
         $id = htmlspecialchars($id_admin);
-        $this->model("AdminModel")->Delete($id);
+        $isSuccess = $this->model("AdminModel")->delete($id);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Delete", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Delete", "Data gagal dihapus", "error");
+        }
         header('location:' . BASEURL . '/Admin/adminList');
     }
 
@@ -95,8 +109,14 @@ class Admin extends Controller
             'password' => htmlspecialchars($_POST['password']),
             'id_admin' => htmlspecialchars($_POST['id_admin'])
         ];
-        $this->model("AdminModel")->update($data);
-        header('location:' . BASEURL . '/Admin/adminList');
+        $isSuccess = $this->model("AdminModel")->update($data);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Update", "Data berhasil diperbarui", "success", "Admin/adminList");
+        } else {
+            Flasher::setFlash("Update", "Data gagal diperbarui", "error", "Admin/adminList");
+        }
+        header('location:' . BASEURL . '/Admin/edit/' . $data['id_admin']);
     }
 }
 ?>

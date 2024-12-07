@@ -18,10 +18,10 @@
 				<!-- kategori -->
 				<label for="nama" class="block text-gray-700 font-medium mt-6">Kategori Prestasi <span
 						class="text-red-600">*</span></label>
-				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" name="kategori">
 					<?php
 					foreach ($data['kategori'] as $kategori) {
-						echo "<option>{$kategori['kategori']}</option>";
+						echo "<option value=" . $kategori['id_kategori'] . ">{$kategori['kategori']}</option>";
 					}
 					?>
 				</select>
@@ -29,10 +29,11 @@
 				<!-- tingkatan -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tingkatan Kompetisi <span
 						class="text-red-600">*</span></label>
-				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
+					name="tingkat_kompetisi">
 					<?php
 					foreach ($data['tingkatKompetisi'] as $tingkatKompetisi) {
-						echo "<option>{$tingkatKompetisi['tingkat_kompetisi']}</option>";
+						echo "<option value=" . $tingkatKompetisi['id_tingkatKompetisi'] . ">{$tingkatKompetisi['tingkat_kompetisi']}</option>";
 					}
 					?>
 				</select>
@@ -40,10 +41,11 @@
 				<!-- tingkatan -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tingkatan Penyelenggara<span
 						class="text-red-600">*</span></label>
-				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
+					name="tingkat_penyelenggara">
 					<?php
 					foreach ($data['tingkatPenyelenggara'] as $tingkatPenyelenggara) {
-						echo "<option>{$tingkatPenyelenggara['tingkat_penyelenggara']}</option>";
+						echo "<option value=" . $tingkatPenyelenggara['id_tingkatPenyelenggara'] . ">{$tingkatPenyelenggara['tingkat_penyelenggara']}</option>";
 					}
 					?>
 				</select>
@@ -51,7 +53,7 @@
 				<!-- nama kompetisi -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Nama Kompetisi <span
 						class="text-red-600">*</span></label>
-				<input type="text"
+				<input type="text" name="nama_kompetisi"
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal mulai -->
@@ -85,7 +87,7 @@
 				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
 					<?php
 					foreach ($data['juara'] as $juara) {
-						echo "<option>{$juara['juara']}</option>";
+						echo "<option value=" . $juara['id_juara'] . ">{$juara['juara']}</option>";
 					}
 					?>
 				</select>
@@ -252,10 +254,7 @@
 								<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 									No
 								</th>
-								<th class="w-1/5 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-									NIM
-								</th>
-								<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								<th class="w-1/2 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 									Mahasiswa
 								</th>
 								<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
@@ -277,18 +276,17 @@
 										<option>Pilih Mahasiswa</option>
 										<?php
 										foreach ($data['mahasiswa']['all'] as $mahasiswa) {
-											echo "<option>{$mahasiswa['nim']}</option>";
+											echo "<option value='{$mahasiswa['id_mahasiswa']}'>{$mahasiswa['nim']} - {$mahasiswa['nama']}</option>";
 										}
 										?>
 									</select>
-								</td>
-								<td id="nama-mahasiswa" class="py-2 px-4 border border-blue-950"></td>
+								</td>	
 								<td class="py-2 px-4 border border-blue-950">
 									<select name="peran_mhs[]" class="w-full border rounded px-2 py-1">
 										<option>Pilih Peran</option>
 										<?php
 										foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
-											echo "<option>{$peranMahasiswa['peran']}</option>";
+											echo "<option value='{$peranMahasiswa['id_peran']}'>{$peranMahasiswa['peran']}</option>";
 										}
 										?>
 									</select>
@@ -349,7 +347,7 @@
 									<select class="w-full border rounded px-2 py-1">
 										<?php
 										foreach ($data['dosen'] as $dosen) {
-											echo "<option>{$dosen['nama']}</option>";
+											echo "<option value='{$dosen['id_dosen']}'>{$dosen['nama']}</option>";
 										}
 										?>
 									</select>
@@ -359,7 +357,7 @@
 									<select class="w-full border rounded px-2 py-1">
 										<?php
 										foreach ($data['peranDosen'] as $peranDsn) {
-											echo "<option>{$peranDsn['peran']}</option>";
+											echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
 										}
 										?>
 									</select>
@@ -406,78 +404,16 @@
 </section>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
 
-		const mhsMap = <?php echo json_encode(array_column($data['mahasiswa']['all'], 'nama', 'nim')) ?>
-		const tableBodyMhs = document.getElementById('table-body');
-		const addMhsBtn = document.getElementById('add-mhs');
 
-		const mahasiswaMap = <?php echo json_encode(array_column($data['mahasiswa']['all'], 'nama', 'nim')); ?>;
-
-		document.addEventListener('change', (e) => {
-			if (e.target.name === 'nim[]') {
-				const selectedNim = e.target.value;
-				const row = e.target.closest('tr');
-				const namaCell = row.querySelector('#nama-mahasiswa');
-
-				namaCell.textContent = mahasiswaMap[selectedNim] || 'Nama tidak ditemukan';
-			}
-		});
-
-		addMhsBtn.addEventListener('click', (e) => {
-			e.preventDefault()
-
-			const newRow = `
-				< tr >
-			<td class="py-2 px-4 border border-blue-950">${tableBody.children.length + 1}</td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="nim[]" class="w-full border rounded px-2 py-1">
-					<option value="">Pilih Mahasiswa</option>
-					<?php
-					foreach ($data['mahasiswa']['all'] as $mahasiswa) {
-						echo "<option value='{$mahasiswa['nim']}'>{$mahasiswa['nim']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td id="nama-mahasiswa" class="py-2 px-4 border border-blue-950"></td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="peran[]" class="w-full border rounded px-2 py-1">
-					<?php
-					foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
-						echo "<option value='{$peranMahasiswa['peran']}'>{$peranMahasiswa['peran']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td class="py-2 px-4 border border-blue-950 text-center">
-				<button type="button" class="bg-[#FF3B30] py-2 px-2 rounded-md delete-row">
-					<img src="../../../public/img/Trash.png" alt="logo">
-				</button>
-			</td>
-		</ > `
-
-			tableBodyMhs.insertAdjacentHTML('beforeend', newRow)
-		})
-	})
-
-	tableBodyMhs.addEventListener('click', (e) => {
-		if (e.target.closest('.delete-row')) {
-			e.preventDefault();
-			e.target.closest('tr').remove();
-		}
-	});
-
-	function showFileName(input, inputNumber) {
-		const fileNameElement = document.getElementById(`file-name-${inputNumber}`);
-		if (input.files && input.files.length > 0) {
+	function showFileName(input, id) {
+		const fileNameElement = document.getElementById(`file-name-${id}`);
+		console.log(input.files); // Debug apakah file terdeteksi
+		if (input.files && input.files[0]) {
 			fileNameElement.textContent = input.files[0].name;
-			fileNameElement.classList.remove('text-gray-500');
-			fileNameElement.classList.add('text-black');
 		} else {
-			fileNameElement.textContent = 'tidak ada file yang dipilih';
-			fileNameElement.classList.remove('text-black');
-			fileNameElement.classList.add('text-gray-500');
+			fileNameElement.textContent = "tidak ada file yang dipilih";
 		}
 	}
+
 </script>
