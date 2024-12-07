@@ -28,14 +28,17 @@ class PrestasiModel extends Connection
     public function getPrestasiByNim($nim)
     {
         $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?";
-        $params = array(
-            $nim
-        );
+        $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+        $data = [];
+
+        if ($result != false) {
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
         }
+
         return $data;
     }
 

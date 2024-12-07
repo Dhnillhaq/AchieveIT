@@ -205,7 +205,7 @@
 						// Looping data mahasiswa ke dalam tabel
 						$rank = 1;
 						foreach ($data['prestasi'] as $mahasiswa) { ?>
-
+							
 							<tr>
 								<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
 								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
@@ -218,6 +218,16 @@
 						}
 						?>
 					</tbody>
+					
+					<tr>
+						<td colspan="5" class="text-center py-10">
+							<img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" />
+							<p class="font-bold text-gray-500 mt-4">
+								Tidak ada data yang tersedia..
+							</p>
+						</td>
+					</tr>
+				
 				</table>
 			</div>
 		</div>

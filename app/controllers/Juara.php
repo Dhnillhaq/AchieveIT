@@ -12,6 +12,7 @@ class Juara extends Controller
     // Method proses Create Juara
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'juara' => htmlspecialchars($_POST['juara']),
@@ -43,6 +44,7 @@ class Juara extends Controller
     // Method proses Update Juara
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_juara' => htmlspecialchars($_POST['id_juara']),
@@ -64,6 +66,7 @@ class Juara extends Controller
     // Method proses Delete Juara
     public function delete($id_juara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_juara);
 
         $isSuccess =  $this->model("JuaraModel")->delete($id);
