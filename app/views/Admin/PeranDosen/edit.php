@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/Admin/administrasiData">
+		<a href="<?= BASEURL; ?>/Dosen/index">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
