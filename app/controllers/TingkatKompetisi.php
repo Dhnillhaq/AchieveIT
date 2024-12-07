@@ -7,8 +7,10 @@ class TingkatKompetisi extends Controller
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/TingkatKompetisi/create");
     }
+
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'tingkat_kompetisi' => htmlspecialchars($_POST['tingkat_kompetisi']),
@@ -38,6 +40,7 @@ class TingkatKompetisi extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_tingkat_kompetisi' => htmlspecialchars($_POST['id_tingkat_kompetisi']),
@@ -58,6 +61,7 @@ class TingkatKompetisi extends Controller
 
     public function delete($id_tingkat_kompetisi)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_kompetisi);
 
         $isSuccess =  $this->model("TingkatKompetisiModel")->delete($id);

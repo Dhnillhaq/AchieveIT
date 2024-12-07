@@ -39,6 +39,7 @@ class Prodi extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -59,6 +60,7 @@ class Prodi extends Controller
 
     public function delete($id_prodi)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_prodi);
 
         $isSuccess =  $this->model("ProdiModel")->delete($id);

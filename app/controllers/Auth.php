@@ -27,7 +27,7 @@ class Auth extends Controller
                 Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['nama'], "success", "Mahasiswa/index");
             } else {
                 $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
-                Flasher::setFlash("Login", "Anda Gagal masuk", "error");
+                Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
             }
         }
 
@@ -36,7 +36,14 @@ class Auth extends Controller
 
     public function pageNotFound()
     {
-        $this->view('Auth/pageNotFound');
+        if ($_SESSION['user']['role'] == 'Super Admin') {
+            $data['url'] = 'Admin/index';
+        } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+            $data['url'] = 'Kajur/index';
+        } else {
+            $data['url'] = 'Mahasiswa/index';
+        }
+        $this->view('Auth/pageNotFound', $data);
     }
 
     // Method Halaman Registrasi

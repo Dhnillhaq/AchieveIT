@@ -10,6 +10,7 @@ class PeranDosen extends Controller
 
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'peran' => htmlspecialchars($_POST['peran'])
@@ -33,6 +34,7 @@ class PeranDosen extends Controller
 
     public function delete($id_peranDosen)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_peranDosen);
         $isSuccess =  $this->model("PeranDosenModel")->delete($id);
         if ($isSuccess) {
@@ -45,6 +47,7 @@ class PeranDosen extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data = [
             'id_peran' => htmlspecialchars($_POST['id_peran']),
             'peran' => htmlspecialchars($_POST['peran'])

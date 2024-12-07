@@ -11,6 +11,7 @@ class Kategori extends Controller
     // Method proses Create Kategori
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'kategori' => htmlspecialchars($_POST['kategori'])
@@ -40,6 +41,7 @@ class Kategori extends Controller
     // Method proses Update Kategori
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_kategori' => htmlspecialchars($_POST['id_kategori']),
@@ -60,6 +62,7 @@ class Kategori extends Controller
     // Method proses Delete Kategori
     public function delete($id_kategori)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_kategori);
 
         $isSuccess =  $this->model("KategoriModel")->delete($id);

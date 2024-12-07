@@ -14,7 +14,7 @@
         <h1 class="font-extrabold text-7xl text-[#75757580]">404</h1>
         <img src="../../public/img/notFound.png" alt="Page Not Found" class="w-1/5 mx-auto" />
         <h2 class="font-extrabold text-2xl text-[#75757580]">Halaman tidak ditemukan...</h2>
-        <a href="<?=BASEURL;?>/">
+        <a href="<?=BASEURL;?>/<?=$data['url'];?>/">
             <button class="bg-[#132145] text-white py-2 px-4 rounded-lg font-bold mt-8">
                 Kembali Ke Homepage
             </button>
