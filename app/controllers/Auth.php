@@ -27,7 +27,7 @@ class Auth extends Controller
                 Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['nama'], "success", "Mahasiswa/index");
             } else {
                 $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
-                Flasher::setFlash("Login", "Anda Gagal masuk", "error", "Auth/login");
+                Flasher::setFlash("Login", "Anda Gagal masuk", "error");
             }
         }
 
