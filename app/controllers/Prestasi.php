@@ -35,13 +35,13 @@ class Prestasi extends Controller
 
     public function edit()
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $this->view("Prestasi/edit");
     }
 
     public function delete($id_prestasi)
     {
-        $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
 
         $id = htmlspecialchars($id_prestasi);
         $this->model("PrestasiModel")->delete($id);

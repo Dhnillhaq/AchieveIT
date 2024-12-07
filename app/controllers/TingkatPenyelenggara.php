@@ -9,6 +9,7 @@ class TingkatPenyelenggara extends Controller
     }
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'tingkat_penyelenggara' => htmlspecialchars($_POST['tingkat_penyelenggara']),
@@ -29,6 +30,7 @@ class TingkatPenyelenggara extends Controller
     public function edit($id_tingkat_penyelenggara)
     {
         $this->checkRole("Admin", "Super Admin");
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
         $data = $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggaraById($id);
@@ -38,6 +40,7 @@ class TingkatPenyelenggara extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_tingkat_penyelenggara' => htmlspecialchars($_POST['id_tingkat_penyelenggara']),
@@ -58,6 +61,7 @@ class TingkatPenyelenggara extends Controller
 
     public function delete($id_tingkat_penyelenggara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
         $isSuccess =  $this->model("TingkatPenyelenggaraModel")->delete($id);

@@ -10,11 +10,6 @@ class Home extends Controller
         }
         $this->view('index', $data);
     }
-
-    public function search()
-    {
-        $data['search'] = $this->model("PrestasiModel")->searchPrestasi($_POST['keyword']);
-    }
 }
 
 ?>

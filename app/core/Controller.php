@@ -46,15 +46,7 @@ class Controller
         }
 
         if (!$hasAccess) {
-            if ($_SESSION['user']['role'] == 'Super Admin') {
-                $selectedRole = 'Admin';
-            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-                $selectedRole = 'Kajur';
-            } else {
-                $selectedRole = $_SESSION['user']['role'];
-            }
-
-            header('location:' . BASEURL . '/' . $selectedRole);
+            header('location:' . BASEURL . '/Auth/pageNotFound');
         }
     }
 
