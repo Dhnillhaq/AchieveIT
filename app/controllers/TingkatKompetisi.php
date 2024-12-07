@@ -15,10 +15,15 @@ class TingkatKompetisi extends Controller
                 'poin' => htmlspecialchars($_POST['poin']),
             ];
 
-            $this->model("TingkatKompetisiModel")->store($data);
+            $isSuccess =  $this->model("TingkatKompetisiModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/TingkatKompetisi/create");
     }
 
     public function edit($id_tingkat_kompetisi)
@@ -40,17 +45,27 @@ class TingkatKompetisi extends Controller
                 'poin' => htmlspecialchars($_POST['poin'])
             ];
 
-            $this->model("TingkatKompetisiModel")->update($data);
+            $isSuccess =  $this->model("TingkatKompetisiModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/TingkatKompetisi/edit/" . $data['id_tingkat_kompetisi']);
     }
 
     public function delete($id_tingkat_kompetisi)
     {
         $id = htmlspecialchars($id_tingkat_kompetisi);
 
-        $this->model("TingkatKompetisiModel")->delete($id);
+        $isSuccess =  $this->model("TingkatKompetisiModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }

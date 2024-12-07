@@ -31,7 +31,7 @@ class DosenModel extends Connection
         $stmt = "INSERT INTO dosen(nama, nip) VALUES(?, ?)";
         $params = array($data['nama'], $data['nip']);
         
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id_dosen)
@@ -39,7 +39,7 @@ class DosenModel extends Connection
         $stmt = "DELETE FROM dosen WHERE id_dosen = ?";
         $params = array($id_dosen);
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -50,7 +50,7 @@ class DosenModel extends Connection
             $data['nama'],
             $data['id_dosen']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
 

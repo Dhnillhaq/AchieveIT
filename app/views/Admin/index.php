@@ -322,16 +322,7 @@
 								<?php } ?>
 							],
 							borderWidth: 1,
-							backgroundColor: [
-								"#C6E0F7", // Warna untuk Kategori Sains
-								"#70B1EA", // Warna untuk Kategori Seni
-								"#3063C5", // Warna untuk Kategori Olahraga
-								"#1D2C40", // Warna untuk Lain-lain
-								"#1D2C5F", // Warna untuk Lain-lain
-								"#1f2CG7", // Warna untuk Lain-lain
-								"#3D2CG7", // Warna untuk Lain-lain
-								"#1DgCG7", // Warna untuk Lain-lain
-							],
+							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>"
 						},
 					<?php } ?>
 				],

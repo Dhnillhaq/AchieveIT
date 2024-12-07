@@ -56,9 +56,14 @@ class Mahasiswa extends Controller
                 'email' => htmlspecialchars($_POST['email']),
                 'password' => htmlspecialchars($_POST['password'])
             ];
-            $this->model("MahasiswaModel")->store($data);
+            $isSuccess =  $this->model("MahasiswaModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Mahasiswa/create");
     }
 
     public function edit($id_mahasiswa)
@@ -73,7 +78,12 @@ class Mahasiswa extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_mahasiswa);
-        $this->model("MahasiswaModel")->delete($id);
+        $isSuccess =  $this->model("MahasiswaModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
         header('location:' . BASEURL . '/Mahasiswa/listMhs');
     }
 
@@ -94,9 +104,14 @@ class Mahasiswa extends Controller
                 'password' => htmlspecialchars($_POST['password']),
                 'id_mahasiswa' => htmlspecialchars($_POST['id_mahasiswa'])
             ];
-            $this->model("MahasiswaModel")->update($data);
+            $isSuccess =  $this->model("MahasiswaModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Mahasiswa/edit/" . $_POST['id_mahasiswa']);
     }
 
     public function listMhs()

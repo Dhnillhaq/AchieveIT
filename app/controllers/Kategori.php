@@ -16,10 +16,15 @@ class Kategori extends Controller
                 'kategori' => htmlspecialchars($_POST['kategori'])
             ];
 
-            $this->model("KategoriModel")->store($data);
+            $isSuccess =  $this->model("KategoriModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Kategori/create");
     }
 
     public function edit($id_kategori)
@@ -41,10 +46,15 @@ class Kategori extends Controller
                 'kategori' => htmlspecialchars($_POST['kategori'])
             ];
 
-            $this->model("KategoriModel")->update($data);
+            $isSuccess =  $this->model("KategoriModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Kategori/edit/" . $data['id_kategori']);
     }
 
     // Method proses Delete Kategori
@@ -52,7 +62,12 @@ class Kategori extends Controller
     {
         $id = htmlspecialchars($id_kategori);
 
-        $this->model("KategoriModel")->delete($id);
+        $isSuccess =  $this->model("KategoriModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }

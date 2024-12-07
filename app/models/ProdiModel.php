@@ -36,7 +36,7 @@ class ProdiModel extends Connection
             $data['kode_prodi'],
             $data['nama_prodi']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -47,7 +47,7 @@ class ProdiModel extends Connection
             $data['nama_prodi'],
             $data['id_prodi']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id)
@@ -56,7 +56,7 @@ class ProdiModel extends Connection
         $params = array(
             $id
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
 
