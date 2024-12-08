@@ -21,9 +21,9 @@ class Juara extends Controller
 
             $isSuccess =  $this->model("JuaraModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -54,9 +54,9 @@ class Juara extends Controller
 
             $isSuccess =  $this->model("JuaraModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -71,9 +71,9 @@ class Juara extends Controller
 
         $isSuccess =  $this->model("JuaraModel")->delete($id);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
         }
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
