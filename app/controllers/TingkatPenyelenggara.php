@@ -18,9 +18,9 @@ class TingkatPenyelenggara extends Controller
 
             $isSuccess =  $this->model("TingkatPenyelenggaraModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 

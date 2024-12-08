@@ -15,11 +15,11 @@ class Dosen extends Controller
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Dosen/create");
     }
-    
+
     // Method proses Create Dosen
     public function store()
     {
-        
+
         $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
@@ -30,10 +30,10 @@ class Dosen extends Controller
             $isSuccess = $this->model("DosenModel")->store($data);
 
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Dosen/index");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
-            }  
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Dosen/index");
+            }
         }
         header("location:" . BASEURL . "/Dosen/create");
     }
@@ -46,19 +46,6 @@ class Dosen extends Controller
         $this->view("Admin/Dosen/edit", $data);
     }
 
-    public function delete($id_dosen)
-    {
-        $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_dosen);
-        $isSuccess =  $this->model("DosenModel")->delete($id);
-        if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
-        } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
-        }
-        header('location:' . BASEURL . '/Dosen/index');
-    }
-
     public function update()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -67,13 +54,27 @@ class Dosen extends Controller
             'nama' => htmlspecialchars($_POST['nama']),
             'id_dosen' => htmlspecialchars($_POST['id_dosen'])
         ];
-        $isSuccess =  $this->model("DosenModel")->update($data);
+        $isSuccess = $this->model("DosenModel")->update($data);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Dosen/index");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
+            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Dosen/index");
         }
         header('location:' . BASEURL . '/Dosen/edit/' . $data['id_dosen']);
     }
+
+    public function delete($id_dosen)
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $id = htmlspecialchars($id_dosen);
+        $isSuccess = $this->model("DosenModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+        }
+        header('location:' . BASEURL . '/Dosen/index');
+    }
+
 
 }

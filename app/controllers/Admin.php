@@ -27,6 +27,7 @@ class Admin extends Controller
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/administrasiData");
     }
+
     public function pengaturanPrestasi()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -39,6 +40,7 @@ class Admin extends Controller
 
         $this->view("Admin/pengaturanPrestasi", $data);
     }
+
     public function profil()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -70,9 +72,9 @@ class Admin extends Controller
         $isSuccess = $this->model("AdminModel")->store($data);
 
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/adminList");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/adminList");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/adminList");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/adminList");
         }
 
         header('location:' . BASEURL . '/Admin/create');
@@ -84,20 +86,6 @@ class Admin extends Controller
         $id = htmlspecialchars($id_admin);
         $data = $this->model("AdminModel")->getAdminById($id);
         $this->view("Admin/Admin/edit", $data);
-    }
-
-    public function delete($id_admin)
-    {
-        $this->checkRole("Super Admin");
-        $id = htmlspecialchars($id_admin);
-        $isSuccess = $this->model("AdminModel")->delete($id);
-
-        if ($isSuccess) {
-            Flasher::setFlash("Delete", "Data berhasil dihapus", "success");
-        } else {
-            Flasher::setFlash("Delete", "Data gagal dihapus", "error");
-        }
-        header('location:' . BASEURL . '/Admin/adminList');
     }
 
     public function update()
@@ -113,11 +101,35 @@ class Admin extends Controller
         $isSuccess = $this->model("AdminModel")->update($data);
 
         if ($isSuccess) {
-            Flasher::setFlash("Update", "Data berhasil diperbarui", "success", "Admin/adminList");
+            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/adminList");
         } else {
-            Flasher::setFlash("Update", "Data gagal diperbarui", "error", "Admin/adminList");
+            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/adminList");
         }
         header('location:' . BASEURL . '/Admin/edit/' . $data['id_admin']);
     }
+
+    public function delete($id_admin)
+    {
+        $this->checkRole("Super Admin");
+        $id = htmlspecialchars($id_admin);
+
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "question", "Admin/deleting/" . $id);
+
+        header('location:' . BASEURL . '/Admin/adminList');
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Super Admin");
+        $isSuccess = $this->model("AdminModel")->delete($id);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+        }
+        header('location:' . BASEURL . '/Admin/adminList');
+    }
+
 }
 ?>

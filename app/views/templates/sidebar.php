@@ -91,9 +91,9 @@ if ($_SESSION['user']['role'] == "Ketua Jurusan") { ?>
                     </a>
                 </li>
                 <li>
-                    <a href="<?= BASEURL; ?>/Kajur/profilKajur"
-                        class="flex items-center p-2 <?= strpos($currentUrl, '/Kajur/profilKajur') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
-                        <img src="../../../public/img/<?= strpos($currentUrl, '/Kajur/profilKajur') !== false ? 'User_circle (1)' : 'User_circle' ?>.png"
+                    <a href="<?= BASEURL; ?>/Kajur/profil"
+                        class="flex items-center p-2 <?= strpos($currentUrl, '/Kajur/profil') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                        <img src="../../../public/img/<?= strpos($currentUrl, '/Kajur/profil') !== false ? 'User_circle (1)' : 'User_circle' ?>.png"
                             alt="logo" class="w-5 h-5">
                         <span class="flex-1 ms-3 whitespace-nowrap">Lihat Profil</span>
                     </a>

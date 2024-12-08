@@ -58,9 +58,9 @@ class Mahasiswa extends Controller
             ];
             $isSuccess =  $this->model("MahasiswaModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
             }
         }
         header("location:" . BASEURL . "/Mahasiswa/create");
@@ -80,9 +80,9 @@ class Mahasiswa extends Controller
         $id = htmlspecialchars($id_mahasiswa);
         $isSuccess =  $this->model("MahasiswaModel")->delete($id);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
         }
         header('location:' . BASEURL . '/Mahasiswa/listMhs');
     }
@@ -106,9 +106,9 @@ class Mahasiswa extends Controller
             ];
             $isSuccess =  $this->model("MahasiswaModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
             }
         }
         header("location:" . BASEURL . "/Mahasiswa/edit/" . $_POST['id_mahasiswa']);

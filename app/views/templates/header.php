@@ -5,9 +5,11 @@
     <title>AchieveIT</title>
     <link rel="icon" href="../../../public/img/Logo_achieveIT.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../../public/css/style.css">
     <!-- <link href="../../../public/css/output.css" rel="stylesheet" /> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+     
     <script src="../../../public/js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="path-to-your-script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
