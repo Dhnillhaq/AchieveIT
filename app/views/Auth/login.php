@@ -45,10 +45,12 @@
 							echo '<span class="text-red-600 flex justift-center text-center">' . $data['message'] . '</span>';
 						}
 						?>
+
 						<div class="flex justify-between space-x-1">
 							<div class="justify-center">
-								<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
-								onclick="showPassword()">
+							<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
+								onclick="showPassword('password')">
+
 							<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 							</div>
 							
