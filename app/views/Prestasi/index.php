@@ -10,10 +10,10 @@
 	<!-- btn ekspor -->
 	<section class="flex justify-end pr-6">
 		<a href="<?= BASEURL; ?>/">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+			<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../public/img/Export_fill.png" alt="logo" class="w-5 h-5">
 				<p>ekspor</p>
-			</button>
+			</div>
 		</a>
 	</section>
 
@@ -26,13 +26,6 @@
 		</div>
 		<div class="flex right-0 space-x-2">
 			<div class="flex items-center">
-				<span class="">Lihat</span>
-				<select
-					class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="50">50</option>
-				</select>
 				<span class="">entri</span>
 			</div>
 			<div class="flex items-center">
