@@ -78,6 +78,17 @@
 			</thead>
 			<tbody class="text-gray-700">
 				<?php
+				// Periksa apakah data mahasiswa kosong
+				if (empty($data['prestasi'])) { ?>
+					<tr>
+						<td colspan="5" class="text-center py-10">
+							<img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" />
+							<p class="font-bold text-gray-500 mt-4">
+								Tidak ada data yang tersedia..
+							</p>
+						</td>
+					</tr>
+				<?php } else {
 				$no = 1;
 				foreach ($data['prestasi'] as $prestasi) { ?>
 					<tr>
@@ -95,7 +106,7 @@
 							</a>
 						</td>
 					</tr>
-				<?php }
+				<?php }}
 				?>
 
 			</tbody>

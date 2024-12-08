@@ -10,13 +10,19 @@ class PeranDosen extends Controller
 
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'peran' => htmlspecialchars($_POST['peran'])
             ];
-            $this->model("PeranDosenModel")->store($data);
+            $isSuccess =  $this->model("PeranDosenModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
+            }
         }
-        header("location:" . BASEURL . "/Dosen/index");
+        header("location:" . BASEURL . "/PeranDosen/create");
     }
 
     public function edit($id_peran)
@@ -28,18 +34,30 @@ class PeranDosen extends Controller
 
     public function delete($id_peranDosen)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_peranDosen);
-        $this->model("PeranDosenModel")->delete($id);
+        $isSuccess =  $this->model("PeranDosenModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
         header('location:' . BASEURL . '/Dosen/index');
     }
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         $data = [
             'id_peran' => htmlspecialchars($_POST['id_peran']),
             'peran' => htmlspecialchars($_POST['peran'])
         ];
-        $this->model("PeranDosenModel")->update($data);
-        header('location:' . BASEURL . '/Dosen/index');
+        $isSuccess =  $this->model("PeranDosenModel")->update($data);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
+        }
+        header('location:' . BASEURL . '/PeranDosen/edit/' . $data['id_peran']);
     }
 }

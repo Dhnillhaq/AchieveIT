@@ -16,10 +16,15 @@ class Prodi extends Controller
                 'nama_prodi' => htmlspecialchars($_POST['nama_prodi']),
             ];
 
-            $this->model("ProdiModel")->store($data);
+            $isSuccess =  $this->model("ProdiModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
 
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Prodi/create");
     }
 
     public function edit($id_prodi)
@@ -34,6 +39,7 @@ class Prodi extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -41,17 +47,28 @@ class Prodi extends Controller
                 'nama_prodi' => htmlspecialchars($_POST['nama_prodi'])
             ];
 
-            $this->model("ProdiModel")->update($data);
+            $isSuccess =  $this->model("ProdiModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
 
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Prodi/edit");
     }
 
     public function delete($id_prodi)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_prodi);
 
-        $this->model("ProdiModel")->delete($id);
+        $isSuccess =  $this->model("ProdiModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
 
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }

@@ -12,16 +12,22 @@ class Juara extends Controller
     // Method proses Create Juara
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'juara' => htmlspecialchars($_POST['juara']),
                 'poin' => htmlspecialchars($_POST['poin']),
             ];
 
-            $this->model("JuaraModel")->store($data);
+            $isSuccess =  $this->model("JuaraModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Juara/create");
     }
 
 
@@ -38,6 +44,7 @@ class Juara extends Controller
     // Method proses Update Juara
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_juara' => htmlspecialchars($_POST['id_juara']),
@@ -45,19 +52,29 @@ class Juara extends Controller
                 'poin' => htmlspecialchars($_POST['poin'])
             ];
 
-            $this->model("JuaraModel")->update($data);
+            $isSuccess =  $this->model("JuaraModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Juara/edit/" . $data['id_juara']);
     }
 
     // Method proses Delete Juara
     public function delete($id_juara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_juara);
 
-        $this->model("JuaraModel")->delete($id);
-
+        $isSuccess =  $this->model("JuaraModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
 

@@ -7,35 +7,69 @@ class Auth extends Controller
 
     public function login()
     {
-        $this->view('Auth/login');
+        $data = [];
+
+        if (isset($_POST["submit"])) {       
+            $this->usernameInp = htmlspecialchars($_POST["username"]);
+            $this->passwordInp = htmlspecialchars($_POST["password"]);
+    
+            if ($this->isSuperAdmin()) {
+                $this->setSession();
+                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Admin/index");
+            } else if ($this->isAdmin()) {
+                $this->setSession();
+                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Admin/index");
+            } else if ($this->isKajur()) {
+                $this->setSession();
+                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Kajur/index");
+            } else if ($this->isMahasiswa()) {
+                $this->setSession();
+                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['nama'], "success", "Mahasiswa/index");
+            } else {
+                $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
+                Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
+            }
+        }
+
+        $this->view('Auth/login', $data);
     }
 
-    public function isLogin()
+    public function pageNotFound()
+    {
+        if ($_SESSION['user']['role'] == 'Super Admin') {
+            $data['url'] = 'Admin/index';
+        } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+            $data['url'] = 'Kajur/index';
+        } else {
+            $data['url'] = 'Mahasiswa/index';
+        }
+        $this->view('Auth/pageNotFound', $data);
+    }
+
+    // Method Halaman Registrasi
+    public function registrasi()
+    {
+        $this->view('Auth/registrasi');
+    }
+
+    // Method proses Registrasi
+    public function registration()
     {
         $this->usernameInp = htmlspecialchars($_POST["username"]);
         $this->passwordInp = htmlspecialchars($_POST["password"]);
-        $url = BASEURL;
+        $confirmPassword = htmlspecialchars($_POST["confirm_password"]);
 
-        if ($this->isSuperAdmin()) {
-            $this->setSession();
-            header("location:$url/Admin/superAdmin");
-            exit;
-        } else if ($this->isAdmin()) {
-            $this->setSession();
-            header("location:$url/Admin/");
-            exit;
-        } else if ($this->isKajur()) {
-            $this->setSession();
-            header("location:$url/Kajur/index");
-            exit;
-        } else if ($this->isMahasiswa()) {
-            $this->setSession();
-            header("location:$url/Mahasiswa/index");
-            exit;
-        } else {
-            header("location:$url/Auth/login");
-            exit;
+        if ($this->passwordInp != $confirmPassword) {
+            $data ['message'] = "Konfirmasi password tidak sesuai!";
+            $this->view('Auth/registrasi', $data);
         }
+        
+        if ($this->isRegistered()) {
+            $data ['message'] = "Username sudah terdaftar!";
+        } else {
+            $this->model("AuthModel")->register($this->usernameInp, $this->passwordInp);
+        }
+        
     }
 
     public function setSession()
@@ -95,11 +129,24 @@ class Auth extends Controller
     public function isMahasiswa()
     {
         $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
-        if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
-            return true;
-        } else {
-            return false;
+        if (!empty($this->userDB['0'])) {
+            if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
+    }
+
+    // Method check apakah sudah terdaftar
+    public function isRegistered()
+    {
+        $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
+        if (!empty($this->userDB['0'])) {
+            return true;
+        }
+        return false;
     }
 
     public function changePass()
@@ -109,8 +156,7 @@ class Auth extends Controller
 
     public function deleteSession()
     {
-        session_unset();
-        session_destroy();
+        unset($_SESSION['user']);
         header("location:" . BASEURL . '/Auth/login');
     }
 }

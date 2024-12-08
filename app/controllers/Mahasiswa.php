@@ -14,12 +14,6 @@ class Mahasiswa extends Controller
         $this->view('Mahasiswa/index', $data);
     }
 
-    public function formPrestasi()
-    {
-        $this->checkRole("Mahasiswa");
-        $this->view('Mahasiswa/formPrestasi');
-    }
-
     public function prestasiSaya()
     {
         $this->checkRole("Mahasiswa");
@@ -41,13 +35,14 @@ class Mahasiswa extends Controller
 
     public function create()
     {
-        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->checkRole("Admin", "Super Admin");
+        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view("Admin/Mahasiswa/create", $data);
     }
-    
+
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -61,11 +56,16 @@ class Mahasiswa extends Controller
                 'email' => htmlspecialchars($_POST['email']),
                 'password' => htmlspecialchars($_POST['password'])
             ];
-            $this->model("MahasiswaModel")->store($data);
+            $isSuccess =  $this->model("MahasiswaModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Mahasiswa/create");
     }
-    
+
     public function edit($id_mahasiswa)
     {
         $this->checkRole("Admin", "Super Admin");
@@ -73,16 +73,23 @@ class Mahasiswa extends Controller
         $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view("Admin/Mahasiswa/edit", $data);
     }
-    
+
     public function delete($id_mahasiswa)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_mahasiswa);
-        $this->model("MahasiswaModel")->delete($id);
+        $isSuccess =  $this->model("MahasiswaModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
         header('location:' . BASEURL . '/Mahasiswa/listMhs');
     }
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_prodi' => htmlspecialchars($_POST['id_prodi']),
@@ -97,9 +104,14 @@ class Mahasiswa extends Controller
                 'password' => htmlspecialchars($_POST['password']),
                 'id_mahasiswa' => htmlspecialchars($_POST['id_mahasiswa'])
             ];
-            $this->model("MahasiswaModel")->update($data);
+            $isSuccess =  $this->model("MahasiswaModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            }
         }
-        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+        header("location:" . BASEURL . "/Mahasiswa/edit/" . $_POST['id_mahasiswa']);
     }
 
     public function listMhs()
@@ -115,6 +127,21 @@ class Mahasiswa extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Mahasiswa/show");
+    }
+
+    public function getSelectedMahasiswa()
+    {
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nim = htmlspecialchars($_POST['nim']);
+
+            $data = [
+                'selectedMahasiswa' => $this->model("MahasiswaModel")->getMahasiswaByNim($nim)
+            ];
+
+            echo json_encode($data);
+        }
     }
 }
 ?>

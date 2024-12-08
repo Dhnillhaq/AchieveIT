@@ -28,14 +28,17 @@ class PrestasiModel extends Connection
     public function getPrestasiByNim($nim)
     {
         $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?";
-        $params = array(
-            $nim
-        );
+        $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+        $data = [];
+
+        if ($result != false) {
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
         }
+
         return $data;
     }
 
@@ -43,12 +46,48 @@ class PrestasiModel extends Connection
     public function getDetailPrestasi($id)
     {
         $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = ?";
-        $params = array(
-            $id
-        );
+        $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataMahasiswa($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataMahasiswa @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataDosen($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataDosen @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getDetailPrestasiDataPoin($id)
+    {
+        $stmt = "EXEC usp_GetDetailPrestasiDataPoin @id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
 
         return $data;
     }
@@ -74,15 +113,55 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function searchPrestasi($keyword)
+    public function getGrafikPrestasi(){
+        
+    }
+
+    public function getTahunPrestasi()
     {
-        $stmt = "SELECT m.nim, m.nama, p.nama_prodi, m.total_poin
-            FROM mahasiswa m
-            JOIN program_studi p ON m.id_prodi = p.id_prodi
-            WHERE nama LIKE '%$keyword%' OR nim LIKE'%$keyword%'
-            ORDER BY total_poin DESC;";
+        $stmt = "SELECT
+                DISTINCT YEAR(tanggal_selesai_kompetisi) as tahun
+                FROM prestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+            // $data[] = self::getGrafikPertahun("Kategori", $row['tahun']);
+        }
+        return $data;
+
+    }
+
+    public function getGrafikDiagramLingkaran($type = "Kategori")
+    {
+        $stmt = "EXEC usp_GetAnalisisPrestasi @type = ?;";
+        $params = array($type);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getGrafikPerTahun($type = "kategori")
+    {
+        $stmt = "EXEC usp_GetAnalisisPrestasiPerTahun @type = ?;";
+        $params = array($type);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+    public function getGrafikPerBulan($type = "kategori", $year = "2024")
+    {
+        $stmt = "EXEC usp_GetAnalisisPrestasiPerBulan @tahun = ?, @type = ?;";
+        $params = array($year, $type );
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;

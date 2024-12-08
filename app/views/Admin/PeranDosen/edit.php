@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/Admin/administrasiData">
+		<a href="<?= BASEURL; ?>/Dosen/index">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -29,7 +29,7 @@
 				<!-- nama -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Peran<span
 						class="text-red-600">*</span></label>
-				<input type="text" value="<?= $data['peran'] ?>" name="peran"
+				<input type="text" value="<?= $data['peran'] ?>" name="peran" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 

@@ -11,15 +11,21 @@ class Kategori extends Controller
     // Method proses Create Kategori
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'kategori' => htmlspecialchars($_POST['kategori'])
             ];
 
-            $this->model("KategoriModel")->store($data);
+            $isSuccess =  $this->model("KategoriModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Kategori/create");
     }
 
     public function edit($id_kategori)
@@ -35,24 +41,36 @@ class Kategori extends Controller
     // Method proses Update Kategori
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_kategori' => htmlspecialchars($_POST['id_kategori']),
                 'kategori' => htmlspecialchars($_POST['kategori'])
             ];
 
-            $this->model("KategoriModel")->update($data);
+            $isSuccess =  $this->model("KategoriModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/Kategori/edit/" . $data['id_kategori']);
     }
 
     // Method proses Delete Kategori
     public function delete($id_kategori)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_kategori);
 
-        $this->model("KategoriModel")->delete($id);
+        $isSuccess =  $this->model("KategoriModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+        }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }

@@ -45,14 +45,15 @@ class AdminModel extends Connection
     {
         $stmt = "INSERT INTO admin(nip, nama, role, password) VALUES(?, ?, ?, ?)";
         $params = array($data['nip'], $data['nama'], $data['role'], $data['password']);
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
+    
     public function delete($id_admin)
     {
         $stmt = "DELETE FROM admin WHERE id_admin = ?";
         $params = array($id_admin);
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -65,7 +66,7 @@ class AdminModel extends Connection
             $data['password'],
             $data['id_admin']
         );
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
 ?>

@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/Admin/administrasiData">
+		<a href="<?= BASEURL; ?>/Admin/pengaturanPrestasi">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -30,7 +30,7 @@
 				<!-- kategori -->
 				<label for="kategori" class="block text-gray-700 font-medium pt-6">Kategori <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="kategori" id="kategori"
+				<input type="text" name="kategori" id="kategori" required
 					class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			</div>
@@ -39,24 +39,19 @@
 		<!-- btn -->
 		<section class="flex space-x-4 justify-start pl-4 pb-6">
 			<div class="justify-center p-2">
-				<a href="<?= BASEURL; ?>/">
 					<button type="submit" name="submit"
 						class="flex items-center space-x-2 py-2 px-6 text-white bg-[#34C759] rounded-lg w-auto">
 						<img src="../../../../public/img/simpan.png" alt="logo" class="w-5 h-5">
 						<p>Simpan</p>
 					</button>
-				</a>
 			</div>
 
 			<div class="justify-center p-2">
-				<a href="<?= BASEURL; ?>/">
 					<button type="reset"
 						class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 						<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 						<p>Reset</p>
 					</button>
-
-				</a>
 			</div>
 		</section>
 	</form>

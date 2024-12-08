@@ -5,12 +5,19 @@ class Admin extends Controller
     public function index()
     {
         $this->checkRole("Admin", "Super Admin");
-        $data['statistik'] = $this->model('PrestasiModel')->getStatistikPrestasi();
-        if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum($_POST['keyword'], $_POST['limit'], $_POST['year']);
-        } else {
-            $data['prestasi'] = $this->model("PrestasiModel")->printPrestasiUmum();
-        }
+        $data = [
+            'prestasi' => $this->model("PrestasiModel")->printPrestasiUmum(),
+            'statistik' => $this->model('PrestasiModel')->getStatistikPrestasi(),
+            'lingkaran' => $this->model('PrestasiModel')->getGrafikDiagramLingkaran(),
+            'tahun' => $this->model('PrestasiModel')->getTahunPrestasi(),
+            'kategori' => $this->model('KategoriModel')->getKategori(),
+            'perTahun' => $this->model('PrestasiModel')->getGrafikPertahun(),
+            'perBulan' => $this->model('PrestasiModel')->getGrafikPerBulan(),
+        ];
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
         $this->view('Admin/index', $data);
 
     }
@@ -59,8 +66,16 @@ class Admin extends Controller
             "role" => htmlspecialchars($_POST['role']),
             "password" => htmlspecialchars($_POST['password'])
         ];
-        $this->model("AdminModel")->store($data);
-        header("location:" . BASEURL . "/Admin/adminList");
+
+        $isSuccess = $this->model("AdminModel")->store($data);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/adminList");
+        } else {
+            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/adminList");
+        }
+
+        header('location:' . BASEURL . '/Admin/create');
     }
 
     public function edit($id_admin)
@@ -75,12 +90,19 @@ class Admin extends Controller
     {
         $this->checkRole("Super Admin");
         $id = htmlspecialchars($id_admin);
-        $this->model("AdminModel")->Delete($id);
+        $isSuccess = $this->model("AdminModel")->delete($id);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Delete", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Delete", "Data gagal dihapus", "error");
+        }
         header('location:' . BASEURL . '/Admin/adminList');
     }
 
     public function update()
     {
+        $this->checkRole("Super Admin");
         $data = [
             'nip' => htmlspecialchars($_POST['nip']),
             'nama' => htmlspecialchars($_POST['nama']),
@@ -88,8 +110,14 @@ class Admin extends Controller
             'password' => htmlspecialchars($_POST['password']),
             'id_admin' => htmlspecialchars($_POST['id_admin'])
         ];
-        $this->model("AdminModel")->update($data);
-        header('location:' . BASEURL . '/Admin/adminList');
+        $isSuccess = $this->model("AdminModel")->update($data);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Update", "Data berhasil diperbarui", "success", "Admin/adminList");
+        } else {
+            Flasher::setFlash("Update", "Data gagal diperbarui", "error", "Admin/adminList");
+        }
+        header('location:' . BASEURL . '/Admin/edit/' . $data['id_admin']);
     }
 }
 ?>

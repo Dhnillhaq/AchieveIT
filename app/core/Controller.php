@@ -7,7 +7,7 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/templates/header.php';
-        if ($view != 'index' && $view != 'Auth/login') {
+        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/pageNotFound') {
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';
@@ -25,10 +25,9 @@ class Controller
                 require_once $modelFile;
                 $this->models[$model] = new $model();
             } else {
-                // error handling
+                header("location:".BASEURL."/Auth/pageNotFound");
             }
         }
-
         return $this->models[$model];
     }
 
@@ -47,15 +46,7 @@ class Controller
         }
 
         if (!$hasAccess) {
-            if ($_SESSION['user']['role'] == 'Super Admin') {
-                $selectedRole = 'Admin';
-            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-                $selectedRole = 'Kajur';
-            } else {
-                $selectedRole = $_SESSION['user']['role'];
-            }
-
-            header('location:' . BASEURL . '/' . $selectedRole);
+            header('location:' . BASEURL . '/Auth/pageNotFound');
         }
     }
 

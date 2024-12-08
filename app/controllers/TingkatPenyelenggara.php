@@ -9,20 +9,27 @@ class TingkatPenyelenggara extends Controller
     }
     public function store()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'tingkat_penyelenggara' => htmlspecialchars($_POST['tingkat_penyelenggara']),
                 'poin' => htmlspecialchars($_POST['poin']),
             ];
 
-            $this->model("TingkatPenyelenggaraModel")->store($data);
+            $isSuccess =  $this->model("TingkatPenyelenggaraModel")->store($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/TingkatPenyelenggara/create");
     }
 
     public function edit($id_tingkat_penyelenggara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
@@ -33,6 +40,7 @@ class TingkatPenyelenggara extends Controller
 
     public function update()
     {
+        $this->checkRole("Admin", "Super Admin");
         if (isset($_POST['submit'])) {
             $data = [
                 'id_tingkat_penyelenggara' => htmlspecialchars($_POST['id_tingkat_penyelenggara']),
@@ -40,17 +48,28 @@ class TingkatPenyelenggara extends Controller
                 'poin' => htmlspecialchars($_POST['poin'])
             ];
 
-            $this->model("TingkatPenyelenggaraModel")->update($data);
+            $isSuccess =  $this->model("TingkatPenyelenggaraModel")->update($data);
+            if ($isSuccess) {
+                Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
+            } else {
+                Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
+            }
         }
 
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        header("location:" . BASEURL . "/TingkatPenyelenggara/edit/" . $data['id_tingkat_penyelenggara']);
     }
 
     public function delete($id_tingkat_penyelenggara)
     {
+        $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
-        $this->model("TingkatPenyelenggaraModel")->delete($id);
+        $isSuccess =  $this->model("TingkatPenyelenggaraModel")->delete($id);
+        if ($isSuccess) {
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+        }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }

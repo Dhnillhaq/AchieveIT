@@ -34,14 +34,13 @@ class MahasiswaModel extends Connection
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = '$nim';";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
+        $params = [
+            $nim
+        ];
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-
-        return $data;
+        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   
@@ -91,7 +90,7 @@ class MahasiswaModel extends Connection
             $data['password']
         );
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function delete($id_mahasiswa)
@@ -99,7 +98,7 @@ class MahasiswaModel extends Connection
         $stmt = "DELETE FROM mahasiswa WHERE id_mahasiswa = ?";
         $params = array($id_mahasiswa);
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 
     public function update($data)
@@ -131,7 +130,7 @@ class MahasiswaModel extends Connection
             $data['id_mahasiswa']
         );
 
-        sqlsrv_query($this->conn, $stmt, $params);
+        return sqlsrv_query($this->conn, $stmt, $params);
     }
 }
 ?>

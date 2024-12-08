@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/">
+		<a href="<?= BASEURL; ?>/Dosen/index">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -30,13 +30,13 @@
 			<!-- nama -->
 			<label for="nama" class="block text-gray-700 font-medium pt-6">Nama <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="nama" id="nama"
+			<input type="text" placeholder="" name="nama" id="nama" required
 				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 			<!-- NIP -->
 			<label for="nip" class="block text-gray-700 font-medium pt-6">NIP <span
 					class="text-red-600">*</span></label>
-			<input type="text" placeholder="" name="nip" id="nip"
+			<input type="text" placeholder="" name="nip" id="nip" required
 				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 
 		</div>
@@ -51,14 +51,11 @@
 				</button>
 		</div>
 
-		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+		<div class="justify-center p-2">			
+				<button type="reset" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 					<img src="../../../../public/img/Refresh.png" alt="logo" class="w-5 h-5">
 					<p>Reset</p>
 				</button>
-
-			</a>
 		</div>
 	</section>
 	</form>
