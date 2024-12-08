@@ -46,6 +46,9 @@
 						</div>
 						<button type="submit" name="submit"
 							class="font-bold mt-4 w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Masuk</button>
+							<div class="flex justify-start text-blue-700 space-x-1">
+								<span>Belum punya akun? <a href="#" class="hover:underline">Daftar</a></span>
+							</div>
 					</form>
 				</div>
 			</div>
