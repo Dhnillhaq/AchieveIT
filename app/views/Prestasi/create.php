@@ -18,7 +18,8 @@
 				<!-- kategori -->
 				<label for="nama" class="block text-gray-700 font-medium mt-6">Kategori Prestasi <span
 						class="text-red-600">*</span></label>
-				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm" name="kategori">
+				<select name="kategori" class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+					<option>Pilih Kategori</option>
 					<?php
 					foreach ($data['kategori'] as $kategori) {
 						echo "<option value=" . $kategori['id_kategori'] . ">{$kategori['kategori']}</option>";
@@ -31,9 +32,10 @@
 						class="text-red-600">*</span></label>
 				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
 					name="tingkat_kompetisi">
+					<option>Pilih Tingkat Kompetisi</option>
 					<?php
 					foreach ($data['tingkatKompetisi'] as $tingkatKompetisi) {
-						echo "<option value=" . $tingkatKompetisi['id_tingkatKompetisi'] . ">{$tingkatKompetisi['tingkat_kompetisi']}</option>";
+						echo "<option value=" . $tingkatKompetisi['id_tingkat_kompetisi'] . ">{$tingkatKompetisi['tingkat_kompetisi']}</option>";
 					}
 					?>
 				</select>
@@ -43,9 +45,10 @@
 						class="text-red-600">*</span></label>
 				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm"
 					name="tingkat_penyelenggara">
+					<option>Pilih Tingkat Penyelenggara</option>
 					<?php
 					foreach ($data['tingkatPenyelenggara'] as $tingkatPenyelenggara) {
-						echo "<option value=" . $tingkatPenyelenggara['id_tingkatPenyelenggara'] . ">{$tingkatPenyelenggara['tingkat_penyelenggara']}</option>";
+						echo "<option value=" . $tingkatPenyelenggara['id_tingkat_penyelenggara'] . ">{$tingkatPenyelenggara['tingkat_penyelenggara']}</option>";
 					}
 					?>
 				</select>
@@ -53,38 +56,40 @@
 				<!-- nama kompetisi -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Nama Kompetisi <span
 						class="text-red-600">*</span></label>
-				<input type="text" name="nama_kompetisi"
+				<input type="text" name="nama_kompetisi" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal mulai -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">tanggal Mulai Kompetisi <span
 						class="text-red-600">*</span></label>
-				<input type="date"
+				<input type="date" name="tanggal_mulai" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal selesai -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">tanggal Selesai Kompetisi
 					<span class="text-red-600">*</span></label>
-				<input type="date"
+				<input type="date" name="tanggal_selesai" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- penyelenggara -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Penyelenggara Kompetisi <span
 						class="text-red-600">*</span></label>
-				<input type="text"
+				<input type="text" name="penyelenggara" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 
 				<!-- tempat kompetisi -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tempat Kompetisi <span
 						class="text-red-600">*</span></label>
-				<input type="text"
+				<input type="text" name="tempat_kompetisi" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- juara -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Juara <span
 						class="text-red-600">*</span></label>
-				<select class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+				<select name="juara" required
+					class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+					<option>Pilih Juara</option>
 					<?php
 					foreach ($data['juara'] as $juara) {
 						echo "<option value=" . $juara['id_juara'] . ">{$juara['juara']}</option>";
@@ -114,7 +119,7 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-1" name="surat_tugas"
+						<input type="file" class="hidden" id="file-input-1" name="surat_tugas" required
 							onchange="showFileName(this, 1)">
 					</label>
 				</div>
@@ -142,7 +147,7 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-2" name="poster"
+						<input type="file" class="hidden" id="file-input-2" name="poster" required
 							onchange="showFileName(this, 2)">
 					</label>
 				</div>
@@ -171,7 +176,7 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-3" name="foto_juara"
+						<input type="file" class="hidden" id="file-input-3" name="foto_juara" required
 							onchange="showFileName(this, 3)">
 					</label>
 				</div>
@@ -201,7 +206,7 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-4" name="sertifikat"
+						<input type="file" class="hidden" id="file-input-4" name="sertifikat" required
 							onchange="showFileName(this, 4)">
 					</label>
 				</div>
@@ -265,23 +270,22 @@
 							</tr>
 						</thead>
 						<!-- data dummy -->
-						<tbody id="table-body">
+						<tbody id="table-body-mhs">
 							<!-- Row 1 -->
 							<tr>
 								<td class="py-2 px-4 border border-blue-950">1</td>
 								<td class="py-2 px-4 border border-blue-950">
-									<select name="nim[]" onchange="showMhsName()"
-										class="w-full border rounded px-2 py-1">
+									<select name="mahasiswa[]" required class="w-full border rounded px-2 py-1">
 										<option>Pilih Mahasiswa</option>
 										<?php
-										foreach ($data['mahasiswa']['all'] as $mahasiswa) {
+										foreach ($data['mahasiswa'] as $mahasiswa) {
 											echo "<option value='{$mahasiswa['id_mahasiswa']}'>{$mahasiswa['nim']} - {$mahasiswa['nama']}</option>";
 										}
 										?>
 									</select>
-								</td>	
+								</td>
 								<td class="py-2 px-4 border border-blue-950">
-									<select name="peran_mhs[]" class="w-full border rounded px-2 py-1">
+									<select name="peran_mhs[]" required class="w-full border rounded px-2 py-1">
 										<option>Pilih Peran</option>
 										<?php
 										foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
@@ -291,7 +295,7 @@
 									</select>
 								</td>
 								<td class="py-2 px-4 border border-blue-950 text-center">
-									<button type="button" id="delete-mhs-row" class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
 										<img src="../../../public/img/Trash.png" alt="logo" class="">
 									</button>
 								</td>
@@ -335,21 +339,22 @@
 								</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="table-body-dsn">
 							<!-- Row 1 -->
 							<tr>
 								<td class="py-2 px-4 border border-blue-950">1</td>
 								<td class="py-2 px-4 border border-blue-950">
-									<select class="w-full border rounded px-2 py-1">
+									<select name="dosen[]" required class="w-full border rounded px-2 py-1">
+										<option>Pilih Dosen Pembimbing</option>
 										<?php
 										foreach ($data['dosen'] as $dosen) {
-											echo "<option value='{$dosen['id_dosen']}'>{$dosen['nama']}</option>";
+											echo "<option value='{$dosen['id_dosen']}'>{$dosen['nip']} - {$dosen['nama']}</option>";
 										}
 										?>
 									</select>
 								</td>
 								<td class="py-2 px-4 border border-blue-950">
-									<select class="w-full border rounded px-2 py-1">
+									<select name="peran_dsn[]" required class="w-full border rounded px-2 py-1">
 										<?php
 										foreach ($data['peranDosen'] as $peranDsn) {
 											echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
@@ -358,7 +363,7 @@
 									</select>
 								</td>
 								<td class="py-2 px-4 border border-blue-950 text-center">
-									<button type="button" class="bg-[#FF3B30] py-2 px-2 rounded-md">
+									<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
 										<img src="../../../public/img/Trash.png" alt="logo" class="">
 									</button>
 								</td>
@@ -369,10 +374,9 @@
 
 				<!-- btn tambah -->
 				<section class="justify-center p-4">
-					<a href="<?= BASEURL; ?>/">
-						<button type="button" class="py-2 px-6 text-white bg-[#132145] rounded-lg">+ Tambah
-							Pembimbing</button>
-					</a>
+					<button type="button" id="add-dsn" class="py-2 px-6 text-white bg-[#132145] rounded-lg">
+						+ Tambah Pembimbing
+					</button>
 				</section>
 			</div>
 		</section>
@@ -400,6 +404,95 @@
 
 <script>
 
+	document.addEventListener("DOMContentLoaded", () => {
+
+		const tableBodyMhs = document.getElementById("table-body-mhs");
+
+		document.getElementById("add-mhs").addEventListener("click", () => {
+			const newRowMhs = `
+		<tr>
+			<td class="py-2 px-4 border border-blue-950">${tableBodyMhs.children.length + 1}</td>
+			<td class="py-2 px-4 border border-blue-950">
+				<select name="mahasiswa[]" onchange="showMhsName()"
+					class="w-full border rounded px-2 py-1">
+					<option>Pilih Mahasiswa</option>
+					<?php
+					foreach ($data['mahasiswa'] as $mahasiswa) {
+						echo "<option value='{$mahasiswa['id_mahasiswa']}'>{$mahasiswa['nim']} - {$mahasiswa['nama']}</option>";
+					}
+					?>
+				</select>
+			</td>
+			<td class="py-2 px-4 border border-blue-950">
+				<select name="peran_mhs[]" class="w-full border rounded px-2 py-1">
+					<option>Pilih Peran</option>
+					<?php
+					foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
+						echo "<option value='{$peranMahasiswa['id_peran']}'>{$peranMahasiswa['peran']}</option>";
+					}
+					?>
+				</select>
+			</td>
+			<td class="py-2 px-4 border border-blue-950 text-center">
+				<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
+					<img src="../../../public/img/Trash.png" alt="logo" class="">
+				</button>
+			</td>
+		</tr>
+	`;
+			tableBodyMhs.insertAdjacentHTML("beforeend", newRowMhs);
+		});
+
+		tableBodyMhs.addEventListener("click", (event) => {
+			if (event.target.closest(".delete-row")) {
+				const row = event.target.closest("tr");
+				row.parentElement.removeChild(row);
+			}
+		});
+
+		const tableBodyDsn = document.getElementById("table-body-dsn");
+
+		document.getElementById("add-dsn").addEventListener("click", () => {
+			const newRowDsn = `
+		<tr>
+			<td class="py-2 px-4 border border-blue-950">${tableBodyDsn.children.length + 1}</td>
+			<td class="py-2 px-4 border border-blue-950">
+				<select name="dosen[]" class="w-full border rounded px-2 py-1">
+					<option>Pilih Dosen Pembimbing</option>
+					<?php
+					foreach ($data['dosen'] as $dosen) {
+						echo "<option value='{$dosen['id_dosen']}'>{$dosen['nip']} - {$dosen['nama']}</option>";
+					}
+					?>
+				</select>
+			</td>
+			<td class="py-2 px-4 border border-blue-950">
+				<select name="peran_dsn[]" class="w-full border rounded px-2 py-1">
+				<option>Pilih Peran</option>
+					<?php
+					foreach ($data['peranDosen'] as $peranDsn) {
+						echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
+					}
+					?>
+				</select>
+			</td>
+			<td class="py-2 px-4 border border-blue-950 text-center">
+				<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
+					<img src="../../../public/img/Trash.png" alt="logo" class="">
+				</button>
+			</td>
+		</tr>
+	`;
+			tableBodyDsn.insertAdjacentHTML("beforeend", newRowDsn);
+		});
+
+		tableBodyDsn.addEventListener("click", (event) => {
+			if (event.target.closest(".delete-row")) {
+				const row = event.target.closest("tr");
+				row.parentElement.removeChild(row);
+			}
+		});
+	})
 
 	function showFileName(input, id) {
 		const fileNameElement = document.getElementById(`file-name-${id}`);

@@ -1,7 +1,8 @@
 <?php
 class JuaraModel extends Connection
 {
-    public function getJuara(){   
+    public function getJuara()
+    {
 
         $stmt = "SELECT * FROM juara";
         $result = sqlsrv_query($this->conn, $stmt);

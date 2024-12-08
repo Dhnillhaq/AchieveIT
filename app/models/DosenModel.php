@@ -1,8 +1,6 @@
 <?php
 class DosenModel extends Connection
 {
-     
-
     // Get All Dosen
     public function getDosen()
     {
