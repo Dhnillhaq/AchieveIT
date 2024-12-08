@@ -8,9 +8,11 @@
 	</section>
 
 	<!-- btn edit -->
+	<!-- KALO VALID WARNANYA ABU-ABU "bg-[#757575]" -->
+	<!-- halaman edit bisa diakses ketika status = invalid / not validated -->
 	<section class="flex justify-end pr-6">
 		<a href="<?= BASEURL; ?>/prestasi/edit">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145]  rounded-lg w-auto">
 				<img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
 				<p>edit</p>
 			</button>
@@ -127,9 +129,6 @@
 							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								No
 							</th>
-							<th class="w-1/5 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								NIM
-							</th>
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Mahasiswa
 							</th>
@@ -179,9 +178,6 @@
 							</th>
 							<th class="w-1/3 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Pembimbing
-							</th>
-							<th class="w-1/5 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								NIP
 							</th>
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Peran Pembimbing

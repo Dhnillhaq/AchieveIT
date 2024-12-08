@@ -183,8 +183,7 @@
 			</div>
 
 			<!-- proposal -->
-			<label for="nama" class="block text-gray-700 font-medium pt-6">File Proposal <span
-					class="text-red-600">*</span></label>
+			<label for="nama" class="block text-gray-700 font-medium pt-6">File Proposal</label>
 			<div class="flex items-center ">
 				<label
 					class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
@@ -225,9 +224,6 @@
 							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								No
 							</th>
-							<th class="w-1/5 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								NIM
-							</th>
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Mahasiswa
 							</th>
@@ -246,12 +242,11 @@
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">2341720001</option>
-									<option value="2021002">2341720002</option>
-									<option value="2021003">2341720003</option>
+									<option value="2021001">2341720001 - Haikal</option>
+									<option value="2021002">2341720002 - Haikal</option>
+									<option value="2021003">2341720003 - Haikal</option>
 								</select>
 							</td>
-							<td class="py-2 px-4 border border-blue-950">Haikal</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
 									<option value="Ketua">Ketua</option>
@@ -266,19 +261,18 @@
 						</tr>
 						<!-- Row 2 -->
 						<tr>
-							<td class="py-2 px-4 border border-blue-950">2</td>
+							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">2341720001</option>
-									<option value="2021002">2341720002</option>
-									<option value="2021003">2341720003</option>
+									<option value="2021001">2341720001 - Haikal</option>
+									<option value="2021002">2341720002 - Haikal</option>
+									<option value="2021003">2341720003 - Haikal</option>
 								</select>
 							</td>
-							<td class="py-2 px-4 border border-blue-950">Restu</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="Anggota">Anggota</option>
 									<option value="Ketua">Ketua</option>
+									<option value="Anggota">Anggota</option>
 								</select>
 							</td>
 							<td class="py-2 px-4 border border-blue-950 text-center">
@@ -315,11 +309,8 @@
 							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								No
 							</th>
-							<th class="w-1/3 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								Pembimbing
-							</th>
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								NIP
+								Pembimbing
 							</th>
 							<th class="w-1/3 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Peran Pembimbing
@@ -335,12 +326,11 @@
 							<td class="py-2 px-4 border border-blue-950">1</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
-									<option value="2021001">Dimas Wahyu Wibowo, S.T., M.T.</option>
-									<option value="2021002">Dimas Wahyu Wibowo, S.T., M.T.</option>
-									<option value="2021003">Dimas Wahyu Wibowo, S.T., M.T.</option>
+									<option value="2021001">198406102008121004 - Dimas Wahyu Wibowo, S.T., M.T.</option>
+									<option value="2021002">198406102008121004 - Dimas Wahyu Wibowo, S.T., M.T.</option>
+									<option value="2021003">198406102008121004 - Dimas Wahyu Wibowo, S.T., M.T.</option>
 								</select>
 							</td>
-							<td class="py-2 px-4 border border-blue-950">198406102008121004</td>
 							<td class="py-2 px-4 border border-blue-950">
 								<select class="w-full border rounded px-2 py-1">
 									<option>Melakukan pembinaan kegiatan mahasiswa di bidang akademik (PA) dan
