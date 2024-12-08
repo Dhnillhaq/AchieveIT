@@ -17,9 +17,9 @@ class PeranDosen extends Controller
             ];
             $isSuccess =  $this->model("PeranDosenModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Dosen/index");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Dosen/index");
             }
         }
         header("location:" . BASEURL . "/PeranDosen/create");
@@ -38,9 +38,9 @@ class PeranDosen extends Controller
         $id = htmlspecialchars($id_peranDosen);
         $isSuccess =  $this->model("PeranDosenModel")->delete($id);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
         }
         header('location:' . BASEURL . '/Dosen/index');
     }
@@ -54,9 +54,9 @@ class PeranDosen extends Controller
         ];
         $isSuccess =  $this->model("PeranDosenModel")->update($data);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Dosen/index");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Dosen/index");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Dosen/index");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Dosen/index");
         }
         header('location:' . BASEURL . '/PeranDosen/edit/' . $data['id_peran']);
     }

@@ -47,7 +47,7 @@
 						?>
 						<div class="flex justify-start space-x-1">
 							<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
-								onclick="showPassword()">
+								onclick="showPassword('password')">
 							<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 						</div>
 						<button type="submit" name="submit"
