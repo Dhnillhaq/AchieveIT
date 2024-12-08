@@ -25,11 +25,6 @@ class Flasher
                   confirmButtonText: 'Ya, " . $_SESSION['flash']['action'] . "!'
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    Swal.fire({
-                      title: 'Berhasil!',
-                      text: 'Data berhasil diperbarui.',
-                      icon: 'success'
-                    });
                     if ('" . $_SESSION['flash']['url'] . "' !== '') {
                     window.location.href = '" . BASEURL . "/" . $_SESSION['flash']['url'] . "';
                     }

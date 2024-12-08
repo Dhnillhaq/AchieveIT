@@ -76,6 +76,9 @@
 					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Juara
 					</th>
+					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+						Status
+					</th>
 					<th class="w-1/12 py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Poin
 					</th>
@@ -94,6 +97,11 @@
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
+						<td class="py-2 px-4 border border-blue-950">
+							<img src="../../public/img/Valid.png" alt="Icon Status" class="w-5 h-auto" />
+							<img src="../../public/img/invalid.png" alt="Icon Status" class="w-5 h-auto" />
+							<img src="../../public/img/notValidated.png" alt="Icon Status" class="w-5 h-auto" />
+						</td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
 						<td class="py-2 px-4 border border-blue-950">
 							<a href="<?= BASEURL; ?>/Prestasi/show/<?= $prestasi['id_prestasi'] ?>">
@@ -109,4 +117,33 @@
 			</tbody>
 		</table>
 	</section>
+	<!-- pagination -->
+        <section class="flex items-center justify-center py-2">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination bg-blue-50 p-3 rounded-lg border-blue-500">
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
 </section>

@@ -138,6 +138,35 @@
 					</tbody>
 				</table>
 </section>
+			<!-- pagination -->
+        <section class="flex items-center justify-center py-2">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination bg-blue-50 p-3 rounded-lg border-blue-500">
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link bg-blue-50 hover:bg-blue-100" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
 		</div>
 	</section>
 

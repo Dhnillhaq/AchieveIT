@@ -64,7 +64,16 @@ class TingkatPenyelenggara extends Controller
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_penyelenggara);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "TingkatPenyelenggara/deleting/" . $id);
+
+        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess =  $this->model("TingkatPenyelenggaraModel")->delete($id);
+        
         if ($isSuccess) {
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {

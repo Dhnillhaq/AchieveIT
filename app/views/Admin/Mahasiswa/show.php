@@ -74,8 +74,27 @@
 						<p class="text-[#757575]">Password</p>
 						<p class="font-semibold">******</p>
 					</div>
+
+					<div class="flex flex-col justify-start items-start pt-5">
+						<p class="text-[#757575]">Status Akun</p>
+						<p class="font-semibold">NOT VALIDATED</p>
+					</div>
 				</div>
 			</div>
+
+			<!-- Garis Horizontal -->
+        <div class="border-b border-1 border-gray-600 mt-10"></div>
+
+        <!-- Tombol -->
+		<p class="font-bold mt-4">Validasi Akun</p>
+        <div class="flex justify-start space-x-4 mt-2">
+            <button class="bg-green-500 text-white p-2 rounded-lg hover:bg-blue-600">
+                <img src="../../../../public/img/centang.png" alt="logo" class="w-7 h-7" />
+            </button>
+            <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600">
+                <img src="../../../../public/img/silang.png" alt="logo" class="w-7 h-7" />
+            </button>
+        </div>
 
 		</div>
 	</section>

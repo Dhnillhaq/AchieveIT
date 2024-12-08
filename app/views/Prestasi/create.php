@@ -207,8 +207,7 @@
 				</div>
 
 				<!-- proposal -->
-				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal <span
-						class="text-red-600">*</span>
+				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal 
 				</label>
 				<div class="flex items-center ">
 					<label
@@ -325,11 +324,8 @@
 								<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 									No
 								</th>
-								<th class="w-1/3 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-									Pembimbing
-								</th>
 								<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-									NIP
+									Pembimbing
 								</th>
 								<th class="w-1/3 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 									Peran Pembimbing
@@ -352,7 +348,6 @@
 										?>
 									</select>
 								</td>
-								<td class="py-2 px-4 border border-blue-950">198406102008121004</td>
 								<td class="py-2 px-4 border border-blue-950">
 									<select class="w-full border rounded px-2 py-1">
 										<?php

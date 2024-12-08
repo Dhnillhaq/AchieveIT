@@ -54,9 +54,9 @@ class Juara extends Controller
 
             $isSuccess =  $this->model("JuaraModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -69,11 +69,20 @@ class Juara extends Controller
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_juara);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Juara/deleting/" . $id);
+
+        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess =  $this->model("JuaraModel")->delete($id);
+
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
         }
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
