@@ -37,11 +37,20 @@ class PeranMahasiswa extends Controller
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_peran);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "PeranMahasiswa/deleting/" . $id);
+
+        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess =  $this->model("PeranMahasiswaModel")->delete($id);
+
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
         }
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
@@ -56,9 +65,9 @@ class PeranMahasiswa extends Controller
 
         $isSuccess =  $this->model("PeranMahasiswaModel")->update($data);
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
         }
         header('location:' . BASEURL . '/PeranMahasiswa/edit/' . $data['id_peran']);
     }
