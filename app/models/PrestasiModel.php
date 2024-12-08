@@ -126,7 +126,6 @@ class PrestasiModel extends Connection
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
-            // $data[] = self::getGrafikPertahun("Kategori", $row['tahun']);
         }
         return $data;
 

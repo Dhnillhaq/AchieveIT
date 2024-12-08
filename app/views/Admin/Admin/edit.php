@@ -55,7 +55,7 @@
 				class="placeholder-black border rounded-lg px-2 py-1.5 w-1/3 bg-white shadow-gray-400 shadow-sm" />
 			
 			<div class="flex justify-start space-x-1">
-				<input type="checkbox" placeholder="" class=" border rounded-lg" onclick="showPassword()" />
+				<input type="checkbox" placeholder="" class=" border rounded-lg" onclick="showPassword('password')" />
 				<label class="text-[#757575]" for="tampil-sandi">Tampilkan kata Sandi</label>
 			</div>
 			<input type="hidden" name="id_admin" value="<?=$data['id_admin']?>">
