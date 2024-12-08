@@ -67,11 +67,21 @@ class Dosen extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_dosen);
+
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Dosen/deleting/" . $id);
+
+        header('location:' . BASEURL . '/Dosen/index');
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess = $this->model("DosenModel")->delete($id);
+        
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
         }
         header('location:' . BASEURL . '/Dosen/index');
     }

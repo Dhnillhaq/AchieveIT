@@ -31,20 +31,7 @@ class PeranDosen extends Controller
         $data = $this->model("PeranDosenModel")->getPeranDosenById($id_peran);
         $this->view("Admin/PeranDosen/edit", $data);
     }
-
-    public function delete($id_peranDosen)
-    {
-        $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_peranDosen);
-        $isSuccess =  $this->model("PeranDosenModel")->delete($id);
-        if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
-        } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
-        }
-        header('location:' . BASEURL . '/Dosen/index');
-    }
-
+    
     public function update()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -54,10 +41,33 @@ class PeranDosen extends Controller
         ];
         $isSuccess =  $this->model("PeranDosenModel")->update($data);
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Dosen/index");
+            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Dosen/index");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Dosen/index");
+            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Dosen/index");
         }
         header('location:' . BASEURL . '/PeranDosen/edit/' . $data['id_peran']);
+    }
+    
+    public function delete($id_peranDosen)
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $id = htmlspecialchars($id_peranDosen);
+
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "PeranDosen/deleting/" . $id);
+
+        header('location:' . BASEURL . '/Dosen/index');
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $isSuccess =  $this->model("PeranDosenModel")->delete($id);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+        }
+        header('location:' . BASEURL . '/Dosen/index');
     }
 }

@@ -49,13 +49,13 @@ class Prodi extends Controller
 
             $isSuccess =  $this->model("ProdiModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
+                Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
             } else {
-                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
+                Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
             }
         }
 
-        header("location:" . BASEURL . "/Prodi/edit");
+        header('location:' . BASEURL . '/Prodi/edit/' . $data['id_prodi']);
     }
 
     public function delete($id_prodi)
@@ -63,11 +63,20 @@ class Prodi extends Controller
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_prodi);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Prodi/deleting/" . $id);
+
+        header("location:" . BASEURL . "/Mahasiswa/listMhs");
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess =  $this->model("ProdiModel")->delete($id);
+
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
         }
 
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
