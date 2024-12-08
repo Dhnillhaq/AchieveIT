@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Edit Tingkat-->
 	<section class="flex-col justify-start pl-6">
@@ -9,7 +9,7 @@
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/">
+		<a href="<?= BASEURL; ?>/Admin/pengaturanPrestasi">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
@@ -52,11 +52,11 @@
 			</div>
 
 			<div class="justify-center p-2">
-				<a href="<?= BASEURL; ?>/Juara/TingkatPenyelenggara/<?= $data['id_tingkat_penyelenggara'] ?>">
-					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+				<a href="<?= BASEURL; ?>/TingkatPenyelenggara/delete/<?= $data['id_tingkat_penyelenggara'] ?>">
+					<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 						<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
 						<p>Hapus</p>
-					</button>
+					</div>
 				</a>
 			</div>
 		</section>

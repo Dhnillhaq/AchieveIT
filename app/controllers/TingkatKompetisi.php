@@ -50,9 +50,9 @@ class TingkatKompetisi extends Controller
 
             $isSuccess =  $this->model("TingkatKompetisiModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -64,11 +64,20 @@ class TingkatKompetisi extends Controller
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_tingkat_kompetisi);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "TingkatKompetisi/deleting/" . $id);
+
+        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
         $isSuccess =  $this->model("TingkatKompetisiModel")->delete($id);
+        
         if ($isSuccess) {
-            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
-            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
         }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");

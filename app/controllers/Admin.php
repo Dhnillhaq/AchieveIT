@@ -113,7 +113,7 @@ class Admin extends Controller
         $this->checkRole("Super Admin");
         $id = htmlspecialchars($id_admin);
 
-        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "question", "Admin/deleting/" . $id);
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Admin/deleting/" . $id);
 
         header('location:' . BASEURL . '/Admin/adminList');
     }

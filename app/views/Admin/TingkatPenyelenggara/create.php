@@ -1,15 +1,15 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Tambah Tingkat-->
 	<section class="flex-col justify-start pl-6">
-		<p class="font-bold text-3xl">Tambah Tingkat Kompetisi</p>
+		<p class="font-bold text-3xl">Tambah Tingkat Penyelenggara</p>
 	</section>
 
 	<!-- btn back -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/">
+		<a href="<?= BASEURL; ?>/Admin/pengaturanPrestasi">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../../public/img/back.png" alt="logo" class="w-5 h-5" />
