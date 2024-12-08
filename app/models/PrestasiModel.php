@@ -42,7 +42,6 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-
     public function getDetailPrestasi($id)
     {
         $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = ?";
@@ -113,8 +112,9 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function getGrafikPrestasi(){
-        
+    public function getGrafikPrestasi()
+    {
+
     }
 
     public function getTahunPrestasi()
@@ -160,7 +160,7 @@ class PrestasiModel extends Connection
     public function getGrafikPerBulan($type = "kategori", $year = "2024")
     {
         $stmt = "EXEC usp_GetAnalisisPrestasiPerBulan @tahun = ?, @type = ?;";
-        $params = array($year, $type );
+        $params = array($year, $type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
@@ -170,6 +170,55 @@ class PrestasiModel extends Connection
         return $data;
     }
 
+    public function store($data)
+    {
+        $stmt = "INSERT INTO prestasi(
+        id_kategori, 
+        id_juara, 
+        id_tingkat_penyelenggara, 
+        id_tingkat_kompetisi, 
+        nama_kompetisi, 
+        tanggal_mulai_kompetisi, 
+        tanggal_selesai_kompetisi, 
+        penyelenggara_kompetisi, 
+        tempat_kompetisi, 
+        surat_tugas, 
+        poster_kompetisi, 
+        foto_juara, 
+        proposal, 
+        sertifikat, 
+        poin_prestasi) OUTPUT INSERTED.id_prestasi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $params = array(
+            $data['kategori'],
+            $data['juara'],
+            $data['tingkat_penyelenggara'],
+            $data['tingkat_kompetisi'],
+            $data['nama_kompetisi'],
+            $data['tanggal_mulai'],
+            $data['tanggal_selesai'],
+            $data['penyelenggara'],
+            $data['tempat_kompetisi'],
+            $data['surat_tugas'],
+            $data['poster'],
+            $data['foto_juara'],
+            $data['proposal'],
+            $data['sertifikat'],
+            $data['poin_prestasi'],
+        );
+
+        $idResource = sqlsrv_query($this->conn, $stmt, $params);
+
+        if (!$idResource) {
+            die(print_r(sqlsrv_errors(), true)); // Debug errors
+        }
+
+        // Fetch the inserted ID
+        $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
+        $insertedId = $idRow[0]; // ID of the inserted row
+
+        return (int)$insertedId;
+    }
 }
 
 ?>
