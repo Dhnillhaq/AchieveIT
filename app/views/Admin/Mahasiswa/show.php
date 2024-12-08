@@ -18,66 +18,66 @@
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">NIM</p>
-						<p class="font-semibold">2341720001</p>
+						<p class="font-semibold"><?= $data['nim']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Nama Mahasiswa</p>
-						<p class="font-semibold">HAIKAL MUHAMMAD RAFLI</p>
+						<p class="font-semibold"><?= $data['nama']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Program Studi</p>
-						<p class="font-semibold">D-IV Teknik Informatika</p>
+						<p class="font-semibold"><?= $data['nama_prodi']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Total Poin</p>
-						<p class="font-semibold">125</p>
+						<p class="font-semibold"><?= $data['total_poin']?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tanggal Lahir</p>
-						<p class="font-semibold">25-07-2004</p>
+						<p class="font-semibold"><?= $data['tanggal_lahir']->format('d-m-Y')?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tempat Lahir</p>
-						<p class="font-semibold">Malang</p>
+						<p class="font-semibold"><?= $data['tempat_lahir']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Agama</p>
-						<p class="font-semibold">Islam</p>
+						<p class="font-semibold"><?= $data['agama']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Jenis Kelamin</p>
-						<p class="font-semibold">Laki-laki</p>
+						<p class="font-semibold"><?= $data['jenis_kelamin']?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">No Telepon</p>
-						<p class="font-semibold">0812345678</p>
+						<p class="font-semibold"><?= $data['no_telepon']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Email</p>
-						<p class="font-semibold">haikalmura123@gmail.com</p>
+						<p class="font-semibold"><?= $data['email']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Password</p>
-						<p class="font-semibold">******</p>
+						<p class="font-semibold"><?= $data['password']?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Status Akun</p>
-						<p class="font-semibold">NOT VALIDATED</p>
+						<p class="font-semibold"><?= $data['status']?></p>
 					</div>
 				</div>
 			</div>

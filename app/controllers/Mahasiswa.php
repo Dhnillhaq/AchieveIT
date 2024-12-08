@@ -133,10 +133,11 @@ class Mahasiswa extends Controller
         $this->view("Admin/Mahasiswa/index", $data);
     }
 
-    public function show()
+    public function show($id_mahasiswa)
     {
         $this->checkRole("Admin", "Super Admin");
-        $this->view("Admin/Mahasiswa/show");
+        $data = $this->model("MahasiswaModel")->getMahasiswaById($id_mahasiswa);
+        $this->view("Admin/Mahasiswa/show", $data);
     }
 
     public function getSelectedMahasiswa()
