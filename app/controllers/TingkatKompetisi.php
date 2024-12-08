@@ -19,9 +19,9 @@ class TingkatKompetisi extends Controller
 
             $isSuccess =  $this->model("TingkatKompetisiModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -50,9 +50,9 @@ class TingkatKompetisi extends Controller
 
             $isSuccess =  $this->model("TingkatKompetisiModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -66,9 +66,9 @@ class TingkatKompetisi extends Controller
 
         $isSuccess =  $this->model("TingkatKompetisiModel")->delete($id);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
         }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");

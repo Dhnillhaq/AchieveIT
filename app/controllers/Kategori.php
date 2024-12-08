@@ -19,9 +19,9 @@ class Kategori extends Controller
 
             $isSuccess =  $this->model("KategoriModel")->store($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -50,9 +50,9 @@ class Kategori extends Controller
 
             $isSuccess =  $this->model("KategoriModel")->update($data);
             if ($isSuccess) {
-                Flasher::setFlash("Input", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
-                Flasher::setFlash("Input", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
             }
         }
 
@@ -67,9 +67,9 @@ class Kategori extends Controller
 
         $isSuccess =  $this->model("KategoriModel")->delete($id);
         if ($isSuccess) {
-            Flasher::setFlash("Input", "Data berhasil ditambahkan", "success");
+            Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
         } else {
-            Flasher::setFlash("Input", "Data gagal ditambahkan", "error");
+            Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error");
         }
 
         header("location:" . BASEURL . "/Admin/pengaturanPrestasi");

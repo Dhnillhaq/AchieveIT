@@ -44,9 +44,27 @@ class AuthModel extends Connection
         $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
-    public function registrasi($username, $password) {
+    public function registrasi($username, $password)
+    {
         $stmt = "INSERT INTO mahasiswa (nim, password) VALUES (?, ?)";
         $params = array($username, $password);
+        return sqlsrv_query($this->conn, $stmt, $params);
+    }
+
+    public function changePass($username, $password)
+    {
+        if ($_SESSION['user']['role'] == 'Mahasiswa') {
+        $stmt = "UPDATE mahasiswa
+                 SET password = ?
+                 WHERE nim = ?;";
+        } else {
+            $stmt = "UPDATE admin
+                 SET password = ?
+                 WHERE nip = ?;";
+        }
+        
+        $params = array($username, $password);
+
         return sqlsrv_query($this->conn, $stmt, $params);
     }
 

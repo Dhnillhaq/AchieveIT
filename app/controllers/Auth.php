@@ -9,22 +9,22 @@ class Auth extends Controller
     {
         $data = [];
 
-        if (isset($_POST["submit"])) {       
+        if (isset($_POST["submit"])) {
             $this->usernameInp = htmlspecialchars($_POST["username"]);
             $this->passwordInp = htmlspecialchars($_POST["password"]);
-    
+
             if ($this->isSuperAdmin()) {
                 $this->setSession();
-                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Admin/index");
+                Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
             } else if ($this->isAdmin()) {
                 $this->setSession();
-                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Admin/index");
+                Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
             } else if ($this->isKajur()) {
                 $this->setSession();
-                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['role'], "success", "Kajur/index");
+                Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Kajur/index");
             } else if ($this->isMahasiswa()) {
                 $this->setSession();
-                Flasher::setFlash("Login", "Selamat Datang ". $_SESSION['user']['nama'], "success", "Mahasiswa/index");
+                Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['nama'], "success", "Mahasiswa/index");
             } else {
                 $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
                 Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
@@ -60,16 +60,16 @@ class Auth extends Controller
         $confirmPassword = htmlspecialchars($_POST["confirm_password"]);
 
         if ($this->passwordInp != $confirmPassword) {
-            $data ['message'] = "Konfirmasi password tidak sesuai!";
+            $data['message'] = "Konfirmasi password tidak sesuai!";
             $this->view('Auth/registrasi', $data);
         }
-        
+
         if ($this->isRegistered()) {
-            $data ['message'] = "Username sudah terdaftar!";
+            $data['message'] = "Username sudah terdaftar!";
         } else {
             $this->model("AuthModel")->register($this->usernameInp, $this->passwordInp);
         }
-        
+
     }
 
     public function setSession()
@@ -152,6 +152,52 @@ class Auth extends Controller
     public function changePass()
     {
         $this->view('Auth/ubahKataSandi');
+    }
+
+    public function passprocess()
+    {
+        if (isset($_POST['submit'])) {
+            $sandiLama = htmlspecialchars($_POST['sandiLama']);
+            $data = [
+                'sandiBaru' => htmlspecialchars($_POST['sandiBaru']),
+            ];
+
+            if ($sandiLama == $_SESSION['user']['password']) {
+                Flasher::setFlash("Ubah Sandi", "Apakah anda yakin ingin mengubah kata sandi anda?", "question", "Auth/updatePass/" . $data['sandiBaru']);
+            } else {
+                Flasher::setFlash("Gagal", "Kata Sandi Lama yang anda masukkan tidak cocok!", "error");
+            }
+        }
+        header("location:" . BASEURL . "/Auth/changePass");
+
+    }
+
+    public function updatePass($password)
+    {
+        $data['password'] = $password;
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            $data['username'] = htmlspecialchars($_SESSION['user']['nim']);
+        } else {
+            $data['username'] = htmlspecialchars($_SESSION['user']['nip']);
+        }
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+        $isSuccess = $this->model("AuthModel")->changePass($data['password'], $data['username']);
+
+        if ($isSuccess) {
+            $_SESSION['user']['password'] = $data['password'];
+        }
+
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            header("location:" . BASEURL . "/Mahasiswa/profil");
+        } else if ($_SESSION['user']['role'] == "Ketua Jurusan") {
+            header("location:" . BASEURL . "/Kajur/profil");
+        } else {
+            header("location:" . BASEURL . "/Admin/profil");
+
+        }
     }
 
     public function deleteSession()
