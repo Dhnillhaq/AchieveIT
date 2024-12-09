@@ -51,10 +51,10 @@ class AuthModel extends Connection
         return sqlsrv_query($this->conn, $stmt, $params);
     }
 
-    public function changePass($username, $password)
+    public function gantiSandi($username, $password)
     {
         if ($_SESSION['user']['role'] == 'Mahasiswa') {
-        $stmt = "UPDATE mahasiswa
+            $stmt = "UPDATE mahasiswa
                  SET password = ?
                  WHERE nim = ?;";
         } else {
@@ -62,7 +62,7 @@ class AuthModel extends Connection
                  SET password = ?
                  WHERE nip = ?;";
         }
-        
+
         $params = array($username, $password);
 
         return sqlsrv_query($this->conn, $stmt, $params);

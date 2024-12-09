@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 	<!-- profil -->
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- Profil Mahasiswa -->
 	<section class="flex-col justify-start pl-6">
@@ -18,62 +18,62 @@
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">NIM</p>
-						<p class="font-semibold"><?= $_SESSION['user']['nim']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['nim'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Nama Mahasiswa</p>
-						<p class="font-semibold"><?= $_SESSION['user']['nama']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['nama'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Program Studi</p>
-						<p class="font-semibold"><?= $_SESSION['user']['prodi']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['prodi'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Total Poin</p>
-						<p class="font-semibold"><?= $_SESSION['user']['total_poin']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['total_poin'] ?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tanggal Lahir</p>
-						<p class="font-semibold"><?= $_SESSION['user']['tanggal_lahir']->format('d-m-Y')?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['tanggal_lahir']->format('d-m-Y') ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tempat Lahir</p>
-						<p class="font-semibold"><?= $_SESSION['user']['tempat_lahir']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['tempat_lahir'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Agama</p>
-						<p class="font-semibold"><?= $_SESSION['user']['agama']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['agama'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Jenis Kelamin</p>
-						<p class="font-semibold"><?= $_SESSION['user']['jenis_kelamin']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['jenis_kelamin'] ?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">No Telepon</p>
-						<p class="font-semibold"><?= $_SESSION['user']['no_telepon']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['no_telepon'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Email</p>
-						<p class="font-semibold"><?= $_SESSION['user']['email']?></p>
+						<p class="font-semibold"><?= $_SESSION['user']['email'] ?></p>
 					</div>
 				</div>
 			</div>
 			<!-- btn ubah kt sandi -->
 			<section class="justify-center pt-6">
-				<a href="<?= BASEURL; ?>/Auth/changePass">
+				<a href="<?= BASEURL; ?>/Auth/gantiSandi">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5">
 						<p>Ubah Kata Sandi</p>

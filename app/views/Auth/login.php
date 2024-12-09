@@ -13,9 +13,10 @@
 	<div class="relative z-10 flex justify-between">
 		<!-- left side -->
 		<section class="w-1/2 flex flex-col items-start justify-center h-screen px-10 text-white">
-			<h1 class="absolute text-6xl font-bold">Selamat datang <br> di <span class="text-[#FEC01A]">AchieveIT!</span></h1>
+			<h1 class="absolute text-6xl font-bold">Selamat datang <br> di <span
+					class="text-[#FEC01A]">AchieveIT!</span></h1>
 			<div class="relative mt-[calc(1/2*120vh)]">
-  				<!-- Gambar di antara dua section -->
+				<!-- Gambar di antara dua section -->
 				<img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-36 h-auto" />
 			</div>
 		</section>
@@ -48,19 +49,21 @@
 
 						<div class="flex justify-between space-x-1">
 							<div class="justify-center">
-							<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
-								onclick="showPassword('password')">
+								<input id="tampil-sandi" type="checkbox" placeholder="" class="border rounded-l"
+									onclick="showPassword('password')">
 
-							<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
+								<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 							</div>
-							
-							<a href="<?= BASEURL; ?>/Auth/lupaSandi" class="justify-end text-blue-700 hover:underline">Lupa Sandi</a>
+
+							<a href="<?= BASEURL; ?>/Auth/lupaSandi"
+								class="justify-end text-blue-700 hover:underline">Lupa Sandi</a>
 						</div>
 						<button type="submit" name="submit"
 							class="font-bold mt-4 w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Masuk</button>
-							<div class="flex justify-start text-blue-700 space-x-1">
-								<span>Belum punya akun? <a href="<?= BASEURL; ?>/Auth/register" class="hover:underline">Daftar</a></span>
-							</div>
+						<div class="flex justify-start text-blue-700 space-x-1">
+							<span>Belum punya akun? <a href="<?= BASEURL; ?>/Auth/register"
+									class="hover:underline">Daftar</a></span>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -69,7 +72,7 @@
 </section>
 
 <script>
-	<?php 
-        Flasher::flash();
-    ?>
+	<?php
+	Flasher::flash();
+	?>
 </script>

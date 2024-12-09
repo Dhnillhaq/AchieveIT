@@ -85,11 +85,6 @@ class Auth extends Controller
 
     }
 
-    public function lupaSandi()
-    {
-        $this->view('Auth/lupaSandi');
-    }
-
     public function setSession()
     {
         if (isset($this->userDB['role'])) {
@@ -187,9 +182,25 @@ class Auth extends Controller
         return false;
     }
 
-    public function changePass()
+    public function lupaSandi()
     {
-        $this->view('Auth/ubahKataSandi');
+        $this->view('Auth/lupaSandi');
+    }
+
+    public function lupaSandiProcess()
+    {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'nim' => htmlspecialchars($_POST['nim']),
+                'email' => htmlspecialchars($_POST['email']),
+                'tanggal_lahir' => date('Y-m-d', strtotime($_POST['tanggal_lahir'])),
+            ];
+        }
+    }
+
+    public function gantiSandi()
+    {
+        $this->view('Auth/gantiSandi');
     }
 
     public function passprocess()
@@ -206,7 +217,7 @@ class Auth extends Controller
                 Flasher::setFlash("Gagal", "Kata Sandi Lama yang anda masukkan tidak cocok!", "error");
             }
         }
-        header("location:" . BASEURL . "/Auth/changePass");
+        header("location:" . BASEURL . "/Auth/gantiSandi");
 
     }
 
@@ -222,7 +233,7 @@ class Auth extends Controller
         print_r($data);
         echo "</pre>";
 
-        $isSuccess = $this->model("AuthModel")->changePass($data['password'], $data['username']);
+        $isSuccess = $this->model("AuthModel")->gantiSandi($data['password'], $data['username']);
 
         if ($isSuccess) {
             $_SESSION['user']['password'] = $data['password'];
