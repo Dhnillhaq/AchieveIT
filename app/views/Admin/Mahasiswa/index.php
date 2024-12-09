@@ -89,15 +89,8 @@
 			Daftar Mahasiswa
 		</div>
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
-			<!-- cari -->
-			<section class="flex justify-between p-6">
-				<div
-					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
-					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="myInput2" placeholder="" class="bg-white flex focus:outline-none" />
-				</div>
-
-				<!-- btn tambah -->
+			<!-- btn tambah -->
+			<section class="flex justify-end pr-6">
 				<a href="<?= BASEURL; ?>/Mahasiswa/create">
 					<button
 						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
@@ -106,6 +99,27 @@
 					</button>
 				</a>
 			</section>
+				
+			<!-- cari -->
+			<section class="flex justify-between p-6">
+				<div
+					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
+					<input type="text" id="myInput2" placeholder="" class="bg-white flex focus:outline-none" />
+				</div>
+				<div class="flex justify-end right-0 space-x-2">
+					<div class="flex items-center">
+						<span class="">Lihat</span>
+						<select
+							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+						</select>
+						<span class="">entri</span>
+					</div>
+				</div>
+			</section>				
 
 			<!-- table  -->
 			<div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
