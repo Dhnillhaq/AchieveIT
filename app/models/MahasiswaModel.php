@@ -67,7 +67,11 @@ class MahasiswaModel extends Connection
 
     public function getMahasiswaById($id)
     {
-        $stmt = "SELECT * FROM mahasiswa WHERE id_mahasiswa = ?;";
+        $stmt = "SELECT m.*, 
+		            p.*
+                    FROM mahasiswa m
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi
+                    WHERE id_mahasiswa = ?";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
