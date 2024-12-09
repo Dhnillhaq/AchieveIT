@@ -369,7 +369,7 @@
 					<p>Simpan</p>
 				</button>
 			</a>
-		</div>x
+		</div>
 
 		<div class="justify-center p-2">
 			<a href="<?= BASEURL; ?>/">
