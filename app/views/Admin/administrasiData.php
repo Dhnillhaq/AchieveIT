@@ -39,7 +39,7 @@
 			</div>
 			<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
 				<img src="../../../public/img/validasi.png" alt="logo" class="w-32 mx-auto">
-				<a href="<?= BASEURL; ?>">
+				<a href="<?= BASEURL; ?>/Validasi">
 					<button
 						class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Validasi
 						Akun</button>
@@ -63,7 +63,7 @@
 			}
 			?>
 		</div>
-		
+
 	</section>
 
 </section>

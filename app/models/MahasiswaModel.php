@@ -12,11 +12,14 @@ class MahasiswaModel extends Connection
                     JOIN program_studi p ON m.id_prodi = p.id_prodi";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
         return $data;
     }
+
     public function getMahasiswaByNim($nim, $type = "Valid")
     {
         $stmt = "SELECT m.*, 
@@ -60,6 +63,7 @@ class MahasiswaModel extends Connection
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -172,6 +176,46 @@ class MahasiswaModel extends Connection
         );
 
         return sqlsrv_query($this->conn, $stmt, $params);
+    }
+
+    public function validate($id, $status)
+    {
+        $stmt = "UPDATE mahasiswa SET status = ? WHERE id_mahasiswa = ?";
+        $params = [
+            $status,
+            $id
+        ];
+
+        return sqlsrv_query($this->conn, $stmt, $params);
+    }
+
+    public function getNotValidatedMahasiswa()
+    {
+        $stmt = "SELECT m.*, 
+		            p.*
+                    FROM mahasiswa m
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi WHERE m.status = 'Not Validated'";
+        $result = sqlsrv_query($this->conn, $stmt);
+
+        $data = [];
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function getNotValidatedMahasiswaById($id)
+    {
+        $stmt = "SELECT m.*, 
+		            p.*
+                    FROM mahasiswa m
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi
+                    WHERE id_mahasiswa = ? AND m.status = 'Not Validated'";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 }
 ?>
