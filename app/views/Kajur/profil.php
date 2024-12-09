@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- Profil -->
 	<section class="flex-col justify-start pl-6">
@@ -17,17 +17,17 @@
 			<div class="flex flex-col justify-start items-start">
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">NIP</p>
-					<p class="font-semibold"><?=$_SESSION['user']['nip']?></p>
+					<p class="font-semibold"><?= $_SESSION['user']['nip'] ?></p>
 				</div>
 
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">Nama</p>
-					<p class="font-semibold"><?=$_SESSION['user']['nama']?></p>
+					<p class="font-semibold"><?= $_SESSION['user']['nama'] ?></p>
 				</div>
 			</div>
 			<!-- btn ubah kt sandi -->
 			<section class="justify-center pt-6">
-				<a href="<?= BASEURL; ?>/Auth/changePass">
+				<a href="<?= BASEURL; ?>/Auth/gantiSandi">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5" />
 						<p>Ubah Kata Sandi</p>
@@ -39,7 +39,7 @@
 
 	<!-- btn -->
 	<section class="justify-center p-6">
-		<a href="<?=BASEURL; ?>/Auth/deleteSession">
+		<a href="<?= BASEURL; ?>/Auth/deleteSession">
 			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg w-auto">
 				<img src="../../../public/img/Sign_out.png" alt="logo" class="w-5 h-5" />
 				<p>Keluar</p>

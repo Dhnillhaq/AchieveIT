@@ -8,7 +8,7 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/templates/header.php';
-        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar' && $view != 'Auth/pageNotFound') {
+        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar' && $view != 'Auth/pageNotFound' && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi') {
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';

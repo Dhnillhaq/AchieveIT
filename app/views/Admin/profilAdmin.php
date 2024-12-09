@@ -1,6 +1,6 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- Profil -->
 	<section class="flex-col justify-start pl-6">
@@ -17,17 +17,17 @@
 			<div class="flex flex-col justify-start items-start">
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">NIP</p>
-					<p class="font-semibold"><?=$_SESSION['user']['nip']?></p>
+					<p class="font-semibold"><?= $_SESSION['user']['nip'] ?></p>
 				</div>
 
 				<div class="flex flex-col justify-start items-start pt-5">
 					<p class="text-[#757575]">Nama</p>
-					<p class="font-semibold"><?=$_SESSION['user']['nama']?></p>
+					<p class="font-semibold"><?= $_SESSION['user']['nama'] ?></p>
 				</div>
 			</div>
 			<!-- btn ubah kt sandi -->
 			<section class="justify-center pt-6">
-				<a href="<?= BASEURL; ?>/Auth/changePass">
+				<a href="<?= BASEURL; ?>/Auth/gantiSandi">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5" />
 						<p>Ubah Kata Sandi</p>
@@ -137,51 +137,57 @@
 						</tr>
 					</tbody>
 				</table>
-</section>
+			</section>
 			<!-- pagination -->
-        <section class="flex items-center justify-center py-2">
-  <nav aria-label="Page navigation example">
-  <ul class="flex items-center -space-x-px h-8 text-sm">
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-        </svg>
-      </a>
-    </li>
-    <li>
-      <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Next</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-        </svg>
-      </a>
-    </li>
-  </ul>
-</nav>
+			<section class="flex items-center justify-center py-2">
+				<nav aria-label="Page navigation example">
+					<ul class="flex items-center -space-x-px h-8 text-sm">
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
+								<span class="sr-only">Previous</span>
+								<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+										stroke-width="2" d="M5 1 1 5l4 4" />
+								</svg>
+							</a>
+						</li>
+						<li>
+							<a href="#" aria-current="page"
+								class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
+								<span class="sr-only">Next</span>
+								<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+										stroke-width="2" d="m1 9 4-4-4-4" />
+								</svg>
+							</a>
+						</li>
+					</ul>
+				</nav>
 
-</section>
-
-		</div>
-	</section>
-
-	<!-- btn -->
-	<section class="justify-center p-6">
-		<a href="<?= BASEURL; ?>/Auth/deleteSession">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg w-auto">
-				<img src="../../../public/img/Sign_out.png" alt="logo" class="w-5 h-5" />
-				<p>Keluar</p>
-			</button>
-		</a>
+			</section>
+			<!-- btn -->
+			<section class="justify-center p-6">
+				<a href="<?= BASEURL; ?>/Auth/deleteSession">
+					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg w-auto">
+						<img src="../../../public/img/Sign_out.png" alt="logo" class="w-5 h-5" />
+						<p>Keluar</p>
+					</button>
+				</a>
+			</section>
 	</section>
 </section>
