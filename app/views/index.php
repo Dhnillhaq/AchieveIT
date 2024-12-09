@@ -11,9 +11,10 @@
       <a href="<?= BASEURL; ?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
       <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
       <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
-      <a href="<?= BASEURL; ?>/Auth/login">
-        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-24 h-10">
-          Masuk
+      <a
+        href="<?= BASEURL; ?>/<?= ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) ?>">
+        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 px-4">
+          <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
       </a>
     </div>
@@ -32,9 +33,10 @@
         pariatur. Exceptur sint occaecat cupidatat non proident, sunt in
         culpa qui officia desereutn.
       </p>
-      <a href="<?= BASEURL; ?>/Auth/login">
-        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mt-8 w-24 h-10">
-          Masuk
+      <a
+        href="<?= BASEURL; ?>/<?= ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) ?>">
+        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mt-8 px-4">
+          <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
       </a>
     </div>
@@ -184,41 +186,50 @@
             </tbody>
           </table>
         </section>
-        
+
         <!-- pagination -->
         <section class="flex items-center justify-center py-2">
           <nav aria-label="Page navigation example">
-  <ul class="flex items-center -space-x-px h-8 text-sm">
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-        </svg>
-      </a>
-    </li>
-    <li>
-      <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Next</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-        </svg>
-      </a>
-    </li>
-  </ul>
-</nav>
+            <ul class="flex items-center -space-x-px h-8 text-sm">
+              <li>
+                <a href="#"
+                  class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
+                  <span class="sr-only">Previous</span>
+                  <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 1 1 5l4 4" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="#" aria-current="page"
+                  class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
+              </li>
+              <li>
+                <a href="#"
+                  class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
+              </li>
+              <li>
+                <a href="#"
+                  class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
+              </li>
+              <li>
+                <a href="#"
+                  class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
+                  <span class="sr-only">Next</span>
+                  <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 9 4-4-4-4" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
 
 
-</section>
+        </section>
 
       </div>
     </section>
@@ -295,7 +306,8 @@
     }
   });
 </script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
