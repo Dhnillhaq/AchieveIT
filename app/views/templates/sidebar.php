@@ -79,8 +79,8 @@ if ($_SESSION['user']['role'] == "Super Admin" || $_SESSION['user']['role'] == "
                 </li>
                 <li>
                     <a href="<?= BASEURL; ?>/Prestasi/index"
-                        class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/index') !== false || strpos($currentUrl, 'Prestasi/show/') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
-                        <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/index') !== false || strpos($currentUrl, 'Prestasi/show/') !== false ? 'File_dock_search_fill (1)' : 'File_dock_search_fill' ?>.png"
+                        class="flex items-center p-2 <?= strpos($currentUrl, '/Prestasi/index') !== false || strpos($currentUrl, 'Prestasi/show/') !== false || strpos($currentUrl, 'prestasi/edit') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
+                        <img src="../../../public/img/<?= strpos($currentUrl, '/Prestasi/index') !== false || strpos($currentUrl, 'Prestasi/show/') !== false || strpos($currentUrl, 'prestasi/edit') !== false ? 'File_dock_search_fill (1)' : 'File_dock_search_fill' ?>.png"
                             alt="logo" class="w-5 h-5">
                         <span class="flex-1 ms-3 whitespace-nowrap">Daftar Prestasi</span>
                     </a>
