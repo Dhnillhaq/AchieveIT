@@ -82,7 +82,7 @@
 
 		<!-- kategori -->
 		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm">
+			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
 				<option>Kategori</option>
 				<option>Tingkat Kompetisi</option>
 				<option>Tingkat Penyelenggara</option>
@@ -104,7 +104,7 @@
 
 		<!-- kategori -->
 		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm">
+			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
 				<option>Kategori</option>
 				<option>Tingkat Kompetisi</option>
 				<option>Tingkat Penyelenggara</option>
@@ -126,7 +126,7 @@
 
 		<!-- kategori -->
 		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm">
+			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
 				<option>Kategori</option>
 				<option>Tingkat Kompetisi</option>
 				<option>Tingkat Penyelenggara</option>
