@@ -135,6 +135,9 @@
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Peran
 							</th>
+							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								Aksi
+							</th>
 						</tr>
 					</thead>
 					<!-- data dummy -->
@@ -146,11 +149,15 @@
 							?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950">
-									<a href=""><?= $mhs['nim'] ?></a>
-								</td>
-								<td class="py-2 px-4 border border-blue-950"><?= $mhs['nama_mahasiswa'] ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $mhs['peran'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
+										<button>
+										<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
+									</button>
+									</a>
+								</td>
 							</tr>
 							<?php
 							$no++;
@@ -192,10 +199,7 @@
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<?= $dosen['nama_dosen'] ?>
-								</td>
-								<td class="py-2 px-4 border border-blue-950">
-									<?= $dosen['nip'] ?>
+									<?= $dosen['nip'] . ' - ' . $dosen['nama_dosen'] ?>
 								</td>
 								<td class="py-2 px-4 border border-blue-950">
 									<?= $dosen['peran'] ?>
@@ -220,6 +224,7 @@
 			<div class="flex flex-col space-y-0 justify-start items-start py-3">
 				<p class="text-[#757575] font-light">Status</p>
 				<p class="font-bold">VALID</p>
+				
 			</div>
 
 			<h2 class="text-[#757575]">Perhitungan Poin</h2>
@@ -301,7 +306,6 @@
 					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
 					<p>Hapus</p>
 				</button>
-
 			</a>
 		</div>
 
