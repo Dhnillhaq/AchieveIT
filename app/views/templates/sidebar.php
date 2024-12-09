@@ -1,4 +1,54 @@
 <?php
+//Kondisi di administrasi data
+// Array berisi semua path yang perlu diperiksa
+//kurang validasi akun
+$currentUrl = $_SERVER['REQUEST_URI'];
+$activePaths = [
+    '/Admin/administrasiData',
+    'Dosen/index',
+    'Dosen/Create',
+    'Dosen/edit/',
+    'PeranDosen/create',
+    'PeranDosen/edit/',
+    'Mahasiswa/listMhs',
+    'Prodi/create',
+    'Prodi/edit/',
+    'Mahasiswa/create',
+    'Mahasiswa/edit/',
+    'Mahasiswa/show/',
+    'PeranMahasiswa/Create',
+    'PeranMahasiswa/edit/',
+    'Admin/pengaturanPrestasi',
+    'Kategori/Create',
+    'Kategori/edit/',
+    'TingkatKompetisi/Create',
+    'TingkatKompetisi/edit/',
+    'TingkatPenyelenggara/Create',
+    'TingkatPenyelenggara/edit/',
+    'Juara/Create',
+    'Juara/edit/',
+    'Admin/adminList',
+    'Admin/create',
+    'Admin/edit/',
+
+
+
+];
+
+// Periksa apakah salah satu path cocok dengan URL saat ini
+$isActive = false;
+foreach ($activePaths as $path) {
+    if (strpos($currentUrl, $path) !== false) {
+        $isActive = true;
+        break;
+    }
+}
+
+// Tentukan kelas aktif
+$activeClass = $isActive ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]';
+$imageName = $isActive ? 'Administrasi-data(1)' : 'Administrasi-data';
+
+
 if ($_SESSION['user']['role'] == "Super Admin" || $_SESSION['user']['role'] == "Admin") { ?>
     <!-- sidebar -->
     <aside id="default-sidebar"
@@ -11,9 +61,6 @@ if ($_SESSION['user']['role'] == "Super Admin" || $_SESSION['user']['role'] == "
                         <span class="ms-3 font-bold">AchieveIT</span>
                     </div>
                 </li>
-                <?php
-                $currentUrl = $_SERVER['REQUEST_URI'];
-                ?>
                 <li>
                     <a href="<?= BASEURL; ?>/Admin/index"
                         class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
@@ -40,9 +87,8 @@ if ($_SESSION['user']['role'] == "Super Admin" || $_SESSION['user']['role'] == "
                 </li>
                 <li>
                     <a href="<?= BASEURL; ?>/Admin/administrasiData"
-                        class="flex items-center p-2 <?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
-                        <img src="../../../public/img/<?= strpos($currentUrl, '/Admin/administrasiData') !== false ? 'Administrasi-data(1)' : 'Administrasi-data' ?>.png"
-                            alt="logo" class="w-5 h-5">
+                        class="flex items-center p-2 <?= $activeClass ?> rounded-lg">
+                        <img src="../../../public/img/<?= $imageName ?>.png" alt="logo" class="w-5 h-5">
                         <span class="flex-1 ms-3 whitespace-nowrap">Administrasi Data</span>
                     </a>
                 </li>
@@ -71,9 +117,6 @@ if ($_SESSION['user']['role'] == "Ketua Jurusan") { ?>
                         <span class="ms-3 font-bold">AchieveIT</span>
                     </div>
                 </li>
-                <?php
-                $currentUrl = $_SERVER['REQUEST_URI'];
-                ?>
                 <li>
                     <a href="<?= BASEURL; ?>/Kajur/index"
                         class="flex items-center p-2 <?= strpos($currentUrl, '/Kajur/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
@@ -117,9 +160,6 @@ if ($_SESSION['user']['role'] == "Mahasiswa") { ?>
                         <span class="ms-3 font-bold">AchieveIT</span>
                     </div>
                 </li>
-                <?php
-                $currentUrl = $_SERVER['REQUEST_URI'];
-                ?>
                 <li>
                     <a href="<?= BASEURL; ?>/Mahasiswa/index"
                         class="flex items-center p-2 <?= strpos($currentUrl, '/Mahasiswa/index') !== false ? 'text-[#FEC01A] bg-[#3063C559]' : 'text-white hover:bg-[#3063C559]' ?> rounded-lg">
