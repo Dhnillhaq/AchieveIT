@@ -360,6 +360,80 @@
 		</div>
 	</section>
 
+	<!-- informasi lain -->
+	<section class="relative p-6">
+		<!-- Static parent -->
+		<div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
+			Informasi Lain
+		</div>
+		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
+			<div class="flex flex-col space-y-0 justify-start items-start py-3">
+				<p class="font-semibold">Status</p>
+				<select class="w-1/4 border rounded px-2 py-1">
+					<option value="valid">VALID</option>
+					<option value="invalid">INVALID</option>
+					<option value="notValidated">NOT VALIDATED</option>
+				</select>
+			</div>
+
+			<h2 class="font-semibold">Perhitungan Poin</h2>
+
+			<!-- tabel -->
+			<div class="mt-6 overflow-x-auto bg-white shadow-md rounded-2xl">
+				<table class="min-w-full table-auto">
+					<thead>
+						<tr>
+							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								No
+							</th>
+							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								Kategori Penilaian
+							</th>
+							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								Value
+							</th>
+							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+								Poin
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<tr>
+							<td class="py-2 px-4 border border-blue-950">1</td>
+							<td class="py-2 px-4 border border-blue-950">
+								Tingkatan Kompetisi
+							</td>
+							<td class="py-2 px-4 border border-blue-950">Nasional</td>
+							<td class="py-2 px-4 border border-blue-950">4</td>
+						</tr>
+						<!-- Row 2 -->
+						<tr>
+							<td class="py-2 px-4 border border-blue-950">2</td>
+							<td class="py-2 px-4 border border-blue-950">
+								Penyelenggara
+							</td>
+							<td class="py-2 px-4 border border-blue-950">Pemerintah</td>
+							<td class="py-2 px-4 border border-blue-950">4</td>
+						</tr>
+						<!-- Row 3 -->
+						<tr>
+							<td class="py-2 px-4 border border-blue-950">3</td>
+							<td class="py-2 px-4 border border-blue-950">Juara</td>
+							<td class="py-2 px-4 border border-blue-950">
+								Juara 1
+							</td>
+							<td class="py-2 px-4 border border-blue-950">4</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+
+			<h2 class="font-semibold ">Total Poin : 12</h2>
+		</div>
+	</section>
+
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">

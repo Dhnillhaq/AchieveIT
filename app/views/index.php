@@ -167,6 +167,45 @@
               </tr>
             </thead>
             <tbody class="text-gray-700">
+              <tr>
+              <!-- Rank 1 -->
+    <tr class="bg-yellow-400 text-black font-bold shadow-lg border-2 border-yellow-600  ">
+        <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
+            🥇 <span>1</span>
+        </td>
+        <td class='py-2 px-4 border border-blue-950'>2341720076</td>
+        <td class='py-2 px-4 border border-blue-950'>Saya</td>
+        <td class='py-2 px-4 border border-blue-950'>TI</td>
+        <td class='py-2 px-4 border border-blue-950'>100</td>
+    </tr>
+    <!-- Rank 2 -->
+    <tr class="bg-yellow-300 text-black font-bold border border-yellow-500">
+        <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
+            🥈 <span>2</span>
+        </td>
+        <td class='py-2 px-4 border border-blue-950'>2341720077</td>
+        <td class='py-2 px-4 border border-blue-950'>Dia</td>
+        <td class='py-2 px-4 border border-blue-950'>TI</td>
+        <td class='py-2 px-4 border border-blue-950'>95</td>
+    </tr>
+    <!-- Rank 3 -->
+    <tr class="bg-yellow-200 text-black font-semibold border border-yellow-400">
+        <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
+            🥉 <span>3</span>
+        </td>
+        <td class='py-2 px-4 border border-blue-950'>2341720078</td>
+        <td class='py-2 px-4 border border-blue-950'>Kamu</td>
+        <td class='py-2 px-4 border border-blue-950'>TI</td>
+        <td class='py-2 px-4 border border-blue-950'>90</td>
+    </tr>
+    <!-- Rank 4 and others -->
+    <tr class="hover:bg-gray-100 transition">
+        <td class='py-2 px-4 border border-blue-950'>4</td>
+        <td class='py-2 px-4 border border-blue-950'>2341720079</td>
+        <td class='py-2 px-4 border border-blue-950'>Kita</td>
+        <td class='py-2 px-4 border border-blue-950'>TI</td>
+        <td class='py-2 px-4 border border-blue-950'>85</td>
+    </tr>
               <?php
               // Looping data mahasiswa ke dalam tabel
               $rank = 1;
