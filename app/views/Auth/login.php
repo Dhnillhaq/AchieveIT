@@ -22,7 +22,7 @@
 
 		<!-- right side -->
 		<section class="w-2/5 h-screen flex-col space-y-6 items-start justify-center py-16 pr-20">
-			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-auto">
+			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-full">
 				<div class="px-14 py-10 space-y-6 w-full max-w-screen-xl">
 					<h1 class="text-4xl font-bold text-center my-10">Masuk</h1>
 					<form method="post" action="<?= BASEURL; ?>/Auth/login" class="space-y-4 w-full">

@@ -9,7 +9,7 @@
 
 	<!-- btn ekspor -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/">
+		<a href="<?= BASEURL; ?>/Prestasi/export">
 			<div class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../public/img/Export_fill.png" alt="logo" class="w-5 h-5">
 				<p>ekspor</p>

@@ -37,6 +37,16 @@
 						Mahasiswa</button>
 				</a>
 			</div>
+			<div class="flex flex-col w-full justify-center bg-white rounded-lg shadow-lg space-y-2 p-6">
+				<img src="../../../public/img/validasi.png" alt="logo" class="w-32 mx-auto">
+				<a href="<?= BASEURL; ?>">
+					<button
+						class="text-white text-xl w-full py-2 font-semibold items-center justify-center bg-[#132145] rounded-lg">Validasi
+						Akun</button>
+				</a>
+			</div>
+		</div>
+		<div class="flex flex-col w-1/3">
 			<?php
 			if ($_SESSION['user']['role'] == "Super Admin") {
 				?>
@@ -53,6 +63,7 @@
 			}
 			?>
 		</div>
+		
 	</section>
 
 </section>
