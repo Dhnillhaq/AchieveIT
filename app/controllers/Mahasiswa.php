@@ -73,30 +73,6 @@ class Mahasiswa extends Controller
         $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view("Admin/Mahasiswa/edit", $data);
     }
-
-    public function delete($id_mahasiswa)
-    {
-        $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_mahasiswa);
-        
-        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Mahasiswa/deleting/" . $id);
-
-        header('location:' . BASEURL . '/Mahasiswa/listMhs');
-    }
-
-    public function deleting($id)
-    {
-        $this->checkRole("Admin", "Super Admin");
-        $isSuccess =  $this->model("MahasiswaModel")->delete($id);
-
-        if ($isSuccess) {
-            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
-        } else {
-            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
-        }
-        header('location:' . BASEURL . '/Mahasiswa/listMhs');
-    }
-
     public function update()
     {
         $this->checkRole("Admin", "Super Admin");
@@ -123,6 +99,30 @@ class Mahasiswa extends Controller
         }
         header("location:" . BASEURL . "/Mahasiswa/edit/" . $_POST['id_mahasiswa']);
     }
+
+    public function delete($id_mahasiswa)
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $id = htmlspecialchars($id_mahasiswa);
+        
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Mahasiswa/deleting/" . $id);
+
+        header('location:' . BASEURL . '/Mahasiswa/listMhs');
+    }
+
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $isSuccess =  $this->model("MahasiswaModel")->delete($id);
+
+        if ($isSuccess) {
+            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
+        } else {
+            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+        }
+        header('location:' . BASEURL . '/Mahasiswa/listMhs');
+    }
+
 
     public function listMhs()
     {

@@ -36,12 +36,16 @@ class Auth extends Controller
 
     public function pageNotFound()
     {
-        if ($_SESSION['user']['role'] == 'Super Admin') {
-            $data['url'] = 'Admin/index';
-        } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-            $data['url'] = 'Kajur/index';
+        if (!isset($_SESSION['user'])) {
+            $data['url'] = 'Home/index';
         } else {
-            $data['url'] = 'Mahasiswa/index';
+            if ($_SESSION['user']['role'] == 'Super Admin') {
+                $data['url'] = 'Admin/index';
+            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+                $data['url'] = 'Kajur/index';
+            } else {
+                $data['url'] = 'Mahasiswa/index';
+            }
         }
         $this->view('Auth/pageNotFound', $data);
     }
