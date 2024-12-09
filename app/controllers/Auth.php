@@ -47,35 +47,66 @@ class Auth extends Controller
     }
 
     // Method Halaman Registrasi
-    public function registrasi()
+    public function register()
     {
-        $this->view('Auth/registrasi');
+        $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
+        $this->view('Auth/daftar', $data);
     }
 
     // Method proses Registrasi
     public function registration()
     {
-        $this->usernameInp = htmlspecialchars($_POST["username"]);
-        $this->passwordInp = htmlspecialchars($_POST["password"]);
-        $confirmPassword = htmlspecialchars($_POST["confirm_password"]);
+        if (isset($_POST['submit'])) {
+            $data = [
+                'id_prodi' => htmlspecialchars($_POST['id_prodi']),
+                'nim' => htmlspecialchars($_POST['nim']),
+                'nama' => htmlspecialchars($_POST['nama']),
+                'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
+                'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+                'agama' => htmlspecialchars($_POST['agama']),
+                'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+                'no_telepon' => htmlspecialchars($_POST['no_telepon']),
+                'email' => htmlspecialchars($_POST['email']),
+                'password' => htmlspecialchars($_POST['password'])
+            ];
 
-        if ($this->passwordInp != $confirmPassword) {
-            $data['message'] = "Konfirmasi password tidak sesuai!";
-            $this->view('Auth/registrasi', $data);
+
+            if ($this->isValidated($data['nim'])) {
+                Flasher::setFlash("Daftar", "NIM yang anda masukkan sudah terdaftar", "error", "Auth/login");
+            } else if ($this->isNotValidatedYet($data['nim'])) {
+                Flasher::setFlash("Daftar", "Akun anda sudah terdaftar, kami akan menghubungi anda lebih lanjut", "error", "Auth/login");
+            } else if ($this->isInvalid($data['nim'])) {
+                $isSuccess = $this->model("MahasiswaModel")->updateAccount($data);
+
+                if ($isSuccess) {
+                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "index");
+                } else {
+                    Flasher::setFlash("Perbarui Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "index");
+                }
+            } else {
+                $isSuccess = $this->model("MahasiswaModel")->store($data);
+
+                if ($isSuccess) {
+                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "index");
+                } else {
+                    Flasher::setFlash("Daftar Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "index");
+                }
+            }
+            header("location:" . BASEURL . "/Auth/register");
         }
 
-        if ($this->isRegistered()) {
-            $data['message'] = "Username sudah terdaftar!";
-        } else {
-            $this->model("AuthModel")->register($this->usernameInp, $this->passwordInp);
-        }
+    }
 
+    public function lupaSandi()
+    {
+        $this->view('Auth/lupaSandi');
     }
 
     public function setSession()
     {
         if (isset($this->userDB['role'])) {
             $_SESSION['user'] = [
+                "id_admin" => $this->userDB['id_admin'],
                 "nip" => $this->userDB['nip'],
                 "nama" => $this->userDB['nama'],
                 "password" => $this->userDB['password'],
@@ -98,6 +129,7 @@ class Auth extends Controller
             ];
         }
     }
+
     public function isSuperAdmin()
     {
         $this->userDB = $this->model("AuthModel")->getSuperAdmin();
@@ -128,7 +160,7 @@ class Auth extends Controller
 
     public function isMahasiswa()
     {
-        $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
+        $check = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
         if (!empty($this->userDB['0'])) {
             if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
                 return true;
@@ -140,10 +172,28 @@ class Auth extends Controller
     }
 
     // Method check apakah sudah terdaftar
-    public function isRegistered()
+    public function isValidated($nim)
     {
-        $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
+        $check = $this->model("MahasiswaModel")->getMahasiswaByNim($nim, "Valid");
         if (!empty($this->userDB['0'])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isInvalid($nim)
+    {
+        $check = $this->model("MahasiswaModel")->getMahasiswaByNim($nim, "Invalid");
+        if (!empty($check['0'])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isNotValidatedYet($nim)
+    {
+        $check = $this->model("MahasiswaModel")->getMahasiswaByNim($nim, "Not Validated");
+        if (!empty($check['0'])) {
             return true;
         }
         return false;

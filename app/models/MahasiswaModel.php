@@ -17,27 +17,28 @@ class MahasiswaModel extends Connection
         }
         return $data;
     }
-    public function getMahasiswaByNim($nim)
+    public function getMahasiswaByNim($nim, $type = "Valid")
     {
         $stmt = "SELECT m.*, 
 		            p.*
                     FROM mahasiswa m
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
-                    WHERE nim = ?";
-        $params = array($nim);
+                    WHERE nim = ?
+                    AND status = ?";
+        $params = array($nim, $type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        $data[] = $this->getStatistikMhs($nim);
+        if ($type == "Valid") {
+            $data[] = $this->getStatistikMhs($nim);
+        }
 
         return $data;
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
         $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
-        $params = [
-            $nim
-        ];
+        $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
@@ -46,8 +47,9 @@ class MahasiswaModel extends Connection
     // Get Prestasi ber-Anggota kan Mahasiswa   
     public function getStatistikMhs($nim)
     {
-        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = '$nim';";
-        $result = sqlsrv_query($this->conn, $stmt);
+        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = ?;";
+        $params = array($nim);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
@@ -132,6 +134,41 @@ class MahasiswaModel extends Connection
             $data['email'],
             $data['password'],
             $data['id_mahasiswa']
+        );
+
+        return sqlsrv_query($this->conn, $stmt, $params);
+    }
+
+    public function updateAccount($data)
+    {
+        $status = "Not Validated";
+        $stmt = "UPDATE mahasiswa
+            SET
+                id_prodi = ?,
+                nim = ?,
+                nama = ?,
+                tempat_lahir = ?,
+                tanggal_lahir = ?,
+                agama = ?,
+                jenis_kelamin = ?,
+                no_telepon = ?,
+                email = ?, 
+                password = ?,
+                status = ? 
+            WHERE nim = ?;";
+        $params = array(
+            $data['id_prodi'],
+            $data['nim'],
+            $data['nama'],
+            $data['tempat_lahir'],
+            $data['tanggal_lahir'],
+            $data['agama'],
+            $data['jenis_kelamin'],
+            $data['no_telepon'],
+            $data['email'],
+            $data['password'],
+            $status,
+            $data['nim']
         );
 
         return sqlsrv_query($this->conn, $stmt, $params);

@@ -54,12 +54,12 @@
 							<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 							</div>
 							
-							<a href="" class="justify-end text-blue-700 hover:underline">Lupa Sandi</a>
+							<a href="<?= BASEURL; ?>/Auth/lupaSandi" class="justify-end text-blue-700 hover:underline">Lupa Sandi</a>
 						</div>
 						<button type="submit" name="submit"
 							class="font-bold mt-4 w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Masuk</button>
 							<div class="flex justify-start text-blue-700 space-x-1">
-								<span>Belum punya akun? <a href="#" class="hover:underline">Daftar</a></span>
+								<span>Belum punya akun? <a href="<?= BASEURL; ?>/Auth/register" class="hover:underline">Daftar</a></span>
 							</div>
 					</form>
 				</div>
