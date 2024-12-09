@@ -169,6 +169,25 @@ class PrestasiModel extends Connection
         return $data;
     }
 
+    public function getExportData()
+    {
+        $stmt = "SELECT * FROM vw_DataPrestasi";
+        $result = sqlsrv_query($this->conn, $stmt);
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        $stmt2 = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'vw_DataPrestasi'";
+        $result2 = sqlsrv_query($this->conn, $stmt2);
+
+        while ($row = sqlsrv_fetch_array($result2, SQLSRV_FETCH_ASSOC)) {
+            $header[] = $row['COLUMN_NAME'];
+        }
+
+        return ['data' => $data, 'header' => $header];
+    }
+
     public function store($data)
     {
         $stmt = "INSERT INTO prestasi(
@@ -216,7 +235,7 @@ class PrestasiModel extends Connection
         $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
         $insertedId = $idRow[0]; // ID of the inserted row
 
-        return (int)$insertedId;
+        return (int) $insertedId;
     }
 }
 

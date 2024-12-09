@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Prestasi extends Controller
 {
     public function index()
@@ -138,5 +143,53 @@ class Prestasi extends Controller
             "poin" => $this->model("PrestasiModel")->getDetailPrestasiDataPoin($id),
         ];
         $this->view("Prestasi/show", $data);
+    }
+
+    public function export()
+    {
+        $file = new Spreadsheet();
+
+        $active_sheet = $file->getActiveSheet();
+
+        $tableData = $this->model("PrestasiModel")->getExportData();
+
+        $column = 'A';
+
+        // Write headers
+        $active_sheet->setCellValue($column++ . '1', 'NO');
+        foreach ($tableData['header'] as $header) {
+            $active_sheet->setCellValue($column++ . '1', $header);
+        }
+
+        // Write data
+        $rowIndex = 2;
+        $number = 1;
+        foreach ($tableData['data'] as $dataRow) {
+            $column = 'A';
+            $active_sheet->setCellValue($column++ . $rowIndex, $number++);
+            foreach ($tableData['header'] as $fieldName) {
+                $active_sheet->setCellValue($column++ . $rowIndex, $dataRow[$fieldName]);
+            }
+            $rowIndex++;
+        }
+
+
+        $writer = IOFactory::createWriter($file, 'Xlsx');
+
+        $file_name = time() . '_' . 'PrestasiExport' . '.' . 'xlsx';
+
+        $writer->save($file_name);
+
+        header('Content-Type: application/x-www-form-urlencoded');
+
+        header('Content-Transfer-Encoding: Binary');
+
+        header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+
+        readfile($file_name);
+
+        unlink($file_name);
+
+        exit;
     }
 }
