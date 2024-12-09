@@ -118,10 +118,24 @@ class Prestasi extends Controller
         header('location:' . BASEURL . '/Prestasi/index');
     }
 
-    public function edit()
+    public function edit($id)
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa");
-        $this->view("Prestasi/edit");
+        $data = [
+            "prestasi" => $this->model("PrestasiModel")->getDetailPrestasi($id),
+            "mhs" => $this->model("PrestasiModel")->getDetailPrestasiDataMahasiswa($id),
+            "dsn" => $this->model("PrestasiModel")->getDetailPrestasiDataDosen($id),
+            "poin" => $this->model("PrestasiModel")->getDetailPrestasiDataPoin($id),
+            'kategori' => $this->model("KategoriModel")->getKategori(),
+            'tingkatKompetisi' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+            'tingkatPenyelenggara' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
+            'juara' => $this->model("JuaraModel")->getJuara(),
+            'mahasiswa' => $this->model("MahasiswaModel")->getAllDataMahasiswa(),
+            'peranMahasiswa' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
+            'dosen' => $this->model("DosenModel")->getDosen(),
+            'peranDosen' => $this->model("PeranDosenModel")->getPeranDosen()
+        ];
+        $this->view("Prestasi/edit", $data);
     }
 
     public function delete($id_prestasi)

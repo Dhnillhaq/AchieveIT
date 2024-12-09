@@ -18,4 +18,24 @@ class DosenPrestasiModel extends Connection
 
         return $isSuccess;
     }
+
+    public function update($id_prestasi, $id_dosen, $id_peran, $data)
+    {
+        $stmt = "UPDATE dosen_prestasi SET id_prestasi = ?, id_dosen = ?, id_peran = ? WHERE id_prestasi = ? AND id_dosen = ? AND id_peran = ?";
+        $params = array(
+            $id_prestasi,
+            $id_dosen,
+            $id_peran,
+            $data['id_prestasi'],
+            $data['id_dosen'],
+            $data['id_peran'],
+        );
+
+        $isSuccess = sqlsrv_query($this->conn, $stmt, $params);
+        if (!$isSuccess) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        return $isSuccess;
+    }
 }
