@@ -87,11 +87,9 @@
 
 	<!-- btn -->
 	<section class="justify-center p-6">
-		<a href="<?= BASEURL; ?>/Mahasiswa/listMhs">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto" onclick="history.back()">
 				<img src="../../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 				<p>Kembali</p>
 			</button>
-		</a>
 	</section>
 </section>

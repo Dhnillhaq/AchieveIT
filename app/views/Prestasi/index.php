@@ -97,10 +97,25 @@
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
-						<td class="py-2 px-4 border border-blue-950">
-							<img src="../../public/img/Valid.png" alt="Icon Status" class="w-5 h-auto" />
-							<img src="../../public/img/invalid.png" alt="Icon Status" class="w-5 h-auto" />
-							<img src="../../public/img/notValidated.png" alt="Icon Status" class="w-5 h-auto" />
+						<td class="py-2 px-4 border border-blue-950 w-2/12">
+							<?php 
+							if ($prestasi['status'] == 'Valid') {
+								echo '<div class="flex justify-center gap-1">
+										<img src="../../public/img/Valid.png" alt="Icon Status" class="w-1/6  h-full object-cover" />
+										<p>VALID</p>
+									</div>';
+							} else if ($prestasi['status'] == '	') {
+								echo '<div class="flex justify-center gap-1">
+										<img src="../../public/img/invalid.png" alt="Icon Status" class="w-1/6  h-full object-cover" />
+										<p>INVALID</p>
+									</div>';
+							} else {
+								echo '<div class="flex justify-center gap-1">
+									<img src="../../public/img/notValidated.png" alt="Icon Status" class="w-1/6  h-full object-cover" />
+									<p>NOT VALIDATED</p>
+								</div>';
+							}
+							?>
 						</td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
 						<td class="py-2 px-4 border border-blue-950">
