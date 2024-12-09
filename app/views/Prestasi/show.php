@@ -11,7 +11,7 @@
 	<!-- KALO VALID WARNANYA ABU-ABU "bg-[#757575]" -->
 	<!-- halaman edit bisa diakses ketika status = invalid / not validated -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/prestasi/edit">
+		<a href="<?= BASEURL; ?>/prestasi/edit/<?= $data['prestasi']['id_prestasi'] ?>">
 			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145]  rounded-lg w-auto">
 				<img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
 				<p>edit</p>
@@ -86,27 +86,27 @@
 					<div class="flex flex-col space-y-4">
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Surat Tugas</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_surat_tugas'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_surat_tugas'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Poster</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_poster'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_poster'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Foto Juara</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_foto_juara'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_foto_juara'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Sertifikat</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_sertifikat'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_sertifikat'] ?></p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Proposal</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['file_proposal'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_proposal'] ?></p>
 						</div>
 					</div>
 				</div>
