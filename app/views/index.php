@@ -12,7 +12,7 @@
       <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
       <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
       <a
-        href="<?= BASEURL; ?>/<?= ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) ?>">
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/login') ?>">
         <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 px-4">
           <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
@@ -34,7 +34,7 @@
         culpa qui officia desereutn.
       </p>
       <a
-        href="<?= BASEURL; ?>/<?= ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) ?>">
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/login') ?>">
         <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mt-8 px-4">
           <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
