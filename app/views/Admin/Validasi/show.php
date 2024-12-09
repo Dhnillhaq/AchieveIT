@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Mahasiswa</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    </style>
-</head>
-<body class="font-[poppins]">
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
+	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Detail Mahasiswa-->
 	<section class="flex-col justify-start pl-6">
@@ -30,96 +18,97 @@
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">NIM</p>
-						<p class="font-semibold">2341720001</p>
+						<p class="font-semibold"><?= $data['nim'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Nama Mahasiswa</p>
-						<p class="font-semibold">HAIKAL MUHAMMAD RAFLI</p>
+						<p class="font-semibold"><?= $data['nama'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Program Studi</p>
-						<p class="font-semibold">D-IV Teknik Informatika</p>
+						<p class="font-semibold"><?= $data['nama_prodi'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Total Poin</p>
-						<p class="font-semibold">125</p>
+						<p class="font-semibold"><?= $data['total_poin'] ?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tanggal Lahir</p>
-						<p class="font-semibold">25-07-2004</p>
+						<p class="font-semibold"><?= $data['tanggal_lahir']->format('d-m-Y') ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Tempat Lahir</p>
-						<p class="font-semibold">Malang</p>
+						<p class="font-semibold"><?= $data['tempat_lahir'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Agama</p>
-						<p class="font-semibold">Islam</p>
+						<p class="font-semibold"><?= $data['agama'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Jenis Kelamin</p>
-						<p class="font-semibold">Laki-laki</p>
+						<p class="font-semibold"><?= $data['jenis_kelamin'] ?></p>
 					</div>
 				</div>
 
 				<div class="flex flex-col space-y-4">
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">No Telepon</p>
-						<p class="font-semibold">0812345678</p>
+						<p class="font-semibold"><?= $data['no_telepon'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Email</p>
-						<p class="font-semibold">haikalmura123@gmail.com</p>
+						<p class="font-semibold"><?= $data['email'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Password</p>
-						<p class="font-semibold">******</p>
+						<p class="font-semibold"><?= $data['password'] ?></p>
 					</div>
 
 					<div class="flex flex-col justify-start items-start pt-5">
 						<p class="text-[#757575]">Status Akun</p>
-						<p class="font-semibold">NOT VALIDATED</p>
+						<p class="font-semibold"><?= $data['status'] ?></p>
 					</div>
 				</div>
 			</div>
 
 			<!-- Garis Horizontal -->
-        <div class="border-b border-1 border-gray-600 mt-10"></div>
+			<div class="border-b border-1 border-gray-600 mt-10"></div>
 
-        <!-- Tombol -->
-		<p class="font-bold mt-4">Validasi Akun</p>
-        <div class="flex justify-start space-x-4 mt-2">
-            <button class="bg-green-500 text-white p-2 rounded-lg hover:bg-blue-600">
-                <img src="../../../../public/img/centang.png" alt="logo" class="w-7 h-7" />
-            </button>
-            <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600">
-                <img src="../../../../public/img/silang.png" alt="logo" class="w-7 h-7" />
-            </button>
-        </div>
+			<!-- Tombol -->
+			<p class="font-bold mt-4">Validasi Akun</p>
+			<div class="flex justify-start space-x-4 mt-2">
+				<a href="<?= BASEURL; ?>/Validasi/validate/<?= $data['id_mahasiswa'] ?>/true">
+					<button class="bg-green-500 text-white p-2 rounded-lg hover:bg-blue-600">
+						<img src="../../../../public/img/centang.png" alt="logo" class="w-7 h-7" />
+					</button>
+				</a>
+				<a href="<?= BASEURL; ?>/Validasi/validate/<?= $data['id_mahasiswa'] ?>/false">
+					<button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600">
+						<img src="../../../../public/img/silang.png" alt="logo" class="w-7 h-7" />
+					</button>
+				</a>
+			</div>
 
 		</div>
 	</section>
 
 	<!-- btn -->
 	<section class="justify-center p-6">
-		<a href="<?= BASEURL; ?>/Mahasiswa/listMhs">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
-				<img src="../../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
-				<p>Kembali</p>
-			</button>
-		</a>
+		<button onclick="History.back()"
+			class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+			<img src="../../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
+			<p>Kembali</p>
+		</button>
 	</section>
 </section>
-</body>
-</html>
