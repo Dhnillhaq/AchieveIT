@@ -34,18 +34,6 @@ class Auth extends Controller
         $this->view('Auth/login', $data);
     }
 
-    public function pageNotFound()
-    {
-        if ($_SESSION['user']['role'] == 'Super Admin') {
-            $data['url'] = 'Admin/index';
-        } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-            $data['url'] = 'Kajur/index';
-        } else {
-            $data['url'] = 'Mahasiswa/index';
-        }
-        $this->view('Auth/pageNotFound', $data);
-    }
-
     // Method Halaman Registrasi
     public function register()
     {
@@ -95,11 +83,6 @@ class Auth extends Controller
             header("location:" . BASEURL . "/Auth/register");
         }
 
-    }
-
-    public function lupaSandi()
-    {
-        $this->view('Auth/lupaSandi');
     }
 
     public function setSession()
@@ -199,9 +182,25 @@ class Auth extends Controller
         return false;
     }
 
-    public function changePass()
+    public function lupaSandi()
     {
-        $this->view('Auth/ubahKataSandi');
+        $this->view('Auth/lupaSandi');
+    }
+
+    public function lupaSandiProcess()
+    {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'nim' => htmlspecialchars($_POST['nim']),
+                'email' => htmlspecialchars($_POST['email']),
+                'tanggal_lahir' => date('Y-m-d', strtotime($_POST['tanggal_lahir'])),
+            ];
+        }
+    }
+
+    public function gantiSandi()
+    {
+        $this->view('Auth/gantiSandi');
     }
 
     public function passprocess()
@@ -218,7 +217,7 @@ class Auth extends Controller
                 Flasher::setFlash("Gagal", "Kata Sandi Lama yang anda masukkan tidak cocok!", "error");
             }
         }
-        header("location:" . BASEURL . "/Auth/changePass");
+        header("location:" . BASEURL . "/Auth/gantiSandi");
 
     }
 
@@ -234,7 +233,7 @@ class Auth extends Controller
         print_r($data);
         echo "</pre>";
 
-        $isSuccess = $this->model("AuthModel")->changePass($data['password'], $data['username']);
+        $isSuccess = $this->model("AuthModel")->gantiSandi($data['password'], $data['username']);
 
         if ($isSuccess) {
             $_SESSION['user']['password'] = $data['password'];

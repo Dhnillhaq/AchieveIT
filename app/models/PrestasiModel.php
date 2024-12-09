@@ -8,6 +8,8 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM prestasi";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -18,6 +20,8 @@ class PrestasiModel extends Connection
     {
         $stmt = "SELECT * FROM vw_PrestasiMahasiswa ORDER BY poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
+
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -59,6 +63,8 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -71,6 +77,8 @@ class PrestasiModel extends Connection
         $stmt = "EXEC usp_GetDetailPrestasiDataDosen @id_prestasi = ?";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -95,6 +103,8 @@ class PrestasiModel extends Connection
     {
         $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
         $result = sqlsrv_query($this->conn, $stmt);
+
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -124,6 +134,8 @@ class PrestasiModel extends Connection
                 FROM prestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -136,6 +148,8 @@ class PrestasiModel extends Connection
         $stmt = "EXEC usp_GetAnalisisPrestasi @type = ?;";
         $params = array($type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -150,6 +164,8 @@ class PrestasiModel extends Connection
         $params = array($type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -162,6 +178,8 @@ class PrestasiModel extends Connection
         $params = array($year, $type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
+        $data = [];
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -173,6 +191,8 @@ class PrestasiModel extends Connection
     {
         $stmt = "SELECT * FROM vw_DataPrestasi";
         $result = sqlsrv_query($this->conn, $stmt);
+
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;

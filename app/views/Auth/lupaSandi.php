@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganti Kata Sandi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    </style>
-</head>
-<body class="font-[poppins]">
-    <section class="relative bg-cover bg-center min-h-screen"
+<section class="relative bg-cover bg-center min-h-screen"
 	style="background-image: url('../../../public/img/gedung-jti.png');">
 	<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
 
-    <!-- kembali -->
+	<!-- kembali -->
 	<a href="<?= BASEURL; ?>"
 		class="absolute top-4 left-4 flex items-center space-x-2 text-white px-4 py-2 rounded-lg hover:underline z-20">
 		<img src="../../../public/img/Back.png" alt="back" class="w-4 h-4" />
@@ -24,9 +12,10 @@
 	<div class="relative z-10 flex justify-between">
 		<!-- left side -->
 		<section class="w-1/2 flex flex-col items-start justify-center h-screen px-10 text-white">
-			<h1 class="absolute text-6xl font-bold">Selamat datang <br> di <span class="text-[#FEC01A]">AchieveIT!</span></h1>
+			<h1 class="absolute text-6xl font-bold">Selamat datang <br> di <span
+					class="text-[#FEC01A]">AchieveIT!</span></h1>
 			<div class="relative mt-[calc(1/2*120vh)]">
-  				<!-- Gambar di antara dua section -->
+				<!-- Gambar di antara dua section -->
 				<img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-36 h-auto" />
 			</div>
 		</section>
@@ -51,25 +40,20 @@
 							<img src="../../../public/img/Message.png" alt="logo"
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
-                        <div class="relative">
-                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
-                            class="w-full px-4 py-4 bg-[#D9D9D9] border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 placeholder-[#757575]"
-                            required>
-                        </div>
-
-						
-						
+						<div class="relative">
+							<input type="date" id="tanggal_lahir" name="tanggal_lahir"
+								placeholder="Masukkan Tanggal Lahir"
+								class="w-full px-4 py-4 bg-[#D9D9D9] border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 placeholder-[#757575]"
+								required>
+						</div>
 					</form>
-					<button type="submit" nameh="submit"
-							class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Proses</button>
-							<div class="flex justify-start text-blue-700 space-x-1">
-								<a href="#" class="hover:underline">kembali ke Halaman Login</a>
-							</div>
+					<button type="submit" name="submit"
+						class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Proses</button>
+					<div class="flex justify-start text-blue-700 space-x-1">
+						<a href="#" class="hover:underline">kembali ke Halaman Login</a>
+					</div>
 				</div>
 			</div>
 		</section>
 	</div>
-
-    </section>
-</body>
-</html>
+</section>

@@ -10,6 +10,18 @@ class Home extends Controller
         }
         $this->view('index', $data);
     }
+
+    public function pageNotFound()
+    {
+        if ($_SESSION['user']['role'] == 'Super Admin') {
+            $data['url'] = 'Admin/index';
+        } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+            $data['url'] = 'Kajur/index';
+        } else {
+            $data['url'] = 'Mahasiswa/index';
+        }
+        $this->view('pageNotFound', $data);
+    }
 }
 
 ?>
