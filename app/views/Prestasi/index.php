@@ -100,7 +100,7 @@
 						<td class="py-2 px-4 border border-blue-950">
 							<img src="../../public/img/<?= ($prestasi['status'] == 'Valid') ? 'Valid.png' : (($prestasi['status'] == 'Invalid') ? 'invalid.png' : 'notValidated.png') ?>"
 								alt="Icon Status" class="w-5 h-auto" />
-							<?= $prestasi['status'] ?>
+							<p><?= $prestasi['status'] ?></p>
 						</td>
 						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
 						<td class="py-2 px-4 border border-blue-950">
