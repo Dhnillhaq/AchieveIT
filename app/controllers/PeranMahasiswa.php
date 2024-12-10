@@ -32,6 +32,23 @@ class PeranMahasiswa extends Controller
         $this->view("Admin/PeranMahasiswa/edit", $data);
     }
     
+    public function update()
+    {
+        $this->checkRole("Admin", "Super Admin");
+        $data = [
+            'peran' => htmlspecialchars($_POST['peran']),
+            'id_peran' => htmlspecialchars($_POST['id_peran'])
+        ];
+
+        $isSuccess =  $this->model("PeranMahasiswaModel")->update($data);
+        if ($isSuccess) {
+            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
+        } else {
+            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
+        }
+        header('location:' . BASEURL . '/PeranMahasiswa/edit/' . $data['id_peran']);
+    }
+    
     public function delete($id_peran)
     {
         $this->checkRole("Admin", "Super Admin");
@@ -55,20 +72,4 @@ class PeranMahasiswa extends Controller
         header("location:" . BASEURL . "/Mahasiswa/listMhs");
     }
 
-    public function update()
-    {
-        $this->checkRole("Admin", "Super Admin");
-        $data = [
-            'peran' => htmlspecialchars($_POST['peran']),
-            'id_peran' => htmlspecialchars($_POST['id_peran'])
-        ];
-
-        $isSuccess =  $this->model("PeranMahasiswaModel")->update($data);
-        if ($isSuccess) {
-            Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
-        } else {
-            Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
-        }
-        header('location:' . BASEURL . '/PeranMahasiswa/edit/' . $data['id_peran']);
-    }
 }

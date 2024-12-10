@@ -34,6 +34,23 @@ class Auth extends Controller
         $this->view('Auth/login', $data);
     }
 
+    // public function pageNotFound()
+    // {
+    //     if (!isset($_SESSION['user'])) {
+    //         $data['url'] = 'Home/index';
+    //     } else {
+    //         if ($_SESSION['user']['role'] == 'Super Admin') {
+    //             $data['url'] = 'Admin/index';
+    //         } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+    //             $data['url'] = 'Kajur/index';
+    //         } else {
+    //             $data['url'] = 'Mahasiswa/index';
+    //         }
+    //     }
+    //     $this->view('Auth/pageNotFound', $data);
+    // }
+
+
     // Method Halaman Registrasi
     public function register()
     {
@@ -67,17 +84,17 @@ class Auth extends Controller
                 $isSuccess = $this->model("MahasiswaModel")->updateAccount($data);
 
                 if ($isSuccess) {
-                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "index");
+                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "Homeindex");
                 } else {
-                    Flasher::setFlash("Perbarui Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "index");
+                    Flasher::setFlash("Perbarui Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "Home/index");
                 }
             } else {
                 $isSuccess = $this->model("MahasiswaModel")->store($data);
 
                 if ($isSuccess) {
-                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "index");
+                    Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "Home/index");
                 } else {
-                    Flasher::setFlash("Daftar Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "index");
+                    Flasher::setFlash("Daftar Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "Home/index");
                 }
             }
             header("location:" . BASEURL . "/Auth/register");
@@ -143,7 +160,7 @@ class Auth extends Controller
 
     public function isMahasiswa()
     {
-        $check = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
+        $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
         if (!empty($this->userDB['0'])) {
             if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
                 return true;
@@ -158,7 +175,7 @@ class Auth extends Controller
     public function isValidated($nim)
     {
         $check = $this->model("MahasiswaModel")->getMahasiswaByNim($nim, "Valid");
-        if (!empty($this->userDB['0'])) {
+        if (!empty($check['0'])) {
             return true;
         }
         return false;
