@@ -86,7 +86,8 @@
 					<div class="flex flex-col space-y-4">
 						<div class="flex flex-col justify-start items-start pt-5">
 							<p class="text-[#757575]">File Surat Tugas</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_surat_tugas'] ?></p>
+							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_surat_tugas'] ?>
+							</p>
 						</div>
 
 						<div class="flex flex-col justify-start items-start pt-5">
@@ -149,13 +150,15 @@
 							?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950"><?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?></td>
+								<td class="py-2 px-4 border border-blue-950">
+									<?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $mhs['peran'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
 									<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
 										<button>
-										<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-									</button>
+											<img src="../../../public/img/Aksi.png" alt="logo"
+												class="p-2 bg-[#132145] rounded-md">
+										</button>
 									</a>
 								</td>
 							</tr>
@@ -224,7 +227,7 @@
 			<div class="flex flex-col space-y-0 justify-start items-start py-3">
 				<p class="text-[#757575] font-light">Status</p>
 				<p class="font-bold">VALID</p>
-				
+
 			</div>
 
 			<h2 class="text-[#757575]">Perhitungan Poin</h2>
@@ -301,7 +304,7 @@
 		</div>
 
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/Prestasi/delete/">
+			<a href="<?= BASEURL; ?>/Prestasi/delete/<?= $data['prestasi']['id_prestasi'] ?>">
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
 					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
 					<p>Hapus</p>
