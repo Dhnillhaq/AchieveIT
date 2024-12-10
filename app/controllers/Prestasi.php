@@ -138,12 +138,179 @@ class Prestasi extends Controller
         $this->view("Prestasi/edit", $data);
     }
 
-    public function delete($id_prestasi)
+    public function update()
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa");
 
+        if (isset($_POST['submit'])) {
+
+            $id_prestasi = htmlspecialchars($_POST['id_prestasi']);
+
+            $selectedPrestasi = $this->model("PrestasiModel")->getPrestasiById($id_prestasi);
+
+            $dataPrestasi = [
+                'kategori' => filter_var($_POST['kategori'], FILTER_VALIDATE_INT),
+                'tingkat_kompetisi' => filter_var($_POST['tingkat_kompetisi'], FILTER_VALIDATE_INT),
+                'tingkat_penyelenggara' => filter_var($_POST['tingkat_penyelenggara'], FILTER_VALIDATE_INT),
+                'nama_kompetisi' => htmlspecialchars($_POST['nama_kompetisi']),
+                'tanggal_mulai' => date('Y-m-d', strtotime($_POST['tanggal_mulai'])),
+                'tanggal_selesai' => date('Y-m-d', strtotime($_POST['tanggal_selesai'])),
+                'penyelenggara' => htmlspecialchars($_POST['penyelenggara']),
+                'tempat_kompetisi' => htmlspecialchars($_POST['tempat_kompetisi']),
+                'juara' => filter_var($_POST['juara'], FILTER_VALIDATE_INT),
+                'surat_tugas' => !empty($_FILES['surat_tugas']['name']) ? $this->uploadFile($_FILES['surat_tugas']) : $selectedPrestasi['surat_tugas'],
+                'poster' => !empty($_FILES['poster']['name']) ? $this->uploadFile($_FILES['poster']) : $selectedPrestasi['poster_kompetisi'],
+                'foto_juara' => !empty($_FILES['foto_juara']['name']) ? $this->uploadFile($_FILES['foto_juara']) : $selectedPrestasi['foto_juara'],
+                'sertifikat' => !empty($_FILES['sertifikat']['name']) ? $this->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
+                'proposal' => !empty($_FILES['proposal']['name']) ? $this->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
+                'id_prestasi' => $id_prestasi
+            ];
+
+            $dataPrestasi['poin_prestasi'] = $this->model("JuaraModel")->getJuaraById($dataPrestasi['juara'])['poin'] +
+                $this->model("TingkatKompetisiModel")->getTingkatKompetisiById($dataPrestasi['tingkat_kompetisi'])['poin'] +
+                $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggaraById($dataPrestasi['tingkat_penyelenggara'])['poin'];
+
+            $updatePrestasi = $this->model("PrestasiModel")->update($dataPrestasi);
+
+            if ($updatePrestasi) {
+
+                // insert into mahasiswa - prestasi
+                $dataMahasiswa = [
+                    'id_prestasi' => $id_prestasi,
+                    'id_mahasiswa' => $_POST['mahasiswa'],
+                    'id_peran' => $_POST['peran_mhs']
+                ];
+
+                if (count($dataMahasiswa['id_mahasiswa']) === count($dataMahasiswa['id_peran'])) {
+
+                    for ($i = 0; $i < count($dataMahasiswa['id_mahasiswa']); $i++) {
+                        if (!$dataMahasiswa['id_mahasiswa'][$i] == $this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)['id_mahasiswa'][$i]) {
+                            $updatePeranMahasiswa = $this->model("PrestasiMahasiswaModel")->update(
+                                $dataMahasiswa['id_prestasi'],
+                                filter_var($dataMahasiswa['id_mahasiswa'][$i], FILTER_VALIDATE_INT),
+                                filter_var($dataMahasiswa['id_peran'][$i], FILTER_VALIDATE_INT),
+                                $this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)
+                            );
+
+                            if (!$updatePeranMahasiswa) {
+                                var_dump($dataMahasiswa);
+                                die;
+                            }
+                        } else {
+                            if (empty($dataMahasiswa['id_mahasiswa']) && !empty($this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)['id_mahasiswa'])) {
+                                $insertedPeranMahasiswa = $this->model("PrestasiMahasiswaModel")->store(
+                                    $dataMahasiswa['id_prestasi'],
+                                    filter_var($dataMahasiswa['id_mahasiswa'][$i], FILTER_VALIDATE_INT),
+                                    filter_var($dataMahasiswa['id_peran'][$i], FILTER_VALIDATE_INT)
+                                );
+
+                                if (!$insertedPeranMahasiswa) {
+                                    var_dump($dataMahasiswa);
+                                    die;
+                                }
+                            } else {
+                                $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id_prestasi, $dataMahasiswa['id_mahasiswa'][$i]);
+                                if (!$deleteMahasiswa) {
+                                    var_dump($dataMahasiswa);
+                                    die;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // error handling
+                }
+
+                // insert into dosen - prestasi
+                $dataDosen = [
+                    'id_prestasi' => $id_prestasi,
+                    'id_dosen' => $_POST['dosen'],
+                    'id_peran' => $_POST['peran_dsn']
+                ];
+
+                if (count($dataDosen['id_dosen']) === count($dataDosen['id_peran'])) {
+
+                    for ($i = 0; $i < count($dataDosen['id_dosen']); $i++) {
+                        if (!$dataDosen['id_dosen'][$i] == $this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)['id_dosen'][$i]) {
+                            $updatePeranDosen = $this->model("DosenPrestasiModel")->update(
+                                $dataDosen['id_prestasi'],
+                                filter_var($dataDosen['id_dosen'][$i], FILTER_VALIDATE_INT),
+                                filter_var($dataDosen['id_peran'][$i], FILTER_VALIDATE_INT),
+                                $this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)
+                            );
+
+                            if (!$updatePeranDosen) {
+                                var_dump($dataDosen);
+                                die;
+                            }
+                        } else {
+                            if (!empty($dataDosen['id_dosen']) > empty($this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)['id_dosen'])) {
+                                $insertedPeranDosen = $this->model("DosenPrestasiModel")->store(
+                                    $dataDosen['id_prestasi'],
+                                    filter_var($dataDosen['id_dosen'][$i], FILTER_VALIDATE_INT),
+                                    filter_var($dataDosen['id_peran'][$i], FILTER_VALIDATE_INT)
+                                );
+
+                                if (!$insertedPeranDosen) {
+                                    var_dump($dataDosen);
+                                    die;
+                                }
+                            } else {
+                                $deleteDosen = $this->model("DosenPrestasiModel")->delete($id_prestasi, $dataDosen['id_dosen'][$i]);
+                                if (!$deleteDosen) {
+                                    var_dump($dataDosen);
+                                    die;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    var_dump($dataDosen);
+                    die;
+                }
+
+            } else {
+                // error handling
+            }
+        }
+        Flasher::setFlash("Ubah", "Data Prestasi berhasil diubah", "success");
+        header('location:' . BASEURL . '/Prestasi/index');
+    }
+
+    public function delete($id_prestasi)
+    {
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $id = htmlspecialchars($id_prestasi);
-        $this->model("PrestasiModel")->delete($id);
+
+        $mahasiswa = $this->model('PrestasiMahasiswaModel')->getPrestasiMahasiswaByIdPrestasi($id);
+
+        if (!empty($mahasiswa)) {
+            for ($i = 0; $i < count($mahasiswa); $i++) {
+                $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id, $mahasiswa['id_mahasiswa']);
+                if (!$deleteMahasiswa) {
+                    var_dump($mahasiswa);
+                    die;
+                }
+            }
+        }
+
+        $dosen = $this->model('DosenPrestasiModel')->getDosenPrestasiByIdPrestasi($id);
+
+        if (!empty($dosen)) {
+            for ($i = 0; $i < count($dosen); $i++) {
+                $deleteDosen = $this->model("DosenPrestasiModel")->delete($id, $dosen['id_dosen']);
+                if (!$deleteDosen) {
+                    var_dump($dosen);
+                    die;
+                }
+            }
+        }
+
+        $isSuccess = $this->model("PrestasiModel")->delete($id);
+        if (!$isSuccess) {
+            var_dump($dosen);
+            die;
+        }
         header('location:' . BASEURL . '/Prestasi/index');
     }
     public function show($id_prestasi)

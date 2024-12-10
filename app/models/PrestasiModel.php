@@ -57,6 +57,17 @@ class PrestasiModel extends Connection
         return $data;
     }
 
+    public function getPrestasiById($id)
+    {
+        $stmt = "SELECT * FROM prestasi WHERE id_prestasi = ?";
+        $params = array($id);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
+        return $data;
+    }
+
     public function getDetailPrestasiDataMahasiswa($id)
     {
         $stmt = "EXEC usp_GetDetailPrestasiDataMahasiswa @id_prestasi = ?";
@@ -278,6 +289,7 @@ class PrestasiModel extends Connection
                 sertifikat = ?, 
                 poin_prestasi = ?
             WHERE id_prestasi = ?;";
+
         $params = array(
             $data['kategori'],
             $data['juara'],
@@ -296,6 +308,18 @@ class PrestasiModel extends Connection
             $data['poin_prestasi'],
             $data['id_prestasi']
         );
+
+        $isSuccess = sqlsrv_query($this->conn, $stmt, $params);
+
+        if (!$isSuccess) {
+            die(print_r(sqlsrv_errors(), true)); // Debug errors
+        }
+    }
+
+    public function delete($id_prestasi)
+    {
+        $stmt = "DELETE FROM prestasi WHERE id_prestasi = ?";
+        $params = array($id_prestasi);
 
         return sqlsrv_query($this->conn, $stmt, $params);
     }
