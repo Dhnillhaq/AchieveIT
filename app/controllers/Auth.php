@@ -34,21 +34,21 @@ class Auth extends Controller
         $this->view('Auth/login', $data);
     }
 
-    public function pageNotFound()
-    {
-        if (!isset($_SESSION['user'])) {
-            $data['url'] = 'Home/index';
-        } else {
-            if ($_SESSION['user']['role'] == 'Super Admin') {
-                $data['url'] = 'Admin/index';
-            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-                $data['url'] = 'Kajur/index';
-            } else {
-                $data['url'] = 'Mahasiswa/index';
-            }
-        }
-        $this->view('Auth/pageNotFound', $data);
-    }
+    // public function pageNotFound()
+    // {
+    //     if (!isset($_SESSION['user'])) {
+    //         $data['url'] = 'Home/index';
+    //     } else {
+    //         if ($_SESSION['user']['role'] == 'Super Admin') {
+    //             $data['url'] = 'Admin/index';
+    //         } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+    //             $data['url'] = 'Kajur/index';
+    //         } else {
+    //             $data['url'] = 'Mahasiswa/index';
+    //         }
+    //     }
+    //     $this->view('Auth/pageNotFound', $data);
+    // }
 
 
     // Method Halaman Registrasi
