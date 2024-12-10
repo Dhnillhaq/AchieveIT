@@ -48,10 +48,10 @@ class PeranDosen extends Controller
         header('location:' . BASEURL . '/PeranDosen/edit/' . $data['id_peran']);
     }
     
-    public function delete($id_peranDosen)
+    public function delete($id_peran)
     {
         $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_peranDosen);
+        $id = htmlspecialchars($id_peran);
 
         Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "PeranDosen/deleting/" . $id);
 

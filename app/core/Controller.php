@@ -8,11 +8,11 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/templates/header.php';
-        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar' && $view != 'Home/pageNotFound' && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi') {
+        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar'  && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi' && $view != 'pageNotFound') {
             require_once '../app/views/templates/sidebar.php';
         }
         require_once '../app/views/' . $view . '.php';
-        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar') {
+        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar'  && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi' && $view != 'pageNotFound') {
             require_once '../app/views/templates/footer.php';
         }
     }
