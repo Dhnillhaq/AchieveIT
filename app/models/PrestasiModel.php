@@ -257,6 +257,48 @@ class PrestasiModel extends Connection
 
         return (int) $insertedId;
     }
+
+    public function update($data)
+    {
+        $stmt = "UPDATE prestasi
+            SET
+                id_kategori = ?,
+                id_juara = ?,
+                id_tingkat_penyelenggara = ?,
+                id_tingkat_kompetisi = ?,
+                nama_kompetisi = ?,
+                tanggal_mulai_kompetisi = ?,
+                tanggal_selesai_kompetisi = ?,
+                penyelenggara_kompetisi = ?,
+                tempat_kompetisi = ?,
+                surat_tugas = ?, 
+                poster_kompetisi = ?, 
+                foto_juara = ?, 
+                proposal = ?, 
+                sertifikat = ?, 
+                poin_prestasi = ?
+            WHERE id_prestasi = ?;";
+        $params = array(
+            $data['kategori'],
+            $data['juara'],
+            $data['tingkat_penyelenggara'],
+            $data['tingkat_kompetisi'],
+            $data['nama_kompetisi'],
+            $data['tanggal_mulai'],
+            $data['tanggal_selesai'],
+            $data['penyelenggara'],
+            $data['tempat_kompetisi'],
+            $data['surat_tugas'],
+            $data['poster'],
+            $data['foto_juara'],
+            $data['proposal'],
+            $data['sertifikat'],
+            $data['poin_prestasi'],
+            $data['id_prestasi']
+        );
+
+        return sqlsrv_query($this->conn, $stmt, $params);
+    }
 }
 
 ?>
