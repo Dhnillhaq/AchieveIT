@@ -31,8 +31,6 @@ $activePaths = [
     'Admin/create',
     'Admin/edit/',
 
-
-
 ];
 
 // Periksa apakah salah satu path cocok dengan URL saat ini

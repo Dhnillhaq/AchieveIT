@@ -73,7 +73,7 @@
 			</div>
 			<!-- btn ubah kt sandi -->
 			<section class="justify-center pt-6">
-				<a href="<?= BASEURL; ?>/Auth/gantiSandi">
+				<a href="<?= BASEURL; ?>/Auth/ubahSandi">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5">
 						<p>Ubah Kata Sandi</p>
@@ -85,7 +85,7 @@
 
 	<!-- btn -->
 	<section class="justify-center p-6">
-		<a href="<?= BASEURL; ?>/Auth/deleteSession">
+		<a href="<?= BASEURL; ?>/Auth/logout">
 			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg w-auto">
 				<img src="../../../public/img/Sign_out.png" alt="logo" class="w-5 h-5">
 				<p>Keluar</p>

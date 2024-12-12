@@ -37,7 +37,7 @@
 			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg min-h-full">
 				<div class="px-10 py-6 space-y-5 w-full max-w-screen-xl">
 					<h1 class="text-4xl font-bold text-center my-2">Daftar</h1>
-					<form method="post" action="<?=BASEURL;?>/Auth/registration" class="space-y-4 w-full" onsubmit="return validasiSandi()">
+					<form method="post" action="<?=BASEURL;?>/Auth/registrasiProcess" class="space-y-4 w-full" onsubmit="return validasiSandi()">
 						<!-- //  nama -->
 						<div class="relative">
 							<input type="text" id="nama" name="nama" placeholder="Nama Lengkap"
@@ -105,7 +105,7 @@
 									required>
 								<img src="../../../public/img/Date_fill.png" alt="logo"
 									class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer"
-									onclick="document.getElementById('tglLahir').showPicker()" />
+									onclick="document.getElementById('tglLahir').showPicker()"/>
 							</div>
 
 							<div class="relative w-full">
