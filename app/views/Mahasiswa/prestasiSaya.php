@@ -92,66 +92,76 @@
 						</td>
 					</tr>
 				<?php } else {
-				$no = 1;
-				foreach ($data['prestasi'] as $prestasi) { ?>
-					<tr>
-						<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
-						<td class="py-2 px-4 border border-blue-950">
-							<img src="../../public/img/Valid.png" alt="Icon Status" class="w-5 h-auto" />
-							<img src="../../public/img/invalid.png" alt="Icon Status" class="w-5 h-auto" />
-							<img src="../../public/img/notValidated.png" alt="Icon Status" class="w-5 h-auto" />
-						</td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
-						<td class="py-2 px-4 border border-blue-950">
-							<a href="<?= BASEURL; ?>/Prestasi/show/<?= $prestasi['id_prestasi'] ?>">
-								<button>
-									<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
-								</button>
-							</a>
-						</td>
-					</tr>
-				<?php }}
+					$no = 1;
+					foreach ($data['prestasi'] as $prestasi) { ?>
+						<tr>
+							<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
+							<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
+							<td class="py-2 px-4 border border-blue-950">
+								<img src="../../public/img/<?= ($prestasi['status'] == 'Valid') ? 'Valid.png' : (($prestasi['status'] == 'Invalid') ? 'invalid.png' : 'notValidated.png') ?>"
+									alt="Icon Status" class="w-5 h-auto" />
+								<p><?= $prestasi['status'] ?></p>
+							</td>
+							<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
+							<td class="py-2 px-4 border border-blue-950">
+								<a href="<?= BASEURL; ?>/Prestasi/show/<?= $prestasi['id_prestasi'] ?>">
+									<button>
+										<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
+									</button>
+								</a>
+							</td>
+						</tr>
+					<?php }
+				}
 				?>
 
 			</tbody>
 		</table>
 	</section>
 	<!-- pagination -->
-        <section class="flex items-center justify-center py-2">
-  <nav aria-label="Page navigation example">
-  <ul class="flex items-center -space-x-px h-8 text-sm">
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-        </svg>
-      </a>
-    </li>
-    <li>
-      <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Next</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-        </svg>
-      </a>
-    </li>
-  </ul>
-</nav>
+	<section class="flex items-center justify-center py-2">
+		<nav aria-label="Page navigation example">
+			<ul class="flex items-center -space-x-px h-8 text-sm">
+				<li>
+					<a href="#"
+						class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
+						<span class="sr-only">Previous</span>
+						<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+							fill="none" viewBox="0 0 6 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M5 1 1 5l4 4" />
+						</svg>
+					</a>
+				</li>
+				<li>
+					<a href="#" aria-current="page"
+						class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
+				</li>
+				<li>
+					<a href="#"
+						class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
+				</li>
+				<li>
+					<a href="#"
+						class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
+				</li>
+				<li>
+					<a href="#"
+						class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
+						<span class="sr-only">Next</span>
+						<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+							fill="none" viewBox="0 0 6 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="m1 9 4-4-4-4" />
+						</svg>
+					</a>
+				</li>
+			</ul>
+		</nav>
 
-</section>
+	</section>
 
 </section>
