@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Flasher;
+use DateTime;
 
 class Auth extends Controller
 {
@@ -223,7 +224,7 @@ class Auth extends Controller
     // Method / function ganti sandi setelah lupa sandi saat Login
     public function gantiSandiForm($nim)
     {
-       $this->view('Auth/gantiSandi', $nim);
+        $this->view('Auth/gantiSandi', $nim);
     }
 
     public function gantiSandiProcess()
