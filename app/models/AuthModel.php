@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Models;
+
+use App\Core\Connection;
+
 class AuthModel extends Connection
 {
 
@@ -51,19 +56,25 @@ class AuthModel extends Connection
         return sqlsrv_query($this->conn, $stmt, $params);
     }
 
-    public function gantiSandi($username, $password)
+    public function gantiSandi($password, $username)
     {
-        if ($_SESSION['user']['role'] == 'Mahasiswa') {
-            $stmt = "UPDATE mahasiswa
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['user']['role'] == 'Mahasiswa') {
+                $stmt = "UPDATE mahasiswa
                  SET password = ?
                  WHERE nim = ?;";
-        } else {
-            $stmt = "UPDATE admin
+            } else {
+                $stmt = "UPDATE admin
                  SET password = ?
                  WHERE nip = ?;";
+            }
+        } else {
+            $stmt = "UPDATE mahasiswa
+             SET password = ?
+             WHERE nim = ?;";
         }
 
-        $params = array($username, $password);
+        $params = array($password, $username);
 
         return sqlsrv_query($this->conn, $stmt, $params);
     }

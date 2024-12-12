@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Models;
+
+use App\Core\Connection;
+
 class PeranMahasiswaModel extends Connection
 {
     public function getPeranMhs()

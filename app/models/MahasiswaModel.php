@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use App\Core\Connection;
+
 class MahasiswaModel extends Connection
 {
 
@@ -84,9 +88,9 @@ class MahasiswaModel extends Connection
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
-    public function store($data)
+    public function store($data, $validate = 'Valid')
     {
-        $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, status, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $params = array(
             $data['id_prodi'],
             $data['nim'],
@@ -97,6 +101,7 @@ class MahasiswaModel extends Connection
             $data['jenis_kelamin'],
             $data['no_telepon'],
             $data['email'],
+            $validate,
             $data['password']
         );
 

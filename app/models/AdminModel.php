@@ -1,15 +1,20 @@
-<?php 
+<?php
+
+namespace App\Models;
+
+use App\Core\Connection;
+
 class AdminModel extends Connection
 {
-    
+
     // Get All Data Admin
     public function getAllDataAdmin()
     {
         $stmt = "SELECT * FROM admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        
-        
+
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -19,12 +24,12 @@ class AdminModel extends Connection
     // Get All Log Admin
     public function getAllLogAdmin()
     {
-     
+
         $stmt = "SELECT * FROM log_admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        
-        
+
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
@@ -36,9 +41,9 @@ class AdminModel extends Connection
         $stmt = "SELECT * FROM admin WHERE id_admin = ?";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
-        
-        return  sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
+
+        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+
     }
 
     public function store($data)
@@ -47,7 +52,7 @@ class AdminModel extends Connection
         $params = array($data['nip'], $data['nama'], $data['role'], $data['password']);
         return sqlsrv_query($this->conn, $stmt, $params);
     }
-    
+
     public function delete($id_admin)
     {
         $stmt = "DELETE FROM admin WHERE id_admin = ?";
