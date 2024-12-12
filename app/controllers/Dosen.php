@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Core\Flasher;
+
 class Dosen extends Controller
 {
     public function index()

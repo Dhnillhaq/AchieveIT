@@ -1,9 +1,12 @@
 <?php
+
+namespace App\Core;
+
 class Connection
 {
     private $serverName = SERVER_NAME;
     private $connectionInfo = ["Database" => DATABASE_NAME];
-    public $conn;
+    protected $conn;
 
     public function __construct()
     {

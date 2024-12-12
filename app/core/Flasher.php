@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Core;
+
 class Flasher
 {
     public static function setFlash($action, $message, $type, $url = '')

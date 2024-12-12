@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Core\Flasher;
+
 class TingkatKompetisi extends Controller
 {
     public function create()

@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use App\Core\Connection;
+
 class PrestasiMahasiswaModel extends Connection
 {
     public function getPrestasiMahasiswaByIdPrestasi($id_prestasi)

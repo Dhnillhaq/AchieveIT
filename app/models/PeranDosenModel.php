@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Models;
+
+use App\Core\Connection;
+
 class PeranDosenModel extends Connection
 {
     public function getPeranDosen()

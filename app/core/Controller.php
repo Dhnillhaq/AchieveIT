@@ -1,18 +1,31 @@
 <?php
 
-class Controller
+namespace App\Core;
+
+abstract class Controller
 {
     private $models = [];
-    private $storageDir = __DIR__ . "../../../storage";
+
+    private final static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound'];
 
     public function view($view, $data = [])
     {
+        $viewFile = '../app/views/' . $view . '.php';
+
+        if (!file_exists($viewFile)) {
+            header("location:" . BASEURL . "/Auth/pageNotFound");
+            exit;
+        }
+
         require_once '../app/views/templates/header.php';
-        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar'  && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi' && $view != 'pageNotFound') {
+
+        if (!in_array($view, self::$excludeSidebarFooter)) {
             require_once '../app/views/templates/sidebar.php';
         }
-        require_once '../app/views/' . $view . '.php';
-        if ($view != 'index' && $view != 'Auth/login' && $view != 'Auth/daftar'  && $view != 'Auth/lupaSandi' && $view != 'Auth/gantiSandi' && $view != 'pageNotFound') {
+
+        require_once $viewFile;
+
+        if (!in_array($view, self::$excludeSidebarFooter)) {
             require_once '../app/views/templates/footer.php';
         }
     }
@@ -22,12 +35,13 @@ class Controller
         if (!isset($this->models[$model])) {
             $modelFile = '../app/models/' . $model . '.php';
 
-            if (file_exists($modelFile)) {
-                require_once $modelFile;
-                $this->models[$model] = new $model();
-            } else {
+            if (!file_exists($modelFile)) {
                 header("location:" . BASEURL . "/Auth/pageNotFound");
+                exit;
             }
+
+            require_once $modelFile;
+            $this->models[$model] = new $model();
         }
         return $this->models[$model];
     }
@@ -36,69 +50,15 @@ class Controller
     {
         $hasAccess = false;
 
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role'])) {
             header('location:' . BASEURL . '/Auth/Login');
+            exit;
         }
 
-        foreach ($roles as $role) {
-            if ($_SESSION['user']['role'] == $role) {
-                $hasAccess = true;
-            }
+        if (!in_array($_SESSION['user']['role'], $roles)) {
+            header('location:' . BASEURL . '/Auth/pageNotFound');
+            exit;
         }
-
-        if (!$hasAccess) {
-            header('location:' . BASEURL . '/Home/pageNotFound');
-        }
-    }
-
-    public function uploadFile($file)
-    {
-        if (!is_dir($this->storageDir)) {
-            mkdir($this->storageDir, 0755, true);
-        }
-
-        if ($file['error'] !== UPLOAD_ERR_OK) {
-            Flasher::setFlash("Input", "1 File {$file['name']} gagal ditambahkan {$file['error']}", "error", "Prestasi/create");
-            return false;
-        }
-
-        $fileName = uniqid() . '_' . basename($file['name']);
-        $targetFile = $this->storageDir . '/' . $fileName;
-
-        // validate file type
-        $allowedTypes = ['image/jpg', 'image/jpeg', 'image/png', 'application/pdf'];
-        if (!in_array($file['type'], $allowedTypes)) {
-            Flasher::setFlash("Input", "2 File {$file['name']} gagal ditambahkan {$file['error']}", "error", "Prestasi/create");
-            return false;
-        }
-
-        // validate file size
-        if ($file['size'] > 5 * 1024 * 1024) {
-            Flasher::setFlash("Input", "3 File {$file['name']} gagal ditambahkan {$file['error']}", "error", "Prestasi/create");
-            return false;
-        }
-
-        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            $data = [
-                'nama_file' => $fileName,
-                'nama_asli' => $file['name'],
-                'ukuran' => $file['size'],
-                'tipe' => $file['type'],
-                'path' => $targetFile
-            ];
-
-            $result = $this->model("FilesModel")->store($data);
-
-            if (!empty($result)) {
-                return $result;
-            } else {
-                Flasher::setFlash("Input", "4 File {$file['name']} gagal ditambahkan {$file['error']}", "error", "Prestasi/create");
-                return false;
-            }
-        }
-
-        Flasher::setFlash("Input", "5 File {$file['name']} gagal ditambahkan {$file['error']}", "error", "Prestasi/create");
-        return false;
     }
 }
 ?>

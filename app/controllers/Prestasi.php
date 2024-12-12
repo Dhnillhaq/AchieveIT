@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Core\Flasher;
+use App\Controllers\Files;
+
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -7,6 +13,14 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class Prestasi extends Controller
 {
+
+    private $files;
+
+    public function __construct()
+    {
+        $files = new Files();
+    }
+
     public function index()
     {
         $this->checkRole("Admin", "Super Admin", "Ketua Jurusan");
@@ -44,11 +58,11 @@ class Prestasi extends Controller
                 'penyelenggara' => htmlspecialchars($_POST['penyelenggara']),
                 'tempat_kompetisi' => htmlspecialchars($_POST['tempat_kompetisi']),
                 'juara' => filter_var($_POST['juara'], FILTER_VALIDATE_INT),
-                'surat_tugas' => $this->uploadFile($_FILES['surat_tugas']),
-                'poster' => $this->uploadFile($_FILES['poster']),
-                'foto_juara' => $this->uploadFile($_FILES['foto_juara']),
-                'sertifikat' => $this->uploadFile($_FILES['sertifikat']),
-                'proposal' => !empty($_FILES['proposal']['name']) ? $this->uploadFile($_FILES['proposal']) : NULL
+                'surat_tugas' => self::$files->uploadFile($_FILES['surat_tugas']),
+                'poster' => self::$files->uploadFile($_FILES['poster']),
+                'foto_juara' => self::$files->uploadFile($_FILES['foto_juara']),
+                'sertifikat' => self::$files->uploadFile($_FILES['sertifikat']),
+                'proposal' => !empty($_FILES['proposal']['name']) ? self::$files->uploadFile($_FILES['proposal']) : NULL
             ];
 
             $dataPrestasi['poin_prestasi'] = $this->model("JuaraModel")->getJuaraById($dataPrestasi['juara'])['poin'] +
@@ -158,11 +172,11 @@ class Prestasi extends Controller
                 'penyelenggara' => htmlspecialchars($_POST['penyelenggara']),
                 'tempat_kompetisi' => htmlspecialchars($_POST['tempat_kompetisi']),
                 'juara' => filter_var($_POST['juara'], FILTER_VALIDATE_INT),
-                'surat_tugas' => !empty($_FILES['surat_tugas']['name']) ? $this->uploadFile($_FILES['surat_tugas']) : $selectedPrestasi['surat_tugas'],
-                'poster' => !empty($_FILES['poster']['name']) ? $this->uploadFile($_FILES['poster']) : $selectedPrestasi['poster_kompetisi'],
-                'foto_juara' => !empty($_FILES['foto_juara']['name']) ? $this->uploadFile($_FILES['foto_juara']) : $selectedPrestasi['foto_juara'],
-                'sertifikat' => !empty($_FILES['sertifikat']['name']) ? $this->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
-                'proposal' => !empty($_FILES['proposal']['name']) ? $this->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
+                'surat_tugas' => !empty($_FILES['surat_tugas']['name']) ? self::$files->uploadFile($_FILES['surat_tugas']) : $selectedPrestasi['surat_tugas'],
+                'poster' => !empty($_FILES['poster']['name']) ? self::$files->uploadFile($_FILES['poster']) : $selectedPrestasi['poster_kompetisi'],
+                'foto_juara' => !empty($_FILES['foto_juara']['name']) ? self::$files->uploadFile($_FILES['foto_juara']) : $selectedPrestasi['foto_juara'],
+                'sertifikat' => !empty($_FILES['sertifikat']['name']) ? self::$files->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
+                'proposal' => !empty($_FILES['proposal']['name']) ? self::$files->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
                 'id_prestasi' => $id_prestasi
             ];
 
