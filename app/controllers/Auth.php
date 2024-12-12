@@ -11,7 +11,7 @@ class Auth extends Controller
     private $passwordInp;
     private $userDB;
 
-    public function login()
+    public function loginForm()
     {
         $data = [];
 
@@ -40,32 +40,15 @@ class Auth extends Controller
         $this->view('Auth/login', $data);
     }
 
-    // public function pageNotFound()
-    // {
-    //     if (!isset($_SESSION['user'])) {
-    //         $data['url'] = 'Home/index';
-    //     } else {
-    //         if ($_SESSION['user']['role'] == 'Super Admin') {
-    //             $data['url'] = 'Admin/index';
-    //         } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-    //             $data['url'] = 'Kajur/index';
-    //         } else {
-    //             $data['url'] = 'Mahasiswa/index';
-    //         }
-    //     }
-    //     $this->view('Auth/pageNotFound', $data);
-    // }
-
-
     // Method Halaman Registrasi
-    public function register()
+    public function registerForm()
     {
         $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
         $this->view('Auth/daftar', $data);
     }
 
     // Method proses Registrasi
-    public function registration()
+    public function registrasiProcess()
     {
         if (isset($_POST['submit'])) {
             $data = [
@@ -103,7 +86,7 @@ class Auth extends Controller
                     Flasher::setFlash("Daftar Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "Home/index");
                 }
             }
-            header("location:" . BASEURL . "/Auth/register");
+            header("location:" . BASEURL . "/Auth/registerForm");
         }
 
     }
@@ -205,28 +188,71 @@ class Auth extends Controller
         return false;
     }
 
-    public function lupaSandi()
+    public function lupaSandiForm()
     {
         $this->view('Auth/lupaSandi');
     }
 
     public function lupaSandiProcess()
     {
+        $data = [];
         if (isset($_POST['submit'])) {
             $data = [
                 'nim' => htmlspecialchars($_POST['nim']),
                 'email' => htmlspecialchars($_POST['email']),
                 'tanggal_lahir' => date('Y-m-d', strtotime($_POST['tanggal_lahir'])),
             ];
+            $userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($data['nim']);
+
+            if (!empty($userDB['0'])) {
+                if ($userDB['0']['email'] == $data['email'] && $userDB['0']['tanggal_lahir'] == new DateTime($data['tanggal_lahir'])) {
+                    $_SESSION['message'] = "";
+                    Flasher::setFlash("{$userDB['0']['nama']}", "Silahkan ganti kata sandi anda", "success", "Auth/gantiSandiForm/" . $data['nim']);
+                } else {
+                    $_SESSION['message'] = "Email & tanggal lahir yang anda masukkan mungkin salah!";
+                    Flasher::setFlash("Tidak Ditemukan", "Data yang anda masukkan mungkin salah!", "error");
+                }
+            } else {
+                $_SESSION['message'] = "NIM yang anda masukkan tidak cocok dengan akun manapun";
+                Flasher::setFlash("Tidak Ditemukan", "Data yang anda masukkan tidak cocok!", "error");
+            }
+            header("location:" . BASEURL . "/Auth/lupaSandiForm");
         }
     }
 
-    public function gantiSandi()
+    // Method / function ganti sandi setelah lupa sandi saat Login
+    public function gantiSandiForm($nim)
     {
-        $this->view('Auth/gantiSandi');
+       $this->view('Auth/gantiSandi', $nim);
     }
 
-    public function passprocess()
+    public function gantiSandiProcess()
+    {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'nim' => htmlspecialchars($_POST['nim']),
+                'sandiBaru' => htmlspecialchars($_POST['sandiBaru']),
+            ];
+
+            $isSuccess = $this->model("AuthModel")->gantiSandi($data['sandiBaru'], $data['nim']);
+
+            if ($isSuccess) {
+                Flasher::setFlash("Berhasil", "Sandi anda berhasil diganti", "success", "Auth/login");
+            } else {
+                Flasher::setFlash("Gagal", "Sandi anda gagal diganti", "error");
+            }
+        }
+        header("location:" . BASEURL . "/Auth/gantiSandiForm/" . $data['nim']);
+    }
+
+    // Method / function ubah sandi di profil
+    public function ubahSandiForm()
+    {
+        $this->view('Auth/ubahKataSandi');
+    }
+
+    // Method / function pengecekan & konfirmasi ubah sandi di profil
+    public function passProcess()
     {
         if (isset($_POST['submit'])) {
             $sandiLama = htmlspecialchars($_POST['sandiLama']);
@@ -240,39 +266,45 @@ class Auth extends Controller
                 Flasher::setFlash("Gagal", "Kata Sandi Lama yang anda masukkan tidak cocok!", "error");
             }
         }
-        header("location:" . BASEURL . "/Auth/gantiSandi");
+        header("location:" . BASEURL . "/Auth/ubahSandiForm");
 
     }
 
+    // Method / function memperbarui sandi pengguna
     public function updatePass($password)
     {
         $data['password'] = $password;
+
         if ($_SESSION['user']['role'] == "Mahasiswa") {
             $data['username'] = htmlspecialchars($_SESSION['user']['nim']);
         } else {
             $data['username'] = htmlspecialchars($_SESSION['user']['nip']);
         }
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+
 
         $isSuccess = $this->model("AuthModel")->gantiSandi($data['password'], $data['username']);
 
         if ($isSuccess) {
             $_SESSION['user']['password'] = $data['password'];
+            Flasher::setFlash("Berhasil", "Kata Sandi anda berhasil diubah", "success");
+        } else {
+            Flasher::setFlash("Gagal", "Kata Sandi anda gagal diubah", "error");
         }
 
-        if ($_SESSION['user']['role'] == "Mahasiswa") {
-            header("location:" . BASEURL . "/Mahasiswa/profil");
-        } else if ($_SESSION['user']['role'] == "Ketua Jurusan") {
-            header("location:" . BASEURL . "/Kajur/profil");
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['user']['role'] == "Mahasiswa") {
+                header("location:" . BASEURL . "/Mahasiswa/profil");
+            } else if ($_SESSION['user']['role'] == "Ketua Jurusan") {
+                header("location:" . BASEURL . "/Kajur/profil");
+            } else {
+                header("location:" . BASEURL . "/Admin/profil");
+            }
         } else {
-            header("location:" . BASEURL . "/Admin/profil");
-
+            header("location:" . BASEURL . "/Auth/login");
         }
     }
 
-    public function deleteSession()
+    public function logout()
     {
         unset($_SESSION['user']);
         header("location:" . BASEURL . '/Auth/login');

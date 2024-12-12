@@ -36,7 +36,7 @@ class Flasher
             } else {
                 echo "Swal.fire({
                     title: '" . $_SESSION['flash']['action'] . "',
-                    text: '" . $_SESSION['flash']['message'] . ".',
+                    text: '" . $_SESSION['flash']['message'] . "',
                     icon: '" . $_SESSION['flash']['type'] . "',
                     allowOutsideClick: false
                     }).then((result) => {

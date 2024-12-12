@@ -15,29 +15,29 @@ function showPassword(idInput) {
 }
 
 
-// Method / fungsi validasi input sandi baru
-
 function validasiSandi() {
-  // Ambil elemen input
   const sandiBaru = document.getElementById("sandiBaru");
   const konfirmasiSandiBaru = document.getElementById("konfirmasiSandiBaru");
+  
+  let errorMessage = document.getElementById("errorMessage");
 
-  // Ambil nilai input
   const sandiBaruValue = sandiBaru.value;
   const konfirmasiSandiBaruValue = konfirmasiSandiBaru.value;
 
-  // Reset class error sebelumnya
   sandiBaru.classList.remove("error");
   konfirmasiSandiBaru.classList.remove("error");
+  errorMessage.textContent = "";
 
   // Periksa apakah nilai input berbeda
   if (sandiBaruValue !== konfirmasiSandiBaruValue) {
-    // Tambahkan class "error" ke input box
+    
     sandiBaru.classList.add("error");
     konfirmasiSandiBaru.classList.add("error");
+    errorMessage.textContent = "Kata sandi baru dan konfirmasi sandi tidak cocok.";
     return false; // Mencegah pengiriman form
   }
 
-  // Jika sama, lanjutkan pengiriman
+  // Jika validasi berhasil, hapus pesan error
+  errorMessage.textContent = "";
   return true;
 }

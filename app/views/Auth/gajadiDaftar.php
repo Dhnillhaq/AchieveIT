@@ -40,7 +40,7 @@
 				<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-auto">
 					<div class="px-10 py-6 space-y-5 w-full max-w-screen-xl">
 						<h1 class="text-4xl font-bold text-center my-2">Daftar</h1>
-						<form class="space-y-4 w-full" action="<?= BASEURL; ?>/Auth/registration" method="post"
+						<form class="space-y-4 w-full" action="<?= BASEURL; ?>/Auth/registrasiProcess" method="post"
 							onsubmit="return validasiSandi()">
 							<!-- nama -->
 							<div class="relative">

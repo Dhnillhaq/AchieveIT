@@ -25,24 +25,35 @@
 			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-auto">
 				<div class="px-14 py-10 space-y-6 w-full max-w-screen-xl">
 					<h1 class="text-4xl font-bold text-center my-12">Ganti Kata Sandi</h1>
-					<form class="space-y-4 w-full">
+					<form action="<?= BASEURL; ?>/Auth/gantiSandiProcess" method="post" class="space-y-4 w-full"
+						onsubmit="return validasiSandi()">
 						<div class="relative">
-							<input type="password" id="password" name="password" placeholder="Masukkan Kata sandi Baru"
+							<input type="password" id="sandiBaru" name="sandiBaru" placeholder="Masukkan Kata sandi Baru"
 								class="w-full px-4 py-4 bg-[#D9D9D9]  border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
 								required>
-							<img src="../../../public/img/Key.png" alt="logo"
+							<img src="../../../public/img/Password.png" alt="logo"
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
+						<input id="tampil-sandi1" type="checkbox" placeholder="" class="border rounded-l"
+							onclick="showPassword('sandiBaru')">
+						<label for="tampil-sandi1" class="text-[#757575]">Tampilkan kata sandi</label>
 						<div class="relative">
-							<input type="password" id="password" name="password" placeholder="Masukkan Kata sandi Lama"
+							<input type="password" id="konfirmasiSandiBaru" placeholder="Konfirmasi Kata sandi Baru"
 								class="w-full px-4 py-4 bg-[#D9D9D9]  border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
 								required>
-							<img src="../../../public/img/Message.png" alt="logo"
+							<img src="../../../public/img/Password.png" alt="logo"
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
+						<input id="tampil-sandi2" type="checkbox" placeholder="" class="border rounded-l"
+							onclick="showPassword('konfirmasiSandiBaru')">
+						<label for="tampil-sandi2" class="text-[#757575]">Tampilkan kata sandi</label>
+
+						<input type="hidden" value="<?= $data; ?>" name="nim">
+
+						<div id="errorMessage" class="relative flex justify-center text-red-600"></div>
+						<button type="submit" name="submit"
+							class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Ganti</button>
 					</form>
-					<button type="submit" nameh="submit"
-						class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Ganti</button>
 					<div class="flex justify-start text-blue-700 space-x-1">
 						<a href="#" class="hover:underline">kembali ke Halaman Login</a>
 					</div>
@@ -51,3 +62,8 @@
 		</section>
 	</div>
 </section>
+<script>
+	<?php
+	Flasher::flash();
+	?>
+</script>
