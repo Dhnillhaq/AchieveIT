@@ -199,7 +199,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-53" value="+ updatePass(password)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-31">
           <mxGeometry y="476" width="170" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-50" value="+ deleteSession()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-31">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-50" value="+ logout()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-31">
           <mxGeometry y="502" width="170" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-43" value="1" style="resizable=0;align=right;verticalAlign=bottom;labelBackgroundColor=none;fontSize=12;" connectable="0" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">

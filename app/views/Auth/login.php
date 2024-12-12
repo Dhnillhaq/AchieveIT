@@ -43,7 +43,7 @@
 						</div>
 						<?php
 						if (isset($data['message'])) {
-							echo '<span class="text-red-600 flex justift-center text-center">' . $data['message'] . '</span>';
+							echo '<span class="text-red-600 flex justify-center text-center">' . $data['message'] . '</span>';
 						}
 						?>
 
