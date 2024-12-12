@@ -12,7 +12,7 @@
       <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
       <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
       <a
-        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa/index' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin/index' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur/index' : 'Auth/login')) : 'Auth/login') ?>">
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa/index' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin/index' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur/index' : 'Auth/login')) : 'Auth/loginForm') ?>">
         <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 px-4">
           <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
@@ -31,7 +31,7 @@
         jurusan.
       </p>
       <a
-        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/login') ?>">
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/loginForm') ?>">
         <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mt-8 px-4">
           <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
@@ -280,7 +280,7 @@
     </div>
 
     <div class="flex right-0 text-[16px]">
-      <a href="<?= BASEURL; ?>/Auth/login">
+      <a href="<?= BASEURL; ?>/Auth/loginForm">
         <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-24 h-10">
           Masuk
         </button>
@@ -304,7 +304,7 @@
 
     <div class="flex justify-center items-start">
       <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Beranda</a>
-      <a href="#selamat-datang" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
+      <a href="#fitur-utama" class="text-white hover:underline py-2 mx-2">Fitur Utama</a>
       <a href="#daftar-prestasi" class="text-white hover:underline py-2 mx-2 flex-shrink-0">Daftar Prestasi</a>
     </div>
 
@@ -327,21 +327,7 @@
     </p>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- <script>
-  Swal.fire('Hello world!');
-  Swal.fire({
-    title: 'The Internet?',
-    text: 'That thing is still around?',
-    icon: 'question',
-    allowOutsideClick: false
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Arahkan ke halaman yang diinginkan
-      window.location.href = '<= BASEURL?>/Auth/Login'; // Ganti dengan URL tujuan
-    }
-  });
-</script> -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

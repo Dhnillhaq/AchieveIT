@@ -25,7 +25,7 @@
 			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-auto">
 				<div class="px-14 py-10 space-y-6 w-full max-w-screen-xl">
 					<h1 class="text-4xl font-bold text-center my-10">Lupa Kata Sandi</h1>
-					<form action="<?= BASEURL; ?>/Auth/lupaSandiProcess"  method="post" class="space-y-4 w-full">
+					<form action="<?= BASEURL; ?>/Auth/lupaSandiProcess" method="post" class="space-y-4 w-full">
 						<div class="relative">
 							<input type="text" id="NIM" name="nim" placeholder="Masukkan NIM"
 								class="w-full px-4 py-4 bg-[#D9D9D9]  border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
@@ -41,19 +41,20 @@
 								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer" />
 						</div>
 						<div class="relative">
-						<input type="date" id="tanggal_lahir" name="tanggal_lahir"
-						placeholder="Masukkan Tanggal Lahir"
+							<input type="date" id="tglLahir" name="tanggal_lahir"
+								placeholder="Masukkan Tanggal Lahir"
 								class="w-full px-4 py-4 bg-[#D9D9D9] border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300 placeholder-[#757575]"
 								required>
+							<img src="../../../public/img/Date_fill.png" alt="logo"
+								class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer"
+								onclick="document.getElementById('tglLahir').showPicker()" />
 						</div>
 						<?php
 						if (isset($_SESSION['message'])) {
 							echo '<span class="text-red-600 flex justify-center text-center">' . $_SESSION['message'] . '</span>';
 						}
 						?>
-						<!-- <span class="text-red-600 flex justify-center"><= $_SESSION['message'];?></span> -->
-						
-						
+
 						<button type="submit" name="submit"
 							class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Proses</button>
 					</form>

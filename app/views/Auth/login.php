@@ -26,7 +26,7 @@
 			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg h-full">
 				<div class="px-14 py-10 space-y-6 w-full max-w-screen-xl">
 					<h1 class="text-4xl font-bold text-center my-10">Masuk</h1>
-					<form method="post" action="<?= BASEURL; ?>/Auth/login" class="space-y-4 w-full">
+					<form method="post" action="<?= BASEURL; ?>/Auth/loginForm" class="space-y-4 w-full">
 						<div class="relative">
 							<input type="text" id="Nama pengguna" name="username" placeholder="Masukkan NIP/NIM"
 								class="w-full px-4 py-3 bg-[#D9D9D9] border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
@@ -55,13 +55,13 @@
 								<label for="tampil-sandi" class="text-[#757575]">Tampilkan kata sandi</label>
 							</div>
 
-							<a href="<?= BASEURL; ?>/Auth/lupaSandi"
+							<a href="<?= BASEURL; ?>/Auth/lupaSandiForm"
 								class="justify-end text-blue-700 hover:underline">Lupa Sandi</a>
 						</div>
 						<button type="submit" name="submit"
 							class="font-bold mt-4 w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Masuk</button>
 						<div class="flex justify-start text-blue-700 space-x-1">
-							<span>Belum punya akun? <a href="<?= BASEURL; ?>/Auth/register"
+							<span>Belum punya akun? <a href="<?= BASEURL; ?>/Auth/registerForm"
 									class="hover:underline">Daftar</a></span>
 						</div>
 					</form>
