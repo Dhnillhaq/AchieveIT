@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class PeranMahasiswaModel extends Connection
 {
     public function getPeranMhs()
-    {   
+    {
         $stmt = "SELECT * FROM peran_mahasiswa";
         $result = sqlsrv_query($this->conn, $stmt);
 
@@ -26,7 +22,7 @@ class PeranMahasiswaModel extends Connection
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     }
 
-    public function store ($data)
+    public function store($data)
     {
         $stmt = "INSERT INTO peran_mahasiswa(peran) VALUES (?)";
         $params = array($data['peran']);

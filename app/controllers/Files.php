@@ -1,10 +1,5 @@
 <?php
 
-namespace App\Controllers;
-
-use App\Core\Controller;
-use App\Core\Flasher;
-
 class Files extends Controller
 {
     private final $storageDir = __DIR__ . "../../../storage/files/";

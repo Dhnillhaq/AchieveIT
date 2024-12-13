@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class TingkatPenyelenggaraModel extends Connection
 {
     public function getTingkatPenyelenggara()

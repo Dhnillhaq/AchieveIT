@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class ProdiModel extends Connection
 {
 
@@ -20,7 +16,7 @@ class ProdiModel extends Connection
 
     public function getProdiById($id)
     {
-        $stmt = "SELECT * FROM program_studi WHERE id_prodi = ?";   
+        $stmt = "SELECT * FROM program_studi WHERE id_prodi = ?";
         $params = array(
             $id
         );

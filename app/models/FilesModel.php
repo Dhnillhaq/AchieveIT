@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class FilesModel extends Connection
 {
 
@@ -44,6 +40,6 @@ class FilesModel extends Connection
         $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
         $insertedId = $idRow[0]; // ID of the inserted row
 
-        return (int)$insertedId;
+        return (int) $insertedId;
     }
 }

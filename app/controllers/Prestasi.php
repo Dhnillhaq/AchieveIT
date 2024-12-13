@@ -1,11 +1,5 @@
 <?php
 
-namespace App\Controllers;
-
-use App\Core\Controller;
-use App\Core\Flasher;
-use App\Controllers\Files;
-
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
