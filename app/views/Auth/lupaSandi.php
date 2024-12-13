@@ -3,7 +3,7 @@
 	<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
 
 	<!-- kembali -->
-	<a href="<?= BASEURL; ?>"
+	<a href="<?= BASEURL; ?>/Auth/loginForm"
 		class="absolute top-4 left-4 flex items-center space-x-2 text-white px-4 py-2 rounded-lg hover:underline z-20">
 		<img src="../../../public/img/Back.png" alt="back" class="w-4 h-4" />
 		<span class="font-light">Kembali</span>
@@ -59,7 +59,7 @@
 							class="font-bold h w-full bg-blue-800 text-white py-4 rounded-lg hover:bg-blue-900">Proses</button>
 					</form>
 					<div class="flex justify-start text-blue-700 space-x-1">
-						<a href="#" class="hover:underline">kembali ke Halaman Login</a>
+						<a href="<?= BASEURL; ?>/Auth/loginForm" class="hover:underline">kembali ke Halaman Login</a>
 					</div>
 				</div>
 			</div>

@@ -17,7 +17,7 @@
 		<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
 
 		<!-- kembali -->
-		<a href="<?= BASEURL; ?>"
+		<a href="<?= BASEURL; ?>/Auth/loginForm"
 			class="absolute top-4 left-4 flex items-center space-x-2 text-white px-6 py-2 rounded-lg hover:underline z-20">
 			<img src="../../../public/img/Back.png" alt="back" class="w-4 h-4" />
 			<span class="font-light">Kembali</span>
