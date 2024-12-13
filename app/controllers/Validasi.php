@@ -24,13 +24,14 @@ class Validasi extends Controller
     public function validate($id_mahasiswa, $input)
     {
         $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_mahasiswa);
+        $id_mahasiswa = htmlspecialchars($id_mahasiswa);
+        $id_admin = $_SESSION['user']['id_admin'];
         $bool = filter_var($input, FILTER_VALIDATE_BOOLEAN);
 
         if ($bool == true) {
-            $isSuccess = $this->model("MahasiswaModel")->validate($id, 'Valid');
+            $isSuccess = $this->model("MahasiswaModel")->validate($id_mahasiswa,$id_admin, 'Valid');
         } else {
-            $isSuccess = $this->model("MahasiswaModel")->validate($id, 'Invalid');
+            $isSuccess = $this->model("MahasiswaModel")->validate($id_mahasiswa,$id_admin, 'Invalid');
         }
 
         if ($isSuccess) {
