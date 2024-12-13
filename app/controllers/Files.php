@@ -2,7 +2,7 @@
 
 class Files extends Controller
 {
-    private final $storageDir = __DIR__ . "../../../storage/files/";
+    private $storageDir = __DIR__ . "../../../storage/files/";
 
     public function uploadFile($file)
     {

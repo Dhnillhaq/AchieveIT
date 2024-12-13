@@ -39,21 +39,25 @@ class Validator
                     $this->errors[$field][] = "$field is required";
                 }
                 break;
+
             case 'email':
                 if ($value && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     $this->errors[$field][] = "$field must be a valid email";
                 }
                 break;
+
             case 'min':
                 if (strlen($value) < $params) {
                     $this->errors[$field][] = "$field must be at least $params characters";
                 }
                 break;
+
             case 'max':
                 if (strlen($value) > $params) {
                     $this->errors[$field][] = "$field must not exceed $params characters";
                 }
                 break;
+                
             case 'unique':
                 break;
         }

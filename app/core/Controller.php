@@ -1,6 +1,6 @@
 <?php
 
-abstract class Controller
+class Controller
 {
     private $models = [];
 
