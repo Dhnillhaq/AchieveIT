@@ -302,6 +302,6 @@ class Auth extends Controller
     public function logout()
     {
         unset($_SESSION['user']);
-        header("location:" . BASEURL . '/Auth/login');
+        header("location:" . BASEURL . '/Auth/loginForm');
     }
 }
