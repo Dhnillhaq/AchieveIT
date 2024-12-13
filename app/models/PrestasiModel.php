@@ -261,12 +261,12 @@ class PrestasiModel extends Connection
         $idResource = sqlsrv_query($this->conn, $stmt, $params);
 
         if (!$idResource) {
-            die(print_r(sqlsrv_errors(), true)); // Debug errors
+            die(print_r(sqlsrv_errors(), true)); 
         }
 
         // Fetch the inserted ID
         $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
-        $insertedId = $idRow[0]; // ID of the inserted row
+        $insertedId = $idRow[0];
 
         return (int) $insertedId;
     }
@@ -289,7 +289,8 @@ class PrestasiModel extends Connection
                 foto_juara = ?, 
                 proposal = ?, 
                 sertifikat = ?, 
-                poin_prestasi = ?
+                poin_prestasi = ?,
+                status = ?
             WHERE id_prestasi = ?;";
 
         $params = array(
@@ -308,6 +309,7 @@ class PrestasiModel extends Connection
             $data['proposal'],
             $data['sertifikat'],
             $data['poin_prestasi'],
+            $data['status'],
             $data['id_prestasi']
         );
 

@@ -9,11 +9,11 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Prestasi extends Controller
 {
 
-    private $files;
+    private static $files;
 
     public function __construct()
     {
-        $files = new Files();
+        self::$files = new Files();
     }
 
     public function index()
@@ -124,7 +124,11 @@ class Prestasi extends Controller
             }
         }
         Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success");
-        header('location:' . BASEURL . '/Prestasi/index');
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
+        } else {
+            header('location:' . BASEURL . '/Prestasi/index');
+        }
     }
 
     public function edit($id)
@@ -172,6 +176,7 @@ class Prestasi extends Controller
                 'foto_juara' => !empty($_FILES['foto_juara']['name']) ? self::$files->uploadFile($_FILES['foto_juara']) : $selectedPrestasi['foto_juara'],
                 'sertifikat' => !empty($_FILES['sertifikat']['name']) ? self::$files->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
                 'proposal' => !empty($_FILES['proposal']['name']) ? self::$files->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
+                'status' => htmlspecialchars($_POST['status']),
                 'id_prestasi' => $id_prestasi
             ];
 
@@ -230,7 +235,7 @@ class Prestasi extends Controller
                     // error handling
                 }
 
-                // insert into dosen - prestasi
+                // update into dosen - prestasi
                 $dataDosen = [
                     'id_prestasi' => $id_prestasi,
                     'id_dosen' => $_POST['dosen'],
@@ -283,7 +288,11 @@ class Prestasi extends Controller
             }
         }
         Flasher::setFlash("Ubah", "Data Prestasi berhasil diubah", "success");
-        header('location:' . BASEURL . '/Prestasi/index');
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
+        } else {
+            header('location:' . BASEURL . '/Prestasi/index');
+        }
     }
 
     public function delete($id_prestasi)
