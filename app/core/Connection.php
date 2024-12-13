@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Core;
-
 class Connection
 {
     private $serverName = SERVER_NAME;

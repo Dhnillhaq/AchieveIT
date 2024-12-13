@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class TingkatKompetisiModel extends Connection
 {
     public function getTingkatKompetisi()

@@ -1,8 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
 
 class PrestasiModel extends Connection
 {

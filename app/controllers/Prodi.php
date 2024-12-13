@@ -1,10 +1,5 @@
 <?php
 
-namespace App\Controllers;
-
-use App\Core\Controller;
-use App\Core\Flasher;
-
 class Prodi extends Controller
 {
     public function create()

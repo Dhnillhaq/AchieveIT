@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class DosenModel extends Connection
 {
     // Get All Dosen
@@ -26,14 +22,14 @@ class DosenModel extends Connection
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
+
     }
 
     public function store($data)
     {
         $stmt = "INSERT INTO dosen(nama, nip) VALUES(?, ?)";
         $params = array($data['nama'], $data['nip']);
-        
+
         return sqlsrv_query($this->conn, $stmt, $params);
     }
 

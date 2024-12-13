@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class JuaraModel extends Connection
 {
     public function getJuara()

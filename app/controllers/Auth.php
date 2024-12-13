@@ -1,11 +1,5 @@
 <?php
 
-namespace App\Controllers;
-
-use App\Core\Controller;
-use App\Core\Flasher;
-use DateTime;
-
 class Auth extends Controller
 {
     private $usernameInp;

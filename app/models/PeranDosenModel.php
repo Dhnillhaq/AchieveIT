@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Connection;
-
 class PeranDosenModel extends Connection
 {
     public function getPeranDosen()
-    {   
+    {
         $stmt = "SELECT * FROM peran_dosen";
         $result = sqlsrv_query($this->conn, $stmt);
 
@@ -24,7 +20,7 @@ class PeranDosenModel extends Connection
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        
+
     }
 
     public function store($data)
