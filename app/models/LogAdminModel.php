@@ -5,7 +5,8 @@ class LogAdminModel extends Connection
     public function getAllLogAdmin()
     {
 
-        $stmt = "SELECT * FROM log_admin";
+        $stmt = "SELECT TOP 50 l.*, a.nama FROM log_admin l
+                JOIN admin a ON a.id_admin = l.id_admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
 
@@ -46,26 +47,6 @@ class LogAdminModel extends Connection
             $_SESSION['user']['id_admin'],
             $aksi,
             $keterangan
-        );
-        return sqlsrv_query($this->conn, $stmt, $params);
-    }
-
-    public function update($data)
-    {
-        $stmt = "UPDATE tingkat_kompetisi SET tingkat_kompetisi = ?, poin = ? WHERE id_tingkat_kompetisi = ?";
-        $params = array(
-            $data['tingkat_kompetisi'],
-            $data['poin'],
-            $data['id_tingkat_kompetisi']
-        );
-        return sqlsrv_query($this->conn, $stmt, $params);
-    }
-
-    public function delete($id)
-    {
-        $stmt = "DELETE FROM tingkat_kompetisi WHERE id_tingkat_kompetisi = ?";
-        $params = array(
-            $id
         );
         return sqlsrv_query($this->conn, $stmt, $params);
     }

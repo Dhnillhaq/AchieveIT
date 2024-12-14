@@ -57,8 +57,10 @@ class Mahasiswa extends Controller
                 'email' => htmlspecialchars($_POST['email']),
                 'password' => htmlspecialchars($_POST['password'])
             ];
+
             $isSuccess =  $this->model("MahasiswaModel")->store($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambah Data Mahasiswa");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
@@ -93,6 +95,7 @@ class Mahasiswa extends Controller
             ];
             $isSuccess =  $this->model("MahasiswaModel")->update($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Mahasiswa dengan ID " . $data['id_mahasiswa']);
                 Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
             } else {
                 Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
@@ -117,6 +120,7 @@ class Mahasiswa extends Controller
         $isSuccess =  $this->model("MahasiswaModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Mengubah Data Mahasiswa dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

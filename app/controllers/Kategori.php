@@ -19,6 +19,7 @@ class Kategori extends Controller
 
             $isSuccess =  $this->model("KategoriModel")->store($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Kategori");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
@@ -50,6 +51,7 @@ class Kategori extends Controller
 
             $isSuccess =  $this->model("KategoriModel")->update($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Kategori dengan ID " . $data['id_kategori']);
                 Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
@@ -76,6 +78,7 @@ class Kategori extends Controller
         $isSuccess =  $this->model("KategoriModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Kategori dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

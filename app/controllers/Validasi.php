@@ -35,6 +35,7 @@ class Validasi extends Controller
         }
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Validasi Akun", "Validasi akun Mahasiswa dengan ID " . $id_mahasiswa);
             Flasher::setFlash("Perbarui", "Mahasiswa berhasil divalidasi", "success");
         } else {
             Flasher::setFlash("Perbarui", "Mahasiswa gagal divalidasi", "error");

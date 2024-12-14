@@ -27,7 +27,7 @@
 			</div>
 			<!-- btn ubah kt sandi -->
 			<section class="justify-center pt-6">
-				<a href="<?= BASEURL; ?>/Auth/ubahSandi">
+				<a href="<?= BASEURL; ?>/Auth/ubahSandiForm">
 					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 						<img src="../../../public/img/Horizontal_switch.png" alt="logo" class="w-5 h-5" />
 						<p>Ubah Kata Sandi</p>
@@ -44,19 +44,6 @@
 			Log Admin
 		</div>
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
-			<!-- entri -->
-			<div class="flex justify-end right-0">
-				<div class="flex items-center mr-3">
-					<span class="">Lihat</span>
-					<select
-						class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="50">50</option>
-					</select>
-					<span class="">entri</span>
-				</div>
-			</div>
 			<!-- table -->
 			<section class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
 				<table class="min-w-full bg-white text-center">
