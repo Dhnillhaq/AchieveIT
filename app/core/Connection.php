@@ -8,16 +8,25 @@ class Connection
 
     public function __construct()
     {
-        // Inisialisasi koneksi di dalam konstruktor
         $this->conn = sqlsrv_connect($this->serverName, $this->connectionInfo);
-        $this->ifNotConnect(); // Panggil fungsi cek koneksi setelah inisialisasi
-    }
 
-    function ifNotConnect()
-    {
         if ($this->conn === false) {
+            $errors = sqlsrv_errors();
             die(print_r(sqlsrv_errors(), true));
         }
+    }
+
+    public function close()
+    {
+        if ($this->conn) {
+            sqlsrv_close($this->conn);
+            $this->conn = null;
+        }
+    }
+
+    public function __destruct()
+    {
+        self::close();
     }
 }
 ?>
