@@ -45,7 +45,8 @@ class Admin extends Controller
     public function profil()
     {
         $this->checkRole("Admin", "Super Admin");
-        $this->view("Admin/profilAdmin");
+        $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
+        $this->view("Admin/profilAdmin" , $data);
     }
     public function adminList()
     {
