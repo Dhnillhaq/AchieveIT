@@ -11,7 +11,7 @@ class Controller
         $viewFile = '../app/views/' . $view . '.php';
 
         if (!file_exists($viewFile)) {
-            header("location:" . BASEURL . "/Auth/pageNotFound");
+            header("location:" . BASEURL . "/Home/pageNotFound");
             exit;
         }
 
@@ -34,7 +34,7 @@ class Controller
             $modelFile = '../app/models/' . $model . '.php';
 
             if (!file_exists($modelFile)) {
-                header("location:" . BASEURL . "/Auth/pageNotFound");
+                header("location:" . BASEURL . "/Home/pageNotFound");
                 exit;
             }
 
