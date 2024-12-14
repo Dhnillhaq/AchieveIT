@@ -223,6 +223,7 @@ class PrestasiModel extends Connection
 
     public function store($data)
     {
+        // Statement insert biasa untuk role Mahasiswa
         $stmt = "INSERT INTO prestasi(
         id_kategori, 
         id_juara, 
@@ -238,8 +239,9 @@ class PrestasiModel extends Connection
         foto_juara, 
         proposal, 
         sertifikat, 
-        poin_prestasi) OUTPUT INSERTED.id_prestasi VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        poin_prestasi";
 
+        // Parameter insert Mahasiswa
         $params = array(
             $data['kategori'],
             $data['juara'],
@@ -257,6 +259,27 @@ class PrestasiModel extends Connection
             $data['sertifikat'],
             $data['poin_prestasi'],
         );
+
+        // Cek role user
+        if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
+            //  Langsung validasi kalo Create oleh Super Admin/Admin
+            $stmt .= ", status, id_admin, validated_at";
+            $params[] = 'Valid'; 
+            $params[] = $_SESSION['user']['id_admin']; 
+        }
+
+        $stmt .= ") OUTPUT INSERTED.id_prestasi VALUES(";
+
+        // Tanda tanya sejumlah parameter
+        $stmt .= str_repeat("?, ", count($params) - 1) . "?";
+
+        // Value validated_at
+        if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
+            $stmt .= ", GETDATE()";
+        }
+
+        $stmt .= ")";
+
 
         $idResource = sqlsrv_query($this->conn, $stmt, $params);
 

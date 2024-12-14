@@ -57,7 +57,6 @@
 					<span class="">entri</span>
 				</div>
 			</div>
-
 			<!-- table -->
 			<section class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
 				<table class="min-w-full bg-white text-center">
@@ -80,61 +79,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">
-								<div>2024-11-27</div>
-								<div>09:15:00</div>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Admin1</td>
-							<td class="py-2 px-4 border border-blue-950">Login</td>
-							<td class="py-2 px-4 border border-blue-950">
-								User berhasil login
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">
-								<div>2024-11-27</div>
-								<div>09:30:00</div>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Admin1</td>
-							<td class="py-2 px-4 border border-blue-950">Logout</td>
-							<td class="py-2 px-4 border border-blue-950">
-								User keluar dari sistem
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">
-								<div>2024-11-27</div>
-								<div>10:00:00</div>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Admin1</td>
-							<td class="py-2 px-4 border border-blue-950">Update Profile</td>
-							<td class="py-2 px-4 border border-blue-950">
-								User mengubah data profil
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">
-								<div>2024-11-27</div>
-								<div>11:00:00</div>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Admin1</td>
-							<td class="py-2 px-4 border border-blue-950">Download</td>
-							<td class="py-2 px-4 border border-blue-950">
-								User mengunduh file laporan
-							</td>
-						</tr>
-						<tr>
-							<td class="py-2 px-4 border border-blue-950">
-								<div>2024-11-27</div>
-								<div>11:30:00</div>
-							</td>
-							<td class="py-2 px-4 border border-blue-950">Admin1</td>
-							<td class="py-2 px-4 border border-blue-950">Upload</td>
-							<td class="py-2 px-4 border border-blue-950">
-								User mengunggah dokumen
-							</td>
-						</tr>
+						<?php if (empty($data['log'])) { ?>
+							<tr>
+								<td colspan="5" class="text-center py-10">
+									<img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" />
+									<p class="font-bold text-gray-500 mt-4">
+										Belum ada log admin baru-baru ini
+									</p>
+								</td>
+							</tr>
+						<?php } else {
+							foreach ($data['log'] as $log) { ?>
+								<tr>
+									<td class="py-2 px-4 border border-blue-950">
+										<div><?= $log['timestamp']->format("Y-m-d") ?></div>
+										<div><?= $log['timestamp']->format("H:i:s") ?></div>
+									</td>
+									<td class="py-2 px-4 border border-blue-950"><?=$log['nama']?></td>
+									<td class="py-2 px-4 border border-blue-950"><?= $log['aksi'] ?></td>
+									<td class="py-2 px-4 border border-blue-950">
+										<?= $log['keterangan'] ?>
+									</td>
+								</tr>
+							<?php }
+						} ?>
+
 					</tbody>
 				</table>
 			</section>
