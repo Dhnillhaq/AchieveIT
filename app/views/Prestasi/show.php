@@ -140,7 +140,7 @@
 								<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 									Aksi
 								</th>
-								<?php } ?>
+							<?php } ?>
 						</tr>
 					</thead>
 					<!-- data dummy -->
@@ -153,18 +153,19 @@
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?></td>
+									<?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?>
+								</td>
 								<td class="py-2 px-4 border border-blue-950"><?= $mhs['peran'] ?></td>
 								<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
 									<td class="py-2 px-4 border border-blue-950">
 										<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
 											<button>
 												<img src="../../../public/img/Aksi.png" alt="logo"
-												class="p-2 bg-[#132145] rounded-md">
+													class="p-2 bg-[#132145] rounded-md">
 											</button>
 										</a>
 									</td>
-									<?php } ?>
+								<?php } ?>
 							</tr>
 							<?php
 							$no++;
@@ -299,16 +300,12 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-		<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
-			<a href="<?= BASEURL; ?>/Prestasi/mhsIndex">
-			<?php } else { ?> 
-						<a href="<?= BASEURL; ?>/Mahasiswa/prestasiSaya">
-						<?php } ?> 
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
-					<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
-					<p>Kembali</p>
-				</button>
-			</a>
+
+			<button onclick="history.back()" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+				<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
+				<p>Kembali</p>
+			</button>
+
 		</div>
 
 		<div class="justify-center p-2">

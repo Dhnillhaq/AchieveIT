@@ -5,7 +5,7 @@
     <div class="navbar-text flex justify-between items-center gap-2">
       <img src="../../../public/img/logo-poltek-outline.png" alt="logo" class="w-8 h-8" />
       <img src="../../../public/img/logo-JTI-outline.png" alt="logo" class="w-8 h-8" />
-      <h1 class="font-extrabold text-4xl pl-4">AchieveIt</h1>
+      <h1 class="font-extrabold text-4xl pl-4">AchieveIT</h1>
     </div>
     <div class="navbar-button flex right-0 text-[16px]">
       <a href="<?= BASEURL; ?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
