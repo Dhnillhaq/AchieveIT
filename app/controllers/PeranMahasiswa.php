@@ -17,6 +17,7 @@ class PeranMahasiswa extends Controller
             ];
             $isSuccess =  $this->model("PeranMahasiswaModel")->store($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambah Data Peran Mahasiswa");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
@@ -42,6 +43,7 @@ class PeranMahasiswa extends Controller
 
         $isSuccess =  $this->model("PeranMahasiswaModel")->update($data);
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Peran Mahasiswa dengan ID " . $data['id_peran']);
             Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
         } else {
             Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
@@ -65,6 +67,7 @@ class PeranMahasiswa extends Controller
         $isSuccess =  $this->model("PeranMahasiswaModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Peran Dosen dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

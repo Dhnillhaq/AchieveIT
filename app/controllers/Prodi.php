@@ -18,6 +18,7 @@ class Prodi extends Controller
 
             $isSuccess =  $this->model("ProdiModel")->store($data);
             if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Program Studi" );
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Mahasiswa/listMhs");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Mahasiswa/listMhs");
@@ -49,6 +50,7 @@ class Prodi extends Controller
 
             $isSuccess =  $this->model("ProdiModel")->update($data);
             if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Program Studi dengan ID " . $data['id_prodi']);
                 Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Mahasiswa/listMhs");
             } else {
                 Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Mahasiswa/listMhs");
@@ -74,6 +76,7 @@ class Prodi extends Controller
         $isSuccess =  $this->model("ProdiModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Program Studi dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

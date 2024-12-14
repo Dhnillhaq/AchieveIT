@@ -17,12 +17,15 @@ class Auth extends Controller
             if ($this->isSuperAdmin()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isAdmin()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isKajur()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Kajur/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isMahasiswa()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['nama'], "success", "Mahasiswa/index");
@@ -290,8 +293,10 @@ class Auth extends Controller
             if ($_SESSION['user']['role'] == "Mahasiswa") {
                 header("location:" . BASEURL . "/Mahasiswa/profil");
             } else if ($_SESSION['user']['role'] == "Ketua Jurusan") {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Sandi", "Memperbarui Kata Sandi");
                 header("location:" . BASEURL . "/Kajur/profil");
             } else {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Sandi", "Memperbarui Kata Sandi");
                 header("location:" . BASEURL . "/Admin/profil");
             }
         } else {
@@ -301,6 +306,9 @@ class Auth extends Controller
 
     public function logout()
     {
+        if ($_SESSION['user']['role'] !== "Mahasiswa") {
+            $this->model("LogAdminModel")->storeAdminLog("Logout", "Sukses");
+        }
         unset($_SESSION['user']);
         header("location:" . BASEURL . '/Auth/loginForm');
     }

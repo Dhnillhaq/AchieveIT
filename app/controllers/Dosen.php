@@ -30,6 +30,7 @@ class Dosen extends Controller
             $isSuccess = $this->model("DosenModel")->store($data);
 
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Dosen");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Dosen/index");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Dosen/index");
@@ -56,6 +57,7 @@ class Dosen extends Controller
         ];
         $isSuccess = $this->model("DosenModel")->update($data);
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Dosen dengan ID " . $data['id_dosen']);
             Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Dosen/index");
         } else {
             Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Dosen/index");
@@ -79,6 +81,7 @@ class Dosen extends Controller
         $isSuccess = $this->model("DosenModel")->delete($id);
         
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Dosen dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

@@ -21,6 +21,7 @@ class Juara extends Controller
 
             $isSuccess =  $this->model("JuaraModel")->store($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Juara");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
@@ -54,6 +55,7 @@ class Juara extends Controller
 
             $isSuccess =  $this->model("JuaraModel")->update($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Juara dengan ID " . $data['id_juara']);
                 Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
@@ -80,6 +82,7 @@ class Juara extends Controller
         $isSuccess =  $this->model("JuaraModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Admin dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

@@ -19,6 +19,7 @@ class TingkatKompetisi extends Controller
 
             $isSuccess =  $this->model("TingkatKompetisiModel")->store($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambah Data Tingkat Kompetisi");
                 Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
@@ -50,6 +51,7 @@ class TingkatKompetisi extends Controller
 
             $isSuccess =  $this->model("TingkatKompetisiModel")->update($data);
             if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Tingkat Kompetisi dengan ID " . $data['id_tingkat_kompetisi']);
                 Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
             } else {
                 Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
@@ -75,6 +77,7 @@ class TingkatKompetisi extends Controller
         $isSuccess =  $this->model("TingkatKompetisiModel")->delete($id);
         
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Tingkat Kompetisi dengan ID " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");

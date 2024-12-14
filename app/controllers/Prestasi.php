@@ -127,6 +127,7 @@ class Prestasi extends Controller
         if ($_SESSION['user']['role'] == "Mahasiswa") {
             header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
         } else {
+            $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambah Data Prestasi");
             header('location:' . BASEURL . '/Prestasi/index');
         }
     }
@@ -292,6 +293,7 @@ class Prestasi extends Controller
         if ($_SESSION['user']['role'] == "Mahasiswa") {
             header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
         } else {
+            $this->model("LogAdminModel")->storeAdminLog("Validasi", "Menvalidasi Data Prestasi dengan ID " . $id_prestasi);
             header('location:' . BASEURL . '/Prestasi/index');
         }
     }
@@ -326,6 +328,7 @@ class Prestasi extends Controller
         }
 
         $isSuccess = $this->model("PrestasiModel")->delete($id);
+        $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
         if (!$isSuccess) {
             var_dump($dosen);
             die;
@@ -348,6 +351,9 @@ class Prestasi extends Controller
     public function export()
     {
         $file = new Spreadsheet();
+
+        $this->model("LogAdminModel")->storeAdminLog("Export Prestasi", "Mengekspor Data Prestasi" );
+
 
         $active_sheet = $file->getActiveSheet();
 

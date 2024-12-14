@@ -45,7 +45,11 @@ class Admin extends Controller
     public function profil()
     {
         $this->checkRole("Admin", "Super Admin");
-        $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
+        if ($_SESSION['user']['role'] == "Super Admin") {
+            $data['log'] = $this->model("LogAdminModel")->getAllLogAdmin();
+        } else {
+            $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
+        }
         $this->view("Admin/profilAdmin" , $data);
     }
     public function adminList()
@@ -74,6 +78,7 @@ class Admin extends Controller
         $isSuccess = $this->model("AdminModel")->store($data);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Admin");
             Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/adminList");
         } else {
             Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/adminList");
@@ -103,6 +108,7 @@ class Admin extends Controller
         $isSuccess = $this->model("AdminModel")->update($data);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Edit Data", "Mengubah Data Admin dengan ID: " . $data['id_admin']);
             Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/adminList");
         } else {
             Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/adminList");
@@ -126,6 +132,7 @@ class Admin extends Controller
         $isSuccess = $this->model("AdminModel")->delete($id);
 
         if ($isSuccess) {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Admin dengan ID: " . $id);
             Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
         } else {
             Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
