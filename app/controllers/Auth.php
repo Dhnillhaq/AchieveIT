@@ -61,9 +61,9 @@ class Auth extends Controller
 
 
             if ($this->isValidated($data['nim'])) {
-                Flasher::setFlash("Daftar", "NIM yang anda masukkan sudah terdaftar", "error", "Auth/login");
+                Flasher::setFlash("Daftar", "NIM yang anda masukkan sudah terdaftar", "error", "w");
             } else if ($this->isNotValidatedYet($data['nim'])) {
-                Flasher::setFlash("Daftar", "Akun anda sudah terdaftar, kami akan menghubungi anda lebih lanjut", "error", "Auth/login");
+                Flasher::setFlash("Daftar", "Akun anda sudah terdaftar, kami akan menghubungi anda lebih lanjut", "error", "Auth/loginForm");
             } else if ($this->isInvalid($data['nim'])) {
                 $isSuccess = $this->model("MahasiswaModel")->updateAccount($data);
 
@@ -73,7 +73,7 @@ class Auth extends Controller
                     Flasher::setFlash("Perbarui Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "Home/index");
                 }
             } else {
-                $isSuccess = $this->model("MahasiswaModel")->store($data);
+                $isSuccess = $this->model("MahasiswaModel")->store($data, "Not Validated");
 
                 if ($isSuccess) {
                     Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "Home/index");
@@ -232,7 +232,7 @@ class Auth extends Controller
             $isSuccess = $this->model("AuthModel")->gantiSandi($data['sandiBaru'], $data['nim']);
 
             if ($isSuccess) {
-                Flasher::setFlash("Berhasil", "Sandi anda berhasil diganti", "success", "Auth/login");
+                Flasher::setFlash("Berhasil", "Sandi anda berhasil diganti", "success", "Auth/loginForm");
             } else {
                 Flasher::setFlash("Gagal", "Sandi anda gagal diganti", "error");
             }
@@ -295,7 +295,7 @@ class Auth extends Controller
                 header("location:" . BASEURL . "/Admin/profil");
             }
         } else {
-            header("location:" . BASEURL . "/Auth/login");
+            header("location:" . BASEURL . "/Auth/loginForm");
         }
     }
 

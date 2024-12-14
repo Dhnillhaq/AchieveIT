@@ -60,10 +60,9 @@ class Controller
 
     protected function checkRole(...$roles)
     {
-        $hasAccess = false;
 
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role'])) {
-            header('location:' . BASEURL . '/Auth/Login');
+            header('location:' . BASEURL . '/Auth/loginForm');
             exit;
         }
 
