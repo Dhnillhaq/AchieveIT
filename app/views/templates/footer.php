@@ -7,8 +7,8 @@
 </footer>
 
 <script>
-	<?php 
-        Flasher::flash();
+    <?php
+    Flasher::flash();
     ?>
 </script>
 

@@ -1,12 +1,21 @@
 <?php
 
+require_once 'Validator.php';
+
 class Controller
 {
     private $models = [];
 
+    private static $validator;
+
     private static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound'];
 
-    public function view($view, $data = [])
+    public function __construct()
+    {
+        self::$validator = new Validator();
+    }
+
+    protected function view($view, $data = [])
     {
         $viewFile = '../app/views/' . $view . '.php';
 
@@ -28,7 +37,12 @@ class Controller
         }
     }
 
-    public function model($model)
+    protected function redirect($path)
+    {
+        header("location" . BASEURL . $path);
+    }
+
+    protected function model($model)
     {
         if (!isset($this->models[$model])) {
             $modelFile = '../app/models/' . $model . '.php';
@@ -44,7 +58,7 @@ class Controller
         return $this->models[$model];
     }
 
-    public function checkRole(...$roles)
+    protected function checkRole(...$roles)
     {
 
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role'])) {

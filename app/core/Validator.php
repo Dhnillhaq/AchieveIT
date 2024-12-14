@@ -57,7 +57,7 @@ class Validator
                     $this->errors[$field][] = "$field must not exceed $params characters";
                 }
                 break;
-                
+
             case 'unique':
                 break;
         }

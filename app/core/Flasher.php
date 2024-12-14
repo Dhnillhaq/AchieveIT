@@ -4,12 +4,12 @@ class Flasher
 {
     public static function setFlash($action, $message, $type, $url = '')
     {
-        $_SESSION['flash'] = [
+        Session::set('flash', [
             'action' => $action,
             'message' => $message,
             'type' => $type,
             'url' => $url
-        ];
+        ]);
     }
 
     public static function flash()
@@ -45,7 +45,7 @@ class Flasher
                          }
                     });";
             }
-            unset($_SESSION['flash']);
+            Session::remove('flash');
         }
     }
 }
