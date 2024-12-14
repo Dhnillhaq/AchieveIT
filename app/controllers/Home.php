@@ -15,7 +15,7 @@ class Home extends Controller
     public function pageNotFound()
     {
         if (!isset($_SESSION['user'])) {
-            $data['url'] = 'index';
+            $data['url'] = 'Home/index';
         } else {
             if ($_SESSION['user']['role'] == 'Super Admin') {
                 $data['url'] = 'Admin/index';
