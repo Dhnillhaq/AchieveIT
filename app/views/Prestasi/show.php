@@ -136,9 +136,11 @@
 							<th class="w-auto py-2 px-4 bg-white font-semibold text-left border border-blue-950">
 								Peran
 							</th>
-							<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
-								Aksi
-							</th>
+							<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
+								<th class="w-1/12 py-2 px-4 bg-white font-semibold text-left border border-blue-950">
+									Aksi
+								</th>
+								<?php } ?>
 						</tr>
 					</thead>
 					<!-- data dummy -->
@@ -153,14 +155,16 @@
 								<td class="py-2 px-4 border border-blue-950">
 									<?= $mhs['nim'] . ' - ' . $mhs['nama_mahasiswa'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $mhs['peran'] ?></td>
-								<td class="py-2 px-4 border border-blue-950">
-									<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
-										<button>
-											<img src="../../../public/img/Aksi.png" alt="logo"
+								<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
+									<td class="py-2 px-4 border border-blue-950">
+										<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
+											<button>
+												<img src="../../../public/img/Aksi.png" alt="logo"
 												class="p-2 bg-[#132145] rounded-md">
-										</button>
-									</a>
-								</td>
+											</button>
+										</a>
+									</td>
+									<?php } ?>
 							</tr>
 							<?php
 							$no++;
@@ -226,7 +230,7 @@
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 			<div class="flex flex-col space-y-0 justify-start items-start py-3">
 				<p class="text-[#757575] font-light">Status</p>
-				<p class="font-bold">VALID</p>
+				<p class="font-bold"><?= $data['prestasi']['status'] ?></p>
 
 			</div>
 
@@ -295,7 +299,11 @@
 	<!-- btn -->
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/Prestasi/index">
+		<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
+			<a href="<?= BASEURL; ?>/Prestasi/mhsIndex">
+			<?php } else { ?> 
+						<a href="<?= BASEURL; ?>/Mahasiswa/prestasiSaya">
+						<?php } ?> 
 				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 					<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 					<p>Kembali</p>

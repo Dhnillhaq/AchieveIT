@@ -54,7 +54,7 @@ class Controller
         }
 
         if (!in_array($_SESSION['user']['role'], $roles)) {
-            header('location:' . BASEURL . '/Auth/pageNotFound');
+            header('location:' . BASEURL . '/Home/pageNotFound');
             exit;
         }
     }

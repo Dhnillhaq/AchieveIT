@@ -60,13 +60,13 @@
 					class="placeholder-black border rounded-lg px-2 py-1 w-full bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal mulai -->
-				<label for="nama" class="block text-gray-700 font-medium pt-6">tanggal Mulai Kompetisi <span
+				<label for="nama" class="block text-gray-700 font-medium pt-6">Tanggal Mulai Kompetisi <span
 						class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_mulai" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal selesai -->
-				<label for="nama" class="block text-gray-700 font-medium pt-6">tanggal Selesai Kompetisi
+				<label for="nama" class="block text-gray-700 font-medium pt-6">Tanggal Selesai Kompetisi
 					<span class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_selesai" required
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
@@ -212,7 +212,7 @@
 				</div>
 
 				<!-- proposal -->
-				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal 
+				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal
 				</label>
 				<div class="flex items-center ">
 					<label
@@ -405,16 +405,15 @@
 <script>
 
 	document.addEventListener("DOMContentLoaded", () => {
-
 		const tableBodyMhs = document.getElementById("table-body-mhs");
+		const tableBodyDsn = document.getElementById("table-body-dsn");
 
 		document.getElementById("add-mhs").addEventListener("click", () => {
 			const newRowMhs = `
 		<tr>
 			<td class="py-2 px-4 border border-blue-950">${tableBodyMhs.children.length + 1}</td>
 			<td class="py-2 px-4 border border-blue-950">
-				<select name="mahasiswa[]" onchange="showMhsName()"
-					class="w-full border rounded px-2 py-1">
+				<select name="mahasiswa[]" required class="w-full border rounded px-2 py-1">
 					<option>Pilih Mahasiswa</option>
 					<?php
 					foreach ($data['mahasiswa'] as $mahasiswa) {
@@ -424,7 +423,7 @@
 				</select>
 			</td>
 			<td class="py-2 px-4 border border-blue-950">
-				<select name="peran_mhs[]" class="w-full border rounded px-2 py-1">
+				<select name="peran_mhs[]" required class="w-full border rounded px-2 py-1">
 					<option>Pilih Peran</option>
 					<?php
 					foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
@@ -438,26 +437,16 @@
 					<img src="../../../public/img/Trash.png" alt="logo" class="">
 				</button>
 			</td>
-		</tr>
-	`;
+		</tr>`;
 			tableBodyMhs.insertAdjacentHTML("beforeend", newRowMhs);
 		});
-
-		tableBodyMhs.addEventListener("click", (event) => {
-			if (event.target.closest(".delete-row")) {
-				const row = event.target.closest("tr");
-				row.parentElement.removeChild(row);
-			}
-		});
-
-		const tableBodyDsn = document.getElementById("table-body-dsn");
 
 		document.getElementById("add-dsn").addEventListener("click", () => {
 			const newRowDsn = `
 		<tr>
 			<td class="py-2 px-4 border border-blue-950">${tableBodyDsn.children.length + 1}</td>
 			<td class="py-2 px-4 border border-blue-950">
-				<select name="dosen[]" class="w-full border rounded px-2 py-1">
+				<select name="dosen[]" required class="w-full border rounded px-2 py-1">
 					<option>Pilih Dosen Pembimbing</option>
 					<?php
 					foreach ($data['dosen'] as $dosen) {
@@ -467,8 +456,8 @@
 				</select>
 			</td>
 			<td class="py-2 px-4 border border-blue-950">
-				<select name="peran_dsn[]" class="w-full border rounded px-2 py-1">
-				<option>Pilih Peran</option>
+				<select name="peran_dsn[]" required class="w-full border rounded px-2 py-1">
+					<option>Pilih Peran</option>
 					<?php
 					foreach ($data['peranDosen'] as $peranDsn) {
 						echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
@@ -481,18 +470,47 @@
 					<img src="../../../public/img/Trash.png" alt="logo" class="">
 				</button>
 			</td>
-		</tr>
-	`;
+		</tr>`;
 			tableBodyDsn.insertAdjacentHTML("beforeend", newRowDsn);
 		});
 
-		tableBodyDsn.addEventListener("click", (event) => {
-			if (event.target.closest(".delete-row")) {
-				const row = event.target.closest("tr");
-				row.parentElement.removeChild(row);
-			}
-		});
-	})
+		const addDeleteRowListener = (tableBody) => {
+			tableBody.addEventListener("click", (event) => {
+				const target = event.target.closest(".delete-row");
+				if (target) {
+					if (tableBody.children.length > 1) {
+						const row = target.closest("tr");
+						row.parentElement.removeChild(row);
+					} else {
+						// Add shake effect
+						target.classList.add("shake");
+						setTimeout(() => target.classList.remove("shake"), 500);
+					}
+				}
+			});
+		};
+
+		// Apply listener to both tables
+		addDeleteRowListener(tableBodyMhs);
+		addDeleteRowListener(tableBodyDsn);
+	});
+
+	// CSS for shake effect
+	const style = document.createElement('style');
+	style.textContent = `
+@keyframes shake {
+	0% { transform: translateX(0); }
+	25% { transform: translateX(-5px); }
+	50% { transform: translateX(5px); }
+	75% { transform: translateX(-5px); }
+	100% { transform: translateX(0); }
+}
+
+.shake {
+	animation: shake 0.5s;
+}`;
+	document.head.appendChild(style);
+
 
 	function showFileName(input, id) {
 		const fileNameElement = document.getElementById(`file-name-${id}`);

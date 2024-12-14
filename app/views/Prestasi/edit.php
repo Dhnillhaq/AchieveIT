@@ -122,11 +122,11 @@
 						<div class="flex flex-col items-start py-6 space-y-1">
 							<div class="flex flex-row justify-center items-center space-x-2">
 								<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-								<p class="text-xs" id="file-name-1">tidak ada file yang dipilih</p>
+								<p class="text-xs" id="file-name-1"><?= $data['prestasi']['nama_asli_surat_tugas'] ?></p>
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-1" name="surat_tugas"
+						<input type="file" class="hidden" id="file-input-1" name="surat_tugas" accept=".jpg,.jpeg,.png,.pdf,.docx"
 							onchange="showFileName(this, 1)">
 					</label>
 				</div>
@@ -150,11 +150,11 @@
 						<div class="flex flex-col items-start py-6 space-y-1">
 							<div class="flex flex-row justify-center items-center space-x-2">
 								<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File</p>
-								<p class="text-xs" id="file-name-2">tidak ada file yang dipilih</p>
+								<p class="text-xs" id="file-name-2"><?= $data['prestasi']['nama_asli_poster'] ?></p>
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-2" name="poster"
+						<input type="file" class="hidden" id="file-input-2" name="poster" accept=".jpg,.jpeg,.png,.pdf,.docx"
 							onchange="showFileName(this, 2)">
 					</label>
 				</div>
@@ -179,11 +179,11 @@
 							<div class="flex flex-row justify-center items-center space-x-2">
 								<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih File
 								</p>
-								<p class="text-xs" id="file-name-3">tidak ada file yang dipilih</p>
+								<p class="text-xs" id="file-name-3"><?= $data['prestasi']['nama_asli_foto_juara'] ?></p>
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-3" name="foto_juara"
+						<input type="file" class="hidden" id="file-input-3" name="foto_juara" accept=".jpg,.jpeg,.png,.pdf,.docx"
 							onchange="showFileName(this, 3)">
 					</label>
 				</div>
@@ -209,11 +209,11 @@
 								<p class="bg-[#FEC01A8F] py-1 px-14 rounded-xl hover:bg-yellow-400">Pilih
 									File
 								</p>
-								<p class="text-xs" id="file-name-4">tidak ada file yang dipilih</p>
+								<p class="text-xs" id="file-name-4"><?= $data['prestasi']['nama_asli_sertifikat'] ?></p>
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-4" name="sertifikat"
+						<input type="file" class="hidden" id="file-input-4" name="sertifikat" accept=".jpg,.jpeg,.png,.pdf,.docx"
 							onchange="showFileName(this, 4)">
 					</label>
 				</div>
@@ -239,11 +239,11 @@
 									Pilih
 									File
 								</p>
-								<p class="text-xs" id="file-name-5">tidak ada file yang dipilih</p>
+								<p class="text-xs" id="file-name-5"><?= $data['prestasi']['nama_asli_proposal'] ?></p>
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-5" name="proposal"
+						<input type="file" class="hidden" id="file-input-5" name="proposal" accept=".jpg,.jpeg,.png,.pdf,.docx"
 							onchange="showFileName(this, 5)">
 					</label>
 				</div>
@@ -401,6 +401,7 @@
 			</div>
 		</section>
 
+		<?php if ($_SESSION['user']['role'] != 'Mahasiswa') { ?>
 		<!-- informasi lain -->
 		<section class="relative p-6">
 			<!-- Static parent -->
@@ -410,16 +411,15 @@
 			<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
 				<div class="flex flex-col space-y-0 justify-start items-start py-3">
 					<p class="font-semibold">Status</p>
-					<select class="w-1/4 border rounded px-2 py-1">
-						<option <?= ($data['prestasi']['status'] == 'Valid') ? 'selected' : '' ?> value="Valid">VALID
+					<select name="status" class="w-1/4 border rounded px-2 py-1">
+						<option <?= ($data['prestasi']['status'] == 'Valid') ? 'selected' : '' ?> value="Valid">Valid
 						</option>
-						<option <?= ($data['prestasi']['status'] == 'Invalid') ? 'selected' : '' ?> value="Invalid">INVALID
+						<option <?= ($data['prestasi']['status'] == 'Invalid') ? 'selected' : '' ?> value="Invalid">Invalid
 						</option>
 						<option <?= ($data['prestasi']['status'] == 'Not Validated') ? 'selected' : '' ?>
-							value="Not Validated">NOT VALIDATED</option>
+							value="Not Validated">Not Validated</option>
 					</select>
 				</div>
-
 
 				<h2 class="font-semibold">Perhitungan Poin</h2>
 
@@ -478,6 +478,7 @@
 				<h2 class="font-semibold ">Total Poin : 12</h2>
 			</div>
 		</section>
+		<?php } ?>
 
 		<!-- btn -->
 		<section class="flex space-x-4 justify-start pl-4 pb-6">
@@ -503,95 +504,113 @@
 
 <script>
 
-	document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const tableBodyMhs = document.getElementById("table-body-mhs");
+    const tableBodyDsn = document.getElementById("table-body-dsn");
 
-		const tableBodyMhs = document.getElementById("table-body-mhs");
+    document.getElementById("add-mhs").addEventListener("click", () => {
+        const newRowMhs = `
+        <tr>
+            <td class="py-2 px-4 border border-blue-950">${tableBodyMhs.children.length + 1}</td>
+            <td class="py-2 px-4 border border-blue-950">
+                <select name="mahasiswa[]" required class="w-full border rounded px-2 py-1">
+                    <option>Pilih Mahasiswa</option>
+                    <?php
+                    foreach ($data['mahasiswa'] as $mahasiswa) {
+                        echo "<option value='{$mahasiswa['id_mahasiswa']}'>{$mahasiswa['nim']} - {$mahasiswa['nama']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+            <td class="py-2 px-4 border border-blue-950">
+                <select name="peran_mhs[]" required class="w-full border rounded px-2 py-1">
+                    <option>Pilih Peran</option>
+                    <?php
+                    foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
+                        echo "<option value='{$peranMahasiswa['id_peran']}'>{$peranMahasiswa['peran']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+            <td class="py-2 px-4 border border-blue-950 text-center">
+                <button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
+                    <img src="../../../public/img/Trash.png" alt="logo" class="">
+                </button>
+            </td>
+        </tr>`;
+        tableBodyMhs.insertAdjacentHTML("beforeend", newRowMhs);
+    });
 
-		document.getElementById("add-mhs").addEventListener("click", () => {
-			const newRowMhs = `
-		<tr>
-			<td class="py-2 px-4 border border-blue-950">${tableBodyMhs.children.length + 1}</td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="mahasiswa[]" onchange="showMhsName()"
-					class="w-full border rounded px-2 py-1">
-					<option>Pilih Mahasiswa</option>
-					<?php
-					foreach ($data['mahasiswa'] as $mahasiswa) {
-						echo "<option value='{$mahasiswa['id_mahasiswa']}'>{$mahasiswa['nim']} - {$mahasiswa['nama']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="peran_mhs[]" class="w-full border rounded px-2 py-1">
-					<option>Pilih Peran</option>
-					<?php
-					foreach ($data['peranMahasiswa'] as $peranMahasiswa) {
-						echo "<option value='{$peranMahasiswa['id_peran']}'>{$peranMahasiswa['peran']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td class="py-2 px-4 border border-blue-950 text-center">
-				<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
-					<img src="../../../public/img/Trash.png" alt="logo" class="">
-				</button>
-			</td>
-		</tr>
-	`;
-			tableBodyMhs.insertAdjacentHTML("beforeend", newRowMhs);
-		});
+    document.getElementById("add-dsn").addEventListener("click", () => {
+        const newRowDsn = `
+        <tr>
+            <td class="py-2 px-4 border border-blue-950">${tableBodyDsn.children.length + 1}</td>
+            <td class="py-2 px-4 border border-blue-950">
+                <select name="dosen[]" required class="w-full border rounded px-2 py-1">
+                    <option>Pilih Dosen Pembimbing</option>
+                    <?php
+                    foreach ($data['dosen'] as $dosen) {
+                        echo "<option value='{$dosen['id_dosen']}'>{$dosen['nip']} - {$dosen['nama']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+            <td class="py-2 px-4 border border-blue-950">
+                <select name="peran_dsn[]" required class="w-full border rounded px-2 py-1">
+                    <option>Pilih Peran</option>
+                    <?php
+                    foreach ($data['peranDosen'] as $peranDsn) {
+                        echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+            <td class="py-2 px-4 border border-blue-950 text-center">
+                <button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
+                    <img src="../../../public/img/Trash.png" alt="logo" class="">
+                </button>
+            </td>
+        </tr>`;
+        tableBodyDsn.insertAdjacentHTML("beforeend", newRowDsn);
+    });
 
-		tableBodyMhs.addEventListener("click", (event) => {
-			if (event.target.closest(".delete-row")) {
-				const row = event.target.closest("tr");
-				row.parentElement.removeChild(row);
-			}
-		});
+    const addDeleteRowListener = (tableBody) => {
+        tableBody.addEventListener("click", (event) => {
+            const target = event.target.closest(".delete-row");
+            if (target) {
+                if (tableBody.children.length > 1) {
+                    const row = target.closest("tr");
+                    row.parentElement.removeChild(row);
+                } else {
+                    // Add shake effect
+                    target.classList.add("shake");
+                    setTimeout(() => target.classList.remove("shake"), 500);
+                }
+            }
+        });
+    };
 
-		const tableBodyDsn = document.getElementById("table-body-dsn");
+    // Apply listener to both tables
+    addDeleteRowListener(tableBodyMhs);
+    addDeleteRowListener(tableBodyDsn);
+});
 
-		document.getElementById("add-dsn").addEventListener("click", () => {
-			const newRowDsn = `
-		<tr>
-			<td class="py-2 px-4 border border-blue-950">${tableBodyDsn.children.length + 1}</td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="dosen[]" class="w-full border rounded px-2 py-1">
-					<option>Pilih Dosen Pembimbing</option>
-					<?php
-					foreach ($data['dosen'] as $dosen) {
-						echo "<option value='{$dosen['id_dosen']}'>{$dosen['nip']} - {$dosen['nama']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td class="py-2 px-4 border border-blue-950">
-				<select name="peran_dsn[]" class="w-full border rounded px-2 py-1">
-				<option>Pilih Peran</option>
-					<?php
-					foreach ($data['peranDosen'] as $peranDsn) {
-						echo "<option value='{$peranDsn['id_peran']}'>{$peranDsn['peran']}</option>";
-					}
-					?>
-				</select>
-			</td>
-			<td class="py-2 px-4 border border-blue-950 text-center">
-				<button type="button" class="delete-row bg-[#FF3B30] py-2 px-2 rounded-md">
-					<img src="../../../public/img/Trash.png" alt="logo" class="">
-				</button>
-			</td>
-		</tr>
-	`;
-			tableBodyDsn.insertAdjacentHTML("beforeend", newRowDsn);
-		});
+	// CSS for shake effect
+	const style = document.createElement('style');
+	style.textContent = `
+	@keyframes shake {
+	    0% { transform: translateX(0); }
+	    25% { transform: translateX(-5px); }
+	    50% { transform: translateX(5px); }
+	    75% { transform: translateX(-5px); }
+	    100% { transform: translateX(0); }
+	}
 
-		tableBodyDsn.addEventListener("click", (event) => {
-			if (event.target.closest(".delete-row")) {
-				const row = event.target.closest("tr");
-				row.parentElement.removeChild(row);
-			}
-		});
-	})
+	.shake {
+	    animation: shake 0.5s;
+	}`;
+	document.head.appendChild(style);
+
 
 	function showFileName(input, id) {
 		const fileNameElement = document.getElementById(`file-name-${id}`);
