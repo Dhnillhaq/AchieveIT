@@ -172,7 +172,7 @@
 							class="font-bold h w-full bg-blue-800 text-white py-3 rounded-lg hover:bg-blue-900">Daftar</button>
 					</form>
 					<div class="flex justify-start text-blue-700 space-x-1">
-						<a href="<?=BASEURL;?>/Auth/Login" class="hover:underline">kembali ke Halaman Login</a>
+						<a href="<?=BASEURL;?>/Auth/loginForm" class="hover:underline">kembali ke Halaman Login</a>
 					</div>
 				</div>
 			</div>

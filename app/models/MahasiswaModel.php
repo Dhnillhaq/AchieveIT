@@ -179,12 +179,13 @@ class MahasiswaModel extends Connection
         return sqlsrv_query($this->conn, $stmt, $params);
     }
 
-    public function validate($id, $status)
+    public function validate($id_mahasiswa, $id_admin, $status)
     {
-        $stmt = "UPDATE mahasiswa SET status = ? WHERE id_mahasiswa = ?";
+        $stmt = "UPDATE mahasiswa SET status = ?, id_admin = ?, validated_at = GETDATE() WHERE id_mahasiswa = ?";
         $params = [
             $status,
-            $id
+            $id_admin,
+            $id_mahasiswa
         ];
 
         return sqlsrv_query($this->conn, $stmt, $params);
