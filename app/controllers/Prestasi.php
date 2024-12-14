@@ -177,6 +177,7 @@ class Prestasi extends Controller
                 'sertifikat' => !empty($_FILES['sertifikat']['name']) ? self::$files->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
                 'proposal' => !empty($_FILES['proposal']['name']) ? self::$files->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
                 'status' => htmlspecialchars($_POST['status']),
+                'id_admin' => $_SESSION['user']['id_admin'],
                 'id_prestasi' => $id_prestasi
             ];
 

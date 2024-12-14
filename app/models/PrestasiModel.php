@@ -261,7 +261,7 @@ class PrestasiModel extends Connection
         $idResource = sqlsrv_query($this->conn, $stmt, $params);
 
         if (!$idResource) {
-            die(print_r(sqlsrv_errors(), true)); 
+            die(print_r(sqlsrv_errors(), true));
         }
 
         // Fetch the inserted ID
@@ -274,24 +274,23 @@ class PrestasiModel extends Connection
     public function update($data)
     {
         $stmt = "UPDATE prestasi
-            SET
-                id_kategori = ?,
-                id_juara = ?,
-                id_tingkat_penyelenggara = ?,
-                id_tingkat_kompetisi = ?,
-                nama_kompetisi = ?,
-                tanggal_mulai_kompetisi = ?,
-                tanggal_selesai_kompetisi = ?,
-                penyelenggara_kompetisi = ?,
-                tempat_kompetisi = ?,
-                surat_tugas = ?, 
-                poster_kompetisi = ?, 
-                foto_juara = ?, 
-                proposal = ?, 
-                sertifikat = ?, 
-                poin_prestasi = ?,
-                status = ?
-            WHERE id_prestasi = ?;";
+        SET
+            id_kategori = ?,
+            id_juara = ?,
+            id_tingkat_penyelenggara = ?,
+            id_tingkat_kompetisi = ?,
+            nama_kompetisi = ?,
+            tanggal_mulai_kompetisi = ?,
+            tanggal_selesai_kompetisi = ?,
+            penyelenggara_kompetisi = ?,
+            tempat_kompetisi = ?,
+            surat_tugas = ?, 
+            poster_kompetisi = ?, 
+            foto_juara = ?, 
+            proposal = ?, 
+            sertifikat = ?, 
+            poin_prestasi = ?,
+            status = ?";
 
         $params = array(
             $data['kategori'],
@@ -309,9 +308,17 @@ class PrestasiModel extends Connection
             $data['proposal'],
             $data['sertifikat'],
             $data['poin_prestasi'],
-            $data['status'],
-            $data['id_prestasi']
+            $data['status']
         );
+
+        if ($data['status'] !== 'Not Validated') {
+            $stmt .= ", id_admin = ?, validated_at = GETDATE()";
+            $params[] = $data['id_admin'];
+        }
+
+        // Tambahkan WHERE id_prestasi
+        $stmt .= " WHERE id_prestasi = ?";
+        $params[] = $data['id_prestasi'];
 
         $isSuccess = sqlsrv_query($this->conn, $stmt, $params);
 
