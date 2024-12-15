@@ -1,18 +1,15 @@
 tbody {
-    overflow: hidden; /* Penting untuk animasi */
-    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
-}
-
-tbody.hidden {
-    max-height: 0; /* Menyembunyikan tbody dengan tinggi 0 */
-    opacity: 0; /* Menghilangkan tampilan secara visual */
+    display: none; /* Tersembunyi secara default */
+    opacity: 0; /* Untuk efek transisi */
+    transform: translateY(-20px); /* Slide dari atas */
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 tbody.visible {
-    max-height: 500px; /* Maksimum tinggi untuk tbody saat ditampilkan */
-    opacity: 1; /* Menampilkan tbody sepenuhnya */
+    display: table-row-group; /* Tampilkan kembali dalam tabel */
+    opacity: 1; /* Efek fade-in */
+    transform: translateY(0); /* Kembali ke posisi normal */
 }
-
 .error {
     border-color: red;
     outline: none;
