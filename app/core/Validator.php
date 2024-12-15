@@ -14,7 +14,6 @@ class Validator
 
         foreach ($rules as $field => $fieldRules) {
             $value = $files[$field]['tmp_name'] ?? $data[$field] ?? null;
-            $fileInfo = $files[$field] ?? null;
             $ruleset = is_string($fieldRules) ? explode('|', $fieldRules) : $fieldRules;
 
             foreach ($ruleset as $rule) {
