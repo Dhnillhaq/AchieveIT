@@ -27,6 +27,22 @@ class Home extends Controller
         }
         $this->view('pageNotFound', $data);
     }
+
+    public function exception()
+    {
+        if (!isset($_SESSION['user'])) {
+            $data['url'] = 'Home/index';
+        } else {
+            if ($_SESSION['user']['role'] == 'Super Admin') {
+                $data['url'] = 'Admin/index';
+            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
+                $data['url'] = 'Kajur/index';
+            } else {
+                $data['url'] = 'Mahasiswa/index';
+            }
+        }
+        $this->view('exception', $data);
+    }
 }
 
 ?>
