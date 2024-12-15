@@ -9,7 +9,7 @@ class LogAdminModel extends Connection
                 JOIN admin a ON a.id_admin = l.id_admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-
+        $data = [];
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -26,9 +26,10 @@ class LogAdminModel extends Connection
         $params = array(
             $id_admin
         );
-        $data = [];
 
         $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        $data = [];
 
         if ($result) {
             while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {

@@ -6,13 +6,13 @@ class Controller
 {
     private $models = [];
 
-    private static $validator;
+    protected $validator;
 
-    private static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound'];
+    private static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound', 'exception'];
 
     public function __construct()
     {
-        self::$validator = new Validator();
+        $this->validator = new Validator();
     }
 
     protected function view($view, $data = [])

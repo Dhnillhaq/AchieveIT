@@ -15,12 +15,8 @@ class Admin extends Controller
             'perTahun' => $this->model('PrestasiModel')->getGrafikPertahun(),
             'perBulan' => $this->model('PrestasiModel')->getGrafikPerBulan(),
         ];
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
 
         $this->view('Admin/index', $data);
-
     }
 
     public function administrasiData()
@@ -50,7 +46,7 @@ class Admin extends Controller
         } else {
             $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
         }
-        $this->view("Admin/profilAdmin" , $data);
+        $this->view("Admin/profilAdmin", $data);
     }
     public function adminList()
     {
