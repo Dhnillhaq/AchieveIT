@@ -10,12 +10,14 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM prestasi";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getDaftarPrestasi()
@@ -23,12 +25,14 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM vw_PrestasiMahasiswa ORDER BY poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getPrestasiByNim($nim)
@@ -37,15 +41,14 @@ class PrestasiModel extends Connection
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
-
-        if ($result != false) {
-            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-                $data[] = $row;
-            }
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
-        return $data;
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data ?? [];
     }
 
     public function getDetailPrestasi($id)
@@ -54,7 +57,11 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
 
         return $data;
     }
@@ -65,7 +72,11 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
 
         return $data;
     }
@@ -76,13 +87,14 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-
-        return $data;
+        return $data ?? [];
     }
 
     public function getDetailPrestasiDataDosen($id)
@@ -91,13 +103,14 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-
-        return $data;
+        return $data ?? [];
     }
 
     public function getDetailPrestasiDataPoin($id)
@@ -106,8 +119,11 @@ class PrestasiModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
 
         return $data;
     }
@@ -144,12 +160,14 @@ class PrestasiModel extends Connection
                  ORDER BY total_poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getStatistikPrestasi()
@@ -157,14 +175,13 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM vw_StatistikPrestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
 
         return $data;
-    }
-
-    public function getGrafikPrestasi()
-    {
-
     }
 
     public function getTahunPrestasi()
@@ -174,13 +191,14 @@ class PrestasiModel extends Connection
                 FROM prestasi;";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
-
+        return $data ?? [];
     }
 
     public function getGrafikDiagramLingkaran($type = "Kategori")
@@ -189,13 +207,14 @@ class PrestasiModel extends Connection
         $params = array($type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-
-        return $data;
+        return $data ?? [];
     }
 
     public function getGrafikPerTahun($type = "kategori")
@@ -204,13 +223,14 @@ class PrestasiModel extends Connection
         $params = array($type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-
-        return $data;
+        return $data ?? [];
     }
     public function getGrafikPerBulan($type = "kategori", $year = "2024")
     {
@@ -218,13 +238,14 @@ class PrestasiModel extends Connection
         $params = array($year, $type);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-
-        return $data;
+        return $data ?? [];
     }
 
     public function getExportData()
@@ -232,7 +253,9 @@ class PrestasiModel extends Connection
         $stmt = "SELECT * FROM vw_DataPrestasi";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
@@ -245,7 +268,7 @@ class PrestasiModel extends Connection
             $header[] = $row['COLUMN_NAME'];
         }
 
-        return ['data' => $data, 'header' => $header];
+        return ['data' => $data ?? [], 'header' => $header ?? []];
     }
 
     public function store($data)
@@ -307,16 +330,15 @@ class PrestasiModel extends Connection
 
         $stmt .= ")";
 
-
         $idResource = sqlsrv_query($this->conn, $stmt, $params);
 
-        if (!$idResource) {
-            die(print_r(sqlsrv_errors(), true));
+        if ($idResource === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
         // Fetch the inserted ID
         $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
-        $insertedId = $idRow[0];
+        $insertedId = $idRow[0]; // ID of the inserted row
 
         return (int) $insertedId;
     }
@@ -369,20 +391,26 @@ class PrestasiModel extends Connection
         // Tambahkan WHERE id_prestasi
         $stmt .= " WHERE id_prestasi = ?";
         $params[] = $data['id_prestasi'];
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $isSuccess = sqlsrv_query($this->conn, $stmt, $params);
-
-        if (!$isSuccess) {
-            die(print_r(sqlsrv_errors(), true)); // Debug errors
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        return $result;
     }
 
     public function delete($id_prestasi)
     {
         $stmt = "DELETE FROM prestasi WHERE id_prestasi = ?";
         $params = array($id_prestasi);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 }
 

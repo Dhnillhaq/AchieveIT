@@ -9,12 +9,14 @@ class LogAdminModel extends Connection
                 JOIN admin a ON a.id_admin = l.id_admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getLogAdminByIdAdmin($id_admin)
@@ -26,18 +28,14 @@ class LogAdminModel extends Connection
         $params = array(
             $id_admin
         );
-
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
-
-        if ($result) {
-            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-                $data[] = $row;
-            }
-        } else {
-            // error handling
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
         return $data;
     }
 
@@ -49,6 +47,12 @@ class LogAdminModel extends Connection
             $aksi,
             $keterangan
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 }

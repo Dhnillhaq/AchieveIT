@@ -12,11 +12,11 @@ class FilesModel extends Connection
 
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        if ($result) {
-            return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        } else {
-            // error handling
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        return $result;
     }
 
     public function store($data)
@@ -32,8 +32,8 @@ class FilesModel extends Connection
 
         $idResource = sqlsrv_query($this->conn, $stmt, $params);
 
-        if (!$idResource) {
-            die(print_r(sqlsrv_errors(), true)); // Debug errors
+        if ($idResource === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
         // Fetch the inserted ID
