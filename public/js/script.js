@@ -12,7 +12,7 @@ function toggleTbody(year) {
       tbody.classList.remove('visible'); // Sembunyikan tbody
       setTimeout(() => {
           tbody.style.display = "none"; // Hapus dari flow setelah transisi
-      }, 500); // Waktu sinkron dengan durasi transisi
+      }, 100); // Waktu sinkron dengan durasi transisi
   });
 
   // Tampilkan tbody yang sesuai setelah delay
@@ -20,7 +20,7 @@ function toggleTbody(year) {
   setTimeout(() => {
       targetTbody.style.display = "table-row-group"; // Tampilkan dalam tabel
       targetTbody.classList.add('visible'); // Tambahkan animasi
-  }, 500); // Delay untuk sinkronisasi
+  }, 100); // Delay untuk sinkronisasi
 }
 
 

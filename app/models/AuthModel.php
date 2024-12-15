@@ -13,9 +13,8 @@ class AuthModel extends Connection
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+        
         return $data ?? [];
     }
 
@@ -29,9 +28,8 @@ class AuthModel extends Connection
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
         return $data ?? [];
     }
 
@@ -45,26 +43,11 @@ class AuthModel extends Connection
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+            
         return $data ?? [];
     }
 
-    public function getMahasiswa($nim)
-    {
-        $stmt = "SELECT * FROM mahasiswa WHERE nim LIKE ?";
-        $params = array("%{$nim}%");
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
-    }
 
     public function registrasi($username, $password)
     {

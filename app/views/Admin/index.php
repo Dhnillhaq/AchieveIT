@@ -67,9 +67,20 @@
 
 	<!-- judul -->
 	<section class="flex-col justify-start pl-6">
-		<p class="font-semibold text-2xl">
-			Analisis Data Prestasi Mahasiswa JTI
-		</p>
+		<div>
+			<p class="font-semibold text-2xl">
+				Analisis Data Prestasi Mahasiswa JTI
+			</p>
+		</div>
+		<!-- kategori -->
+		<div class="flex justify-end">
+			<span class="py-1 px-2">Berdasarkan :</span>
+			<select class="rounded-lg px-2 py-1 w-1/5 bg-white shadow-gray-400 shadow-sm">
+				<option>Kategori</option>
+				<option>Tingkat Kompetisi</option>
+				<option>Tingkat Penyelenggara</option>
+			</select>
+		</div>
 	</section>
 
 	<!-- Diagram Lingkaran Analisis -->
@@ -80,14 +91,6 @@
 			<p class="font-semibold text-2xl">Diagram Lingkaran Analisis</p>
 		</div>
 
-		<!-- kategori -->
-		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
-				<option>Kategori</option>
-				<option>Tingkat Kompetisi</option>
-				<option>Tingkat Penyelenggara</option>
-			</select>
-		</div>
 		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
 			<canvas id="DiagramLingkar"></canvas>
 		</div>
@@ -102,14 +105,7 @@
 			</p>
 		</div>
 
-		<!-- kategori -->
-		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
-				<option>Kategori</option>
-				<option>Tingkat Kompetisi</option>
-				<option>Tingkat Penyelenggara</option>
-			</select>
-		</div>
+
 		<div class="">
 			<canvas id="DiagramBatangPerTahun"></canvas>
 		</div>
@@ -124,14 +120,6 @@
 			</p>
 		</div>
 
-		<!-- kategori -->
-		<div class="flex justify-end">
-			<select class="rounded-lg px-2 py-1 w-1/4 bg-white shadow-gray-400 shadow-sm">
-				<option>Kategori</option>
-				<option>Tingkat Kompetisi</option>
-				<option>Tingkat Penyelenggara</option>
-			</select>
-		</div>
 		<div class="">
 			<canvas id="DiagramBatang1Tahun"></canvas>
 		</div>
@@ -169,7 +157,7 @@
 								// Cek apakah tahun prestasi sudah ada di array $yearsDisplayed
 								if (!in_array($prestasi['tahun_prestasi'], $yearsDisplayed) && $prestasi['tahun_prestasi'] != 0) {
 									// Jika belum ada, tampilkan option
-									echo "<option>{$prestasi['tahun_prestasi']}</option>";
+									echo "<option value='{$prestasi['tahun_prestasi']}'>{$prestasi['tahun_prestasi']}</option>";
 
 									// Tambahkan tahun yang sudah ditampilkan ke dalam array
 									$yearsDisplayed[] = $prestasi['tahun_prestasi'];
@@ -204,7 +192,26 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="text-gray-700 visible" id="myTbody">
+					<style>
+						tbody {
+							display: none;
+							/* Tersembunyi secara default */
+							opacity: 0;
+							/* Untuk efek transisi */
+							/* transform: translateY(-20px); Slide dari atas */
+							transition: opacity 0.5s ease, transform 0.5s ease;
+						}
+
+						tbody.visible {
+							display: table-row-group;
+							/* Tampilkan kembali dalam tabel */
+							opacity: 1;
+							/* Efek fade-in */
+							transform: translateY(0);
+							/* Kembali ke posisi normal */
+						}
+					</style>
+					<tbody class="text-gray-700 visible" id="tbody-2024">
 						<?php
 						// Looping data mahasiswa ke data tabel
 						$rank = 1;
@@ -214,6 +221,31 @@
 								break; // Hentikan perulangan jika sudah mencapai 10 iterasi
 							}
 							if ($mahasiswa['tahun_prestasi'] === 2024) {
+								?>
+								<tr>
+									<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_prodi'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
+								</tr>
+								<?php
+								$rank++;
+								$counter++;
+							}
+						}
+						?>
+					</tbody>
+					<tbody class="text-gray-700 visible" id="tbody-2023">
+						<?php
+						// Looping data mahasiswa ke data tabel
+						$rank = 1;
+						$counter = 0;
+						foreach ($data['prestasi'] as $mahasiswa) {
+							if ($counter >= 10) {
+								break; // Hentikan perulangan jika sudah mencapai 10 iterasi
+							}
+							if ($mahasiswa['tahun_prestasi'] === 2023) {
 								?>
 								<tr>
 									<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
@@ -284,14 +316,14 @@
 			data: {
 				labels: [
 					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-													"<?= $lingkar['Kategori'] ?>",
+																	"<?= $lingkar['Kategori'] ?>",
 					<?php } ?>
 				],
 				datasets: [
 					{
 						data: [
 							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-													<?= $lingkar['jumlah_prestasi'] ?>,
+																	<?= $lingkar['jumlah_prestasi'] ?>,
 							<?php } ?>
 						], // Data untuk setiap kategori
 						borderWidth: 1,
@@ -317,18 +349,18 @@
 			data: {
 				labels: [
 					<?php foreach ($data['tahun'] as $tahun) { ?>
-																	"<?= $tahun['tahun']; ?>",
+																					"<?= $tahun['tahun']; ?>",
 					<?php } ?>
 				],
 				datasets: [
 					<?php
 					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
 					foreach ($data['kategori'] as $kategori) { ?>
-																{
+																				{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perTahun'] as $perTahun) { ?>
-																								<?= $perTahun[$kategori['kategori']] ?>,
+																																<?= $perTahun[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
@@ -369,11 +401,11 @@
 				],
 				datasets: [
 					<?php foreach ($data['kategori'] as $kategori) { ?>
-												{
+																{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perBulan'] as $perBulan) { ?>
-																							<?= $perBulan[$kategori['kategori']] ?>,
+																															<?= $perBulan[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
