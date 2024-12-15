@@ -6,7 +6,7 @@ class Validator
     private $data = [];
     private $files = [];
 
-    public function validate(array $data, array $files = [], array $rules)
+    public function validate(array $data, array $rules, array $files = [])
     {
         $this->data = $data;
         $this->files;
