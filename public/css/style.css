@@ -1,15 +1,3 @@
-tbody {
-    display: none; /* Tersembunyi secara default */
-    opacity: 0; /* Untuk efek transisi */
-    /* transform: translateY(-20px); Slide dari atas */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-tbody.visible {
-    display: table-row-group; /* Tampilkan kembali dalam tabel */
-    opacity: 1; /* Efek fade-in */
-    transform: translateY(0); /* Kembali ke posisi normal */
-}
 .error {
     border-color: red;
     outline: none;

@@ -192,25 +192,6 @@
 							</th>
 						</tr>
 					</thead>
-					<style>
-						tbody {
-							display: none;
-							/* Tersembunyi secara default */
-							opacity: 0;
-							/* Untuk efek transisi */
-							/* transform: translateY(-20px); Slide dari atas */
-							transition: opacity 0.5s ease, transform 0.5s ease;
-						}
-
-						tbody.visible {
-							display: table-row-group;
-							/* Tampilkan kembali dalam tabel */
-							opacity: 1;
-							/* Efek fade-in */
-							transform: translateY(0);
-							/* Kembali ke posisi normal */
-						}
-					</style>
 					<tbody class="text-gray-700 visible" id="tbody-2024">
 						<?php
 						// Looping data mahasiswa ke data tabel
@@ -309,6 +290,25 @@
 		</div>
 	</section>
 
+	<style>
+		tbody {
+			display: none;
+			/* Tersembunyi secara default */
+			opacity: 0;
+			/* Untuk efek transisi */
+			/* transform: translateY(-20px); Slide dari atas */
+			transition: opacity 0.5s ease, transform 0.5s ease;
+		}
+
+		tbody.visible {
+			display: table-row-group;
+			/* Tampilkan kembali dalam tabel */
+			opacity: 1;
+			/* Efek fade-in */
+			transform: translateY(0);
+			/* Kembali ke posisi normal */
+		}
+	</style>
 	<script>
 		const ctx = document.getElementById("DiagramLingkar");
 		new Chart(ctx, {
@@ -316,14 +316,14 @@
 			data: {
 				labels: [
 					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-																	"<?= $lingkar['Kategori'] ?>",
+																		"<?= $lingkar['Kategori'] ?>",
 					<?php } ?>
 				],
 				datasets: [
 					{
 						data: [
 							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-																	<?= $lingkar['jumlah_prestasi'] ?>,
+																		<?= $lingkar['jumlah_prestasi'] ?>,
 							<?php } ?>
 						], // Data untuk setiap kategori
 						borderWidth: 1,
@@ -349,18 +349,18 @@
 			data: {
 				labels: [
 					<?php foreach ($data['tahun'] as $tahun) { ?>
-																					"<?= $tahun['tahun']; ?>",
+																						"<?= $tahun['tahun']; ?>",
 					<?php } ?>
 				],
 				datasets: [
 					<?php
 					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
 					foreach ($data['kategori'] as $kategori) { ?>
-																				{
+																					{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perTahun'] as $perTahun) { ?>
-																																<?= $perTahun[$kategori['kategori']] ?>,
+																																		<?= $perTahun[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
@@ -401,11 +401,11 @@
 				],
 				datasets: [
 					<?php foreach ($data['kategori'] as $kategori) { ?>
-																{
+																	{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perBulan'] as $perBulan) { ?>
-																															<?= $perBulan[$kategori['kategori']] ?>,
+																																	<?= $perBulan[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
