@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tbody Toggle with Animation</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Default styles */
+        tbody {
+            display: none; /* Tersembunyi secara default */
+            opacity: 0; /* Untuk efek transisi */
+            transform: translateX(-20px); /* Slide dari atas */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        tbody.visible {
+            display: table-row-group; /* Tampilkan kembali dalam tabel */
+            opacity: 1; /* Efek fade-in */
+            transform: translateY(0); /* Kembali ke posisi normal */
+        }
+    </style>
+</head>
+<body>
+    <label for="yearSelect">Pilih Tahun:</label>
+    <select id="yearSelect" onchange="toggleTbody(this.value)">
+        <option value="2024" selected>Tahun 2024</option>
+        <option value="2023">Tahun 2023</option>
+        <option value="2022">Tahun 2022</option>
+    </select>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+        </thead>
+
+        <!-- Tbody Tahun 2024 -->
+        <tbody id="tbody-2024" class="visible">
+            <tr>
+                <td>Data 2024-1</td>
+                <td>Data 2024-2</td>
+                <td>Data 2024-3</td>
+            </tr>
+            <tr>
+                <td>Data 2024-4</td>
+                <td>Data 2024-5</td>
+                <td>Data 2024-6</td>
+            </tr>
+        </tbody>
+
+        <!-- Tbody Tahun 2023 -->
+        <tbody id="tbody-2023">
+            <tr>
+                <td>Data 2023-1</td>
+                <td>Data 2023-2</td>
+                <td>Data 2023-3</td>
+            </tr>
+            <tr>
+                <td>Data 2023-4</td>
+                <td>Data 2023-5</td>
+                <td>Data 2023-6</td>
+            </tr>
+        </tbody>
+
+        <!-- Tbody Tahun 2022 -->
+        <tbody id="tbody-2022">
+            <tr>
+                <td>Data 2022-1</td>
+                <td>Data 2022-2</td>
+                <td>Data 2022-3</td>
+            </tr>
+            <tr>
+                <td>Data 2022-4</td>
+                <td>Data 2022-5</td>
+                <td>Data 2022-6</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function toggleTbody(year) {
+            // Dapatkan semua tbody di dalam tabel
+            const tbodies = document.querySelectorAll('tbody');
+
+            // Loop untuk menyembunyikan semua tbody
+            tbodies.forEach(tbody => {
+                tbody.classList.remove('visible'); // Sembunyikan tbody
+                setTimeout(() => {
+                    tbody.style.display = "none"; // Hapus dari flow setelah transisi
+                }, 500); // Waktu sinkron dengan durasi transisi
+            });
+
+            // Tampilkan tbody yang sesuai setelah delay
+            const targetTbody = document.getElementById(`tbody-${year}`);
+            setTimeout(() => {
+                targetTbody.style.display = "table-row-group"; // Tampilkan dalam tabel
+                targetTbody.classList.add('visible'); // Tambahkan animasi
+            }, 500); // Delay untuk sinkronisasi
+        }
+    </script>
+</body>
+</html>

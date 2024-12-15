@@ -1,3 +1,18 @@
+tbody {
+    overflow: hidden; /* Penting untuk animasi */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+tbody.hidden {
+    max-height: 0; /* Menyembunyikan tbody dengan tinggi 0 */
+    opacity: 0; /* Menghilangkan tampilan secara visual */
+}
+
+tbody.visible {
+    max-height: 500px; /* Maksimum tinggi untuk tbody saat ditampilkan */
+    opacity: 1; /* Menampilkan tbody sepenuhnya */
+}
+
 .error {
     border-color: red;
     outline: none;

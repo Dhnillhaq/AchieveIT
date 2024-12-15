@@ -159,20 +159,24 @@
 				<div class="flex right-0">
 					<div class="flex items-center mr-3">
 
-						<span class="">Lihat</span>
-						<select name="limit" onchange="submitForm()"
-							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-							<option value="10" selected>10</option>
-							<option value="20">20</option>
-							<option value="50">50</option>
-						</select>
-
 						<span class="">entri</span>
-						<select name="year" onchange="submitForm()"
-							class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-							<option value="2022">2022</option>
-							<option value="2023">2023</option>
-							<option value="2024" selected>2024</option>
+						<select name="year" id="yearSelect" onchange="toggleTbody()"
+							class="righ	t-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<?php
+							$yearsDisplayed = [];
+
+							foreach ($data['prestasi'] as $prestasi) {
+								// Cek apakah tahun prestasi sudah ada di array $yearsDisplayed
+								if (!in_array($prestasi['tahun_prestasi'], $yearsDisplayed) && $prestasi['tahun_prestasi'] != 0) {
+									// Jika belum ada, tampilkan option
+									echo "<option>{$prestasi['tahun_prestasi']}</option>";
+
+									// Tambahkan tahun yang sudah ditampilkan ke dalam array
+									$yearsDisplayed[] = $prestasi['tahun_prestasi'];
+								}
+							}
+							?>
+
 						</select>
 						</form>
 					</div>
@@ -200,58 +204,76 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="text-gray-700">
+					<tbody class="text-gray-700" id="myTbody">
 						<?php
-						// Looping data mahasiswa ke dalam tabel
+						// Looping data mahasiswa k	e dalaabel
 						$rank = 1;
-						foreach ($data['prestasi'] as $mahasiswa) { ?>
-							<tr>
-								<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_mahasiswa'] ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['prodi'] ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
-							</tr>
-							<?php
-							$rank++;
+						$counter = 0;
+						$year = "0";
+						foreach ($data['prestasi'] as $mahasiswa) {
+							if ($counter >= 10) {
+								break; // Hentikan perulangan jika sudah mencapai 10 iterasi
+							}
+							if ($mahasiswa['tahun_prestasi'] == $year) {
+								?>
+								<tr>
+									<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_prodi'] ?></td>
+									<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
+								</tr>
+								<?php
+								$rank++;
+								$counter++;
+							}
 						}
 						?>
 					</tbody>
 				</table>
 			</div>
 			<!-- pagination -->
-        <section class="flex items-center justify-center py-2">
-		<nav aria-label="Page navigation example">
-  <ul class="flex items-center -space-x-px h-8 text-sm">
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Previous</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-        </svg>
-      </a>
-    </li>
-    <li>
-      <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
-    </li>
-    <li>
-      <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
-        <span class="sr-only">Next</span>
-        <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-        </svg>
-      </a>
-    </li>
-  </ul>
-</nav>
+			<section class="flex items-center justify-center py-2">
+				<nav aria-label="Page navigation example">
+					<ul class="flex items-center -space-x-px h-8 text-sm">
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-blue-600 border border-e-0 border-gray-300 rounded-s-lg hover:bg-blue-200 hover:text-blue-700">
+								<span class="sr-only">Previous</span>
+								<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+										stroke-width="2" d="M5 1 1 5l4 4" />
+								</svg>
+							</a>
+						</li>
+						<li>
+							<a href="#" aria-current="page"
+								class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">1</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">2</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 bg-transparent hover:bg-blue-200 hover:text-blue-700">3</a>
+						</li>
+						<li>
+							<a href="#"
+								class="flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-gray-300 rounded-e-lg bg-transparent hover:bg-blue-200 hover:text-blue-700">
+								<span class="sr-only">Next</span>
+								<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+										stroke-width="2" d="m1 9 4-4-4-4" />
+								</svg>
+							</a>
+						</li>
+					</ul>
+				</nav>
 
-</section>
+			</section>
 
 		</div>
 	</section>
@@ -263,14 +285,14 @@
 			data: {
 				labels: [
 					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-								"<?= $lingkar['Kategori'] ?>",
+													"<?= $lingkar['Kategori'] ?>",
 					<?php } ?>
 				],
 				datasets: [
 					{
 						data: [
 							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-								<?= $lingkar['jumlah_prestasi'] ?>,
+													<?= $lingkar['jumlah_prestasi'] ?>,
 							<?php } ?>
 						], // Data untuk setiap kategori
 						borderWidth: 1,
@@ -296,22 +318,22 @@
 			data: {
 				labels: [
 					<?php foreach ($data['tahun'] as $tahun) { ?>
-												"<?= $tahun['tahun']; ?>",
+																	"<?= $tahun['tahun']; ?>",
 					<?php } ?>
 				],
 				datasets: [
-					<?php 
+					<?php
 					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
-						foreach ($data['kategori'] as $kategori) { ?>
-											{
+					foreach ($data['kategori'] as $kategori) { ?>
+																{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perTahun'] as $perTahun) { ?>
-														<?= $perTahun[$kategori['kategori']] ?>,
+																								<?= $perTahun[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
-							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>",					
+							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>",
 						},
 					<?php } ?>
 				],
@@ -348,11 +370,11 @@
 				],
 				datasets: [
 					<?php foreach ($data['kategori'] as $kategori) { ?>
-							{
+												{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perBulan'] as $perBulan) { ?>
-													<?= $perBulan[$kategori['kategori']] ?>,
+																							<?= $perBulan[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
