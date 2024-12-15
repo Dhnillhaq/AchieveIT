@@ -147,7 +147,7 @@ class Auth extends Controller
     public function isMahasiswa()
     {
         $this->userDB = $this->model("MahasiswaModel")->getMahasiswaByNim($this->usernameInp);
-        if (!empty($this->userDB['0'])) {
+        if (!empty($this->userDB)) {
             if ($this->usernameInp == $this->userDB['0']['nim'] && $this->passwordInp == $this->userDB['0']['password']) {
                 return true;
             } else {
