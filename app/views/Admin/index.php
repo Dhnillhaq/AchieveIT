@@ -20,7 +20,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Prestasi
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_prestasi'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_prestasi'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Mahasiswa JTI
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_mahasiswa'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_mahasiswa'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Rata-rata Per Tahun
 					</p>
-					<p class="font-bold"><?= round($data['statistik']['0']['rata_rata']) ?></p>
+					<p class="font-bold"><?= round($data['statistik']['rata_rata']) ?></p>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total MaPres
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_mapres'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_mapres'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -160,7 +160,7 @@
 					<div class="flex items-center mr-3">
 
 						<span class="">entri</span>
-						<select name="year" id="yearSelect" onchange="toggleTbody()"
+						<select name="year" id="yearSelect" onchange="toggleTbody(this.value)"
 							class="righ	t-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
 							<?php
 							$yearsDisplayed = [];
@@ -204,17 +204,16 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="text-gray-700" id="myTbody">
+					<tbody class="text-gray-700 visible" id="myTbody">
 						<?php
-						// Looping data mahasiswa k	e dalaabel
+						// Looping data mahasiswa ke data tabel
 						$rank = 1;
 						$counter = 0;
-						$year = "0";
 						foreach ($data['prestasi'] as $mahasiswa) {
 							if ($counter >= 10) {
 								break; // Hentikan perulangan jika sudah mencapai 10 iterasi
 							}
-							if ($mahasiswa['tahun_prestasi'] == $year) {
+							if ($mahasiswa['tahun_prestasi'] === 2024) {
 								?>
 								<tr>
 									<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
