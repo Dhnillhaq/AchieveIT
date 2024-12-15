@@ -11,13 +11,14 @@ class MahasiswaModel extends Connection
                     FROM mahasiswa m
                     JOIN program_studi p ON m.id_prodi = p.id_prodi";
         $result = sqlsrv_query($this->conn, $stmt);
-
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getMahasiswaByNim($nim, $type = "Valid")
@@ -29,11 +30,17 @@ class MahasiswaModel extends Connection
                     WHERE nim = ?
                     AND status = ?";
         $params = array($nim, $type);
+
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
         if ($type == "Valid") {
-            $data[] = $this->getStatistikMhs($nim);
+            $data = $this->getStatistikMhs($nim);
         }
 
         return $data;
@@ -44,7 +51,13 @@ class MahasiswaModel extends Connection
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   
@@ -54,7 +67,13 @@ class MahasiswaModel extends Connection
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     public function countPrestMhs($nim)
@@ -63,11 +82,12 @@ class MahasiswaModel extends Connection
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = [];
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
         return $data;
     }
 
@@ -81,7 +101,13 @@ class MahasiswaModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     public function store($data, $validate = 'Valid')
@@ -101,7 +127,13 @@ class MahasiswaModel extends Connection
             $data['password']
         );
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function delete($id_mahasiswa)
@@ -109,7 +141,13 @@ class MahasiswaModel extends Connection
         $stmt = "DELETE FROM mahasiswa WHERE id_mahasiswa = ?";
         $params = array($id_mahasiswa);
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function update($data)
@@ -141,7 +179,13 @@ class MahasiswaModel extends Connection
             $data['id_mahasiswa']
         );
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function updateAccount($data)
@@ -176,7 +220,13 @@ class MahasiswaModel extends Connection
             $data['nim']
         );
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function validate($id_mahasiswa, $id_admin, $status)
@@ -188,7 +238,13 @@ class MahasiswaModel extends Connection
             $id_mahasiswa
         ];
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function getNotValidatedMahasiswa()
@@ -199,12 +255,14 @@ class MahasiswaModel extends Connection
                     JOIN program_studi p ON m.id_prodi = p.id_prodi WHERE m.status = 'Not Validated'";
         $result = sqlsrv_query($this->conn, $stmt);
 
-        $data = [];
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getNotValidatedMahasiswaById($id)
@@ -217,7 +275,13 @@ class MahasiswaModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 }
 ?>

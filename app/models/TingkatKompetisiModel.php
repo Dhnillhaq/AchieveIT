@@ -7,10 +7,14 @@ class TingkatKompetisiModel extends Connection
         $stmt = "SELECT * FROM tingkat_kompetisi";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getTingkatKompetisiById($id)
@@ -19,14 +23,15 @@ class TingkatKompetisiModel extends Connection
         $params = array(
             $id
         );
-
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        if ($result) {
-            return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        } else {
-            // error handling
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     public function store($data)
@@ -36,7 +41,13 @@ class TingkatKompetisiModel extends Connection
             $data['tingkat_kompetisi'],
             $data['poin']
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function update($data)
@@ -47,7 +58,13 @@ class TingkatKompetisiModel extends Connection
             $data['poin'],
             $data['id_tingkat_kompetisi']
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function delete($id)
@@ -56,6 +73,12 @@ class TingkatKompetisiModel extends Connection
         $params = array(
             $id
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 }

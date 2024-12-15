@@ -9,12 +9,14 @@ class AdminModel extends Connection
         $stmt = "SELECT * FROM admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     // Get All Log Admin
@@ -24,12 +26,14 @@ class AdminModel extends Connection
         $stmt = "SELECT * FROM log_admin";
         $result = sqlsrv_query($this->conn, $stmt);
 
-
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getAdminById($id)
@@ -38,23 +42,39 @@ class AdminModel extends Connection
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     public function store($data)
     {
         $stmt = "INSERT INTO admin(nip, nama, role, password) VALUES(?, ?, ?, ?)";
         $params = array($data['nip'], $data['nama'], $data['role'], $data['password']);
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function delete($id_admin)
     {
         $stmt = "DELETE FROM admin WHERE id_admin = ?";
         $params = array($id_admin);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function update($data)
@@ -67,7 +87,13 @@ class AdminModel extends Connection
             $data['password'],
             $data['id_admin']
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 }
 ?>
