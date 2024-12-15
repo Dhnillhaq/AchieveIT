@@ -39,7 +39,35 @@ class Controller
 
     protected function redirect($path)
     {
-        header("location" . BASEURL . $path);
+        header("location" . BASEURL . '/' . $path);
+    }
+
+    protected function redirectToDashboard()
+    {
+        switch ($_SESSION['user']['role']) {
+            case 'Super Admin':
+                $path = 'Admin/index';
+                break;
+
+            case 'Admin':
+                $path = 'Admin/index';
+                break;
+
+            case 'Ketua Jurusan':
+                $path = 'Kajur/index';
+                break;
+
+            case 'Mahasiswa':
+                $path = 'Mahasiswa/index';
+                break;
+
+            default:
+                $path = 'Home/pageNotFound';
+                break;
+        }
+
+        header("location" . BASEURL . '/' . $path);
+        exit;
     }
 
     protected function model($model)
