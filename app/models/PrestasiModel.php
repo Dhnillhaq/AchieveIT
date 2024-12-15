@@ -114,7 +114,34 @@ class PrestasiModel extends Connection
 
     public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
     {
-        $stmt = "EXEC usp_GetRankingMahasiswaPerTahun @keyword = '$keyword', @quantity = $filterQ, @year = $filterY;";
+        $stmt = "SELECT
+                 	m.nama,
+                 	m.nim,
+                 	prodi.nama_prodi,
+                 	m.total_poin AS total_poin,
+                 	0 AS tahun_prestasi
+                 FROM mahasiswa m
+                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                 WHERE total_poin > 0
+                     
+                 UNION ALL
+                     
+                 SELECT
+                 	m.nama,
+                 	m.nim,
+                 	prodi.nama_prodi,
+                 	SUM(p.poin_prestasi) AS total_poin,
+                 	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi
+                 FROM prestasi_mahasiswa pm
+                 JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                 JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                 GROUP BY
+                 	m.nama,
+                 	m.nim,
+                 	prodi.nama_prodi,
+                 	YEAR(p.tanggal_selesai_kompetisi)
+                 ORDER BY total_poin DESC;";
         $result = sqlsrv_query($this->conn, $stmt);
 
         $data = [];
@@ -264,8 +291,8 @@ class PrestasiModel extends Connection
         if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
             //  Langsung validasi kalo Create oleh Super Admin/Admin
             $stmt .= ", status, id_admin, validated_at";
-            $params[] = 'Valid'; 
-            $params[] = $_SESSION['user']['id_admin']; 
+            $params[] = 'Valid';
+            $params[] = $_SESSION['user']['id_admin'];
         }
 
         $stmt .= ") OUTPUT INSERTED.id_prestasi VALUES(";

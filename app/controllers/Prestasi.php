@@ -303,8 +303,16 @@ class Prestasi extends Controller
         $this->checkRole("Admin", "Super Admin", "Mahasiswa");
         $id = htmlspecialchars($id_prestasi);
 
+        Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Prestasi/deleting/" . $id);
+        header('location:' . BASEURL . '/Prestasi/show/' . $id);
+    }
+    
+    public function deleting($id)
+    {
+        $this->checkRole("Admin", "Super Admin", "Mahasiswa");
+        
         $mahasiswa = $this->model('PrestasiMahasiswaModel')->getPrestasiMahasiswaByIdPrestasi($id);
-
+        
         if (!empty($mahasiswa)) {
             for ($i = 0; $i < count($mahasiswa); $i++) {
                 $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id, $mahasiswa['id_mahasiswa']);
@@ -328,6 +336,7 @@ class Prestasi extends Controller
         }
 
         $isSuccess = $this->model("PrestasiModel")->delete($id);
+        Flasher::setFlash("Hapus", "Data Prestasi berhasil dihapus", "success");
         $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
         if (!$isSuccess) {
             var_dump($dosen);
@@ -335,6 +344,7 @@ class Prestasi extends Controller
         }
         header('location:' . BASEURL . '/Prestasi/index');
     }
+
     public function show($id_prestasi)
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa", "Ketua Jurusan");

@@ -3,6 +3,17 @@ function submitForm() {
   document.getElementById("formFilter").submit();
 }
 
+function toggleTbody() {
+  const tbody = document.getElementById('myTbody');
+   if (tbody.classList.contains('hidden')) {
+      tbody.classList.remove('hidden');
+      tbody.classList.add('visible');
+  } else {
+      tbody.classList.remove('visible');
+      tbody.classList.add('hidden');
+  }
+}
+
 
 // Method / fungsi Tampilkan sandi input password
 function showPassword(idInput) {

@@ -32,10 +32,9 @@ class Auth extends Controller
             } else {
                 $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
                 Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
-                $this->view('Auth/login', $data);
-                exit;
             }
         }
+        $this->view('Auth/login', $data);
     }
 
     // Method Halaman Registrasi

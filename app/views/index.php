@@ -211,8 +211,8 @@
                 <tr>
                   <td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
                   <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_mahasiswa'] ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['prodi'] ?></td>
+                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama'] ?></td>
+                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_prodi'] ?></td>
                   <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
                 </tr>
                 <?php
