@@ -21,7 +21,7 @@ class MahasiswaModel extends Connection
         return $data ?? [];
     }
 
-    public function getMahasiswaByNim($nim, $type = "Valid")
+    public function getMahasiswaByNim($nim, $status = "Valid")
     {
         $stmt = "SELECT m.*, 
 		            p.*
@@ -29,7 +29,7 @@ class MahasiswaModel extends Connection
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
                     WHERE nim = ?
                     AND status = ?";
-        $params = array($nim, $type);
+        $params = array($nim, $status);
 
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
@@ -37,10 +37,10 @@ class MahasiswaModel extends Connection
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
 
-        if ($type == "Valid") {
-            $data = $this->getStatistikMhs($nim);
+        if ($status == "Valid") {
+            $data[] = $this->getStatistikMhs($nim);
         }
 
         return $data;
@@ -49,7 +49,7 @@ class MahasiswaModel extends Connection
     {
         $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
         $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);    
 
         if ($result === false) {
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
