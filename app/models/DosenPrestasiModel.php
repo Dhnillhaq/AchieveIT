@@ -22,16 +22,30 @@ class DosenPrestasiModel extends Connection
 
     public function store($id_prestasi, $id_dosen, $id_peran)
     {
-        $stmt = "INSERT INTO dosen_prestasi(id_prestasi, id_dosen, id_peran) VALUES(?, ?, ?)";
-        $params = array(
-            $id_prestasi,
-            $id_dosen,
-            $id_peran
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        // Cek sudah adakah didatabase?
+        $query = "SELECT COUNT(*) FROM dosen_prestasi WHERE id_dosen = ? AND id_prestasi = ? AND id_peran = ?";
+        $check = sqlsrv_query($this->conn, $query, [$id_dosen, $id_prestasi, $id_peran]);
+        $count = sqlsrv_fetch_array($check)[0];
+        if ($count > 0) { // jika ya, update data
+            $data = [
+                'id_prestasi' => $id_prestasi,
+                'id_dosen' => $id_dosen,
+                'id_peran' => $id_peran
+            ];
+            $result = $this->update($id_prestasi, $id_dosen, $id_peran, $data);
+        } else {
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            $stmt = "INSERT INTO dosen_prestasi(id_prestasi, id_dosen, id_peran) VALUES(?, ?, ?)";
+            $params = array(
+                $id_prestasi,
+                $id_dosen,
+                $id_peran
+            );
+            $result = sqlsrv_query($this->conn, $stmt, $params);
+
+            if ($result === false) {
+                throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            }
         }
 
         return $result;
