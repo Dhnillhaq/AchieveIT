@@ -61,28 +61,28 @@
 		<table class="min-w-full bg-white text-center">
 			<thead>
 				<tr>
-					<th class="w-1/12 py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-1/12 py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						No
 					</th>
-					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-auto py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Nama Kompetisi
 					</th>
-					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-auto py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Tingkat Kompetisi
 					</th>
-					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-auto py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Kategori Kompetisi
 					</th>
-					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-auto py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Juara
 					</th>
-					<th class="w-auto py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-auto py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Status
 					</th>
-					<th class="w-1/12 py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-1/12 py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Poin
 					</th>
-					<th class="w-1/12 py-2 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
+					<th class="w-1/12 py-3 px-4 bg-blue-950 text-white font-semibold border border-blue-950">
 						Aksi
 					</th>
 				</tr>
@@ -92,18 +92,20 @@
 				$no = 1;
 				foreach ($data['daftar_prestasi'] as $prestasi) { ?>
 					<tr>
-						<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
-						<td class="py-2 px-4 border border-blue-950">
-							<img src="../../public/img/<?= ($prestasi['status'] == 'Valid') ? 'Valid.png' : (($prestasi['status'] == 'Invalid') ? 'invalid.png' : 'notValidated.png') ?>"
-								alt="Icon Status" class="w-5 h-auto" />
-							<p><?= $prestasi['status'] ?></p>
+						<td class="py-3 px-4 border border-blue-950"><?= $no++ ?></td>
+						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
+						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
+						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
+						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
+						<td class="py-3 px-4 border border-blue-950">
+							<div class="flex justify-center gap-1">
+								<img src="../../public/img/<?= ($prestasi['status'] == 'Valid') ? 'Valid.png' : (($prestasi['status'] == 'Invalid') ? 'invalid.png' : 'notValidated.png') ?>"
+									alt="Icon Status" class="w-6 h-full object-cover" />
+								<p><?= $prestasi['status'] ?></p>
+							</div>
 						</td>
-						<td class="py-2 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
-						<td class="py-2 px-4 border border-blue-950">
+						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['poin'] ?></td>
+						<td class="py-3 px-4 border border-blue-950">
 							<a href="<?= BASEURL; ?>/Prestasi/show/<?= $prestasi['id_prestasi'] ?>">
 								<button>
 									<img src="../../../public/img/Aksi.png" alt="logo" class="p-2 bg-[#132145] rounded-md">
