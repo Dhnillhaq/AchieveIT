@@ -410,11 +410,22 @@ class PrestasiModel extends Connection
 
     public function delete($id_prestasi)
     {
-        $stmt = "DELETE FROM prestasi WHERE id_prestasi = ?";
-        $params = array($id_prestasi);
+        $stmt = "
+            BEGIN TRANSACTION;
+
+            DELETE FROM dosen_prestasi WHERE id_prestasi = ?;
+            DELETE FROM prestasi_mahasiswa WHERE id_prestasi = ?;
+            DELETE FROM prestasi WHERE id_prestasi = ?;
+
+            COMMIT TRANSACTION;
+";
+
+        $params = array($id_prestasi, $id_prestasi, $id_prestasi);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
+            // Transaksi dibatalkan
+            sqlsrv_query($this->conn, "ROLLBACK TRANSACTION;");
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 

@@ -304,38 +304,20 @@ class Prestasi extends Controller
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa");
 
-        $mahasiswa = $this->model('PrestasiMahasiswaModel')->getPrestasiMahasiswaByIdPrestasi($id);
-
-        if (!empty($mahasiswa)) {
-            for ($i = 0; $i < count($mahasiswa); $i++) {
-                $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id, $mahasiswa['id_mahasiswa']);
-                if (!$deleteMahasiswa) {
-                    var_dump($mahasiswa);
-                    die;
-                }
-            }
-        }
-
-        $dosen = $this->model('DosenPrestasiModel')->getDosenPrestasiByIdPrestasi($id);
-
-        if (!empty($dosen)) {
-            for ($i = 0; $i < count($dosen); $i++) {
-                $deleteDosen = $this->model("DosenPrestasiModel")->delete($id, $dosen['id_dosen']);
-                if (!$deleteDosen) {
-                    var_dump($dosen);
-                    die;
-                }
-            }
-        }
-
         $isSuccess = $this->model("PrestasiModel")->delete($id);
-        Flasher::setFlash("Hapus", "Data Prestasi berhasil dihapus", "success");
-        $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
         if (!$isSuccess) {
-            var_dump($dosen);
+            var_dump($isSuccess);
             die;
+        } else {
+            Flasher::setFlash("Hapus", "Data Prestasi berhasil dihapus", "success");
         }
-        header('location:' . BASEURL . '/Prestasi/index');
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
+        } else {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
+            header('location:' . BASEURL . '/Prestasi/index');
+
+        }
     }
 
     public function show($id_prestasi)
