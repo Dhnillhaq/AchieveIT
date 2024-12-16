@@ -48,6 +48,24 @@ class Admin extends Controller
         }
         $this->view("Admin/profilAdmin", $data);
     }
+
+    public function getLogs($pages, $limits = 10)
+    {
+        $page = (int)$pages;
+        $limit = (int)$limits;
+        $offset = ($page - 1) * $limit;
+    
+        $logs = $this->model("LogAdminModel")->getAllLogAdmin($offset, $limit);
+        $totalLogs = $this->model("LogAdminModel")->countLogs(); // Total jumlah log
+    
+        echo json_encode([
+            'data' => $logs,
+            'total' => $totalLogs,
+            'page' => $page,
+            'limit' => $limit,
+        ]);
+    }
+    
     public function adminList()
     {
         $this->checkRole("Super Admin");
