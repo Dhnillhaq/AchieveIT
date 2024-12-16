@@ -11,12 +11,15 @@
 	<!-- KALO VALID WARNANYA ABU-ABU "bg-[#757575]" -->
 	<!-- halaman edit bisa diakses ketika status = invalid / not validated -->
 	<section class="flex justify-end pr-6">
-		<a href="<?= BASEURL; ?>/prestasi/edit/<?= $data['prestasi']['id_prestasi'] ?>">
-			<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145]  rounded-lg w-auto">
-				<img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
-				<p>edit</p>
-			</button>
-		</a>
+		<?php
+		if ($_SESSION['user']['role'] != 'Ketua Jurusan') { ?>
+			<a href="<?= BASEURL; ?>/prestasi/edit/<?= $data['prestasi']['id_prestasi'] ?>">
+				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145]  rounded-lg w-auto">
+					<img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
+					<p>edit</p>
+				</button>
+			</a>
+		<?php } ?>
 	</section>
 
 	<!-- data kompetisi -->
@@ -301,21 +304,25 @@
 	<section class="flex space-x-4 justify-start pl-4 pb-6">
 		<div class="justify-center p-2">
 
-			<button onclick="history.back()" class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+			<button onclick="history.back()"
+				class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
 				<img src="../../../public/img/Back.png" alt="logo" class="w-5 h-5" />
 				<p>Kembali</p>
 			</button>
 
 		</div>
-
-		<div class="justify-center p-2">
-			<a href="<?= BASEURL; ?>/Prestasi/delete/<?= $data['prestasi']['id_prestasi'] ?>">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
-					<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
-					<p>Hapus</p>
-				</button>
-			</a>
-		</div>
+		<?php 
+		if ($_SESSION['user']['role'] != 'Ketua Jurusan') { ?>
+			
+			<div class="justify-center p-2">
+				<a href="<?= BASEURL; ?>/Prestasi/delete/<?= $data['prestasi']['id_prestasi'] ?>">
+					<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#FF3B30] rounded-lg">
+						<img src="../../../public/img/Trash.png" alt="logo" class="w-5 h-5">
+						<p>Hapus</p>
+					</button>
+				</a>
+			</div>
+			<?php }?>
 
 	</section>
 </section>
