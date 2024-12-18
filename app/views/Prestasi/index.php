@@ -22,7 +22,7 @@
 		<div
 			class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 			<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
-			<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+			<input type="text" id="myInput" placeholder="Cari prestasi" class="bg-white flex focus:outline-none px-3" />
 		</div>
 		<div class="flex right-0 space-x-2">
 			<div class="flex items-center">
@@ -87,13 +87,13 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody class="text-gray-700">
+			<tbody class="text-gray-700" id="myTable">
 				<?php
 				$no = 1;
 				foreach ($data['daftar_prestasi'] as $prestasi) { ?>
 					<tr>
 						<td class="py-3 px-4 border border-blue-950"><?= $no++ ?></td>
-						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
+						<td class="nama-kompetisi py-3 px-4 border border-blue-950"><?= $prestasi['nama_kompetisi'] ?></td>
 						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['tingkat_kompetisi'] ?></td>
 						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['kategori_kompetisi'] ?></td>
 						<td class="py-3 px-4 border border-blue-950"><?= $prestasi['juara'] ?></td>
@@ -162,3 +162,14 @@
 	</section>
 
 </section>
+
+<script>
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase(); 
+			$("#myTable tr").filter(function() { 
+				$(this).toggle($(this).find(".nama-kompetisi").text().toLowerCase().indexOf(value) > -1);
+			});
+		});
+	});
+</script>

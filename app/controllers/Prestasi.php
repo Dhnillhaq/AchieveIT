@@ -162,6 +162,7 @@ class Prestasi extends Controller
 
             $selectedPrestasi = $this->model("PrestasiModel")->getPrestasiById($id_prestasi);
 
+
             $dataPrestasi = [
                 'kategori' => filter_var($_POST['kategori'], FILTER_VALIDATE_INT),
                 'tingkat_kompetisi' => filter_var($_POST['tingkat_kompetisi'], FILTER_VALIDATE_INT),
@@ -177,10 +178,13 @@ class Prestasi extends Controller
                 'foto_juara' => !empty($_FILES['foto_juara']['name']) ? self::$files->uploadFile($_FILES['foto_juara']) : $selectedPrestasi['foto_juara'],
                 'sertifikat' => !empty($_FILES['sertifikat']['name']) ? self::$files->uploadFile($_FILES['sertifikat']) : $selectedPrestasi['sertifikat'],
                 'proposal' => !empty($_FILES['proposal']['name']) ? self::$files->uploadFile($_FILES['proposal']) : $selectedPrestasi['proposal'],
-                'status' => htmlspecialchars($_POST['status']),
-                'id_admin' => $_SESSION['user']['id_admin'],
                 'id_prestasi' => $id_prestasi
             ];
+
+            if (isset($_POST['status'])) {
+                $dataPrestasi['status'] = htmlspecialchars($_POST['status']);
+                $dataPrestasi['id_admin'] = $_SESSION['user']['id_admin'];
+            }
 
             $dataPrestasi['poin_prestasi'] = $this->model("JuaraModel")->getJuaraById($dataPrestasi['juara'])['poin'] +
                 $this->model("TingkatKompetisiModel")->getTingkatKompetisiById($dataPrestasi['tingkat_kompetisi'])['poin'] +
@@ -188,105 +192,94 @@ class Prestasi extends Controller
 
             $updatePrestasi = $this->model("PrestasiModel")->update($dataPrestasi);
 
-            if ($updatePrestasi) {
+            // --- Mahasiswa - Prestasi ---
+            $dataMahasiswa = [
+                'id_prestasi' => $id_prestasi,
+                'id_mahasiswa' => $_POST['mahasiswa'] ?? [],
+                'id_peran' => $_POST['peran_mhs'] ?? []
+            ];
 
-                // insert into mahasiswa - prestasi
-                $dataMahasiswa = [
-                    'id_prestasi' => $id_prestasi,
-                    'id_mahasiswa' => $_POST['mahasiswa'],
-                    'id_peran' => $_POST['peran_mhs']
-                ];
+            $existingMahasiswa = $this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi);
+            $existingMahasiswaIds = array_column($existingMahasiswa, 'id_mahasiswa');
 
-                if (count($dataMahasiswa['id_mahasiswa']) === count($dataMahasiswa['id_peran'])) {
+            // Array untuk menandai mahasiswa yang tidak diubah
+            $keptMahasiswa = [];
 
-                    for ($i = 0; $i < count($dataMahasiswa['id_mahasiswa']); $i++) {
-                        if (!$dataMahasiswa['id_mahasiswa'][$i] == $this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)['id_mahasiswa'][$i]) {
-                            $updatePeranMahasiswa = $this->model("PrestasiMahasiswaModel")->update(
-                                $dataMahasiswa['id_prestasi'],
-                                filter_var($dataMahasiswa['id_mahasiswa'][$i], FILTER_VALIDATE_INT),
-                                filter_var($dataMahasiswa['id_peran'][$i], FILTER_VALIDATE_INT),
-                                $this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)
-                            );
+            // Loop untuk penambahan & update
+            foreach ($dataMahasiswa['id_mahasiswa'] as $index => $id_mahasiswa) {
+                $id_peran = $dataMahasiswa['id_peran'][$index];
 
-                            if (!$updatePeranMahasiswa) {
-                                var_dump($dataMahasiswa);
-                                die;
-                            }
-                        } else {
-                            if (empty($dataMahasiswa['id_mahasiswa']) && !empty($this->model("PrestasiMahasiswaModel")->getPrestasiMahasiswaByIdPrestasi($id_prestasi)['id_mahasiswa'])) {
-                                $insertedPeranMahasiswa = $this->model("PrestasiMahasiswaModel")->store(
-                                    $dataMahasiswa['id_prestasi'],
-                                    filter_var($dataMahasiswa['id_mahasiswa'][$i], FILTER_VALIDATE_INT),
-                                    filter_var($dataMahasiswa['id_peran'][$i], FILTER_VALIDATE_INT)
-                                );
-
-                                if (!$insertedPeranMahasiswa) {
-                                    var_dump($dataMahasiswa);
-                                    die;
-                                }
-                            } else {
-                                $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id_prestasi, $dataMahasiswa['id_mahasiswa'][$i]);
-                                if (!$deleteMahasiswa) {
-                                    var_dump($dataMahasiswa);
-                                    die;
-                                }
-                            }
-                        }
+                if (in_array($id_mahasiswa, $existingMahasiswaIds)) {
+                    // Skenario jika ingin mengubah peran
+                    $currentPeran = $existingMahasiswa[array_search($id_mahasiswa, $existingMahasiswaIds)]['id_peran'];
+                    if ($currentPeran != $id_peran) {
+                        $this->model("PrestasiMahasiswaModel")->update(
+                            $id_prestasi,
+                            filter_var($id_mahasiswa, FILTER_VALIDATE_INT),
+                            filter_var($id_peran, FILTER_VALIDATE_INT)
+                        );
                     }
                 } else {
-                    // error handling
+                    // Skenario belum ada mahasiswa dan peran
+                    $this->model("PrestasiMahasiswaModel")->store(
+                        $id_prestasi,
+                        filter_var($id_mahasiswa, FILTER_VALIDATE_INT),
+                        filter_var($id_peran, FILTER_VALIDATE_INT)
+                    );
                 }
+                $keptMahasiswa[] = $id_mahasiswa; // Menandai mahasiswa yang ga diubah
+            }
 
-                // update into dosen - prestasi
-                $dataDosen = [
-                    'id_prestasi' => $id_prestasi,
-                    'id_dosen' => $_POST['dosen'],
-                    'id_peran' => $_POST['peran_dsn']
-                ];
+            // Hapus mahasiswa yang mau dihapus di Prestasi
+            foreach ($existingMahasiswaIds as $id_mahasiswa_db) {
+                if (!in_array($id_mahasiswa_db, $keptMahasiswa)) {
+                    $this->model("PrestasiMahasiswaModel")->delete($id_prestasi, $id_mahasiswa_db);
+                }
+            }
 
-                if (count($dataDosen['id_dosen']) === count($dataDosen['id_peran'])) {
+            // --- Dosen - Prestasi ---
+            $dataDosen = [
+                'id_prestasi' => $id_prestasi,
+                'id_dosen' => $_POST['dosen'] ?? [],
+                'id_peran' => $_POST['peran_dsn'] ?? []
+            ];
 
-                    for ($i = 0; $i < count($dataDosen['id_dosen']); $i++) {
-                        if (!$dataDosen['id_dosen'][$i] == $this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)['id_dosen'][$i]) {
-                            $updatePeranDosen = $this->model("DosenPrestasiModel")->update(
-                                $dataDosen['id_prestasi'],
-                                filter_var($dataDosen['id_dosen'][$i], FILTER_VALIDATE_INT),
-                                filter_var($dataDosen['id_peran'][$i], FILTER_VALIDATE_INT),
-                                $this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)
-                            );
+            $existingDosen = $this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi);
+            $existingDosenIds = array_column($existingDosen, 'id_dosen');
 
-                            if (!$updatePeranDosen) {
-                                var_dump($dataDosen);
-                                die;
-                            }
-                        } else {
-                            if (!empty($dataDosen['id_dosen']) > empty($this->model("DosenPrestasiModel")->getDosenPrestasiByIdPrestasi($id_prestasi)['id_dosen'])) {
-                                $insertedPeranDosen = $this->model("DosenPrestasiModel")->store(
-                                    $dataDosen['id_prestasi'],
-                                    filter_var($dataDosen['id_dosen'][$i], FILTER_VALIDATE_INT),
-                                    filter_var($dataDosen['id_peran'][$i], FILTER_VALIDATE_INT)
-                                );
+            // Array untuk menandai dosen yang tidak diubah
+            $keptDosen = [];
 
-                                if (!$insertedPeranDosen) {
-                                    var_dump($dataDosen);
-                                    die;
-                                }
-                            } else {
-                                $deleteDosen = $this->model("DosenPrestasiModel")->delete($id_prestasi, $dataDosen['id_dosen'][$i]);
-                                if (!$deleteDosen) {
-                                    var_dump($dataDosen);
-                                    die;
-                                }
-                            }
-                        }
+            // Loop untuk penambahan & update
+            foreach ($dataDosen['id_dosen'] as $index => $id_dosen) {
+                $id_peran = $dataDosen['id_peran'][$index];
+
+                if (in_array($id_dosen, $existingDosenIds)) {
+                    // Skenario mengubah peran dosen
+                    $currentPeran = $existingDosen[array_search($id_dosen, $existingDosenIds)]['id_peran'];
+                    if ($currentPeran != $id_peran) {
+                        $this->model("DosenPrestasiModel")->update(
+                            $id_prestasi,
+                            filter_var($id_dosen, FILTER_VALIDATE_INT),
+                            filter_var($id_peran, FILTER_VALIDATE_INT)
+                        );
                     }
                 } else {
-                    var_dump($dataDosen);
-                    die;
+                    // Skenario menambahkan dosen & peran dosen yang belum ada
+                    $this->model("DosenPrestasiModel")->store(
+                        $id_prestasi,
+                        filter_var($id_dosen, FILTER_VALIDATE_INT),
+                        filter_var($id_peran, FILTER_VALIDATE_INT)
+                    );
                 }
+                $keptDosen[] = $id_dosen; // Tandai dosen yang ga diubah
+            }
 
-            } else {
-                // error handling
+            // Hapus dosen yang tidak ada di POST
+            foreach ($existingDosenIds as $id_dosen_db) {
+                if (!in_array($id_dosen_db, $keptDosen)) {
+                    $this->model("DosenPrestasiModel")->delete($id_prestasi, $id_dosen_db);
+                }
             }
         }
         Flasher::setFlash("Ubah", "Data Prestasi berhasil diubah", "success");
@@ -306,43 +299,25 @@ class Prestasi extends Controller
         Flasher::setFlash("Hapus", "Apakah anda yakin ingin menghapus data ini?", "warning", "Prestasi/deleting/" . $id);
         header('location:' . BASEURL . '/Prestasi/show/' . $id);
     }
-    
+
     public function deleting($id)
     {
         $this->checkRole("Admin", "Super Admin", "Mahasiswa");
-        
-        $mahasiswa = $this->model('PrestasiMahasiswaModel')->getPrestasiMahasiswaByIdPrestasi($id);
-        
-        if (!empty($mahasiswa)) {
-            for ($i = 0; $i < count($mahasiswa); $i++) {
-                $deleteMahasiswa = $this->model("PrestasiMahasiswaModel")->delete($id, $mahasiswa['id_mahasiswa']);
-                if (!$deleteMahasiswa) {
-                    var_dump($mahasiswa);
-                    die;
-                }
-            }
-        }
-
-        $dosen = $this->model('DosenPrestasiModel')->getDosenPrestasiByIdPrestasi($id);
-
-        if (!empty($dosen)) {
-            for ($i = 0; $i < count($dosen); $i++) {
-                $deleteDosen = $this->model("DosenPrestasiModel")->delete($id, $dosen['id_dosen']);
-                if (!$deleteDosen) {
-                    var_dump($dosen);
-                    die;
-                }
-            }
-        }
 
         $isSuccess = $this->model("PrestasiModel")->delete($id);
-        Flasher::setFlash("Hapus", "Data Prestasi berhasil dihapus", "success");
-        $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
         if (!$isSuccess) {
-            var_dump($dosen);
+            var_dump($isSuccess);
             die;
+        } else {
+            Flasher::setFlash("Hapus", "Data Prestasi berhasil dihapus", "success");
         }
-        header('location:' . BASEURL . '/Prestasi/index');
+        if ($_SESSION['user']['role'] == "Mahasiswa") {
+            header('location:' . BASEURL . '/Mahasiswa/prestasiSaya');
+        } else {
+            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Prestasi dengan ID " . $id);
+            header('location:' . BASEURL . '/Prestasi/index');
+
+        }
     }
 
     public function show($id_prestasi)
@@ -362,7 +337,7 @@ class Prestasi extends Controller
     {
         $file = new Spreadsheet();
 
-        $this->model("LogAdminModel")->storeAdminLog("Export Prestasi", "Mengekspor Data Prestasi" );
+        $this->model("LogAdminModel")->storeAdminLog("Export Prestasi", "Mengekspor Data Prestasi");
 
 
         $active_sheet = $file->getActiveSheet();

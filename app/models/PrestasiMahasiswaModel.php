@@ -20,18 +20,30 @@ class PrestasiMahasiswaModel extends Connection
 
     public function store($id_prestasi, $id_mahasiswa, $id_peran)
     {
-        $stmt = "INSERT INTO prestasi_mahasiswa(id_prestasi, id_mahasiswa, id_peran) VALUES(?, ?, ?)";
-        $params = array(
-            $id_prestasi,
-            $id_mahasiswa,
-            $id_peran
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        // Cek sudah adakah didatabase?
+        $query = "SELECT COUNT(*) FROM prestasi_mahasiswa WHERE id_mahasiswa = ? AND id_prestasi = ? AND id_peran = ?";
+        $check = sqlsrv_query($this->conn, $query, [$id_mahasiswa, $id_prestasi, $id_peran]);
+        $count = sqlsrv_fetch_array($check)[0];
+        if ($count > 0) { // jika ya, update data di database
+            $data = [
+                'id_prestasi' => $id_prestasi,
+                'id_dosen' => $id_mahasiswa,
+                'id_peran' => $id_peran
+            ];
+            $result = $this->update($id_prestasi, $id_mahasiswa, $id_peran, $data);
+        } else {
+            $stmt = "INSERT INTO prestasi_mahasiswa(id_prestasi, id_mahasiswa, id_peran) VALUES(?, ?, ?)";
+            $params = array(
+                $id_prestasi,
+                $id_mahasiswa,
+                $id_peran
+            );
+            $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            if ($result === false) {
+                throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            }
         }
-
         return $result;
     }
 
