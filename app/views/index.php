@@ -280,9 +280,10 @@
     </div>
 
     <div class="flex right-0 text-[16px]">
-      <a href="<?= BASEURL; ?>/Auth/loginForm">
-        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-24 h-10">
-          Masuk
+      <a
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/loginForm') ?>">
+        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-28 h-10">
+          <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
       </a>
     </div>
