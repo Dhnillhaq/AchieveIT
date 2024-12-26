@@ -19,30 +19,37 @@ class Admin extends Controller
         $this->view('Admin/index', $data);
     }
 
-    public function getDataByYear()
-    {
-        // Terima data POST dari JavaScript
-        $input = json_decode(file_get_contents("php://input"), true);
-        $keyword = $input['keyword'] ?? "";
-        $year = $input['year'] ?? "all";
+    public function getDataRankingPrestasi()
+{
+    // Terima data POST dari JavaScript
+    $input = json_decode(file_get_contents("php://input"), true);
 
-        // Debug: Tampilkan data yang diterima
-        error_log("Year received: " . $year);
+    // Tangkap parameter dari input
+    $keyword = $input['keyword'] ?? "";          // Keyword pencarian
+    $year = $input['year'] ?? "all";             // Tahun filter
+    $page = (int)($input['page'] ?? 1);          // Halaman, default halaman pertama
+    $limit = 10;                                 // Jumlah data per halaman
+    $offset = ($page - 1) * $limit;              // Hitung offset untuk query
 
-        // Ambil data sesuai tahun
-        if ($year === "all") {
-            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword); 
-        } else {
-            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year); // Data sesuai tahun
-        }
-
-        // Debug: Tampilkan data yang akan dikembalikan
-        error_log("Data returned: " . json_encode($data));
-
-        // Return data sebagai JSON
-        header('Content-Type: application/json');
-        echo json_encode($data);
+    // Ambil jumlah total data berdasarkan filter
+    if ($year === "all") {
+        $totalPrestasi = $this->model('PrestasiModel')->countPrestasi($keyword); // Total sesuai keyword
+        $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword, $limit, $offset); // Data untuk semua tahun
+    } else {
+        $totalPrestasi = $this->model('PrestasiModel')->countPrestasiPerTahun($keyword, $year); // Total berdasarkan tahun
+        $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year, $limit, $offset); // Data berdasarkan tahun
     }
+
+    // Return data sebagai JSON
+    header('Content-Type: application/json');
+    echo json_encode([
+        'data' => $data,
+        'total' => $totalPrestasi,   // Total data untuk menghitung pagination
+        'page' => $page,             // Halaman saat ini
+        'limit' => $limit            // Jumlah data per halaman
+    ]);
+}
+
 
 
     public function administrasiData()

@@ -146,7 +146,7 @@
 				<div class="flex right-0">
 					<div class="flex items-center mr-3">
 
-						<span class="">entri</span>
+						<span>entri</span>
 						<select name="year" id="yearSelect"
 							class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
 							<option value="all">Seluruh Waktu</option>
@@ -162,19 +162,24 @@
 				<table id="daftar-prestasi-table" class="min-w-full bg-white">
 					<thead>
 						<tr>
-							<th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+							<th
+								class="py-2 px-2 bg-blue-950 text-white font-semibold text-center border border-blue-950">
 								RANKING
 							</th>
-							<th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+							<th
+								class="py-2 px-4 bg-blue-950 text-white font-semibold text-center border border-blue-950">
 								NIM
 							</th>
-							<th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+							<th
+								class="py-2 px-4 bg-blue-950 text-white font-semibold text-center border border-blue-950">
 								NAMA MAHASISWA
 							</th>
-							<th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+							<th
+								class="py-2 px-4 bg-blue-950 text-white font-semibold text-center border border-blue-950">
 								PRODI
 							</th>
-							<th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
+							<th
+								class="py-2 px-4 bg-blue-950 text-white font-semibold text-center border border-blue-950">
 								TOTAL POIN
 							</th>
 						</tr>
@@ -235,10 +240,12 @@
 			const searchInput = document.getElementById("cari-mhs");
 			const yearSelect = document.getElementById("yearSelect");
 
+			// let currentPage = 1;
+
 			// Fungsi untuk memuat data dengan AJAX
 			function fetchData(keyword = "", year = "all") {
 				// Kirim request AJAX
-				fetch("<?= BASEURL; ?>/Admin/getDataByYear", {
+				fetch("<?= BASEURL; ?>/Admin/getDataRankingPrestasi", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ keyword, year }), // Kirim data dalam bentuk JSON
@@ -253,17 +260,24 @@
 							let rank = 1;
 							data.forEach((item) => {
 								const row = `<tr>
-							<td class='py-2 px-4 border border-blue-950'>${rank}</td>
-							<td class='py-2 px-4 border border-blue-950'>${item.nama}</td>
-							<td class='py-2 px-4 border border-blue-950'>${item.nim}</td>
-							<td class='py-2 px-4 border border-blue-950'>${item.nama_prodi}</td>
-							<td class='py-2 px-4 border border-blue-950'>${item.total_poin}</td>
+							<td class='py-2 px-2 text-center border border-blue-950'>${rank}</td>
+							<td class='py-2 px-4 text-center border border-blue-950'>${item.nim}</td>
+							<td class='py-2 px-4 text-center border border-blue-950'>${item.nama}</td>
+							<td class='py-2 px-4 text-center border border-blue-950'>${item.nama_prodi}</td>
+							<td class='py-2 px-4 text-center border border-blue-950'>${item.total_poin}</td>
 						</tr>`;
 								rank++;
 								tableBody.innerHTML += row;
 							});
 						} else {
-							tableBody.innerHTML = "<tr><td colspan='4'>Tidak ada data</td></tr>";
+							tableBody.innerHTML = `<tr>
+								<td td colspan = '5' class='text-center py-10' >
+							<img src='../../public/img/table-kosong.png' alt='Table Kosong' class='w-1/6 mx-auto'/>
+							<p class='font-bold text-gray-500 mt-4'>
+								Tidak ada data yang tersedia..
+							</p>
+						</td>
+					</tr > `;
 						}
 					})
 					.catch((error) => console.error("Error fetching data:", error));
@@ -287,50 +301,6 @@
 				fetchData(keyword, year);
 			});
 		});
-		// function fetchDataByYear(year) {
-		// 	console.log("Fetching data for year:", year); // Debug: Tahun yang dikirim
-		// 	fetch(`<?= BASEURL; ?>/Admin/getDataByYear`, {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 		},
-		// 		body: JSON.stringify({ year: year }), // Kirim data tahun
-		// 	})
-		// 		.then(response => {
-		// 			if (!response.ok) {
-		// 				throw new Error(`HTTP error! status: ${response.status}`);
-		// 			}
-		// 			return response.json();
-		// 		})
-		// 		.then(data => {
-		// 			console.log("Data received:", data); // Debug: Data yang diterima dari server
-		// 			updateTable(data); // Memperbarui tabel
-		// 		})
-		// 		.catch(error => console.error("Error fetching data:", error)); // Debug jika ada error
-		// }
-
-		// // Fungsi untuk memperbarui tabel
-		// function updateTable(data) {
-		// 	console.log("Data to update table:", data); // Debug data yang diterima
-
-		// 	const tbody = document.querySelector('tbody'); // Atur target tbody
-		// 	console.log(document.querySelector('tbody'));
-		// 	tbody.innerHTML = ''; // Kosongkan tbody sebelum update
-
-		// 	let rank = 1;
-		// 	data.forEach(row => {
-		// 		const tr = document.createElement('tr');
-		// 		tr.innerHTML = `
-		// 	<td class='py-2 px-4 border border-blue-950'>${rank}</td>
-		// 	<td class='py-2 px-4 border border-blue-950'>${row.nim}</td>
-		// 	<td class='py-2 px-4 border border-blue-950'>${row.nama}</td>
-		// 	<td class='py-2 px-4 border border-blue-950'>${row.nama_prodi}</td>
-		// 	<td class='py-2 px-4 border border-blue-950'>${row.total_poin}</td>
-		// `;
-		// 		tbody.appendChild(tr);
-		// 		rank++;
-		// 	});
-		// }
 
 	</script>
 	<script>
@@ -341,14 +311,14 @@
 			data: {
 				labels: [
 					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-								"<?= $lingkar['Kategori'] ?>",
+											"<?= $lingkar['Kategori'] ?>",
 					<?php } ?>
 				],
 				datasets: [
 					{
 						data: [
 							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-								<?= $lingkar['jumlah_prestasi'] ?>,
+											<?= $lingkar['jumlah_prestasi'] ?>,
 							<?php } ?>
 						], // Data untuk setiap kategori
 						borderWidth: 1,
@@ -374,18 +344,18 @@
 			data: {
 				labels: [
 					<?php foreach ($data['tahun'] as $tahun) { ?>
-								"<?= $tahun['tahun']; ?>",
+											"<?= $tahun['tahun']; ?>",
 					<?php } ?>
 				],
 				datasets: [
 					<?php
 					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
 					foreach ($data['kategori'] as $kategori) { ?>
-								{
+											{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perTahun'] as $perTahun) { ?>
-													<?= $perTahun[$kategori['kategori']] ?>,
+																			<?= $perTahun[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
@@ -426,11 +396,11 @@
 				],
 				datasets: [
 					<?php foreach ($data['kategori'] as $kategori) { ?>
-								{
+											{
 							label: "<?= $kategori['kategori'] ?>",
 							data: [
 								<?php foreach ($data['perBulan'] as $perBulan) { ?>
-													<?= $perBulan[$kategori['kategori']] ?>,
+																			<?= $perBulan[$kategori['kategori']] ?>,
 								<?php } ?>
 							],
 							borderWidth: 1,
