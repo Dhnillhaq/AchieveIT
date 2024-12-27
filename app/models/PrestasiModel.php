@@ -128,7 +128,7 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function countPrestasi($keyword = "")
+    public function countPrestasi($keyword)
     {
         $stmt = "WITH Ranking AS (
                     SELECT
@@ -161,7 +161,7 @@ class PrestasiModel extends Connection
         return $data['total'];
     }
 
-    public function countPrestasiPerTahun($keyword = "", $year)
+    public function countPrestasiPerTahun($keyword, $year)
     {
         $stmt = "WITH Ranking AS (
                 SELECT
@@ -197,7 +197,7 @@ class PrestasiModel extends Connection
         return $data['total'];
     }
 
-    public function getRankingPrestasi($keyword = "", $limit, $offset)
+    public function getRankingPrestasi($keyword, $limit, $offset)
     {
         $stmt = "WITH Ranking AS (
                     SELECT
@@ -237,27 +237,27 @@ class PrestasiModel extends Connection
     public function getRankingPrestasiPerTahun($keyword, $year, $limit, $offset)
     {
         $stmt = "WITH Ranking AS (
-                SELECT
-                	m.nama,
-                	m.nim,
-                	prodi.nama_prodi,
-                	SUM(p.poin_prestasi) AS total_poin,
-                	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
-                    ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
-                FROM prestasi_mahasiswa pm
-                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
-                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
-                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
-                AND (m.nim LIKE ? OR m.nama LIKE ?)
-                GROUP BY
-                	m.nama,
-                	m.nim,
-                	prodi.nama_prodi,
-                	YEAR(p.tanggal_selesai_kompetisi)
-            )
-            SELECT *
-            FROM Ranking
+                    SELECT
+                    	m.nama,
+                    	m.nim,
+                    	prodi.nama_prodi,
+                    	SUM(p.poin_prestasi) AS total_poin,
+                    	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                        ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
+                    GROUP BY
+                    	m.nama,
+                    	m.nim,
+                    	prodi.nama_prodi,
+                    	YEAR(p.tanggal_selesai_kompetisi)
+                )
+                SELECT *
+                FROM Ranking
+                WHERE nim LIKE ? OR nama LIKE ?
                 ORDER BY rank
                 OFFSET ? ROWS
                 FETCH NEXT ? ROWS ONLY;";
