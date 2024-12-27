@@ -794,7 +794,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-282" value="+ getDetailPrestasiDataPoin(id)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
           <mxGeometry y="190" width="250" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-283" value="+ printPrestasiUmum(keyword,filterQ,filterY)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-283" value="+ getRankingPrestasi(keyword,filterQ,filterY)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
           <mxGeometry y="216" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-284" value="+ getStatistikPrestasi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">

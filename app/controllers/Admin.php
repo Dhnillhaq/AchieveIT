@@ -7,7 +7,7 @@ class Admin extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $data = [
-            'prestasi' => $this->model("PrestasiModel")->printPrestasiUmum(),
+            'prestasi' => $this->model("PrestasiModel")->getRankingPrestasi(),
             'statistik' => $this->model('PrestasiModel')->getStatistikPrestasi(),
             'lingkaran' => $this->model('PrestasiModel')->getGrafikDiagramLingkaran(),
             'tahun' => $this->model('PrestasiModel')->getTahunPrestasi(),
@@ -18,6 +18,32 @@ class Admin extends Controller
 
         $this->view('Admin/index', $data);
     }
+
+    public function getDataByYear()
+    {
+        // Terima data POST dari JavaScript
+        $input = json_decode(file_get_contents("php://input"), true);
+        $keyword = $input['keyword'] ?? "";
+        $year = $input['year'] ?? "all";
+
+        // Debug: Tampilkan data yang diterima
+        error_log("Year received: " . $year);
+
+        // Ambil data sesuai tahun
+        if ($year === "all") {
+            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword); 
+        } else {
+            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year); // Data sesuai tahun
+        }
+
+        // Debug: Tampilkan data yang akan dikembalikan
+        error_log("Data returned: " . json_encode($data));
+
+        // Return data sebagai JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
+
 
     public function administrasiData()
     {
@@ -48,6 +74,24 @@ class Admin extends Controller
         }
         $this->view("Admin/profilAdmin", $data);
     }
+
+    public function getLogs($pages, $limits = 10)
+    {
+        $page = (int)$pages;
+        $limit = (int)$limits;
+        $offset = ($page - 1) * $limit;
+    
+        $logs = $this->model("LogAdminModel")->getAllLogAdmin($offset, $limit);
+        $totalLogs = $this->model("LogAdminModel")->countLogs(); // Total jumlah log
+    
+        echo json_encode([
+            'data' => $logs,
+            'total' => $totalLogs,
+            'page' => $page,
+            'limit' => $limit,
+        ]);
+    }
+    
     public function adminList()
     {
         $this->checkRole("Super Admin");

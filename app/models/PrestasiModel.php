@@ -128,37 +128,50 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function printPrestasiUmum($keyword = "", $filterQ = "10", $filterY = "2024")
+    public function getRankingPrestasi($keyword = "")
     {
         $stmt = "SELECT
-                 	m.nama,
-                 	m.nim,
-                 	prodi.nama_prodi,
-                 	m.total_poin AS total_poin,
-                 	0 AS tahun_prestasi
-                 FROM mahasiswa m
-                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                 WHERE total_poin > 0
-                     
-                 UNION ALL
-                     
-                 SELECT
-                 	m.nama,
-                 	m.nim,
-                 	prodi.nama_prodi,
-                 	SUM(p.poin_prestasi) AS total_poin,
-                 	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi
-                 FROM prestasi_mahasiswa pm
-                 JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
-                 JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
-                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                 GROUP BY
-                 	m.nama,
-                 	m.nim,
-                 	prodi.nama_prodi,
-                 	YEAR(p.tanggal_selesai_kompetisi)
-                 ORDER BY total_poin DESC;";
-        $result = sqlsrv_query($this->conn, $stmt);
+                	m.nama,
+                	m.nim,
+                	prodi.nama_prodi,
+                	m.total_poin AS total_poin
+                FROM mahasiswa m
+                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                WHERE m.total_poin > 0
+                AND (m.nim LIKE ? OR m.nama LIKE ?)
+                ORDER BY total_poin desc
+                OFFSET 0 ROWS
+                FETCH NEXT 10 ROWS ONLY;";
+
+        $params = array("%" . $keyword . "%", "%" . $keyword . "%");
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data ?? [];
+    }
+    public function getRankingPrestasiPerTahun($keyword, $year, $start = 0)
+    {
+        $stmt = "SELECT
+            		m.nim,
+            		m.nama,
+            		p.nama_prodi,
+            		dbo.fn_HitungTotalPoinMahasiswaPerTahun (m.nim, ?) AS total_poin
+            	FROM mahasiswa m
+            	JOIN program_studi p ON m.id_prodi = p.id_prodi
+            	WHERE dbo.fn_HitungTotalPoinMahasiswaPerTahun (m.nim, ?) > 0
+            	AND (m.nim LIKE ? OR m.nama LIKE ?)
+            	ORDER BY total_poin DESC
+                OFFSET ? ROWS
+                FETCH NEXT 10 ROWS ONLY;";
+
+        $params = array($year, $year, "%" . $keyword . "%", "%" . $keyword . "%", $start);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
@@ -345,26 +358,26 @@ class PrestasiModel extends Connection
 
     public function update($data)
     {
-        $stmt = "UPDATE prestasi
-        SET
-            id_kategori = ?,
-            id_juara = ?,
-            id_tingkat_penyelenggara = ?,
-            id_tingkat_kompetisi = ?,
-            nama_kompetisi = ?,
-            tanggal_mulai_kompetisi = ?,
-            tanggal_selesai_kompetisi = ?,
-            penyelenggara_kompetisi = ?,
-            tempat_kompetisi = ?,
-            surat_tugas = ?, 
-            poster_kompetisi = ?, 
-            foto_juara = ?, 
-            proposal = ?, 
-            sertifikat = ?, 
-            poin_prestasi = ?,
-            status = ?";
+        // Inisialisasi query dan parameter
+        $stmt = "UPDATE prestasi SET 
+                id_kategori = ?, 
+                id_juara = ?, 
+                id_tingkat_penyelenggara = ?, 
+                id_tingkat_kompetisi = ?, 
+                nama_kompetisi = ?, 
+                tanggal_mulai_kompetisi = ?, 
+                tanggal_selesai_kompetisi = ?, 
+                penyelenggara_kompetisi = ?, 
+                tempat_kompetisi = ?, 
+                surat_tugas = ?, 
+                poster_kompetisi = ?, 
+                foto_juara = ?, 
+                proposal = ?, 
+                sertifikat = ?, 
+                poin_prestasi = ?";
 
-        $params = array(
+        // Parameter awal
+        $params = [
             $data['kategori'],
             $data['juara'],
             $data['tingkat_penyelenggara'],
@@ -379,18 +392,26 @@ class PrestasiModel extends Connection
             $data['foto_juara'],
             $data['proposal'],
             $data['sertifikat'],
-            $data['poin_prestasi'],
-            $data['status']
-        );
+            $data['poin_prestasi']
+        ];
 
-        if ($data['status'] !== 'Not Validated') {
+        // Periksa role dan status (opsional)
+        if ($_SESSION['user']['role'] !== 'Mahasiswa') {
+            $stmt .= ", status = ?";
+            $params[] = $data['status'];
+        }
+
+        if ($_SESSION['user']['role'] !== 'Mahasiswa' && $data['status'] !== 'Not Validated') {
             $stmt .= ", id_admin = ?, validated_at = GETDATE()";
             $params[] = $data['id_admin'];
         }
 
-        // Tambahkan WHERE id_prestasi
+        // Tambahkan WHERE kondisi
         $stmt .= " WHERE id_prestasi = ?";
         $params[] = $data['id_prestasi'];
+
+
+        // Eksekusi query
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
@@ -402,11 +423,22 @@ class PrestasiModel extends Connection
 
     public function delete($id_prestasi)
     {
-        $stmt = "DELETE FROM prestasi WHERE id_prestasi = ?";
-        $params = array($id_prestasi);
+        $stmt = "
+            BEGIN TRANSACTION;
+
+            DELETE FROM dosen_prestasi WHERE id_prestasi = ?;
+            DELETE FROM prestasi_mahasiswa WHERE id_prestasi = ?;
+            DELETE FROM prestasi WHERE id_prestasi = ?;
+
+            COMMIT TRANSACTION;
+";
+
+        $params = array($id_prestasi, $id_prestasi, $id_prestasi);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
+            // Transaksi dibatalkan
+            sqlsrv_query($this->conn, "ROLLBACK TRANSACTION;");
             throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
 
