@@ -99,5 +99,18 @@ class Controller
             exit;
         }
     }
+
+    protected function checkMethod(String $method) {
+        if ($_SERVER['REQUEST_METHOD'] !== $method) {
+            header('HTTP/1.0 405 Method Not Allowed');
+            header('Content-Type: application/json');
+            http_response_code(405);
+            echo json_encode([
+                'status' => 'failed',
+                'error' => 'Method not allowed'
+            ]);
+            exit(405);
+        }
+    }
 }
 ?>
