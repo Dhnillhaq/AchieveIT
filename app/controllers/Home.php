@@ -18,10 +18,10 @@ class Home extends Controller
 
         // Ambil data sesuai tahun
         if ($year === "all") {
-            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword);
+            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword, 60, 0);
 
         } else {
-            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year); // Data sesuai tahun
+            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year, 60, 0); // Data sesuai tahun
         }
 
         // Return data sebagai JSON
