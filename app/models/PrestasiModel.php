@@ -197,7 +197,7 @@ class PrestasiModel extends Connection
         return $data['total'];
     }
 
-    public function getRankingPrestasi($keyword, $limit, $offset)
+    public function getRankingPrestasi($keyword = "", $limit = 60, $offset =  0)
     {
         $stmt = "WITH Ranking AS (
                     SELECT
@@ -205,7 +205,7 @@ class PrestasiModel extends Connection
                         m.nim,
                         prodi.nama_prodi,
                         SUM(p.poin_prestasi) AS total_poin,
-                        ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
                     FROM prestasi_mahasiswa pm
                     JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
                     JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
@@ -243,7 +243,7 @@ class PrestasiModel extends Connection
                     	prodi.nama_prodi,
                     	SUM(p.poin_prestasi) AS total_poin,
                     	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
-                        ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
                     FROM prestasi_mahasiswa pm
                     JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
                     JOIN prestasi p ON pm.id_prestasi = p.id_prestasi

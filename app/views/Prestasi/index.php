@@ -147,16 +147,17 @@
 			let keyword = $("#myInput").val().toLowerCase();
 			let tingkat = $("#filterTingkat").val().toLowerCase();
 			let kategori = $("#filterKategori").val().toLowerCase();
-			let status = $("#filterStatus").val().toLowerCase();
+			let statusElement = $("#filterStatus");
+			let status = statusElement.length ? statusElement.val().toLowerCase() : "valid";
 
-			var visibleRows = 0;
+			let visibleRows = 0;
 			$("#myTable tr").each(function (index) {
 				let namaKompetisi = $(this).find(".nama-kompetisi").text().toLowerCase();
 				let tingkatKompetisi = $(this).find(".tingkat").text().toLowerCase();
 				let kategoriKompetisi = $(this).find(".kategori").text().toLowerCase();
 				let statusKompetisi = $(this).find(".status p").text().toLowerCase();
 
-				var isVisible =
+				let isVisible =
 					(namaKompetisi.indexOf(keyword) > -1) &&
 					(tingkat === "" || tingkatKompetisi === tingkat) &&
 					(kategori === "" || kategoriKompetisi === kategori) &&
@@ -164,12 +165,16 @@
 
 				$(this).toggle(isVisible);
 				if (isVisible) visibleRows++;
+				if (isVisible) {
+					$(this).removeClass('hidden');
+				} else {
+					$(this).addClass('hidden');
+				}
+
 			});
 
 			if (visibleRows === 0) {
-				if (!$("#myTable .empty-row").length) {
-					$("#myTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Belum ada log admin baru-baru ini</p></td></tr>');
-				}
+				$("#myTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
 			} else {
 				$("#myTable .empty-row").remove();
 			}
@@ -178,15 +183,12 @@
 		}
 
 		function paginateTable() {
-			let rows = $("#myTable tr");
+			let rows = $("#myTable tr:not(.hidden)");
 			totalPages = Math.ceil(rows.length / rowsPerPage);
 			const paginationContainer = document.querySelector("ul.pagination");
 
 			rows.hide();
-			let start = (currentPage - 1) * rowsPerPage;
-			let end = start + rowsPerPage;
-
-			rows.slice(start, Math.min(end, rows.length)).show();
+			rows.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).show();
 
 			paginationContainer.innerHTML = "";
 
@@ -224,21 +226,25 @@
 					</svg>
 				</a>
 			</li>
-		`;
+			`;
+
+
+			$("ul.pagination").on("click", "a", function (e) {
+				e.preventDefault();
+				let page = parseInt($(this).data("page"));
+				if (page >= 1 && page <= totalPages) {
+					currentPage = page;
+					console.log(page);
+					paginateTable();
+				}
+			});
 		}
 
-
-		$("ul.pagination").on("click", "a", function (e) {
-			e.preventDefault();
-			let page = parseInt($(this).data("page"));
-			if (page >= 1 && page <= totalPages) {
-				currentPage = page;
-				console.log(page);
-				paginateTable();
-			}
+		$("#myInput, #filterTingkat, #filterKategori, #filterStatus").on("input change", function () {
+			filterTable();
+			paginateTable();
 		});
 
-		$("#myInput, #filterTingkat, #filterKategori, #filterStatus").on("input change", filterTable);
 		paginateTable();
 	});
 </script>
