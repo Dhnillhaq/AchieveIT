@@ -18,9 +18,9 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="myInput2" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="validasiAkunSearch" placeholder="Cari berdasarkan NIM" class="bg-white flex focus:outline-none w-full" />
 				</div>
-				<div class="flex justify-end right-0 space-x-2">
+				<!-- <div class="flex justify-end right-0 space-x-2">
 					<div class="flex items-center">
 						<span class="">Lihat</span>
 						<select
@@ -31,7 +31,7 @@
 						</select>
 						<span class="">entri</span>
 					</div>
-				</div>
+				</div> -->
 			</section>
 
 			<!-- table  -->
@@ -59,7 +59,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="myTable2 text-start">
+					<tbody class="myTable2 text-start" id="validasiAkunTable">
 						<?php if (empty($data['mahasiswa'])) { ?>
 							<tr>
 								<td colspan="5" class="text-center py-10">
@@ -75,7 +75,7 @@
 								<tr>
 									<td class="border border-blue-950 px-4 py-2"><?= $no++ ?></td>
 									<td class="border border-blue-950 px-4 py-2"><?= $mahasiswa['email'] ?></td>
-									<td class="border border-blue-950 px-4 py-2"><?= $mahasiswa['nim'] ?></td>
+									<td class="border border-blue-950 px-4 py-2" id="nimAkun"><?= $mahasiswa['nim'] ?></td>
 									<td class="border border-blue-950 px-4 py-2"><?= $mahasiswa['nama'] ?></td>
 									<td class="border border-blue-950 px-4 py-2">
 										<div class="flex items-center justify-start">
@@ -110,3 +110,26 @@
 		</button>
 	</section>
 </section>
+
+
+<script>
+	$(document).ready(function () {
+		function searchValidasiAkun() {
+			let keyword = $("#validasiAkunSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#validasiAkunTable tr").each(function () {
+				let nimAkun = $(this).find("#nimAkun").text().toLowerCase();
+				$(this).toggle(nimAkun.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#validasiAkunTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#validasiAkunTable .empty-row").remove();
+			}
+		}
+
+		$("#validasiAkunSearch").on("input change", searchValidasiAkun);
+	});
+</script>

@@ -37,9 +37,9 @@ class LogAdminModel extends Connection
             die(print_r(sqlsrv_errors(), true));
         }
         
-        $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
     
-        return $row['total'];
+        return $data['total'];
     }
     
 

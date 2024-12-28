@@ -32,19 +32,8 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
-				</div>
-				<div class="flex justify-end right-0 space-x-2">
-					<div class="flex items-center">
-						<span class="">Lihat</span>
-						<select
-							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="50">50</option>
-						</select>
-						<span class="">entri</span>
-					</div>
+					<input type="text" id="dosenSearch" placeholder=""
+						class="bg-white flex focus:outline-none w-full" />
 				</div>
 			</section>
 
@@ -67,21 +56,21 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="dosenTable">
 						<?php
 						$no = 1;
 						foreach ($data['dosen'] as $dosen) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950"><?= $dosen['nama'] ?></td>
+								<td id="dosen" class="py-2 px-4 border border-blue-950"><?= $dosen['nama'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $dosen['nip'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<a href="<?= BASEURL; ?>/Dosen/edit/<?=$dosen['id_dosen']?>">
+									<a href="<?= BASEURL; ?>/Dosen/edit/<?= $dosen['id_dosen'] ?>">
 										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
 											<img src="../../../public/img/Edit_fill.png" alt="logo">
 										</button>
 									</a>
-									<a href="<?= BASEURL; ?>/Dosen/delete/<?=$dosen['id_dosen']?>">
+									<a href="<?= BASEURL; ?>/Dosen/delete/<?= $dosen['id_dosen'] ?>">
 										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
 											<img src="../../../public/img/Trash.png" alt="logo">
 										</button>
@@ -109,7 +98,8 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="peranDosenSearch" placeholder=""
+						class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -138,13 +128,13 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="peranDosenTable">
 						<?php
 						$no = 1;
 						foreach ($data['peranDosen'] as $pd) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950"><?= $pd['peran'] ?></td>
+								<td id="peranDosen" class="py-2 px-4 border border-blue-950"><?= $pd['peran'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
 									<a href="<?= BASEURL; ?>/PeranDosen/edit/<?= $pd['id_peran'] ?>">
 										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
@@ -177,3 +167,44 @@
 		</a>
 	</section>
 </section>
+
+<script>
+	$(document).ready(function () {
+		function searchDosen() {
+			let keyword = $("#dosenSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#dosenTable tr").each(function () {
+				let namaDosen = $(this).find("#dosen").text().toLowerCase();
+				$(this).toggle(namaDosen.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#dosenTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#dosenTable .empty-row").remove();
+			}
+		}
+
+		$("#dosenSearch").on("input change", searchDosen);
+		
+		function searchPeranDosen() {
+			let keyword = $("#peranDosenSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#peranDosenTable tr").each(function () {
+				let namaDosen = $(this).find("#peranDosen").text().toLowerCase();
+				$(this).toggle(namaDosen.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#peranDosenTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#peranDosenTable .empty-row").remove();
+			}
+		}
+
+		$("#peranDosenSearch").on("input change", searchPeranDosen);
+	});
+
+</script>

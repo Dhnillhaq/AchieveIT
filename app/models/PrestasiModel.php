@@ -128,22 +128,101 @@ class PrestasiModel extends Connection
         return $data;
     }
 
-    public function getRankingPrestasi($keyword = "")
+    public function countPrestasi($keyword)
     {
-        $stmt = "SELECT
+        $stmt = "WITH Ranking AS (
+                    SELECT
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        SUM(p.poin_prestasi) AS total_poin,
+                        ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    GROUP BY
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi
+                )
+                SELECT COUNT(*) as total
+                FROM Ranking
+				WHERE nama LIKE ? OR nim LIKE ?;";
+        $params = array("%" . $keyword . "%", "%" . $keyword . "%");
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+    
+        if ($result === false) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+        
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+    
+        return $data['total'];
+    }
+
+    public function countPrestasiPerTahun($keyword, $year)
+    {
+        $stmt = "WITH Ranking AS (
+                SELECT
                 	m.nama,
                 	m.nim,
                 	prodi.nama_prodi,
-                	m.total_poin AS total_poin
-                FROM mahasiswa m
+                	SUM(p.poin_prestasi) AS total_poin,
+                	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                    ROW_NUMBER() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                WHERE m.total_poin > 0
-                AND (m.nim LIKE ? OR m.nama LIKE ?)
-                ORDER BY total_poin desc
-                OFFSET 0 ROWS
-                FETCH NEXT 10 ROWS ONLY;";
+                WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
+                GROUP BY
+                	m.nama,
+                	m.nim,
+                	prodi.nama_prodi,
+                	YEAR(p.tanggal_selesai_kompetisi)
+            )
+            SELECT COUNT(*) as total
+            FROM Ranking
+            WHERE nama LIKE ? OR nim LIKE ?;";
+        $params = array($year, "%" . $keyword . "%", "%" . $keyword . "%");
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+    
+        if ($result === false) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+        
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+    
+        return $data['total'];
+    }
 
-        $params = array("%" . $keyword . "%", "%" . $keyword . "%");
+    public function getRankingPrestasi($keyword = "", $limit = 60, $offset =  0)
+    {
+        $stmt = "WITH Ranking AS (
+                    SELECT
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        SUM(p.poin_prestasi) AS total_poin,
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    GROUP BY
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi
+                )
+                SELECT *
+                FROM Ranking
+                WHERE nama LIKE ? OR nim LIKE ?
+                ORDER BY rank
+                OFFSET ? ROWS
+                FETCH NEXT ? ROWS ONLY;";
+
+        $params = array("%" . $keyword . "%", "%" . $keyword . "%",  $offset, $limit);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
@@ -155,22 +234,35 @@ class PrestasiModel extends Connection
         }
         return $data ?? [];
     }
-    public function getRankingPrestasiPerTahun($keyword, $year, $start = 0)
+    public function getRankingPrestasiPerTahun($keyword, $year, $limit, $offset)
     {
-        $stmt = "SELECT
-            		m.nim,
-            		m.nama,
-            		p.nama_prodi,
-            		dbo.fn_HitungTotalPoinMahasiswaPerTahun (m.nim, ?) AS total_poin
-            	FROM mahasiswa m
-            	JOIN program_studi p ON m.id_prodi = p.id_prodi
-            	WHERE dbo.fn_HitungTotalPoinMahasiswaPerTahun (m.nim, ?) > 0
-            	AND (m.nim LIKE ? OR m.nama LIKE ?)
-            	ORDER BY total_poin DESC
+        $stmt = "WITH Ranking AS (
+                    SELECT
+                    	m.nama,
+                    	m.nim,
+                    	prodi.nama_prodi,
+                    	SUM(p.poin_prestasi) AS total_poin,
+                    	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
+                    GROUP BY
+                    	m.nama,
+                    	m.nim,
+                    	prodi.nama_prodi,
+                    	YEAR(p.tanggal_selesai_kompetisi)
+                )
+                SELECT *
+                FROM Ranking
+                WHERE nim LIKE ? OR nama LIKE ?
+                ORDER BY rank
                 OFFSET ? ROWS
-                FETCH NEXT 10 ROWS ONLY;";
+                FETCH NEXT ? ROWS ONLY;";
 
-        $params = array($year, $year, "%" . $keyword . "%", "%" . $keyword . "%", $start);
+        $params = array($year, "%" . $keyword . "%", "%" . $keyword . "%", $offset, $limit);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {

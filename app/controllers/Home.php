@@ -4,12 +4,29 @@ class Home extends Controller
 {
     public function index()
     {
-        if (isset($_POST['keyword']) && isset($_POST['limit']) && isset($_POST['year'])) {
-            $data['prestasi'] = $this->model("PrestasiModel")->getRankingPrestasi($_POST['keyword'], $_POST['limit'], $_POST['year']);
+        $this->view('index');
+    }
+
+    public function getDataRankingPrestasi()
+    {
+
+        // Terima data POST dari JavaScript
+        $input = json_decode(file_get_contents("php://input"), true);
+        $keyword = $input['keyword'] ?? "";
+        $year = $input['year'] ?? "all";
+        // $totalPrestasi = $this->model("PrestasiModel")->countPrestasi(); // Total jumlah log
+
+        // Ambil data sesuai tahun
+        if ($year === "all") {
+            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword, 60, 0);
+
         } else {
-            $data['prestasi'] = $this->model("PrestasiModel")->getRankingPrestasi();
+            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year, 60, 0); // Data sesuai tahun
         }
-        $this->view('index', $data);
+
+        // Return data sebagai JSON
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 
     public function pageNotFound()
