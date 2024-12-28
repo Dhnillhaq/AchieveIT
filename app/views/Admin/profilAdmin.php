@@ -65,8 +65,8 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="table-log">
-					<!-- Data log akan dirender menggunakan JavaScript -->
+				<tbody id="table-log">					
+					
 				</tbody>
 			</table>
 		</section>
@@ -74,7 +74,7 @@
 		<section class="flex items-center justify-center py-2">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination flex flex-wrap items-center -space-x-px h-8 text-sm">
-					<!-- Pagination akan dirender menggunakan JavaScript -->
+					
 				</ul>
 			</nav>
 		</section>

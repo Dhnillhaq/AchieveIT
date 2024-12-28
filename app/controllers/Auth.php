@@ -109,7 +109,7 @@ class Auth extends Controller
                 "jenis_kelamin" => $this->userDB['0']['jenis_kelamin'],
                 "no_telepon" => $this->userDB['0']['no_telepon'],
                 "email" => $this->userDB['0']['email'],
-                "total_poin" => $this->userDB['0']['total_poin'],
+                "total_poin" => $this->userDB['1']['total_poin'],
                 "prodi" => $this->userDB['0']['nama_prodi'],
                 "role" => "Mahasiswa"
             ];

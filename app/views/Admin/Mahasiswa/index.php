@@ -19,7 +19,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="myInput1" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="prodiSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -51,14 +51,14 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="myTable1">
+					<tbody class="myTable1" id="prodiTable">
 						<?php
 						$no = 1;
 						foreach ($data['prodi'] as $prodi) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $prodi['kode_prodi'] ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left"><?= $prodi['nama_prodi'] ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left" id="prodi"><?= $prodi['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
 									<a href="<?= BASEURL; ?>/Prodi/edit/<?= $prodi['id_prodi'] ?>">
 										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
@@ -99,27 +99,15 @@
 					</button>
 				</a>
 			</section>
-				
+
 			<!-- cari -->
 			<section class="flex justify-between p-6">
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="myInput2" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="mhsSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
-				<div class="flex justify-end right-0 space-x-2">
-					<div class="flex items-center">
-						<span class="">Lihat</span>
-						<select
-							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="50">50</option>
-						</select>
-						<span class="">entri</span>
-					</div>
-				</div>
-			</section>				
+			</section>
 
 			<!-- table  -->
 			<div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
@@ -143,13 +131,13 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="myTable2">
+					<tbody class="myTable2" id="mhsTable">
 						<?php
 						$no = 1;
 						foreach ($data['mhs'] as $mhs) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama'] ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left" id="mahasiswa"><?= $mhs['nama'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nim'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
@@ -192,7 +180,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="myInput3" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="peranMhsSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -221,13 +209,13 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="myTable3">
+					<tbody class="myTable3" id="peranMhsTable">
 						<?php
 						$no = 1;
 						foreach ($data['peranMhs'] as $pm) { ?>
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left"><?= $pm['peran'] ?></td>
+								<td class="py-2 px-4 border border-blue-950 text-left" id="peranMhs"><?= $pm['peran'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
 									<a href="<?= BASEURL; ?>/PeranMahasiswa/edit/<?= $pm['id_peran'] ?>">
 										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
@@ -261,3 +249,62 @@
 		</a>
 	</section>
 </section>
+
+
+<script>
+	$(document).ready(function () {
+		function searchProdi() {
+			let keyword = $("#prodiSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#prodiTable tr").each(function () {
+				let namaProdi = $(this).find("#prodi").text().toLowerCase();
+				$(this).toggle(namaProdi.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#prodiTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#prodiTable .empty-row").remove();
+			}
+		}
+
+		$("#prodiSearch").on("input change", searchProdi);
+		
+		function searchMahasiswa() {
+			let keyword = $("#mhsSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#mhsTable tr").each(function () {
+				let namaMhs = $(this).find("#mahasiswa").text().toLowerCase();
+				$(this).toggle(namaMhs.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#mhsTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#mhsTable .empty-row").remove();
+			}
+		}
+
+		$("#mhsSearch").on("input change", searchMahasiswa);
+		
+		function searchPeranMahasiswa() {
+			let keyword = $("#peranMhsSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#peranMhsTable tr").each(function () {
+				let namaPeranMhs = $(this).find("#peranMhs").text().toLowerCase();
+				$(this).toggle(namaPeranMhs.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#peranMhsTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#peranMhsTable .empty-row").remove();
+			}
+		}
+
+		$("#peranMhsSearch").on("input change", searchPeranMahasiswa);
+	});
+</script>
