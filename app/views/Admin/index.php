@@ -75,10 +75,10 @@
 		<!-- kategori -->
 		<div class="flex justify-end">
 			<span class="py-1 px-2">Berdasarkan :</span>
-			<select class="rounded-lg px-2 py-1 w-1/5 bg-white shadow-gray-400 shadow-sm">
-				<option>Kategori</option>
-				<option>Tingkat Kompetisi</option>
-				<option>Tingkat Penyelenggara</option>
+			<select class="rounded-lg px-2 py-1 mx-6 w-1/5 bg-white shadow-gray-400 shadow-sm" id="analisisSelect">
+				<option value="kategori">Kategori</option>
+				<option value="tingkat_kompetisi">Tingkat Kompetisi</option>
+				<option value="tingkat_penyelenggara">Tingkat Penyelenggara</option>
 			</select>
 		</div>
 	</section>
@@ -116,7 +116,7 @@
 		<!-- judul -->
 		<div class="flex justify-center ju">
 			<p class="font-semibold text-2xl">
-				Diagram Batang Prestasi Dalam 1 Tahun
+				Diagram Batang Prestasi tahun ini, <?= date('Y') ?>
 			</p>
 		</div>
 
@@ -208,7 +208,9 @@
 			const yearSelect = document.getElementById("yearSelect");
 			const tableBody = document.getElementById("daftar-prestasi-body");
 			const paginationContainer = document.querySelector(".pagination");
-
+			const ctx = document.getElementById("DiagramLingkar");
+			const ctx1 = document.getElementById("DiagramBatangPerTahun");
+			const ctx2 = document.getElementById("DiagramBatang1Tahun");
 			let currentPage = 1;
 			const limit = 10; // Menampilkan 10 data per halaman
 
@@ -262,8 +264,8 @@
 				<svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
 				</svg>
-			</a></li>
-		`;
+				</a></li>
+			`;
 
 				// Page numbers
 				for (let i = 1; i <= totalPages; i++) {
@@ -315,124 +317,130 @@
 
 			// Panggil fungsi pertama kali dengan default data
 			fetchData();
-		});
 
 
-	</script>
-	<script>
-		// Script Chart Diagram
-		const ctx = document.getElementById("DiagramLingkar");
-		new Chart(ctx, {
-			type: "doughnut",
-			data: {
-				labels: [
-					<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-												"<?= $lingkar['Kategori'] ?>",
-					<?php } ?>
-				],
-				datasets: [
-					{
-						data: [
-							<?php foreach ($data['lingkaran'] as $lingkar) { ?>
-												<?= $lingkar['jumlah_prestasi'] ?>,
-							<?php } ?>
-						], // Data untuk setiap kategori
-						borderWidth: 1,
-						backgroundColor: [
-							"#C6E0F7", // Warna untuk Kategori Debat
-							"#70B1EA", // Warna untuk Kategori Essai
-							"#3F84D9", // Warna untuk Lain-lain
-							"#3063C5", // Warna untuk Kategori Karya Ilmiah
-							"#274A9D", // Warna untuk Lain-lain
-							"#1D2C40", // Warna untuk Lain-lain
-							"#CFE6FA", // Warna untuk Lain-lain
+
+			const analisisSelect = document.getElementById("analisisSelect");
+
+			function fetchDataAnalysis(selected = "kategori", years = "2024") {
+				fetch("<?= BASEURL; ?>/Admin/getAnalisisDataPrestasi", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ selected, years }) // Kirim data dalam bentuk JSON
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						renderChart(data.dataTahun, data.dataSelected, data.dataLingkaran, data.dataPerTahun, data.dataPerBulan, selected); // Render pagination
+					})
+					.catch((error) => console.error("Error fetching data:", error));
+			}
+
+			// Event listener untuk dropdown tahun
+			analisisSelect.addEventListener("change", function () {
+				const selected = this.value;
+				fetchDataAnalysis(selected);
+			});
+
+			let chartDoughnut = null; // Simpan instance chart
+			let chartBarTahun = null;
+			let chartBarBulan = null;
+
+
+			function renderChart(dataTahun, dataSelected, dataLingkaran, dataPerTahun, dataPerBulan, selected) {
+
+				if (chartDoughnut) chartDoughnut.destroy();
+				if (chartBarTahun) chartBarTahun.destroy();
+				if (chartBarBulan) chartBarBulan.destroy();
+
+				// Doughnut Chart
+				chartDoughnut = new Chart(ctx, {
+					type: "doughnut",
+					data: {
+						labels: dataLingkaran.map(item => item[selected]),
+						datasets: [
+							{
+								data: dataLingkaran.map(item => item.jumlah_prestasi),
+								borderWidth: 1,
+								backgroundColor: [
+									"#C6E0F7",
+									"#70B1EA",
+									"#3F84D9",
+									"#3063C5",
+									"#274A9D",
+									"#1D2C40",
+									"#CFE6FA",
+								],
+							},
 						],
 					},
-				],
-			},
-		});
+				});
 
-
-		const ctx1 = document.getElementById("DiagramBatangPerTahun");
-
-		new Chart(ctx1, {
-			type: "bar",
-			data: {
-				labels: [
-					<?php foreach ($data['tahun'] as $tahun) { ?>
-												"<?= $tahun['tahun']; ?>",
-					<?php } ?>
-				],
-				datasets: [
-					<?php
-					$colors = ["#C6E0F7", "#70B1EA", "#3F84D9", "#3063C5", "#274A9D", "#1D2C40", "#CFE6FA"];
-					foreach ($data['kategori'] as $kategori) { ?>
-												{
-							label: "<?= $kategori['kategori'] ?>",
-							data: [
-								<?php foreach ($data['perTahun'] as $perTahun) { ?>
-																					<?= $perTahun[$kategori['kategori']] ?>,
-								<?php } ?>
-							],
+				// Bar Chart - Per Tahun
+				chartBarTahun = new Chart(ctx1, {
+					type: "bar",
+					data: {
+						labels: dataTahun.map(item => item.tahun),
+						datasets: dataLingkaran.map((selectedData, index) => ({
+							label: selectedData[selected],
+							data: dataPerTahun.map(item => item[selectedData[selected]]),
 							borderWidth: 1,
-							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>",
-						},
-					<?php } ?>
-				],
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true,
+							backgroundColor: [
+								"#C6E0F7",
+								"#70B1EA",
+								"#3F84D9",
+								"#3063C5",
+								"#274A9D",
+								"#1D2C40",
+								"#CFE6FA",
+							][index % 7],
+						})),
 					},
-				},
-			},
-		});
+					options: {
+						scales: {
+							y: {
+								beginAtZero: true,
+							},
+						},
+					},
+				});
 
-
-
-		const ctx2 = document.getElementById("DiagramBatang1Tahun");
-
-		new Chart(ctx2, {
-			type: "bar",
-			data: {
-				labels: [
-					"Januari",
-					"Februari",
-					"Maret",
-					"April",
-					"Mei",
-					"Juni",
-					"Juli",
-					"Agustus",
-					"September",
-					"Oktober",
-					"November",
-					"Desember",
-				],
-				datasets: [
-					<?php foreach ($data['kategori'] as $kategori) { ?>
-												{
-							label: "<?= $kategori['kategori'] ?>",
-							data: [
-								<?php foreach ($data['perBulan'] as $perBulan) { ?>
-																					<?= $perBulan[$kategori['kategori']] ?>,
-								<?php } ?>
-							],
+				// Bar Chart - Per Bulan
+				chartBarBulan = new Chart(ctx2, {
+					type: "bar",
+					data: {
+						labels: [
+							"Januari", "Februari", "Maret", "April", "Mei", "Juni",
+							"Juli", "Agustus", "September", "Oktober", "November", "Desember"
+						],
+						datasets: dataLingkaran.map((selectedData, index) => ({
+							label: selectedData[selected],
+							data: dataPerBulan.map(item => item[selectedData[selected]]),
 							borderWidth: 1,
-							backgroundColor: "<?= $colors[rand(0, count($colors) - 1)] ?>"
-						},
-					<?php } ?>
-				],
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: true,
+							backgroundColor: [
+								"#C6E0F7",
+								"#70B1EA",
+								"#3F84D9",
+								"#3063C5",
+								"#274A9D",
+								"#1D2C40",
+								"#CFE6FA",
+							][index % 7],
+						})),
 					},
-				},
-			},
+					options: {
+						scales: {
+							y: {
+								beginAtZero: true,
+							},
+						},
+					},
+				});
+			}
+			fetchDataAnalysis();
+
 		});
+
 	</script>
+	// Script Chart Diagram
 	<!-- <script src="../../app/components/Diagram.js"></script> -->
 </section>
