@@ -306,7 +306,7 @@ class PrestasiModel extends Connection
         return $data ?? [];
     }
 
-    public function getGrafikDiagramLingkaran($type = "Kategori")
+    public function getGrafikDiagramLingkaran($type = "kategori")
     {
         $stmt = "EXEC usp_GetAnalisisPrestasi @type = ?;";
         $params = array($type);
