@@ -47,7 +47,25 @@ class MahasiswaModel extends Connection
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?;";
+        $stmt = "
+            SELECT
+                p.id_prestasi,
+                p.nama_kompetisi,
+                tk.tingkat_kompetisi,
+                k.kategori AS kategori_kompetisi,
+                j.juara,
+                p.status,
+                p.poin_prestasi AS poin,
+                p.created_at
+            FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                JOIN kategori k ON p.id_kategori = k.id_kategori
+                JOIN juara j ON p.id_juara = j.id_juara
+                JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
+            WHERE m.nim = ?
+            ORDER BY p.created_at DESC;
+        ";
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);    
 
@@ -63,8 +81,23 @@ class MahasiswaModel extends Connection
     // Get Prestasi ber-Anggota kan Mahasiswa   
     public function getStatistikMhs($nim)
     {
-        $stmt = "EXEC usp_GetStatistikMahasiswa @nim = ?;";
-        $params = array($nim);
+        $stmt = "
+            SELECT
+                total_prestasi,
+                total_poin,
+                peringkat_mapres
+            FROM (
+                SELECT
+                    nim,
+                    dbo.fn_HitungTotalPrestasi(?) AS total_prestasi,
+                    total_poin,
+                    RANK() OVER (ORDER BY total_poin DESC) AS 
+                    peringkat_mapres
+                FROM mahasiswa
+            ) AS RankedMahasiswa
+            WHERE nim = ?;
+        ";
+        $params = array($nim, $nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
         if ($result === false) {
