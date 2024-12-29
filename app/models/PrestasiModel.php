@@ -22,7 +22,22 @@ class PrestasiModel extends Connection
 
     public function getDaftarPrestasi()
     {
-        $stmt = "SELECT * FROM vw_PrestasiMahasiswa ORDER BY poin DESC;";
+        $stmt = "
+            SELECT
+                p.id_prestasi,
+                p.nama_kompetisi,
+                tk.tingkat_kompetisi,
+                k.kategori AS kategori_kompetisi,
+                j.juara,
+                p.status,
+                p.poin_prestasi AS poin,
+                p.created_at
+            FROM prestasi p
+                JOIN kategori k ON p.id_kategori = k.id_kategori
+                JOIN juara j ON p.id_juara = j.id_juara
+                JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
+            ORDER BY poin DESC;
+        ";
         $result = sqlsrv_query($this->conn, $stmt);
 
         if ($result === false) {
@@ -37,7 +52,25 @@ class PrestasiModel extends Connection
 
     public function getPrestasiByNim($nim)
     {
-        $stmt = "EXEC usp_GetPrestasiMahasiswa @nim = ?";
+        $stmt = "
+            SELECT
+                p.id_prestasi,
+                p.nama_kompetisi,
+                tk.tingkat_kompetisi,
+                k.kategori AS kategori_kompetisi,
+                j.juara,
+                p.status,
+                p.poin_prestasi AS poin,
+                p.created_at
+            FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                JOIN kategori k ON p.id_kategori = k.id_kategori
+                JOIN juara j ON p.id_juara = j.id_juara
+                JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
+            WHERE m.nim = ?
+            ORDER BY p.created_at DESC;
+        ";
         $params = array($nim);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
@@ -83,7 +116,18 @@ class PrestasiModel extends Connection
 
     public function getDetailPrestasiDataMahasiswa($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasiDataMahasiswa @id_prestasi = ?";
+        $stmt = "
+            SELECT
+                m.id_mahasiswa,
+                m.nim,
+                m.nama as nama_mahasiswa,
+                p.id_peran,
+                p.peran
+            FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN peran_mahasiswa p ON pm.id_peran = p.id_peran
+            WHERE pm.id_prestasi = ?;
+";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
@@ -99,7 +143,18 @@ class PrestasiModel extends Connection
 
     public function getDetailPrestasiDataDosen($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasiDataDosen @id_prestasi = ?";
+        $stmt = "
+            SELECT
+                d.id_dosen,
+                d.nama AS nama_dosen,
+                d.nip,
+                pd.id_peran,
+                pd.peran
+            FROM dosen_prestasi dp
+                JOIN dosen d ON dp.id_dosen = d.id_dosen
+                JOIN peran_dosen pd ON dp.id_peran = pd.id_peran
+            WHERE dp.id_prestasi = ?;
+        ";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
@@ -115,7 +170,21 @@ class PrestasiModel extends Connection
 
     public function getDetailPrestasiDataPoin($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasiDataPoin @id_prestasi = ?";
+        $stmt = "
+            SELECT
+                tk.tingkat_kompetisi,
+                tk.poin AS poin_tk,
+                tp.tingkat_penyelenggara AS penyelenggara,
+                tp.poin AS poin_tp,
+                j.juara,
+                j.poin AS poin_j,
+                p.poin_prestasi AS total_poin
+            FROM prestasi p
+                JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
+                JOIN tingkat_penyelenggara tp ON p.id_tingkat_penyelenggara = tp.id_tingkat_penyelenggara
+                JOIN juara j ON p.id_juara = j.id_juara
+            WHERE p.id_prestasi = ?;
+        ";
         $params = array($id);
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
@@ -277,7 +346,20 @@ class PrestasiModel extends Connection
 
     public function getStatistikPrestasi()
     {
-        $stmt = "SELECT * FROM vw_StatistikPrestasi;";
+        $stmt = "
+            SELECT
+                (SELECT
+                    COUNT(id_prestasi)
+                FROM prestasi WHERE status = 'Valid') AS total_prestasi,
+                (SELECT
+                    COUNT(id_mahasiswa)
+                FROM mahasiswa) AS total_mahasiswa,
+                (SELECT
+                    COUNT(id_prestasi) * 1.0 / COUNT(DISTINCT YEAR(tanggal_selesai_kompetisi))
+                FROM prestasi WHERE status = 'Valid') AS rata_rata,
+                (SELECT
+                    COUNT(id_mahasiswa) FROM mahasiswa WHERE total_poin > 0) AS total_mapres;
+        ";
         $result = sqlsrv_query($this->conn, $stmt);
 
         if ($result === false) {
