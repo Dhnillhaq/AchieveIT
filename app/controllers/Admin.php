@@ -48,6 +48,54 @@ class Admin extends Controller
         ]);
     }
 
+    public function getAnalisisDataPrestasi()
+    {
+        // Terima data POST dari JavaScript
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        // Tangkap parameter dari input
+        $selected = $input['selected'] ?? 'kategori';          // Keyword pencarian
+        $years = $input['years'] ?? "2024";             // Tahun filter
+        $selectedModel = "";
+        if ($selected === 'tingkat_kompetisi') {
+            $selectedModel = 'TingkatKompetisi';
+        } else if ($selected === 'tingkat_penyelenggara') {
+            $selectedModel = 'TingkatPenyelenggara';
+        } else {
+            $selectedModel = $selected;
+        }
+        // Ambil jumlah total data berdasarkan filter
+        $dataTahun = $this->model('PrestasiModel')->getTahunPrestasi();
+        $dataSelected = $this->model($selectedModel . 'Model')->{'get' . $selectedModel}();
+        $dataLingkaran = $this->model('PrestasiModel')->getGrafikDiagramLingkaran($selected);
+        $dataPerTahun = $this->model('PrestasiModel')->getGrafikPertahun($selected);
+        $dataPerBulan = $this->model('PrestasiModel')->getGrafikPerBulan($selected, $years);
+        
+        // echo "<pre>";
+        // echo "LINGKARAN<br>";
+        // print_r($dataLingkaran);
+        // echo "PERBULAN<br>";
+        // print_r($dataPerBulan);
+        // echo "PERTAHUN<br>";
+        // print_r($dataPerTahun);
+        // echo "SELECTED<br>";
+        // print_r($dataSelected);
+        // echo "TAHUN<br>";
+        // print_r($dataTahun);                        
+        // echo "</pre>";
+
+
+        // Return data sebagai JSON
+        header('Content-Type: application/json');
+        echo json_encode([
+            'dataTahun' => $dataTahun,
+            'dataSelected' => $dataSelected,
+            'dataLingkaran' => $dataLingkaran,
+            'dataPerTahun' => $dataPerTahun,
+            'dataPerBulan' => $dataPerBulan,
+        ]);
+    }
+
 
 
     public function administrasiData()
@@ -59,7 +107,7 @@ class Admin extends Controller
     public function pengaturanPrestasi()
     {
         $this->checkRole("Admin", "Super Admin");
-        $data = [
+        $data = [   
             'kategoriKompetisi' => $this->model('KategoriModel')->getKategori(),
             'tingkatKompetisi' => $this->model('TingkatKompetisiModel')->getTingkatKompetisi(),
             'tingkatPenyelenggara' => $this->model('TingkatPenyelenggaraModel')->getTingkatPenyelenggara(),
