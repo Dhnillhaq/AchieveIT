@@ -21,7 +21,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" class="bg-white flex focus:outline-none" />
+					<input type="text" id="adminSearch" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -56,14 +56,14 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody class="text-left">
+					<tbody class="text-left" id="adminTable">
 						<?php
-							$no = 1;
+						$no = 1;
 						foreach ($data['admin'] as $admin) {
 							?>
 							<tr>
-								<td class="py-2 px-4 border border-blue-950"><?= $no?></td>
-								<td class="py-2 px-4 border border-blue-950"><?= $admin['nama'] ?></td>
+								<td class="py-2 px-4 border border-blue-950"><?= $no ?></td>
+								<td class="py-2 px-4 border border-blue-950" id="admin"><?= $admin['nama'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $admin['nip'] ?></td>
 								<td class="py-2 px-4 border border-blue-950"><?= $admin['role'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
@@ -99,3 +99,25 @@
 		</a>
 	</section>
 </section>
+
+<script>
+	$(document).ready(function () {
+		function searchAdmin() {
+			let keyword = $("#adminSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#adminTable tr").each(function () {
+				let namaAdmin = $(this).find("#admin").text().toLowerCase();
+				$(this).toggle(namaAdmin.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#adminTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#adminTable .empty-row").remove();
+			}
+		}
+
+		$("#adminSearch").on("input change", searchAdmin);
+	});
+</script>

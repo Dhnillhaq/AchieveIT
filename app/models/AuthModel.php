@@ -9,9 +9,13 @@ class AuthModel extends Connection
         $params = array('Super Admin');
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
-        return $data;
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+        
+        return $data ?? [];
     }
 
     public function getAdmin()
@@ -20,9 +24,13 @@ class AuthModel extends Connection
         $params = array('Admin');
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
-        return $data;
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data ?? [];
     }
 
     public function getKajur()
@@ -31,25 +39,27 @@ class AuthModel extends Connection
         $params = array('Ketua Jurusan');
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
 
-        return $data;
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+            
+        return $data ?? [];
     }
 
-    public function getMahasiswa($nim)
-    {
-        $stmt = "SELECT * FROM mahasiswa WHERE nim LIKE ?";
-        $params = array("%{$nim}%");
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-        // Ambil data
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-    }
 
     public function registrasi($username, $password)
     {
         $stmt = "INSERT INTO mahasiswa (nim, password) VALUES (?, ?)";
         $params = array($username, $password);
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function gantiSandi($password, $username)
@@ -71,8 +81,13 @@ class AuthModel extends Connection
         }
 
         $params = array($password, $username);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        return sqlsrv_query($this->conn, $stmt, $params);
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
 }

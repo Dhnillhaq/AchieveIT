@@ -8,10 +8,14 @@ class ProdiModel extends Connection
         $stmt = "SELECT * FROM program_studi";
         $result = sqlsrv_query($this->conn, $stmt);
 
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
         while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
             $data[] = $row;
         }
-        return $data;
+        return $data ?? [];
     }
 
     public function getProdiById($id)
@@ -20,14 +24,15 @@ class ProdiModel extends Connection
         $params = array(
             $id
         );
-
         $result = sqlsrv_query($this->conn, $stmt, $params);
 
-        if ($result) {
-            return sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-        } else {
-            // error handling
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
         }
+
+        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
+
+        return $data;
     }
 
     public function store($data)
@@ -37,7 +42,13 @@ class ProdiModel extends Connection
             $data['kode_prodi'],
             $data['nama_prodi']
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function update($data)
@@ -48,7 +59,13 @@ class ProdiModel extends Connection
             $data['nama_prodi'],
             $data['id_prodi']
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 
     public function delete($id)
@@ -57,7 +74,13 @@ class ProdiModel extends Connection
         $params = array(
             $id
         );
-        return sqlsrv_query($this->conn, $stmt, $params);
+        $result = sqlsrv_query($this->conn, $stmt, $params);
+
+        if ($result === false) {
+            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        }
+
+        return $result;
     }
 }
 

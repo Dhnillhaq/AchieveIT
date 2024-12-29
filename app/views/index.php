@@ -5,7 +5,7 @@
     <div class="navbar-text flex justify-between items-center gap-2">
       <img src="../../../public/img/logo-poltek-outline.png" alt="logo" class="w-8 h-8" />
       <img src="../../../public/img/logo-JTI-outline.png" alt="logo" class="w-8 h-8" />
-      <h1 class="font-extrabold text-4xl pl-4">AchieveIt</h1>
+      <h1 class="font-extrabold text-4xl pl-4">AchieveIT</h1>
     </div>
     <div class="navbar-button flex right-0 text-[16px]">
       <a href="<?= BASEURL; ?>" class="text-white hover:underline py-2 mx-2">Beranda</a>
@@ -110,40 +110,29 @@
       <div class="p-5 mb-10 ">
         <div class="flex justify-between">
           <div class="flex">
-            <form id="formFilter" action="<?= BASEURL; ?>/#daftar-prestasi" method="POST">
-              <div
-                class="flex items-center bg-white w-full p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
-                <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
-                <input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword" />
-              </div>
+            <div
+              class="flex items-center bg-white w-full p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+              <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+              <input type="text" id="cari-mhs" placeholder="" class="w-full flex focus:outline-none" name="keyword" />
+            </div>
 
           </div>
           <div class="flex right-0">
             <div class="flex items-center mr-3">
-
-              <span class="">Lihat</span>
-              <select name="limit" onchange="submitForm()"
-                class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="10" selected>10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-
-              <span class="">entri</span>
-              <select name="year" onchange="submitForm()"
+              <span>entri</span>
+              <select id="yearSelect" name="year"
                 class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">Seluruh Waktu</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
-                <option value="2024" selected>2024</option>
+                <option value="2024">2024</option>
               </select>
-
-              </form>
             </div>
           </div>
         </div>
 
         <section class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
-          <table class="min-w-full bg-white">
+          <table id="daftar-prestasi-table" class="min-w-full bg-white">
             <thead>
               <tr>
                 <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">
@@ -163,67 +152,12 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="text-gray-700">
-              <tr>
-                <!-- Rank 1 -->
-              <tr class="bg-yellow-400 text-black font-bold shadow-lg border-2 border-yellow-600  ">
-                <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
-                  🥇 <span>1</span>
-                </td>
-                <td class='py-2 px-4 border border-blue-950'>2341720076</td>
-                <td class='py-2 px-4 border border-blue-950'>Saya</td>
-                <td class='py-2 px-4 border border-blue-950'>TI</td>
-                <td class='py-2 px-4 border border-blue-950'>100</td>
-              </tr>
-              <!-- Rank 2 -->
-              <tr class="bg-yellow-300 text-black font-bold border border-yellow-500">
-                <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
-                  🥈 <span>2</span>
-                </td>
-                <td class='py-2 px-4 border border-blue-950'>2341720077</td>
-                <td class='py-2 px-4 border border-blue-950'>Dia</td>
-                <td class='py-2 px-4 border border-blue-950'>TI</td>
-                <td class='py-2 px-4 border border-blue-950'>95</td>
-              </tr>
-              <!-- Rank 3 -->
-              <tr class="bg-yellow-200 text-black font-semibold border border-yellow-400">
-                <td class='py-2 px-4 border border-blue-950 flex items-center gap-2'>
-                  🥉 <span>3</span>
-                </td>
-                <td class='py-2 px-4 border border-blue-950'>2341720078</td>
-                <td class='py-2 px-4 border border-blue-950'>Kamu</td>
-                <td class='py-2 px-4 border border-blue-950'>TI</td>
-                <td class='py-2 px-4 border border-blue-950'>90</td>
-              </tr>
-              <!-- Rank 4 and others -->
-              <tr class="hover:bg-gray-100 transition">
-                <td class='py-2 px-4 border border-blue-950'>4</td>
-                <td class='py-2 px-4 border border-blue-950'>2341720079</td>
-                <td class='py-2 px-4 border border-blue-950'>Kita</td>
-                <td class='py-2 px-4 border border-blue-950'>TI</td>
-                <td class='py-2 px-4 border border-blue-950'>85</td>
-              </tr>
-              <?php
-              // Looping data mahasiswa ke dalam tabel
-              $rank = 1;
-              foreach ($data['prestasi'] as $mahasiswa) { ?>
-
-                <tr>
-                  <td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_mahasiswa'] ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['prodi'] ?></td>
-                  <td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
-                </tr>
-                <?php
-                $rank++;
-              }
-              ?>
+            <tbody id="daftar-prestasi-body" class="text-gray-700">
             </tbody>
           </table>
         </section>
 
-        <!-- pagination -->
+        <!-- pagination
         <section class="flex items-center justify-center py-2">
           <nav aria-label="Page navigation example">
             <ul class="flex items-center -space-x-px h-8 text-sm">
@@ -263,9 +197,7 @@
               </li>
             </ul>
           </nav>
-
-
-        </section>
+        </section> -->
 
       </div>
     </section>
@@ -280,9 +212,10 @@
     </div>
 
     <div class="flex right-0 text-[16px]">
-      <a href="<?= BASEURL; ?>/Auth/loginForm">
-        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-24 h-10">
-          Masuk
+      <a
+        href="<?= BASEURL; ?>/<?= (isset($_SESSION['user']) ? ($_SESSION['user']['role'] == 'Mahasiswa') ? 'Mahasiswa' : (($_SESSION['user']['role'] == 'Admin' || $_SESSION['user']['role'] == 'Super Admin') ? 'Admin' : (($_SESSION['user']['role'] == 'Ketua Jurusan') ? 'Kajur' : 'Auth/login')) : 'Auth/loginForm') ?>">
+        <button class="border-spacing-2 font-bold bg-white text-blue-950 rounded-lg py-2 mx-2 w-28 h-10">
+          <?= (isset($_SESSION['user']) ? 'Dashboard' : 'Masuk') ?>
         </button>
       </a>
     </div>
@@ -330,6 +263,119 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ambil elemen input dan dropdown
+    const searchInput = document.getElementById("cari-mhs");
+    const yearSelect = document.getElementById("yearSelect");
+
+    // Fungsi untuk memuat data dengan AJAX
+    function fetchData(keyword = "", year = "all") {
+      // Kirim request AJAX
+      fetch("<?= BASEURL; ?>/Home/getDataRankingPrestasi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keyword, year }), // Kirim data dalam bentuk JSON
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Update DOM dengan data yang diterima
+          const tableBody = document.getElementById("daftar-prestasi-body");
+          tableBody.innerHTML = ""; // Kosongkan data lama
+
+          if (data.length > 0) {
+            data.forEach((item) => {
+              let row = ""; // Inisialisasi variabel row
+
+              // Perkondisian jika rank = 1
+              if (item.rank === '1') {
+                row = `<tr class='bg-yellow-400 text-black font-bold shadow-lg border-2 border-yellow-600'>
+                  <td class='py-2 px-2 text-center border border-blue-950 font-bold'>
+                  <div class="flex items-center justify-center relative">
+                    <span class="absolute left-0">🥇</span>
+                    <span class="mx-auto">${item.rank}</span> 
+                  </div>
+                </td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nim}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama_prodi}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.total_poin}</td>
+            </tr>`;
+              } else if (item.rank === '2') {
+                row = `<tr class='bg-yellow-300 text-black font-bold border border-yellow-500'>
+                <td class='py-2 px-2 text-center border border-blue-950 font-bold'>
+                  <div class="flex items-center justify-center relative">
+                    <span class="absolute left-0">🥈</span>
+                    <span class="mx-auto">${item.rank}</span> 
+                  </div>
+                </td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nim}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama_prodi}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.total_poin}</td>
+            </tr>`;
+              } else if (item.rank === '3') {
+                row = `<tr class='bg-yellow-200 text-black font-semibold border border-yellow-400'>
+                <td class='py-2 px-2 text-center border border-blue-950 font-bold'>
+                  <div class="flex items-center justify-center relative">
+                    <span class="absolute left-0">🥉</span>
+                    <span class="mx-auto">${item.rank}</span> 
+                  </div>
+                </td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nim}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.nama_prodi}</td>
+                <td class='py-2 px-4 text-center border border-blue-950 font-bold'>${item.total_poin}</td>
+            </tr>`;
+              } else {
+                // Template untuk selain rank 1,2,3
+                row = `<tr>
+                <td class='py-2 px-2 text-center border border-blue-950'>${item.rank}</td>
+                <td class='py-2 px-4 text-center border border-blue-950'>${item.nim}</td>
+                <td class='py-2 px-4 text-center border border-blue-950'>${item.nama}</td>
+                <td class='py-2 px-4 text-center border border-blue-950'>${item.nama_prodi}</td>
+                <td class='py-2 px-4 text-center border border-blue-950'>${item.total_poin}</td>
+            </tr>`;
+              }
+
+              // Tambahkan baris ke tabel
+              tableBody.innerHTML += row;
+            });
+          } else {
+            tableBody.innerHTML = `<tr>
+                <td td colspan = '5' class='text-center py-10' >
+              <img src='../../public/img/table-kosong.png' alt='Table Kosong' class='w-1/6 mx-auto'/>
+              <p class='font-bold text-gray-500 mt-4'>
+                Belum ada data Ranking pada tahun ${year}
+              </p>
+            </td>
+          </tr > `;
+          }
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+
+    // Panggil fungsi saat halaman pertama kali dimuat
+    fetchData();
+
+    // Event listener untuk pencarian
+    searchInput.addEventListener("input", function () {
+      const keyword = searchInput.value;
+      const year = yearSelect.value;
+      fetchData(keyword, year);
+    });
+
+    // Event listener untuk dropdown tahun
+    yearSelect.addEventListener("change", function () {
+      const year = this.value; // Nilai tahun
+      const keyword = document.getElementById("cari-mhs").value; // Nilai keyword
+      console.log("Year:", year, "Keyword:", keyword); // Debugging
+      fetchData(keyword, year);
+    });
+  });
+
+</script>
 </body>
 
 </html>

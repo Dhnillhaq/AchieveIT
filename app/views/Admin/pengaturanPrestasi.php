@@ -19,7 +19,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="kategoriSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -41,14 +41,14 @@
 								No
 							</th>
 							<th class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
-								Peran
+								Kategori
 							</th>
 							<th class="py-2 px-4 w-1/4 bg-blue-950 text-white font-semibold border border-blue-950">
 								Aksi
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="kategoriTable">
 
 						<?php
 						$no = 1;
@@ -57,7 +57,7 @@
 
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left">
+								<td class="py-2 px-4 border border-blue-950 text-left" id="kategori">
 									<?= $kategori['kategori'] ?>
 								</td>
 								<td class="py-2 px-4 border border-blue-950">
@@ -94,7 +94,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="tkKompetisiSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -116,7 +116,7 @@
 								No
 							</th>
 							<th class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
-								Kategori Prestasi
+								Tingkat Kompetisi Prestasi
 							</th>
 							<th class="py-2 px-4 w-auto bg-blue-950 text-white font-semibold border border-blue-950">
 								Poin
@@ -126,7 +126,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tkKompetisiTable">
 
 						<?php
 						$no = 1;
@@ -135,7 +135,7 @@
 
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left">
+								<td class="py-2 px-4 border border-blue-950 text-left" id="tkKompetisi">
 									<?= $tingkatKompetisi['tingkat_kompetisi'] ?>
 								</td>
 								<td class="py-2 px-4 border border-blue-950 text-left">
@@ -177,7 +177,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="tkPenyelenggaraSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -209,7 +209,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tkPenyelenggaraTable">
 
 						<?php
 						$no = 1;
@@ -218,7 +218,7 @@
 
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left">
+								<td class="py-2 px-4 border border-blue-950 text-left" id="tkPenyelenggara">
 									<?= $tingkatPenyelenggara['tingkat_penyelenggara'] ?>
 								</td>
 								<td class="py-2 px-4 border border-blue-950 text-left">
@@ -260,7 +260,7 @@
 				<div
 					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
-					<input type="text" id="cari" placeholder="" class="bg-white flex focus:outline-none" />
+					<input type="text" id="juaraSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
 
 				<!-- btn tambah -->
@@ -292,7 +292,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="juaraTable">
 
 						<?php
 						$no = 1;
@@ -301,7 +301,7 @@
 
 							<tr>
 								<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
-								<td class="py-2 px-4 border border-blue-950 text-left">
+								<td class="py-2 px-4 border border-blue-950 text-left" id="juara">
 									<?= $juara['juara'] ?>
 								</td>
 								<td class="py-2 px-4 border border-blue-950 text-left">
@@ -338,3 +338,79 @@
 		</a>
 	</section>
 </section>
+
+<script>
+	$(document).ready(function () {
+		function searchKategori() {
+			let keyword = $("#kategoriSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#kategoriTable tr").each(function () {
+				let namaKategori = $(this).find("#kategori").text().toLowerCase();
+				$(this).toggle(namaKategori.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#kategoriTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#kategoriTable .empty-row").remove();
+			}
+		}
+
+		$("#kategoriSearch").on("input change", searchKategori);
+		
+		function searchTkKompetisi() {
+			let keyword = $("#tkKompetisiSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#tkKompetisiTable tr").each(function () {
+				let namaTkKompetisi = $(this).find("#tkKompetisi").text().toLowerCase();
+				$(this).toggle(namaTkKompetisi.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#tkKompetisiTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#tkKompetisiTable .empty-row").remove();
+			}
+		}
+
+		$("#tkKompetisiSearch").on("input change", searchTkKompetisi);
+		
+		function searchTkPenyelenggara() {
+			let keyword = $("#tkPenyelenggaraSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#tkPenyelenggaraTable tr").each(function () {
+				let namaTkPenyelenggara = $(this).find("#tkPenyelenggara").text().toLowerCase();
+				$(this).toggle(namaTkPenyelenggara.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#tkPenyelenggaraTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#tkPenyelenggaraTable .empty-row").remove();
+			}
+		}
+
+		$("#tkPenyelenggaraSearch").on("input change", searchTkPenyelenggara);
+		
+		function searchjuara() {
+			let keyword = $("#juaraSearch").val().toLowerCase();
+			let visibleRows = 0;
+			$("#juaraTable tr").each(function () {
+				let namaJuara = $(this).find("#juara").text().toLowerCase();
+				$(this).toggle(namaJuara.includes(keyword));
+				if ($(this).is(":visible")) visibleRows++;
+			});
+
+			if (visibleRows === 0) {
+				$("#juaraTable").append('<tr class="empty-row"><td colspan="8" class="text-center py-10"><img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" /><p class="font-bold text-gray-500 mt-4">Tidak ada data yang tersedia</p></td></tr>');
+			} else {
+				$("#juaraTable .empty-row").remove();
+			}
+		}
+
+		$("#juaraSearch").on("input change", searchjuara);
+	});
+</script>

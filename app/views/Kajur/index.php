@@ -20,7 +20,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Prestasi
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_prestasi'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_prestasi'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total Mahasiswa JTI
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_mahasiswa'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_mahasiswa'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Rata-rata Per Tahun
 					</p>
-					<p class="font-bold"><?= round($data['statistik']['0']['rata_rata']) ?></p>
+					<p class="font-bold"><?= round($data['statistik']['rata_rata']) ?></p>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 					<p class="font-semibold text-[#757575] text-[12px]">
 						Total MaPres
 					</p>
-					<p class="font-bold"><?= $data['statistik']['0']['total_mapres'] ?></p>
+					<p class="font-bold"><?= $data['statistik']['total_mapres'] ?></p>
 				</div>
 			</div>
 		</div>
@@ -209,8 +209,8 @@
 							<tr>
 								<td class='py-2 px-4 border border-blue-950'><?= $rank ?></td>
 								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nim'] ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_mahasiswa'] ?></td>
-								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['prodi'] ?></td>
+								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama'] ?></td>
+								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['nama_prodi'] ?></td>
 								<td class='py-2 px-4 border border-blue-950'><?= $mahasiswa['total_poin'] ?></td>
 							</tr>
 							<?php
@@ -219,7 +219,7 @@
 						?>
 					</tbody>
 					
-					<tr>
+					<!-- <tr>
 						<td colspan="5" class="text-center py-10">
 							<img src="../../public/img/table-kosong.png" alt="Table Kosong" class="w-1/6 mx-auto" />
 							<p class="font-bold text-gray-500 mt-4">
@@ -227,7 +227,7 @@
 							</p>
 						</td>
 					</tr>
-				
+				 -->
 				</table>
 			</div>
 		</div>

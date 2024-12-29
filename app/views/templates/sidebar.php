@@ -30,6 +30,7 @@ $activePaths = [
     'Admin/adminList',
     'Admin/create',
     'Admin/edit/',
+    'Validasi',
 
 ];
 

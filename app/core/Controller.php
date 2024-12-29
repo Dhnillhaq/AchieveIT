@@ -1,17 +1,26 @@
 <?php
 
+require_once 'Validator.php';
+
 class Controller
 {
     private $models = [];
 
-    private static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound'];
+    protected $validator;
 
-    public function view($view, $data = [])
+    private static $excludeSidebarFooter = ['index', 'index', 'Auth/login', 'Auth/daftar', 'Auth/lupaSandi', 'Auth/gantiSandi', 'pageNotFound', 'exception'];
+
+    public function __construct()
+    {
+        $this->validator = new Validator();
+    }
+
+    protected function view($view, $data = [])
     {
         $viewFile = '../app/views/' . $view . '.php';
 
         if (!file_exists($viewFile)) {
-            header("location:" . BASEURL . "/Auth/pageNotFound");
+            header("location:" . BASEURL . "/Home/pageNotFound");
             exit;
         }
 
@@ -28,13 +37,46 @@ class Controller
         }
     }
 
-    public function model($model)
+    protected function redirect($path)
+    {
+        header("location" . BASEURL . '/' . $path);
+    }
+
+    protected function redirectToDashboard()
+    {
+        switch ($_SESSION['user']['role']) {
+            case 'Super Admin':
+                $path = 'Admin/index';
+                break;
+
+            case 'Admin':
+                $path = 'Admin/index';
+                break;
+
+            case 'Ketua Jurusan':
+                $path = 'Kajur/index';
+                break;
+
+            case 'Mahasiswa':
+                $path = 'Mahasiswa/index';
+                break;
+
+            default:
+                $path = 'Home/pageNotFound';
+                break;
+        }
+
+        header("location" . BASEURL . '/' . $path);
+        exit;
+    }
+
+    protected function model($model)
     {
         if (!isset($this->models[$model])) {
             $modelFile = '../app/models/' . $model . '.php';
 
             if (!file_exists($modelFile)) {
-                header("location:" . BASEURL . "/Auth/pageNotFound");
+                header("location:" . BASEURL . "/Home/pageNotFound");
                 exit;
             }
 
@@ -44,18 +86,30 @@ class Controller
         return $this->models[$model];
     }
 
-    public function checkRole(...$roles)
+    protected function checkRole(...$roles)
     {
-        $hasAccess = false;
 
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role'])) {
-            header('location:' . BASEURL . '/Auth/Login');
+            header('location:' . BASEURL . '/Auth/loginForm');
             exit;
         }
 
         if (!in_array($_SESSION['user']['role'], $roles)) {
             header('location:' . BASEURL . '/Home/pageNotFound');
             exit;
+        }
+    }
+
+    protected function checkMethod(String $method) {
+        if ($_SERVER['REQUEST_METHOD'] !== $method) {
+            header('HTTP/1.0 405 Method Not Allowed');
+            header('Content-Type: application/json');
+            http_response_code(405);
+            echo json_encode([
+                'status' => 'failed',
+                'error' => 'Method not allowed'
+            ]);
+            exit(405);
         }
     }
 }

@@ -285,7 +285,7 @@
 								<tr>
 									<td class="py-2 px-4 border border-blue-950"><?= $no++ ?></td>
 									<td class="py-2 px-4 border border-blue-950">
-										<select name="mahasiswa[]" required class="w-full border rounded px-2 py-1">
+										<select name="mahasiswa[]" required class="select2 w-full border rounded px-2 py-1">
 											<option>Pilih Mahasiswa</option>
 											<?php
 											foreach ($data['mahasiswa'] as $mahasiswa) {
@@ -361,7 +361,7 @@
 								<tr>
 									<td class="py-2 px-4 border border-blue-950">1</td>
 									<td class="py-2 px-4 border border-blue-950">
-										<select name="dosen[]" required class="w-full border rounded px-2 py-1">
+										<select name="dosen[]" required class="select2 w-full border rounded px-2 py-1">
 											<option>Pilih Dosen Pembimbing</option>
 											<?php
 											foreach ($data['dosen'] as $dosen) {
@@ -373,6 +373,7 @@
 									</td>
 									<td class="py-2 px-4 border border-blue-950">
 										<select name="peran_dsn[]" required class="w-full border rounded px-2 py-1">
+											<option value="">Pilih Peran</option>
 											<?php
 											foreach ($data['peranDosen'] as $peranDsn) {
 												$selected = ($peranDsn['id_peran'] == $dsn['id_peran']) ? 'selected' : '';
@@ -505,6 +506,14 @@
 <script>
 
 document.addEventListener("DOMContentLoaded", () => {
+
+	$(document).ready(function() {
+		$('.select2').select2({
+			placeholder: 'Pilih salah satu',
+			allowClear: false
+		});
+	});
+
     const tableBodyMhs = document.getElementById("table-body-mhs");
     const tableBodyDsn = document.getElementById("table-body-dsn");
 
@@ -539,6 +548,13 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
         </tr>`;
         tableBodyMhs.insertAdjacentHTML("beforeend", newRowMhs);
+
+		$(document).ready(function() {
+			$('.select2').select2({
+				placeholder: 'Pilih salah satu',
+				allowClear: false
+			});
+		});
     });
 
     document.getElementById("add-dsn").addEventListener("click", () => {
@@ -572,6 +588,13 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
         </tr>`;
         tableBodyDsn.insertAdjacentHTML("beforeend", newRowDsn);
+
+		$(document).ready(function() {
+			$('.select2').select2({
+				placeholder: 'Pilih salah satu',
+				allowClear: false
+			});
+		});
     });
 
     const addDeleteRowListener = (tableBody) => {

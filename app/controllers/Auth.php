@@ -17,12 +17,15 @@ class Auth extends Controller
             if ($this->isSuperAdmin()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isAdmin()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Admin/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isKajur()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['role'], "success", "Kajur/index");
+                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
             } else if ($this->isMahasiswa()) {
                 $this->setSession();
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['nama'], "success", "Mahasiswa/index");
@@ -31,7 +34,6 @@ class Auth extends Controller
                 Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
             }
         }
-
         $this->view('Auth/login', $data);
     }
 
@@ -61,9 +63,9 @@ class Auth extends Controller
 
 
             if ($this->isValidated($data['nim'])) {
-                Flasher::setFlash("Daftar", "NIM yang anda masukkan sudah terdaftar", "error", "Auth/login");
+                Flasher::setFlash("Daftar", "NIM yang anda masukkan sudah terdaftar", "error", "w");
             } else if ($this->isNotValidatedYet($data['nim'])) {
-                Flasher::setFlash("Daftar", "Akun anda sudah terdaftar, kami akan menghubungi anda lebih lanjut", "error", "Auth/login");
+                Flasher::setFlash("Daftar", "Akun anda sudah terdaftar, kami akan menghubungi anda lebih lanjut", "error", "Auth/loginForm");
             } else if ($this->isInvalid($data['nim'])) {
                 $isSuccess = $this->model("MahasiswaModel")->updateAccount($data);
 
@@ -73,7 +75,7 @@ class Auth extends Controller
                     Flasher::setFlash("Perbarui Gagal", "Koneksi ke database mungkin gagal, tunggu beberapa saat lagi", "error", "Home/index");
                 }
             } else {
-                $isSuccess = $this->model("MahasiswaModel")->store($data);
+                $isSuccess = $this->model("MahasiswaModel")->store($data, "Not Validated");
 
                 if ($isSuccess) {
                     Flasher::setFlash("Berhasil Terdaftar!", "Admin akan memeriksa akun anda terlebih dahulu, kami akan menghubungi anda lebih lanjut", "success", "Home/index");
@@ -107,7 +109,7 @@ class Auth extends Controller
                 "jenis_kelamin" => $this->userDB['0']['jenis_kelamin'],
                 "no_telepon" => $this->userDB['0']['no_telepon'],
                 "email" => $this->userDB['0']['email'],
-                "total_poin" => $this->userDB['0']['total_poin'],
+                "total_poin" => $this->userDB['1']['total_poin'],
                 "prodi" => $this->userDB['0']['nama_prodi'],
                 "role" => "Mahasiswa"
             ];
@@ -232,7 +234,7 @@ class Auth extends Controller
             $isSuccess = $this->model("AuthModel")->gantiSandi($data['sandiBaru'], $data['nim']);
 
             if ($isSuccess) {
-                Flasher::setFlash("Berhasil", "Sandi anda berhasil diganti", "success", "Auth/login");
+                Flasher::setFlash("Berhasil", "Sandi anda berhasil diganti", "success", "Auth/loginForm");
             } else {
                 Flasher::setFlash("Gagal", "Sandi anda gagal diganti", "error");
             }
@@ -290,17 +292,22 @@ class Auth extends Controller
             if ($_SESSION['user']['role'] == "Mahasiswa") {
                 header("location:" . BASEURL . "/Mahasiswa/profil");
             } else if ($_SESSION['user']['role'] == "Ketua Jurusan") {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Sandi", "Memperbarui Kata Sandi");
                 header("location:" . BASEURL . "/Kajur/profil");
             } else {
+                $this->model("LogAdminModel")->storeAdminLog("Ubah Sandi", "Memperbarui Kata Sandi");
                 header("location:" . BASEURL . "/Admin/profil");
             }
         } else {
-            header("location:" . BASEURL . "/Auth/login");
+            header("location:" . BASEURL . "/Auth/loginForm");
         }
     }
 
     public function logout()
     {
+        if ($_SESSION['user']['role'] !== "Mahasiswa") {
+            $this->model("LogAdminModel")->storeAdminLog("Logout", "Sukses");
+        }
         unset($_SESSION['user']);
         header("location:" . BASEURL . '/Auth/loginForm');
     }

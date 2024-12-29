@@ -3,6 +3,26 @@ function submitForm() {
   document.getElementById("formFilter").submit();
 }
 
+function toggleTbody(year) {
+  // Dapatkan semua tbody di dalam tabel
+  const tbodies = document.querySelectorAll('tbody');
+
+  // Loop untuk menyembunyikan semua tbody
+  tbodies.forEach(tbody => {
+      tbody.classList.remove('visible'); // Sembunyikan tbody
+      setTimeout(() => {
+          tbody.style.display = "none"; // Hapus dari flow setelah transisi
+      }, 100); // Waktu sinkron dengan durasi transisi
+  });
+
+  // Tampilkan tbody yang sesuai setelah delay
+  const targetTbody = document.getElementById(`tbody-${year}`);
+  setTimeout(() => {
+      targetTbody.style.display = "table-row-group"; // Tampilkan dalam tabel
+      targetTbody.classList.add('visible'); // Tambahkan animasi
+  }, 100); // Delay untuk sinkronisasi
+}
+
 
 // Method / fungsi Tampilkan sandi input password
 function showPassword(idInput) {
