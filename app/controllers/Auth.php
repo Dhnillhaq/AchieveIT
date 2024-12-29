@@ -8,7 +8,6 @@ class Auth extends Controller
 
     public function loginForm()
     {
-        $this->checkMethod("GET");
         $data = [];
 
         if (isset($_POST["submit"])) {
@@ -54,11 +53,6 @@ class Auth extends Controller
     public function registrasiProcess()
     {
         try {
-            try {
-                //code...
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
             $this->checkMethod("POST");
             if (isset($_POST['submit'])) {
                 $data = [
