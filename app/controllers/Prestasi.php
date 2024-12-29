@@ -19,7 +19,11 @@ class Prestasi extends Controller
     public function index()
     {
         $this->checkRole("Admin", "Super Admin", "Ketua Jurusan");
-        $data['daftar_prestasi'] = $this->model("PrestasiModel")->getDaftarPrestasi();
+        $data = [
+            'daftar_prestasi' => $this->model("PrestasiModel")->getDaftarPrestasi(),
+            'kategori' => $this->model("KategoriModel")->getKategori(),
+            'tingkat' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
+        ];
         $this->view("Prestasi/index", $data);
     }
     public function create()

@@ -7,7 +7,6 @@ class Admin extends Controller
     {
         $this->checkRole("Admin", "Super Admin");
         $data = [
-            'prestasi' => $this->model("PrestasiModel")->getRankingPrestasi(),
             'statistik' => $this->model('PrestasiModel')->getStatistikPrestasi(),
             'lingkaran' => $this->model('PrestasiModel')->getGrafikDiagramLingkaran(),
             'tahun' => $this->model('PrestasiModel')->getTahunPrestasi(),
@@ -19,30 +18,36 @@ class Admin extends Controller
         $this->view('Admin/index', $data);
     }
 
-    public function getDataByYear()
+    public function getDataRankingPrestasi()
     {
         // Terima data POST dari JavaScript
         $input = json_decode(file_get_contents("php://input"), true);
-        $keyword = $input['keyword'] ?? "";
-        $year = $input['year'] ?? "all";
 
-        // Debug: Tampilkan data yang diterima
-        error_log("Year received: " . $year);
-
-        // Ambil data sesuai tahun
+        // Tangkap parameter dari input
+        $keyword = $input['keyword'] ?? "";          // Keyword pencarian
+        $year = $input['year'] ?? "all";             // Tahun filter
+        $page = (int) ($input['page'] ?? 1);          // Halaman, default halaman pertama
+        $limit = 10;                                 // Jumlah data per halaman
+        $offset = ($page - 1) * $limit;              // Hitung offset untuk query
+        // Ambil jumlah total data berdasarkan filter
         if ($year === "all") {
-            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword); 
+            $totalPrestasi = $this->model('PrestasiModel')->countPrestasi($keyword); // Total sesuai keyword
+            $data = $this->model('PrestasiModel')->getRankingPrestasi($keyword, $limit, $offset); // Data untuk semua tahun
         } else {
-            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year); // Data sesuai tahun
+            $totalPrestasi = $this->model('PrestasiModel')->countPrestasiPerTahun($keyword, $year); // Total berdasarkan tahun
+            $data = $this->model('PrestasiModel')->getRankingPrestasiPerTahun($keyword, $year, $limit, $offset); // Data berdasarkan tahun
         }
-
-        // Debug: Tampilkan data yang akan dikembalikan
-        error_log("Data returned: " . json_encode($data));
 
         // Return data sebagai JSON
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode([
+            'data' => $data,
+            'total' => $totalPrestasi,   // Total data untuk menghitung pagination
+            'page' => $page,             // Halaman saat ini
+            'limit' => $limit            // Jumlah data per halaman
+        ]);
     }
+
 
 
     public function administrasiData()
@@ -77,13 +82,13 @@ class Admin extends Controller
 
     public function getLogs($pages, $limits = 10)
     {
-        $page = (int)$pages;
-        $limit = (int)$limits;
+        $page = (int) $pages;
+        $limit = (int) $limits;
         $offset = ($page - 1) * $limit;
-    
+
         $logs = $this->model("LogAdminModel")->getAllLogAdmin($offset, $limit);
         $totalLogs = $this->model("LogAdminModel")->countLogs(); // Total jumlah log
-    
+
         echo json_encode([
             'data' => $logs,
             'total' => $totalLogs,
@@ -91,7 +96,7 @@ class Admin extends Controller
             'limit' => $limit,
         ]);
     }
-    
+
     public function adminList()
     {
         $this->checkRole("Super Admin");
