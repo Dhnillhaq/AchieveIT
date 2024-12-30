@@ -1,9 +1,10 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen p-4">
     <!-- profil -->
-    <?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+
 
     <!-- selamat datang -->
-    <section class="flex-col justify-start p-4 space-y-4">
+    <section class="flex-col justify-start pt-20 md:pt-0 p-4 space-y-4">
         <p class="font-bold text-2xl sm:text-3xl md:text-4xl">Selamat Datang</p>
         <p class="font-semibold text-xl sm:text-2xl text-[#F99D1C]">
             <?= $data['mhs']['0']['nama'] ?> / <?= $data['mhs']['0']['nim'] ?>

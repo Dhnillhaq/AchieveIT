@@ -1,9 +1,12 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<!-- profil -->
+	<div class="hidden md:block">
+		<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
+	</div>
 
 	<!-- Ubah Kata Sandi -->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Ubah Kata Sandi</p>
 	</section>
 	<form action="<?= BASEURL; ?>/Auth/passProcess" method="POST" id="formLupaSandi" onsubmit="return validasiSandi()">

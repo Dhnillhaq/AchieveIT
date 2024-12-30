@@ -1,9 +1,10 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<!-- profil -->
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- detail prestasi -->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Detail prestasi</p>
 	</section>
 
@@ -11,112 +12,97 @@
 	<!-- KALO VALID WARNANYA ABU-ABU "bg-[#757575]" -->
 	<!-- halaman edit bisa diakses ketika status = invalid / not validated -->
 	<section class="flex justify-end pr-6">
-		<?php
-		if ($_SESSION['user']['role'] != 'Ketua Jurusan') { ?>
-			<a href="<?= BASEURL; ?>/prestasi/edit/<?= $data['prestasi']['id_prestasi'] ?>">
-				<button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145]  rounded-lg w-auto">
-					<img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
-					<p>edit</p>
-				</button>
-			</a>
-		<?php } ?>
-	</section>
+    <?php if ($_SESSION['user']['role'] != 'Ketua Jurusan') { ?>
+        <a href="<?= BASEURL; ?>/prestasi/edit/<?= $data['prestasi']['id_prestasi'] ?>">
+            <button class="flex items-center space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+                <img src="../../../public/img/Edit_fill.png" alt="logo" class="w-5 h-5">
+                <p>Edit</p>
+            </button>
+        </a>
+    <?php } ?>
+</section>
 
-	<!-- data kompetisi -->
-	<section class="relative p-6">
-		<!-- Static parent -->
-		<div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
-			Data Kompetisi
-		</div>
-		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
-			<div class="flex flex-col space-y-4">
-				<div class="flex flex-col justify-start items-start pt-5">
-					<p class="text-[#757575]">Nama Kompetisi</p>
-					<p class="font-semibold">
-						<?= $data['prestasi']['nama_kompetisi'] ?>
-					</p>
-				</div>
+<!-- Data Kompetisi -->
+<section class="relative p-6">
+    <!-- Header Section -->
+    <div class="absolute ml-8 py-2 px-4 rounded-lg text-white bg-[#F99D1C]">
+        Data Kompetisi
+    </div>
+    
+    <div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-4">
+        <!-- Grid Layout for Responsiveness -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Column 1 -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Nama Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['nama_kompetisi'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Kategori Prestasi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['kategori_prestasi'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Tingkat Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['tingkat_kompetisi'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Tingkat Penyelenggara</p>
+                    <p class="font-semibold"><?= $data['prestasi']['tingkat_penyelenggara'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Juara</p>
+                    <p class="font-semibold"><?= $data['prestasi']['juara'] ?></p>
+                </div>
+            </div>
 
-				<div class="flex flex-row justify-start items-start space-x-24">
-					<div class="flex flex-col space-y-4">
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Kategori Prestasi</p>
-							<p class="font-semibold"><?= $data['prestasi']['kategori_prestasi'] ?></p>
-						</div>
+            <!-- Column 2 -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Tanggal Mulai Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['tanggal_mulai_kompetisi']->format("d-m-Y") ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Tanggal Selesai Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['tanggal_selesai_kompetisi']->format("d-m-Y") ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Tempat Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['tempat_kompetisi'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">Penyelenggara Kompetisi</p>
+                    <p class="font-semibold"><?= $data['prestasi']['penyelenggara_kompetisi'] ?></p>
+                </div>
+            </div>
 
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Tingkat Kompetisi</p>
-							<p class="font-semibold"><?= $data['prestasi']['tingkat_kompetisi'] ?></p>
-						</div>
+            <!-- Column 3 -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">File Surat Tugas</p>
+                    <p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_surat_tugas'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">File Poster</p>
+                    <p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_poster'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">File Foto Juara</p>
+                    <p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_foto_juara'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">File Sertifikat</p>
+                    <p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_sertifikat'] ?></p>
+                </div>
+                <div class="flex flex-col justify-start items-start pt-5">
+                    <p class="text-[#757575]">File Proposal</p>
+                    <p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_proposal'] ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Tingkat Penyelenggara</p>
-							<p class="font-semibold"><?= $data['prestasi']['tingkat_penyelenggara'] ?></p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Juara</p>
-							<p class="font-semibold"><?= $data['prestasi']['juara'] ?></p>
-						</div>
-					</div>
-
-					<div class="flex flex-col space-y-4">
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Tanggal Mulai Kompetisi</p>
-							<p class="font-semibold">
-								<?= $data['prestasi']['tanggal_mulai_kompetisi']->format("d-m-Y") ?>
-							</p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Tanggal Selesai Kompetisi</p>
-							<p class="font-semibold">
-								<?= $data['prestasi']['tanggal_selesai_kompetisi']->format("d-m-Y") ?>
-							</p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Tempat Kompetisi</p>
-							<p class="font-semibold"><?= $data['prestasi']['tempat_kompetisi'] ?></p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">Penyelenggara Kompetisi</p>
-							<p class="font-semibold"><?= $data['prestasi']['penyelenggara_kompetisi'] ?></p>
-						</div>
-					</div>
-
-					<div class="flex flex-col space-y-4">
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">File Surat Tugas</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_surat_tugas'] ?>
-							</p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">File Poster</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_poster'] ?></p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">File Foto Juara</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_foto_juara'] ?></p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">File Sertifikat</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_sertifikat'] ?></p>
-						</div>
-
-						<div class="flex flex-col justify-start items-start pt-5">
-							<p class="text-[#757575]">File Proposal</p>
-							<p class="font-semibold text-[#3063C5]"><?= $data['prestasi']['nama_asli_proposal'] ?></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 
 	<!-- Data Mahasiswa -->
 	<section class="relative p-6">
