@@ -1,53 +1,126 @@
-<section class=" sm:ml-64 bg-blue-50 min-h-screen">
-	<!-- profil -->
+<section class="sm:ml-64 bg-blue-50 min-h-screen p-4">
+    <!-- profil -->
 	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
-	<!-- selamat datang -->
-	<section class="flex-col justify-start p-6 space-y-4">
-		<p class="font-bold text-4xl">Selamat Datang</p>
-		<p class="font-semibold text-2xl text-[#F99D1C]">
-			<?= $data['mhs']['0']['nama'] ?> / <?= $data['mhs']['0']['nim'] ?>
-	</section>
 
-			<!-- prestasi -->
-			<section class="flex justify-start p-6 space-x-10 ">
-				<!-- total prestasi -->
-				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start space-x-4">
-						<img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-auto h-12">
-						<div class="flex-col">
-							<p class="font-semibold text-[#757575] text-[12px]">Total Prestasi Saat Ini</p>
-							<p class="font-bold"><?= $data['mhs']['1']['total_prestasi'] ?></p>
+    <!-- selamat datang -->
+    <section class="flex-col justify-start pt-20 md:pt-0 p-4 space-y-4">
+        <p class="font-bold text-2xl sm:text-3xl md:text-4xl">Selamat Datang</p>
+        <p class="font-semibold text-xl sm:text-2xl text-[#F99D1C]">
+            <?= $data['mhs']['0']['nama'] ?> / <?= $data['mhs']['0']['nim'] ?>
+        </p>
+    </section>
+
+    <!-- prestasi -->
+    <section class="flex flex-col sm:flex-row justify-start p-4 space-y-4 sm:space-y-0 sm:space-x-4">
+        <!-- total prestasi -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border w-full sm:w-1/3">
+            <div class="flex justify-start space-x-4 items-center">
+                <img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-12 h-12">
+                <div class="flex-col">
+                    <p class="font-semibold text-[#757575] text-xs">Total Prestasi Saat Ini</p>
+                    <p class="font-bold text-base"><?= $data['mhs']['1']['total_prestasi'] ?></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- total poin -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border w-full sm:w-1/3">
+            <div class="flex justify-start space-x-4 items-center">
+                <img src="../../../public/img/Total_poin.png" alt="logo" class="w-12 h-12">
+                <div class="flex-col">
+                    <p class="font-semibold text-[#757575] text-xs">Total Poin Saat Ini</p>
+                    <p class="font-bold text-base"><?= $data['mhs']['1']['total_poin'] ?></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- peringkat mapres -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border w-full sm:w-1/3">
+            <div class="flex justify-start space-x-4 items-center">
+                <img src="../../../public/img/Perankingan_Mhs.png" alt="logo" class="w-12 h-12">
+                <div class="flex-col">
+                    <p class="font-semibold text-[#757575] text-xs">Peringkat MaPres</p>
+                    <p class="font-bold text-base"><?= $data['mhs']['1']['peringkat_mapres'] ?></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="p-4">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">Daftar Mahasiswa Berprestasi</h1>
+    </section>
+
+    <!-- table maPres -->
+    <section id="daftar-prestasi">
+        <div class="p-4">
+        	<div class="flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 w-full">
+				<!-- Search -->
+				<div class="flex w-full sm:w-auto items-center space-x-4">
+					<form id="formFilter" action="<?= BASEURL; ?>/Mahasiswa" method="POST" class="flex-1">
+						<div class="flex items-center bg-white p-2 space-x-1 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+							<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+							<input type="text" id="cari-mhs" placeholder="Cari Mahasiswa" class="w-full flex focus:outline-none" name="keyword" />
 						</div>
-					</div>
 				</div>
 
-				<!-- total poin -->
-				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start space-x-4">
-						<img src="../../../public/img/Total_poin.png" alt="logo" class="w-auto h-12">
-						<div class="flex-col">
-							<p class="font-semibold text-[#757575] text-[12px]">Total Poin Saat Ini</p>
-							<p class="font-bold"><?= $data['mhs']['1']['total_poin'] ?></p>
-						</div>
+				<!-- Filters -->
+				<div class="flex flex-row items-center justify-end w-full sm:space-x-4 space-x-2">
+					<!-- Limit Filter -->
+					<div class="flex items-center">
+						<span class="hidden sm:inline">Lihat</span>
+						<select name="limit" onchange="submitForm()" 
+							class="mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<option value="10" selected>10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+						</select>
+						<span class="hidden sm:inline">entri</span>
 					</div>
-				</div>
 
-				<!-- peringkat mapres -->
-				<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-					<div class="flex justify-start space-x-4">
-						<img src="../../../public/img/Perankingan_Mhs.png" alt="logo" class="w-auto h-12">
-						<div class="flex-col">
-							<p class="font-semibold text-[#757575] text-[12px]">Peringkat MaPres</p>
-							<p class="font-bold"><?= $data['mhs']['1']['peringkat_mapres'] ?></p>
-						</div>
+					<!-- Year Filter -->
+					<div class="flex items-center">
+						<select name="year" onchange="submitForm()" 
+							class="border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+							<option value="2025">2022</option>
+							<option value="2026">2023</option>
+							<option value="2024" selected>2024</option>
+						</select>
 					</div>
+					</form>
 				</div>
-			</section>
+		</div>
 
-			<section class="p-6 justify-start">
-				<h1 class="text-4xl font-bold ">Daftar Mahasiswa Berprestasi</h1>
-			</section>
+
+            <!-- Table -->
+            <div class="mt-6 overflow-x-auto bg-white shadow-md rounded-2xl">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950 hidden sm:table-cell">RANKING</th>
+                            <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950 hidden sm:table-cell">NIM</th>
+                            <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">NAMA MAHASISWA</th>
+                            <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950 hidden md:table-cell">PRODI</th>
+                            <th class="py-2 px-4 bg-blue-950 text-white font-semibold text-left border border-blue-950">TOTAL POIN</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <?php
+                        $rank = 1;
+                        foreach ($data['prestasi'] as $mahasiswa) {
+                            echo "<tr>";
+                            echo "<td class='py-2 px-4 border border-blue-950 hidden sm:table-cell'>$rank</td>";
+                            echo "<td class='py-2 px-4 border border-blue-950 hidden sm:table-cell'>{$mahasiswa['nim']}</td>";
+                            echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['nama_mahasiswa']}</td>";
+                            echo "<td class='py-2 px-4 border border-blue-950 hidden md:table-cell'>{$mahasiswa['prodi']}</td>";
+                            echo "<td class='py-2 px-4 border border-blue-950'>{$mahasiswa['total_poin']}</td>";
+                            echo "</tr>";
+                            $rank++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
 			<!-- table maPres -->
 			<!-- Tabel Prestasi Mahum -->
