@@ -1,5 +1,5 @@
 <?php
 define('BASEURL', 'http://localhost/public');
-define('APP_DEBUG', TRUE);
+define('APP_DEBUG', FALSE);
 define('SERVER_NAME', 'YOUR_SERVER_NAME_HERE\SQLEXPRESS');
 define('DATABASE_NAME', 'achieveit');
