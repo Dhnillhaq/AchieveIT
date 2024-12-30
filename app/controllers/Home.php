@@ -4,12 +4,12 @@ class Home extends Controller
 {
     public function index()
     {
+        $this->checkMethod("GET");
         $this->view('index');
     }
 
     public function getDataRankingPrestasi()
     {
-
         // Terima data POST dari JavaScript
         $input = json_decode(file_get_contents("php://input"), true);
         $keyword = $input['keyword'] ?? "";
@@ -31,6 +31,7 @@ class Home extends Controller
 
     public function pageNotFound()
     {
+        $this->checkMethod("GET");
         if (!isset($_SESSION['user'])) {
             $data['url'] = 'Home/index';
         } else {
@@ -43,22 +44,6 @@ class Home extends Controller
             }
         }
         $this->view('pageNotFound', $data);
-    }
-
-    public function exception()
-    {
-        if (!isset($_SESSION['user'])) {
-            $data['url'] = 'Home/index';
-        } else {
-            if ($_SESSION['user']['role'] == 'Super Admin') {
-                $data['url'] = 'Admin/index';
-            } else if ($_SESSION['user']['role'] == 'Ketua Jurusan') {
-                $data['url'] = 'Kajur/index';
-            } else {
-                $data['url'] = 'Mahasiswa/index';
-            }
-        }
-        $this->view('exception', $data);
     }
 }
 

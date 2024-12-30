@@ -5,6 +5,7 @@ class Juara extends Controller
 
     public function create()
     {
+        $this->checkMethod("GET");
         $this->checkRole("Admin", "Super Admin");
         $this->view("Admin/Juara/create");
     }
@@ -12,62 +13,78 @@ class Juara extends Controller
     // Method proses Create Juara
     public function store()
     {
-        $this->checkRole("Admin", "Super Admin");
-        if (isset($_POST['submit'])) {
-            $data = [
-                'juara' => htmlspecialchars($_POST['juara']),
-                'poin' => htmlspecialchars($_POST['poin']),
-            ];
+        try {
+            $this->checkMethod("POST");
+            $this->checkRole("Admin", "Super Admin");
+            if (isset($_POST['submit'])) {
+                $data = [
+                    'juara' => htmlspecialchars($_POST['juara']),
+                    'poin' => htmlspecialchars($_POST['poin']),
+                ];
 
-            $isSuccess =  $this->model("JuaraModel")->store($data);
-            if ($isSuccess) {
-                $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Juara");
-                Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
-            } else {
-                Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                $isSuccess = $this->model("JuaraModel")->store($data);
+                if ($isSuccess) {
+                    $this->model("LogAdminModel")->storeAdminLog("Tambah Data", "Menambahkan Data Juara");
+                    Flasher::setFlash("Tambahkan", "Data berhasil ditambahkan", "success", "Admin/pengaturanPrestasi");
+                } else {
+                    Flasher::setFlash("Tambahkan", "Data gagal ditambahkan", "error", "Admin/pengaturanPrestasi");
+                }
             }
-        }
 
-        header("location:" . BASEURL . "/Juara/create");
+            header("location:" . BASEURL . "/Juara/create");
+        } catch (Exception $e) {
+            $this->view('exception', $e);
+        }
     }
 
 
     public function edit($id_juara)
     {
-        $this->checkRole("Admin", "Super Admin");
-        $id = htmlspecialchars($id_juara);
+        try {
+            $this->checkMethod("GET");
+            $this->checkRole("Admin", "Super Admin");
+            $id = htmlspecialchars($id_juara);
 
-        $data = $this->model("JuaraModel")->getJuaraById($id);
+            $data = $this->model("JuaraModel")->getJuaraById($id);
 
-        $this->view("Admin/Juara/edit", $data);
+            $this->view("Admin/Juara/edit", $data);
+        } catch (Exception $e) {
+            $this->view('exception', $e);
+        }
     }
 
     // Method proses Update Juara
     public function update()
     {
-        $this->checkRole("Admin", "Super Admin");
-        if (isset($_POST['submit'])) {
-            $data = [
-                'id_juara' => htmlspecialchars($_POST['id_juara']),
-                'juara' => htmlspecialchars($_POST['juara']),
-                'poin' => htmlspecialchars($_POST['poin'])
-            ];
+        try {
+            $this->checkMethod("POST");
+            $this->checkRole("Admin", "Super Admin");
+            if (isset($_POST['submit'])) {
+                $data = [
+                    'id_juara' => htmlspecialchars($_POST['id_juara']),
+                    'juara' => htmlspecialchars($_POST['juara']),
+                    'poin' => htmlspecialchars($_POST['poin'])
+                ];
 
-            $isSuccess =  $this->model("JuaraModel")->update($data);
-            if ($isSuccess) {
-                $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Juara dengan ID " . $data['id_juara']);
-                Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
-            } else {
-                Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
+                $isSuccess = $this->model("JuaraModel")->update($data);
+                if ($isSuccess) {
+                    $this->model("LogAdminModel")->storeAdminLog("Ubah Data", "Mengubah Data Juara dengan ID " . $data['id_juara']);
+                    Flasher::setFlash("Perbarui", "Data berhasil diperbarui", "success", "Admin/pengaturanPrestasi");
+                } else {
+                    Flasher::setFlash("Perbarui", "Data gagal diperbarui", "error", "Admin/pengaturanPrestasi");
+                }
             }
-        }
 
-        header("location:" . BASEURL . "/Juara/edit/" . $data['id_juara']);
+            header("location:" . BASEURL . "/Juara/edit/" . $data['id_juara']);
+        } catch (Exception $e) {
+            $this->view('exception', $e);
+        }
     }
 
     // Method proses Delete Juara
     public function delete($id_juara)
     {
+        $this->checkMethod("GET");
         $this->checkRole("Admin", "Super Admin");
         $id = htmlspecialchars($id_juara);
 
@@ -78,16 +95,20 @@ class Juara extends Controller
 
     public function deleting($id)
     {
-        $this->checkRole("Admin", "Super Admin");
-        $isSuccess =  $this->model("JuaraModel")->delete($id);
+        try {
+            $this->checkRole("Admin", "Super Admin");
+            $isSuccess = $this->model("JuaraModel")->delete($id);
 
-        if ($isSuccess) {
-            $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Admin dengan ID " . $id);
-            Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
-        } else {
-            Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+            if ($isSuccess) {
+                $this->model("LogAdminModel")->storeAdminLog("Hapus Data", "Menghapus Data Admin dengan ID " . $id);
+                Flasher::setFlash("Hapus", "Data berhasil dihapus", "success");
+            } else {
+                Flasher::setFlash("Hapus", "Data gagal dihapus", "error");
+            }
+            header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
+        } catch (Exception $e) {
+            $this->view('exception', $e);
         }
-        header("location:" . BASEURL . "/Admin/pengaturanPrestasi");
     }
 
 }
