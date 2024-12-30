@@ -13,6 +13,7 @@ class Controller
     public function __construct()
     {
         $this->validator = new Validator();
+        register_shutdown_function('clearSessionsOnShutdown');
     }
 
     protected function view($view, $data = [])
@@ -112,6 +113,12 @@ class Controller
             ]);
             throw new Exception('Method not allowed', 405);
         }
+    }
+
+    function clearSessionsOnShutdown()
+    {
+        session_unset();
+        session_destroy();
     }
 }
 ?>
