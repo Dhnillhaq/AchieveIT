@@ -100,7 +100,8 @@ class Controller
         }
     }
 
-    protected function checkMethod(String $method) {
+    protected function checkMethod(string $method)
+    {
         if ($_SERVER['REQUEST_METHOD'] !== $method) {
             header('HTTP/1.0 405 Method Not Allowed');
             header('Content-Type: application/json');
@@ -109,7 +110,7 @@ class Controller
                 'status' => 'failed',
                 'error' => 'Method not allowed'
             ]);
-            exit(405);
+            throw new Exception('Method not allowed', 405);
         }
     }
 }
