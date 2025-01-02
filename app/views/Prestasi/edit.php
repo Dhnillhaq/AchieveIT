@@ -1,9 +1,10 @@
 <section class="sm:ml-64 bg-blue-50">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<!-- profil -->
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- tambah prestasi -->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Edit Data prestasi</p>
 	</section>
 
@@ -67,14 +68,14 @@
 						class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_mulai" required
 					value="<?= $data['prestasi']['tanggal_mulai_kompetisi']->format("Y-m-d") ?>"
-					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
+					class="placeholder-black border rounded-lg px-2 py-1 w-1/2 lg:w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal selesai -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tanggal Selesai Kompetisi
 					<span class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_selesai" required
 					value="<?= $data['prestasi']['tanggal_selesai_kompetisi']->format("Y-m-d") ?>"
-					class="placeholder-black border rounded-lg px-2 py-1 w-1/6 bg-white shadow-gray-400 shadow-sm" />
+					class="placeholder-black border rounded-lg px-2 py-1 w-1/2 lg:w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- penyelenggara -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Penyelenggara Kompetisi <span
@@ -94,7 +95,7 @@
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Juara <span
 						class="text-red-600">*</span></label>
 				<select name="juara" required
-					class="border rounded-lg px-2 py-1 w-1/3 bg-white shadow-gray-400 shadow-sm">
+					class="border rounded-lg px-2 py-1 w-full lg:w-1/3 bg-white shadow-gray-400 shadow-sm">
 					<option>Pilih Juara</option>
 					<?php
 					foreach ($data['juara'] as $juara) {
@@ -107,10 +108,10 @@
 				<!-- surat tugas -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">File Surat Tugas <span
 						class="text-red-600">*</span></label>
-				<div class="flex items-center">
+				<div class="flex flex-col md:flex-row items-center">
 					<label
-						class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
-						<div class="flex flex-col items-center justify-center py-10">
+						class="flex flex-col md:flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm md:space-x-10">
+						<div class="flex flex-col items-center justify-center py-10 md:py-6">
 							<img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
 							<p class="mb-2 text-sm font-semibold">
 								Seret & lepas atau telusuri
@@ -135,10 +136,10 @@
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Poster <span
 						class="text-red-600">*</span>
 				</label>
-				<div class="flex items-center">
+				<div class="flex flex-col md:flex-row items-center">
 					<label
-						class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
-						<div class="flex flex-col items-center justify-center py-10">
+						class="flex flex-col md:flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm md:space-x-10">
+						<div class="flex flex-col items-center justify-center py-10 md:py-6">
 							<img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
 							<p class="mb-2 text-sm font-semibold">
 								Seret & lepas atau telusuri
@@ -163,10 +164,10 @@
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">
 					File Foto Juara <span class="text-red-600">*</span>
 				</label>
-				<div class="flex items-center">
+				<div class="flex flex-col md:flex-row items-center">
 					<label
-						class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
-						<div class="flex flex-col items-center justify-center py-10">
+						class="flex flex-col md:flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm md:space-x-10">
+						<div class="flex flex-col items-center justify-center py-10 md:py-6">
 							<img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
 							<p class="mb-2 text-sm font-semibold">
 								Seret & lepas atau telusuri
@@ -192,10 +193,10 @@
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Sertifikat <span
 						class="text-red-600">*</span>
 				</label>
-				<div class="flex items-center">
+				<div class="flex flex-col md:flex-row items-center">
 					<label
-						class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
-						<div class="flex flex-col items-center justify-center py-10">
+						class="flex flex-col md:flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm md:space-x-10">
+						<div class="flex flex-col items-center justify-center py-10 md:py-6">
 							<img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
 							<p class="mb-2 text-sm font-semibold">
 								Seret & lepas atau telusuri
@@ -221,10 +222,10 @@
 				<!-- proposal -->
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal
 				</label>
-				<div class="flex items-center ">
+				<div class="flex flex-col md:flex-row items-center">
 					<label
-						class="flex flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm space-x-10">
-						<div class="flex flex-col items-center justify-center py-10">
+						class="flex flex-col md:flex-row items-center justify-center w-full bg-white border rounded-lg shadow-gray-400 shadow-sm md:space-x-10">
+						<div class="flex flex-col items-center justify-center py-10 md:py-6">
 							<img src="../../../public/img/Upload cloud.png" alt="logo" class="w-8 h-auto">
 							<p class="mb-2 text-sm font-semibold">
 								Seret & lepas atau telusuri

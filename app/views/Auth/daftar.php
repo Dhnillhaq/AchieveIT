@@ -10,33 +10,30 @@
 
 
 <section class="relative bg-cover bg-center min-h-screen"
-	style="background-image: url('../../../public/img/gedung-jti.png');">
-	<div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
+  style="background-image: url('../../../public/img/gedung-jti.png');">
+  <div class="absolute inset-0 bg-[#132145D4] bg-opacity-80"></div>
 
-	<!-- kembali -->
-	<a href="<?= BASEURL; ?>/Auth/loginForm"
-		class="absolute top-4 left-4 flex items-center space-x-2 text-white px-6 py-2 rounded-lg hover:underline z-20">
-		<img src="../../../public/img/Back.png" alt="back" class="w-4 h-4" />
-		<span class="font-light">Kembali</span>
-	</a>
+	<!-- Back button - Always visible -->
+  <a href="<?= BASEURL; ?>"
+    class="absolute top-4 left-4 flex items-center space-x-2 text-white px-4 py-2 rounded-lg hover:underline z-20">
+    <img src="../../../public/img/Back.png" alt="back" class="w-4 h-4" />
+    <span class="font-light">Kembali</span>
+  </a>
 
-	<div class="relative z-10 flex justify-between">
-		<!-- left side -->
-		<section class="w-1/2 flex flex-col items-start justify-center h-screen px-10 text-white">
-			<h1 class="absolute text-6xl font-bold">Selamat datang <br> di <span
-					class="text-[#FEC01A]">AchieveIT!</span></h1>
-			<div class="relative mt-[calc(1/2*120vh)]">
-
-				<!-- Gambar di antara dua section -->
-				<img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-36 h-auto" />
-			</div>
-		</section>
+	<!-- Main content container -->
+  <div class="relative z-10 flex flex-col md:flex-row justify-between min-h-screen">
+    <!-- Welcome section - Top on mobile, Left on desktop -->
+    <section class="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start md:justify-center px-6 md:px-10 pt-20 md:pt-0 text-white">
+      <h1 class="text-4xl md:text-6xl font-bold text-center md:text-left">
+        Selamat datang <br> di <span class="text-[#FEC01A]">AchieveIT!</span>
+      </h1>
+    </section>
 
 		<!-- right side -->
-		<section class="w-1/2 h-screen flex-col items-start justify-center p-6">
+		<section class="w-full md:w-1/2 h-screen flex-col space-y-6 items-center justify-center p-6">
 			<div class="flex justify-center items-center bg-white rounded-3xl shadow-lg min-h-full">
 				<div class="px-10 py-6 space-y-5 w-full max-w-screen-xl">
-					<h1 class="text-4xl font-bold text-center my-2">Daftar</h1>
+					<h1 class="text-3xl md:text-4xl font-bold text-center my-2">Daftar</h1>
 					<form method="post" action="<?=BASEURL;?>/Auth/registrasiProcess" class="space-y-4 w-full" onsubmit="return validasiSandi()">
 						<!-- //  nama -->
 						<div class="relative">
@@ -178,6 +175,17 @@
 			</div>
 		</section>
 	</div>
+
+	<!-- Logo section - Bottom on mobile, Part of left section on desktop -->
+    <div class="relative w-full md:hidden flex justify-start pl-4 pb-10 pt-24 ">
+      <img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-28 md:w-36 h-auto" />
+    </div>
+
+    <!-- Desktop-only logo -->
+    <div class="hidden md:block pt-2 absolute bottom-14 left-10">
+      <img src="../../../public/img/Logo_achieveIT.png" alt="Gambar di antara section" class="w-36 h-auto" />
+    </div>
+  </div>
 </section>
 
 

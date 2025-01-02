@@ -11,7 +11,7 @@ Dengan antarmuka pengguna yang responsif dan intuitif, aplikasi ini memungkinkan
 
 ## Tech Stack
 
-[![My Skills](https://skillicons.dev/icons?i=php,html,css,js,tailwind)]()
+[![My Skills](https://skillicons.dev/icons?i=php,html,css,js,tailwind,mysql)]()
 
 **Client:** TailwindCSS
 

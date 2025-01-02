@@ -2,7 +2,7 @@
 	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Validasi Akun Mahasiswa-->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Validasi Akun Mahasiswa</p>
 	</section>
 
@@ -16,7 +16,7 @@
 			<!-- cari -->
 			<section class="flex justify-between p-6">
 				<div
-					class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+					class="flex items-center bg-white w-1/ p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
 					<img src="../../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
 					<input type="text" id="validasiAkunSearch" placeholder="Cari berdasarkan NIM" class="bg-white flex focus:outline-none w-full" />
 				</div>

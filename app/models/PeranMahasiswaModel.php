@@ -4,73 +4,68 @@ class PeranMahasiswaModel extends Connection
 {
     public function getPeranMhs()
     {
-        $stmt = "SELECT * FROM peran_mahasiswa";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM peran_mahasiswa");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getPeranMhsById($id)
     {
-        $stmt = "SELECT * FROM peran_mahasiswa WHERE id_peran = ? ";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM peran_mahasiswa WHERE id_peran = :id_peran");
+            $stmt->execute(['id_peran' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO peran_mahasiswa(peran) VALUES (?)";
-        $params = array($data['peran']);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO peran_mahasiswa(peran) VALUES(:peran)");
+            $stmt->execute([
+                'peran' => $data['peran']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_peran)
     {
-        $stmt = "DELETE FROM peran_mahasiswa WHERE id_peran = ?";
-        $params = array($id_peran);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM peran_mahasiswa WHERE id_peran = :id_peran");
+            $stmt->execute(['id_peran' => $id_peran]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE peran_mahasiswa SET peran = ? WHERE id_peran = ?";
-        $params = array(
-            $data['peran'],
-            $data['id_peran']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE peran_mahasiswa SET peran = :peran WHERE id_peran = :id_peran");
+            $stmt->execute([
+                'peran' => $data['peran'],
+                'id_peran' => $data['id_peran']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

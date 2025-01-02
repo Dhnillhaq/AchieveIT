@@ -6,94 +6,89 @@ class AdminModel extends Connection
     // Get All Data Admin
     public function getAllDataAdmin()
     {
-        $stmt = "SELECT * FROM admin";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM admin");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     // Get All Log Admin
-    public function getAllLogAdmin()
+    public function getLogAdmin()
     {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM log_admin");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = "SELECT * FROM log_admin";
-        $result = sqlsrv_query($this->conn, $stmt);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getAdminById($id)
     {
-        $stmt = "SELECT * FROM admin WHERE id_admin = ?";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM admin WHERE id_admin = :id");
+            $stmt->execute([':id' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO admin(nip, nama, role, password) VALUES(?, ?, ?, ?)";
-        $params = array($data['nip'], $data['nama'], $data['role'], $data['password']);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO admin (nip, nama, role, password) VALUES (:nip, :nama, :role, :password)");
+            $stmt->execute([
+                ':nip' => $data['nip'],
+                ':nama' => $data['nama'],
+                ':role' => $data['role'],
+                ':password' => $data['password']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_admin)
     {
-        $stmt = "DELETE FROM admin WHERE id_admin = ?";
-        $params = array($id_admin);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM admin WHERE id_admin = :id_admin");
+            $stmt->execute([':id_admin' => $id_admin]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE admin SET nip = ?, nama = ?, role = ?, password = ? WHERE id_admin = ?";
-        $params = array(
-            $data['nip'],
-            $data['nama'],
-            $data['role'],
-            $data['password'],
-            $data['id_admin']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE admin SET nip = :nip, nama = :nama, role = :role, password = :password WHERE id_admin = :id_admin");
+            $stmt->execute([
+                ':id_admin' => $data['id_admin'],
+                ':nip' => $data['nip'],
+                ':nama' => $data['nama'],
+                ':role' => $data['role'],
+                ':password' => $data['password']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }
 ?>

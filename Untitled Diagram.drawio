@@ -535,7 +535,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-192" value="+ getAllDataAdmin()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-190">
           <mxGeometry y="34" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-193" value="+ getAllLogAdmin()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-190">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-193" value="+ getLogAdmin()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-190">
           <mxGeometry y="60" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-194" value="+ getAdminById(id)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-190">
@@ -681,7 +681,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-243" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-242">
           <mxGeometry y="26" width="210" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-244" value="+ getAllDataMahasiswa()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-242">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-244" value="+ getMahasiswa()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-242">
           <mxGeometry y="34" width="210" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-245" value="+ getPresentasiMahasiswaByNim(id)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-242">
@@ -773,7 +773,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-272" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
           <mxGeometry y="26" width="250" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-273" value="+ getAllPrestasi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-273" value="+ getPrestasi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
           <mxGeometry y="34" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-277" value="+ getDaftarPrestasi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-271">
@@ -832,7 +832,7 @@
         <mxCell id="ApY5DMBaSlw80lDcTymM-291" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-290">
           <mxGeometry y="26" width="210" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="ApY5DMBaSlw80lDcTymM-292" value="+ getAllProdi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-290">
+        <mxCell id="ApY5DMBaSlw80lDcTymM-292" value="+ getProdi()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-290">
           <mxGeometry y="34" width="210" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ApY5DMBaSlw80lDcTymM-293" value="+ getProdiById(id)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="ApY5DMBaSlw80lDcTymM-290">

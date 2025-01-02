@@ -2,31 +2,24 @@
 
 class Connection
 {
-    private $serverName = SERVER_NAME;
-    private $connectionInfo = ["Database" => DATABASE_NAME];
-    protected $conn;
+    protected $pdo;
 
     public function __construct()
     {
-        $this->conn = sqlsrv_connect($this->serverName, $this->connectionInfo);
-
-        if ($this->conn === false) {
-            $errors = sqlsrv_errors();
-            die(print_r(sqlsrv_errors(), true));
+        try {
+            if (CONNECTION_TYPE == 'sqlsrv') {
+                $this->pdo = new PDO(CONNECTION_TYPE . ":Server=" . SERVER_NAME . ";Database=" . DATABASE_NAME . ";CharacterSet=UTF-8", DB_USERNAME, DB_PASS);
+            } else {
+                $this->pdo = new PDO(CONNECTION_TYPE . ":host=" . DB_HOST . ";dbname=" . DATABASE_NAME . ";charset=utf8mb4", DB_USERNAME, DB_PASS);
+            }
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            if (APP_DEBUG) {
+                die('Connection failed: ' . $e->getMessage());
+            } else {
+                die('Internal Server Error');
+            }
         }
-    }
-
-    public function close()
-    {
-        if ($this->conn) {
-            sqlsrv_close($this->conn);
-            $this->conn = null;
-        }
-    }
-
-    public function __destruct()
-    {
-        self::close();
     }
 }
 ?>

@@ -3,84 +3,73 @@
 class ProdiModel extends Connection
 {
 
-    public function getAllProdi()
+    public function getProdi()
     {
-        $stmt = "SELECT * FROM program_studi";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM program_studi");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getProdiById($id)
     {
-        $stmt = "SELECT * FROM program_studi WHERE id_prodi = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM program_studi WHERE id_prodi = :id_prodi");
+            $stmt->execute(['id_prodi' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO program_studi(kode_prodi, nama_prodi) VALUES(?, ?)";
-        $params = array(
-            $data['kode_prodi'],
-            $data['nama_prodi']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO program_studi (kode_prodi, nama_prodi) VALUES (:kode_prodi, :nama_prodi)");
+            $stmt->execute([
+                'kode_prodi' => $data['kode_prodi'],
+                'nama_prodi' => $data['nama_prodi']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE program_studi SET kode_prodi = ?, nama_prodi = ? WHERE id_prodi = ?";
-        $params = array(
-            $data['kode_prodi'],
-            $data['nama_prodi'],
-            $data['id_prodi']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE program_studi SET kode_prodi = :kode_prodi, nama_prodi = :nama_prodi WHERE id_prodi = :id_prodi");
+            $stmt->execute([
+                'kode_prodi' => $data['kode_prodi'],
+                'nama_prodi' => $data['nama_prodi'],
+                'id_prodi' => $data['id_prodi']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id)
     {
-        $stmt = "DELETE FROM program_studi WHERE id_prodi = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM program_studi WHERE id_prodi = :id_prodi");
+            $stmt->execute(['id_prodi' => $id]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }
 
