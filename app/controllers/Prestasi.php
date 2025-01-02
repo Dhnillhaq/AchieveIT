@@ -42,7 +42,7 @@ class Prestasi extends Controller
                 'tingkatKompetisi' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
                 'tingkatPenyelenggara' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
                 'juara' => $this->model("JuaraModel")->getJuara(),
-                'mahasiswa' => $this->model("MahasiswaModel")->getAllDataMahasiswa(),
+                'mahasiswa' => $this->model("MahasiswaModel")->getMahasiswa(),
                 'peranMahasiswa' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
                 'dosen' => $this->model("DosenModel")->getDosen(),
                 'peranDosen' => $this->model("PeranDosenModel")->getPeranDosen()
@@ -162,7 +162,7 @@ class Prestasi extends Controller
                 'tingkatKompetisi' => $this->model("TingkatKompetisiModel")->getTingkatKompetisi(),
                 'tingkatPenyelenggara' => $this->model("TingkatPenyelenggaraModel")->getTingkatPenyelenggara(),
                 'juara' => $this->model("JuaraModel")->getJuara(),
-                'mahasiswa' => $this->model("MahasiswaModel")->getAllDataMahasiswa(),
+                'mahasiswa' => $this->model("MahasiswaModel")->getMahasiswa(),
                 'peranMahasiswa' => $this->model("PeranMahasiswaModel")->getPeranMhs(),
                 'dosen' => $this->model("DosenModel")->getDosen(),
                 'peranDosen' => $this->model("PeranDosenModel")->getPeranDosen()

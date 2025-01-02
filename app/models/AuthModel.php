@@ -3,92 +3,76 @@
 class AuthModel extends Connection
 {
 
-    public function getSuperAdmin()
+    public function getMahasiswa()
     {
-        $stmt = "SELECT * FROM admin WHERE role = ?";
-        $params = array('Super Admin');
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM mahasiswa");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-        
-        return $data ?? [];
     }
 
     public function getAdmin()
     {
-        $stmt = "SELECT * FROM admin WHERE role = ?";
-        $params = array('Admin');
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM mahasiswa");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data ?? [];
     }
-
-    public function getKajur()
-    {
-        $stmt = "SELECT * FROM admin WHERE role = ?";
-        $params = array('Ketua Jurusan');
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-            
-        return $data ?? [];
-    }
-
 
     public function registrasi($username, $password)
     {
-        $stmt = "INSERT INTO mahasiswa (nim, password) VALUES (?, ?)";
-        $params = array($username, $password);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO mahasiswa (nim, password) VALUES (:nim, :password)");
+            $stmt->execute([
+                ':nim' => $username,
+                ':password' => $password
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function gantiSandi($password, $username)
     {
-        if (isset($_SESSION['user'])) {
-            if ($_SESSION['user']['role'] == 'Mahasiswa') {
-                $stmt = "UPDATE mahasiswa
-                 SET password = ?
-                 WHERE nim = ?;";
+        try {
+            if (isset($_SESSION['user'])) {
+                if ($_SESSION['user']['role'] == 'Mahasiswa') {
+                    $stmtStr = "UPDATE mahasiswa
+                 SET password = :password
+                 WHERE nim = :username;";
+                } else {
+                    $stmtStr = "UPDATE admin
+                 SET password = :password
+                 WHERE nip = :username;";
+                }
             } else {
-                $stmt = "UPDATE admin
-                 SET password = ?
-                 WHERE nip = ?;";
+                $stmtStr = "UPDATE mahasiswa
+             SET password = :password
+             WHERE nim = :username;";
             }
-        } else {
-            $stmt = "UPDATE mahasiswa
-             SET password = ?
-             WHERE nim = ?;";
+
+            $stmt = $this->pdo->prepare($stmtStr);
+            $stmt->execute([
+                ':password' => $password,
+                ':username' => $username
+            ]);
+
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $params = array($password, $username);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        return $result;
     }
-
 }
 ?>

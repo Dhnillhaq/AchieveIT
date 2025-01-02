@@ -1,5 +1,10 @@
 <?php
 define('BASEURL', 'http://localhost/public');
 define('APP_DEBUG', FALSE);
+
 define('SERVER_NAME', 'YOUR_SERVER_NAME_HERE\SQLEXPRESS');
+define('CONNECTION_TYPE', 'mysql');
 define('DATABASE_NAME', 'achieveit');
+define('DB_HOST', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASS', '');

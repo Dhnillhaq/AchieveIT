@@ -5,82 +5,67 @@ class DosenPrestasiModel extends Connection
 
     public function getDosenPrestasiByIdPrestasi($id_prestasi)
     {
-        $stmt = "SELECT * FROM dosen_prestasi WHERE id_prestasi = ?";
-        $params = array(
-            $id_prestasi
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM dosen_prestasi WHERE id_prestasi = :id_prestasi");
+            $stmt->execute([':id_prestasi' => $id_prestasi]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($id_prestasi, $id_dosen, $id_peran)
     {
-        // Cek sudah adakah didatabase?
-        $query = "SELECT COUNT(*) FROM dosen_prestasi WHERE id_dosen = ? AND id_prestasi = ? AND id_peran = ?";
-        $check = sqlsrv_query($this->conn, $query, [$id_dosen, $id_prestasi, $id_peran]);
-        $count = sqlsrv_fetch_array($check)[0];
-        if ($count > 0) { // jika ya, update data
-            $data = [
-                'id_prestasi' => $id_prestasi,
-                'id_dosen' => $id_dosen,
-                'id_peran' => $id_peran
-            ];
-            $result = $this->update($id_prestasi, $id_dosen, $id_peran, $data);
-        } else {
+        try {
+            // Cek sudah adakah didatabase?
+            $query = $this->pdo->prepare("SELECT COUNT(*) FROM dosen_prestasi WHERE id_dosen = :id_dosen AND id_prestasi = :id_prestasi AND id_peran = :id_peran");
+            $query->execute([':id_dosen' => $id_dosen, ':id_prestasi' => $id_prestasi, ':id_peran' => $id_peran]);
+            $count = $query->fetchColumn();
+            if ($count > 0) { // jika ya, update data
+                $data = [
+                    'id_prestasi' => $id_prestasi,
+                    'id_dosen' => $id_dosen,
+                    'id_peran' => $id_peran
+                ];
+                $result = self::update($id_prestasi, $id_dosen, $id_peran, $data);
+            } else {
 
-            $stmt = "INSERT INTO dosen_prestasi(id_prestasi, id_dosen, id_peran) VALUES(?, ?, ?)";
-            $params = array(
-                $id_prestasi,
-                $id_dosen,
-                $id_peran
-            );
-            $result = sqlsrv_query($this->conn, $stmt, $params);
-
-            if ($result === false) {
-                throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+                $stmt = $this->pdo->prepare("INSERT INTO dosen_prestasi (id_prestasi, id_dosen, id_peran) VALUES (:id_prestasi, :id_dosen, :id_peran)");
+                $stmt->execute([':id_prestasi' => $id_prestasi, ':id_dosen' => $id_dosen, ':id_peran' => $id_peran]);
+                $result = $stmt->rowCount();
             }
-        }
 
-        return $result;
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
+        }
     }
 
     public function update($id_prestasi, $id_dosen, $id_peran, $data)
     {
-        $stmt = "UPDATE dosen_prestasi SET id_prestasi = ?, id_dosen = ?, id_peran = ? WHERE id_prestasi = ? AND id_dosen = ? AND id_peran = ?";
-        $params = array(
-            $id_prestasi,
-            $id_dosen,
-            $id_peran,
-            $data['id_prestasi'],
-            $data['id_dosen'],
-            $data['id_peran'],
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE dosen_prestasi SET id_prestasi = :id_prestasi, id_dosen = :id_dosen, id_peran = :id_peran WHERE id_prestasi = :id_prestasi2 AND id_dosen = :id_dosen2 AND id_peran = :id_peran2");
+            $stmt->execute([':id_prestasi' => $id_prestasi, ':id_dosen' => $id_dosen, ':id_peran' => $id_peran, ':id_prestasi2' => $data['id_prestasi'], ':id_dosen2' => $data['id_dosen'], ':id_peran2' => $data['id_peran']]);
+            $result = $stmt->rowCount();
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_prestasi, $id_dosen)
     {
-        $stmt = "DELETE FROM dosen_prestasi WHERE id_prestasi = ? AND id_dosen = ?";
-        $params = array($id_prestasi, $id_dosen);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM dosen_prestasi WHERE id_prestasi = :id_prestasi AND id_dosen = :id_dosen");
+            $stmt->execute([':id_prestasi' => $id_prestasi, ':id_dosen' => $id_dosen]);
+            $result = $stmt->rowCount();
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

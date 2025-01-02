@@ -75,7 +75,7 @@ class Admin extends Controller
         $dataLingkaran = $this->model('PrestasiModel')->getGrafikDiagramLingkaran($selected);
         $dataPerTahun = $this->model('PrestasiModel')->getGrafikPertahun($selected);
         $dataPerBulan = $this->model('PrestasiModel')->getGrafikPerBulan($selected, $years);
-        
+
         // echo "<pre>";
         // echo "LINGKARAN<br>";
         // print_r($dataLingkaran);
@@ -133,7 +133,7 @@ class Admin extends Controller
         $this->checkMethod("GET");
         $this->checkRole("Admin", "Super Admin");
         if ($_SESSION['user']['role'] == "Super Admin") {
-            $data['log'] = $this->model("LogAdminModel")->getAllLogAdmin();
+            $data['log'] = $this->model("LogAdminModel")->getLogAdmin();
         } else {
             $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
         }
@@ -146,7 +146,7 @@ class Admin extends Controller
         $limit = (int) $limits;
         $offset = ($page - 1) * $limit;
 
-        $logs = $this->model("LogAdminModel")->getAllLogAdmin($offset, $limit);
+        $logs = $this->model("LogAdminModel")->getLogAdmin($offset, $limit);
         $totalLogs = $this->model("LogAdminModel")->countLogs(); // Total jumlah log
 
         echo json_encode([

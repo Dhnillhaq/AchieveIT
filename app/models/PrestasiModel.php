@@ -5,24 +5,23 @@ class PrestasiModel extends Connection
 {
 
     // Get All Prestasi Mahasiswa
-    public function getAllPrestasi()
+    public function getPrestasi()
     {
-        $stmt = "SELECT * FROM prestasi";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM prestasi");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getDaftarPrestasi()
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 p.id_prestasi,
                 p.nama_kompetisi,
@@ -37,22 +36,20 @@ class PrestasiModel extends Connection
                 JOIN juara j ON p.id_juara = j.id_juara
                 JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
             ORDER BY poin DESC;
-        ";
-        $result = sqlsrv_query($this->conn, $stmt);
+        ");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getPrestasiByNim($nim)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 p.id_prestasi,
                 p.nama_kompetisi,
@@ -68,55 +65,53 @@ class PrestasiModel extends Connection
                 JOIN kategori k ON p.id_kategori = k.id_kategori
                 JOIN juara j ON p.id_juara = j.id_juara
                 JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
-            WHERE m.nim = ?
+            WHERE m.nim = :nim
             ORDER BY p.created_at DESC;
-        ";
-        $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        ");
+            $stmt->execute(['nim' => $nim]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getDetailPrestasi($id)
     {
-        $stmt = "EXEC usp_GetDetailPrestasi @id_prestasi = ?";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("EXEC usp_GetDetailPrestasi @id_prestasi = :id_prestasi");
+            } else {
+                $stmt = $this->pdo->prepare("CALL usp_GetDetailPrestasi(:id_prestasi)");
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            $stmt->execute(['id_prestasi' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function getPrestasiById($id)
     {
-        $stmt = "SELECT * FROM prestasi WHERE id_prestasi = ?";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM prestasi WHERE id_prestasi = :id_prestasi");
+            $stmt->execute(['id_prestasi' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function getDetailPrestasiDataMahasiswa($id)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 m.id_mahasiswa,
                 m.nim,
@@ -126,24 +121,21 @@ class PrestasiModel extends Connection
             FROM prestasi_mahasiswa pm
                 JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
                 JOIN peran_mahasiswa p ON pm.id_peran = p.id_peran
-            WHERE pm.id_prestasi = ?;
-";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            WHERE pm.id_prestasi = :id_prestasi;");
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
+            $stmt->execute(['id_prestasi' => $id]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        return $data ?? [];
     }
 
     public function getDetailPrestasiDataDosen($id)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 d.id_dosen,
                 d.nama AS nama_dosen,
@@ -153,24 +145,21 @@ class PrestasiModel extends Connection
             FROM dosen_prestasi dp
                 JOIN dosen d ON dp.id_dosen = d.id_dosen
                 JOIN peran_dosen pd ON dp.id_peran = pd.id_peran
-            WHERE dp.id_prestasi = ?;
-        ";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            WHERE dp.id_prestasi = :id_prestasi;
+        ");
+            $stmt->execute(['id_prestasi' => $id]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getDetailPrestasiDataPoin($id)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 tk.tingkat_kompetisi,
                 tk.poin AS poin_tk,
@@ -183,23 +172,21 @@ class PrestasiModel extends Connection
                 JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
                 JOIN tingkat_penyelenggara tp ON p.id_tingkat_penyelenggara = tp.id_tingkat_penyelenggara
                 JOIN juara j ON p.id_juara = j.id_juara
-            WHERE p.id_prestasi = ?;
-        ";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            WHERE p.id_prestasi = :id_prestasi;
+        ");
+            $stmt->execute(['id_prestasi' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function countPrestasi($keyword)
     {
-        $stmt = "WITH Ranking AS (
+        try {
+            $stmt = $this->pdo->prepare("WITH Ranking AS (
                     SELECT
                         m.nama,
                         m.nim,
@@ -217,22 +204,20 @@ class PrestasiModel extends Connection
                 )
                 SELECT COUNT(*) as total
                 FROM Ranking
-				WHERE nama LIKE ? OR nim LIKE ?;";
-        $params = array("%" . $keyword . "%", "%" . $keyword . "%");
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-    
-        if ($result === false) {
-            die(print_r(sqlsrv_errors(), true));
+				WHERE nama LIKE :keyword OR nim LIKE :keyword;");
+            $stmt->execute(['keyword' => "%" . $keyword . "%"]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['total'] ?? 0;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-    
-        return $data['total'];
     }
 
     public function countPrestasiPerTahun($keyword, $year)
     {
-        $stmt = "WITH Ranking AS (
+        try {
+            $stmt = $this->pdo->prepare("WITH Ranking AS (
                 SELECT
                 	m.nama,
                 	m.nim,
@@ -244,7 +229,7 @@ class PrestasiModel extends Connection
                 JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
                 JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
                 JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
+                WHERE YEAR(p.tanggal_selesai_kompetisi) = :year 
                 GROUP BY
                 	m.nama,
                 	m.nim,
@@ -253,22 +238,21 @@ class PrestasiModel extends Connection
             )
             SELECT COUNT(*) as total
             FROM Ranking
-            WHERE nama LIKE ? OR nim LIKE ?;";
-        $params = array($year, "%" . $keyword . "%", "%" . $keyword . "%");
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-    
-        if ($result === false) {
-            die(print_r(sqlsrv_errors(), true));
+            WHERE nama LIKE :keyword OR nim LIKE :keyword;");
+            $stmt->execute(['keyword' => "%" . $keyword . "%", 'year' => $year]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['total'] ?? 0;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-    
-        return $data['total'];
     }
 
-    public function getRankingPrestasi($keyword = "", $limit = 60, $offset =  0)
+    public function getRankingPrestasi($keyword = "", $limit = 60, $offset = 0)
     {
-        $stmt = "WITH Ranking AS (
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("WITH Ranking AS (
                     SELECT
                         m.nama,
                         m.nim,
@@ -286,26 +270,50 @@ class PrestasiModel extends Connection
                 )
                 SELECT *
                 FROM Ranking
-                WHERE nama LIKE ? OR nim LIKE ?
+                WHERE nama LIKE :keyword OR nim LIKE :keyword
                 ORDER BY rank
-                OFFSET ? ROWS
-                FETCH NEXT ? ROWS ONLY;";
+                OFFSET :offset ROWS
+                FETCH NEXT :limit ROWS ONLY;");
 
-        $params = array("%" . $keyword . "%", "%" . $keyword . "%",  $offset, $limit);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            } else {
+                $stmt = $this->pdo->prepare("WITH Ranking AS (
+                SELECT
+                    m.nama,
+                    m.nim,
+                    prodi.nama_prodi,
+                    SUM(p.poin_prestasi) AS total_poin,
+                    RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                GROUP BY
+                    m.nama,
+                    m.nim,
+                    prodi.nama_prodi
+            )
+            SELECT *
+            FROM Ranking
+            WHERE nama LIKE :keyword OR nim LIKE :keyword
+            ORDER BY rank
+            LIMIT :offset, :limit;"
+                );
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            $stmt->execute(['keyword' => "%" . $keyword . "%", 'limit' => $limit, 'offset' => $offset]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
+
     public function getRankingPrestasiPerTahun($keyword, $year, $limit, $offset)
     {
-        $stmt = "WITH Ranking AS (
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("WITH Ranking AS (
                     SELECT
                     	m.nama,
                     	m.nim,
@@ -326,27 +334,51 @@ class PrestasiModel extends Connection
                 )
                 SELECT *
                 FROM Ranking
-                WHERE nim LIKE ? OR nama LIKE ?
+                WHERE nim LIKE :keyword OR nama LIKE :keyword
                 ORDER BY rank
-                OFFSET ? ROWS
-                FETCH NEXT ? ROWS ONLY;";
+                OFFSET :offset ROWS
+                FETCH NEXT :limit ROWS ONLY;");
+            } else {
+                $stmt = $this->pdo->prepare("WITH Ranking AS (
+                SELECT
+                    m.nama,
+                    m.nim,
+                    prodi.nama_prodi,
+                    SUM(p.poin_prestasi) AS total_poin,
+                    YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                    RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                FROM prestasi_mahasiswa pm
+                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                WHERE YEAR(p.tanggal_selesai_kompetisi) = :year
+                GROUP BY
+                    m.nama,
+                    m.nim,
+                    prodi.nama_prodi,
+                    YEAR(p.tanggal_selesai_kompetisi)
+            )
+            SELECT *
+            FROM Ranking
+            WHERE nim LIKE :keyword OR nama LIKE :keyword
+            ORDER BY rank
+            LIMIT :offset, :limit;");
+            }
 
-        $params = array($year, "%" . $keyword . "%", "%" . $keyword . "%", $offset, $limit);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            $stmt->execute(['keyword' => "%" . $keyword . "%", 'year' => $year, 'limit' => $limit, 'offset' => $offset]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getStatistikPrestasi()
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 (SELECT
                     COUNT(id_prestasi)
@@ -359,245 +391,258 @@ class PrestasiModel extends Connection
                 FROM prestasi WHERE status = 'Valid') AS rata_rata,
                 (SELECT
                     COUNT(id_mahasiswa) FROM mahasiswa WHERE total_poin > 0) AS total_mapres;
-        ";
-        $result = sqlsrv_query($this->conn, $stmt);
+        ");
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function getTahunPrestasi()
     {
-        $stmt = "SELECT
+        try {
+            $stmt = $this->pdo->prepare("SELECT
                 DISTINCT YEAR(tanggal_selesai_kompetisi) as tahun
-                FROM prestasi;";
-        $result = sqlsrv_query($this->conn, $stmt);
+                FROM prestasi;");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getGrafikDiagramLingkaran($type = "kategori")
     {
-        $stmt = "EXEC usp_GetAnalisisPrestasi @type = ?;";
-        $params = array($type);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("EXEC usp_GetAnalisisPrestasi @type = :type;");
+            } else {
+                $stmt = $this->pdo->prepare("CALL usp_GetAnalisisPrestasi(:type);");
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
+            $stmt->execute(['type' => $type]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        return $data ?? [];
     }
 
     public function getGrafikPerTahun($type = "kategori")
     {
-        $stmt = "EXEC usp_GetAnalisisPrestasiPerTahun @type = ?;";
-        $params = array($type);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("EXEC usp_GetAnalisisPrestasiPerTahun @type = :type;");
+            } else {
+                $stmt = $this->pdo->prepare("CALL usp_GetAnalisisPrestasiPerTahun(:type);");
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
+            $stmt->execute(['type' => $type]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        return $data ?? [];
     }
     public function getGrafikPerBulan($type = "kategori", $year = "2024")
     {
-        $stmt = "EXEC usp_GetAnalisisPrestasiPerBulan @tahun = ?, @type = ?;";
-        $params = array($year, $type);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("EXEC usp_GetAnalisisPrestasiPerBulan @tahun = :year, @type = :type;");
+            } else {
+                $stmt = $this->pdo->prepare("CALL usp_GetAnalisisPrestasiPerBulan(:year, :type);");
+            }
+            $stmt->execute(['year' => $year, 'type' => $type]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getExportData()
     {
-        $stmt = "SELECT * FROM vw_DataPrestasi";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM vw_DataPrestasi");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt2 = $this->pdo->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'vw_DataPrestasi' AND TABLE_CATALOG = DB_NAME();");
+            } else {
+                $stmt2 = $this->pdo->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'vw_DataPrestasi' AND TABLE_SCHEMA = DATABASE();");
+            }
+            $stmt2->execute();
+            $header = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+
+            return ['data' => $data ?? [], 'header' => $header ?? []];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-
-        $stmt2 = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'vw_DataPrestasi'";
-        $result2 = sqlsrv_query($this->conn, $stmt2);
-
-        while ($row = sqlsrv_fetch_array($result2, SQLSRV_FETCH_ASSOC)) {
-            $header[] = $row['COLUMN_NAME'];
-        }
-
-        return ['data' => $data ?? [], 'header' => $header ?? []];
     }
 
     public function store($data)
     {
-        // Statement insert biasa untuk role Mahasiswa
-        $stmt = "INSERT INTO prestasi(
-        id_kategori, 
-        id_juara, 
-        id_tingkat_penyelenggara, 
-        id_tingkat_kompetisi, 
-        nama_kompetisi, 
-        tanggal_mulai_kompetisi, 
-        tanggal_selesai_kompetisi, 
-        penyelenggara_kompetisi, 
-        tempat_kompetisi, 
-        surat_tugas, 
-        poster_kompetisi, 
-        foto_juara, 
-        proposal, 
-        sertifikat, 
-        poin_prestasi";
+        try {
+            //!!! LOGIKA DI CONTROLLER
+            // Cek role user
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
+                //  Langsung validasi kalo Create oleh Super Admin/Admin
+                $data['status'] = 'Valid';
+                $data['id_admin'] = $_SESSION['user']['id_admin'];
+            } else {
+                //  Tidak langsung validasi kalo Create oleh Mahasiswa
+                $data['status'] = 'Not Validated';
+                $data['id_admin'] = null;
+            }
 
-        // Parameter insert Mahasiswa
-        $params = array(
-            $data['kategori'],
-            $data['juara'],
-            $data['tingkat_penyelenggara'],
-            $data['tingkat_kompetisi'],
-            $data['nama_kompetisi'],
-            $data['tanggal_mulai'],
-            $data['tanggal_selesai'],
-            $data['penyelenggara'],
-            $data['tempat_kompetisi'],
-            $data['surat_tugas'],
-            $data['poster'],
-            $data['foto_juara'],
-            $data['proposal'],
-            $data['sertifikat'],
-            $data['poin_prestasi'],
-        );
+            // Statement insert biasa untuk role Mahasiswa
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $validated_at = ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin') ? 'GETDATE()' : 'NULL';
+            } else {
+                $validated_at = ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin') ? 'NOW()' : 'NULL';
+            }
 
-        // Cek role user
-        if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
-            //  Langsung validasi kalo Create oleh Super Admin/Admin
-            $stmt .= ", status, id_admin, validated_at";
-            $params[] = 'Valid';
-            $params[] = $_SESSION['user']['id_admin'];
+            $stmt = $this->pdo->prepare("INSERT INTO prestasi(
+            id_kategori, 
+            id_juara, 
+            id_tingkat_penyelenggara, 
+            id_tingkat_kompetisi, 
+            nama_kompetisi, 
+            tanggal_mulai_kompetisi, 
+            tanggal_selesai_kompetisi, 
+            penyelenggara_kompetisi, 
+            tempat_kompetisi, 
+            surat_tugas, 
+            poster_kompetisi, 
+            foto_juara, 
+            proposal, 
+            sertifikat, 
+            poin_prestasi,
+            status,
+            id_admin,
+            validated_at 
+            ) VALUES (
+                :kategori, 
+                :juara, 
+                :tingkat_penyelenggara, 
+                :tingkat_kompetisi, 
+                :nama_kompetisi, 
+                :tanggal_mulai, 
+                :tanggal_selesai, 
+                :penyelenggara, 
+                :tempat_kompetisi, 
+                :surat_tugas, 
+                :poster, 
+                :foto_juara, 
+                :proposal, 
+                :sertifikat, 
+                :poin_prestasi,
+                :status,
+                :id_admin,
+                :validated_at
+            );");
+
+            $stmt->execute([
+                'kategori' => $data['kategori'],
+                'juara' => $data['juara'],
+                'tingkat_penyelenggara' => $data['tingkat_penyelenggara'],
+                'tingkat_kompetisi' => $data['tingkat_kompetisi'],
+                'nama_kompetisi' => $data['nama_kompetisi'],
+                'tanggal_mulai' => $data['tanggal_mulai'],
+                'tanggal_selesai' => $data['tanggal_selesai'],
+                'penyelenggara' => $data['penyelenggara'],
+                'tempat_kompetisi' => $data['tempat_kompetisi'],
+                'surat_tugas' => $data['surat_tugas'],
+                'poster' => $data['poster'],
+                'foto_juara' => $data['foto_juara'],
+                'proposal' => $data['proposal'],
+                'sertifikat' => $data['sertifikat'],
+                'poin_prestasi' => $data['poin_prestasi'],
+                'status' => $data['status'],
+                'id_admin' => $data['id_admin'],
+                'validated_at' => $validated_at
+            ]);
+
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $stmt .= ") OUTPUT INSERTED.id_prestasi VALUES(";
-
-        // Tanda tanya sejumlah parameter
-        $stmt .= str_repeat("?, ", count($params) - 1) . "?";
-
-        // Value validated_at
-        if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'Super Admin' || $_SESSION['user']['role'] === 'Admin')) {
-            $stmt .= ", GETDATE()";
-        }
-
-        $stmt .= ")";
-
-        $idResource = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($idResource === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        // Fetch the inserted ID
-        $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
-        $insertedId = $idRow[0]; // ID of the inserted row
-
-        return (int) $insertedId;
     }
 
     public function update($data)
     {
-        // Inisialisasi query dan parameter
-        $stmt = "UPDATE prestasi SET 
-                id_kategori = ?, 
-                id_juara = ?, 
-                id_tingkat_penyelenggara = ?, 
-                id_tingkat_kompetisi = ?, 
-                nama_kompetisi = ?, 
-                tanggal_mulai_kompetisi = ?, 
-                tanggal_selesai_kompetisi = ?, 
-                penyelenggara_kompetisi = ?, 
-                tempat_kompetisi = ?, 
-                surat_tugas = ?, 
-                poster_kompetisi = ?, 
-                foto_juara = ?, 
-                proposal = ?, 
-                sertifikat = ?, 
-                poin_prestasi = ?";
+        try {
+            // Inisialisasi query dan parameter
+            $stmt = $this->pdo->prepare("UPDATE prestasi SET
+            id_kategori = :kategori,
+            id_juara = :juara,
+            id_tingkat_penyelenggara = :tingkat_penyelenggara,
+            id_tingkat_kompetisi = :tingkat_kompetisi,
+            nama_kompetisi = :nama_kompetisi,
+            tanggal_mulai_kompetisi = :tanggal_mulai,
+            tanggal_selesai_kompetisi = :tanggal_selesai,
+            penyelenggara_kompetisi = :penyelenggara,
+            tempat_kompetisi = :tempat_kompetisi,
+            surat_tugas = :surat_tugas,
+            poster_kompetisi = :poster,
+            foto_juara = :foto_juara,
+            proposal = :proposal,
+            sertifikat = :sertifikat,
+            poin_prestasi = :poin_prestasi");
 
-        // Parameter awal
-        $params = [
-            $data['kategori'],
-            $data['juara'],
-            $data['tingkat_penyelenggara'],
-            $data['tingkat_kompetisi'],
-            $data['nama_kompetisi'],
-            $data['tanggal_mulai'],
-            $data['tanggal_selesai'],
-            $data['penyelenggara'],
-            $data['tempat_kompetisi'],
-            $data['surat_tugas'],
-            $data['poster'],
-            $data['foto_juara'],
-            $data['proposal'],
-            $data['sertifikat'],
-            $data['poin_prestasi']
-        ];
+            $stmt->execute([
+                'kategori' => $data['kategori'],
+                'juara' => $data['juara'],
+                'tingkat_penyelenggara' => $data['tingkat_penyelenggara'],
+                'tingkat_kompetisi' => $data['tingkat_kompetisi'],
+                'nama_kompetisi' => $data['nama_kompetisi'],
+                'tanggal_mulai' => $data['tanggal_mulai'],
+                'tanggal_selesai' => $data['tanggal_selesai'],
+                'penyelenggara' => $data['penyelenggara'],
+                'tempat_kompetisi' => $data['tempat_kompetisi'],
+                'surat_tugas' => $data['surat_tugas'],
+                'poster' => $data['poster'],
+                'foto_juara' => $data['foto_juara'],
+                'proposal' => $data['proposal'],
+                'sertifikat' => $data['sertifikat'],
+                'poin_prestasi' => $data['poin_prestasi']
+            ]);
 
-        // Periksa role dan status (opsional)
-        if ($_SESSION['user']['role'] !== 'Mahasiswa') {
-            $stmt .= ", status = ?";
-            $params[] = $data['status'];
+            return $stmt->rowCount();
+
+            //!!! LOGIKA DI CONTROLLER
+            // // Periksa role dan status (opsional)
+            // if ($_SESSION['user']['role'] !== 'Mahasiswa') {
+            //     $stmt .= ", status = ?";
+            //     $params[] = $data['status'];
+            // }
+
+            // if ($_SESSION['user']['role'] !== 'Mahasiswa' && $data['status'] !== 'Not Validated') {
+            //     $stmt .= ", id_admin = ?, validated_at = GETDATE()";
+            //     $params[] = $data['id_admin'];
+            // }
+
+            // // Tambahkan WHERE kondisi
+            // $stmt .= " WHERE id_prestasi = ?";
+            // $params[] = $data['id_prestasi'];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        if ($_SESSION['user']['role'] !== 'Mahasiswa' && $data['status'] !== 'Not Validated') {
-            $stmt .= ", id_admin = ?, validated_at = GETDATE()";
-            $params[] = $data['id_admin'];
-        }
-
-        // Tambahkan WHERE kondisi
-        $stmt .= " WHERE id_prestasi = ?";
-        $params[] = $data['id_prestasi'];
-
-
-        // Eksekusi query
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        return $result;
     }
 
     public function delete($id_prestasi)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             BEGIN TRANSACTION;
 
             DELETE FROM dosen_prestasi WHERE id_prestasi = ?;
@@ -605,18 +650,16 @@ class PrestasiModel extends Connection
             DELETE FROM prestasi WHERE id_prestasi = ?;
 
             COMMIT TRANSACTION;
-";
+            ");
 
-        $params = array($id_prestasi, $id_prestasi, $id_prestasi);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            $stmt->execute([$id_prestasi, $id_prestasi, $id_prestasi]);
 
-        if ($result === false) {
-            // Transaksi dibatalkan
-            sqlsrv_query($this->conn, "ROLLBACK TRANSACTION;");
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            $stmt = $this->pdo->prepare("ROLLBACK TRANSACTION;");
+            $stmt->execute();
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }
 

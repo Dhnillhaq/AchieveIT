@@ -2,6 +2,12 @@
 
 require_once 'Validator.php';
 
+function clearSessionsOnShutdown()
+{
+    session_unset();
+    session_destroy();
+}
+
 class Controller
 {
     private $models = [];
@@ -113,12 +119,6 @@ class Controller
             ]);
             throw new Exception('Method not allowed', 405);
         }
-    }
-
-    function clearSessionsOnShutdown()
-    {
-        session_unset();
-        session_destroy();
     }
 }
 ?>
