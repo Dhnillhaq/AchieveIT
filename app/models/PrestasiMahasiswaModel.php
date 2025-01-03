@@ -4,79 +4,83 @@ class PrestasiMahasiswaModel extends Connection
 {
     public function getPrestasiMahasiswaByIdPrestasi($id_prestasi)
     {
-        $stmt = "SELECT * FROM prestasi_mahasiswa WHERE id_prestasi = ?";
-        $params = array(
-            $id_prestasi
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM prestasi_mahasiswa WHERE id_prestasi = :id_prestasi");
+            $stmt->execute(['id_prestasi' => $id_prestasi]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($id_prestasi, $id_mahasiswa, $id_peran)
     {
-        // Cek sudah adakah didatabase?
-        $query = "SELECT COUNT(*) FROM prestasi_mahasiswa WHERE id_mahasiswa = ? AND id_prestasi = ? AND id_peran = ?";
-        $check = sqlsrv_query($this->conn, $query, [$id_mahasiswa, $id_prestasi, $id_peran]);
-        $count = sqlsrv_fetch_array($check)[0];
-        if ($count > 0) { // jika ya, update data di database
-            $data = [
+        try {
+            // Cek sudah adakah didatabase?
+            $query = $this->pdo->prepare("SELECT COUNT(*) FROM prestasi_mahasiswa WHERE id_prestasi = :id_prestasi AND id_mahasiswa = :id_mahasiswa AND id_peran = :id_peran");
+            $query->execute([
                 'id_prestasi' => $id_prestasi,
-                'id_dosen' => $id_mahasiswa,
+                'id_mahasiswa' => $id_mahasiswa,
                 'id_peran' => $id_peran
-            ];
-            $result = $this->update($id_prestasi, $id_mahasiswa, $id_peran, $data);
-        } else {
-            $stmt = "INSERT INTO prestasi_mahasiswa(id_prestasi, id_mahasiswa, id_peran) VALUES(?, ?, ?)";
-            $params = array(
-                $id_prestasi,
-                $id_mahasiswa,
-                $id_peran
-            );
-            $result = sqlsrv_query($this->conn, $stmt, $params);
+            ]);
+            $count = $query->fetchColumn();
 
-            if ($result === false) {
-                throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            if ($count > 0) { // jika ya, update data di database
+                $data = [
+                    'id_prestasi' => $id_prestasi,
+                    'id_dosen' => $id_mahasiswa,
+                    'id_peran' => $id_peran
+                ];
+                $result = $this->update($id_prestasi, $id_mahasiswa, $id_peran, $data);
+            } else {
+                $stmt = $this->pdo->prepare("INSERT INTO prestasi_mahasiswa(id_prestasi, id_mahasiswa, id_peran) VALUES(:id_prestasi, :id_mahasiswa, :id_peran)");
+                $stmt->execute([
+                    'id_prestasi' => $id_prestasi,
+                    'id_mahasiswa' => $id_mahasiswa,
+                    'id_peran' => $id_peran
+                ]);
+
+                $result = $this->pdo->lastInsertId();
             }
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        return $result;
     }
 
     public function update($id_prestasi, $id_mahasiswa, $id_peran, $data)
     {
-        $stmt = "UPDATE prestasi_mahasiswa SET id_prestasi = ?, id_mahasiswa = ?, id_peran = ? WHERE id_prestasi = ? AND id_mahasiswa = ? AND id_peran = ?";
-        $params = array(
-            $id_prestasi,
-            $id_mahasiswa,
-            $id_peran,
-            $data['id_prestasi'],
-            $data['id_mahasiswa'],
-            $data['id_peran'],
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE prestasi_mahasiswa SET id_prestasi = :id_prestasi, id_mahasiswa = :id_mahasiswa, id_peran = :id_peran WHERE id_prestasi = :id_prestasi2 AND id_mahasiswa = :id_mahasiswa2 AND id_peran = :id_peran2");
+            $stmt->execute([
+                'id_prestasi' => $id_prestasi,
+                'id_mahasiswa' => $id_mahasiswa,
+                'id_peran' => $id_peran,
+                'id_prestasi2' => $data['id_prestasi'],
+                'id_mahasiswa2' => $data['id_mahasiswa'],
+                'id_peran2' => $data['id_peran']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_prestasi, $id_mahasiswa)
     {
-        $stmt = "DELETE FROM prestasi_mahasiswa WHERE id_prestasi = ? AND id_mahasiswa = ?";
-        $params = array($id_prestasi, $id_mahasiswa);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM prestasi_mahasiswa WHERE id_prestasi = :id_prestasi AND id_mahasiswa = :id_mahasiswa");
+            $stmt->execute([
+                'id_prestasi' => $id_prestasi,
+                'id_mahasiswa' => $id_mahasiswa
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

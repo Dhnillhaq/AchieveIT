@@ -1,9 +1,10 @@
 <section class="sm:ml-64 bg-blue-50 min-h-screen">
 
-	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
+	<!-- profil -->
+	<?php require_once __DIR__ .'/../templates/profiles.php'; ?>
 
 	<!-- daftar prestasi -->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Daftar prestasi</p>
 	</section>
 
@@ -17,51 +18,55 @@
 		</a>
 	</section>
 
-	<!-- cari -->
-	<section class="flex justify-between p-6">
-		<div
-			class="flex items-center bg-white w-1/3 p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
-			<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
-			<input type="text" id="myInput" placeholder="Cari prestasi"
-				class="bg-white flex focus:outline-none px-3 w-full" />
-		</div>
-		<div class="flex right-0 space-x-2">
-			<div class="flex items-center">
-				<span class="">entri</span>
-			</div>
-			<div class="flex items-center">
-				<select id="filterTingkat"
-					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option value="">Semua Tingkat</option>
-					<?php foreach ($data['tingkat'] as $tingkat) { ?>
-						<option value="<?= $tingkat['tingkat_kompetisi']; ?>"><?= $tingkat['tingkat_kompetisi']; ?></option>
-					<?php } ?>
-				</select>
-			</div>
-			<div class="flex items-center">
-				<select id="filterKategori"
-					class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-					<option value="">Semua Kategori</option>
-					<?php foreach ($data['kategori'] as $kategori) { ?>
-						<option value="<?= $kategori['kategori']; ?>"><?= $kategori['kategori']; ?></option>
-					<?php } ?>
-				</select>
-			</div>
+	<!-- Cari -->
+<section class="p-6">
+    <!-- Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Input Cari Prestasi -->
+        <div class="flex items-center w-1/2 bg-white p-2 rounded-md border shadow-md focus-within:ring-2 focus-within:ring-blue-500">
+            <img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5">
+            <input type="text" id="myInput" placeholder="Cari prestasi"
+                class="bg-white flex focus:outline-none px-3 w-full" />
+        </div>
 
-			<?php
-			if ($_SESSION['user']['role'] == 'Super Admin') { ?>
-				<div class="flex items-center">
-					<select id="filterStatus"
-						class="right-0 mx-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-						<option value="">Status</option>
-						<option value="Valid">Valid</option>
-						<option value="Invalid">Invalid</option>
-						<option value="Not Validated">Not Validated</option>
-					</select>
-				</div>
-			<?php } ?>
-		</div>
-	</section>
+        <!-- Filter Options -->
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center">
+                <span>entri</span>
+            </div>
+            <div class="flex items-center">
+                <select id="filterTingkat"
+                    class="border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Tingkat</option>
+                    <?php foreach ($data['tingkat'] as $tingkat) { ?>
+                        <option value="<?= $tingkat['tingkat_kompetisi']; ?>"><?= $tingkat['tingkat_kompetisi']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="flex items-center">
+                <select id="filterKategori"
+                    class="border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Kategori</option>
+                    <?php foreach ($data['kategori'] as $kategori) { ?>
+                        <option value="<?= $kategori['kategori']; ?>"><?= $kategori['kategori']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+
+            <?php if ($_SESSION['user']['role'] == 'Super Admin') { ?>
+                <div class="flex items-center">
+                    <select id="filterStatus"
+                        class="border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Status</option>
+                        <option value="Valid">Valid</option>
+                        <option value="Invalid">Invalid</option>
+                        <option value="Not Validated">Not Validated</option>
+                    </select>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
 
 	<!-- table -->
 	<section class="mx-6 overflow-x-auto mb-5 bg-white shadow-md rounded-2xl">

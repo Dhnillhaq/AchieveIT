@@ -3,67 +3,70 @@
 	<?php require_once __DIR__ . '/../templates/profiles.php'; ?>
 
 	<!-- selamat datang -->
-	<section class="flex-col justify-start p-6 space-y-4">
+	<section class="flex-col justify-start pt-20 md:pt-0 p-6 space-y-4">
 		<p class="font-bold text-4xl">Selamat Datang</p>
 		<p class="font-semibold text-2xl text-[#F99D1C]">
 			<?= $_SESSION['user']['nama'] ?> / <?= $_SESSION['user']['nip'] ?>
 		</p>
 	</section>
 
-	<!-- prestasi -->
-	<section class="flex justify-start p-6 space-x-10">
-		<!-- total prestasi -->
-		<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-			<div class="flex justify-start space-x-4">
-				<img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-auto h-12" />
-				<div class="flex-col">
-					<p class="font-semibold text-[#757575] text-[12px]">
-						Total Prestasi
-					</p>
-					<p class="font-bold"><?= $data['statistik']['total_prestasi'] ?></p>
-				</div>
-			</div>
-		</div>
+	<!-- Prestasi -->
+<section class="p-6">
+    <!-- Grid container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Total Prestasi -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border">
+            <div class="flex justify-start space-x-4">
+                <img src="../../../public/img/Total_Prestasi.png" alt="logo" class="w-auto h-12" />
+                <div class="flex flex-col">
+                    <p class="font-semibold text-[#757575] text-[12px]">
+                        Total Prestasi
+                    </p>
+                    <p class="font-bold"><?= $data['statistik']['total_prestasi'] ?></p>
+                </div>
+            </div>
+        </div>
 
-		<!-- total mhs JTI -->
-		<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-			<div class="flex justify-start space-x-4">
-				<img src="../../../public/img/Mhs_JTI.png" alt="logo" class="w-auto h-12" />
-				<div class="flex-col">
-					<p class="font-semibold text-[#757575] text-[12px]">
-						Total Mahasiswa JTI
-					</p>
-					<p class="font-bold"><?= $data['statistik']['total_mahasiswa'] ?></p>
-				</div>
-			</div>
-		</div>
+        <!-- Total Mahasiswa JTI -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border">
+            <div class="flex justify-start space-x-4">
+                <img src="../../../public/img/Mhs_JTI.png" alt="logo" class="w-auto h-12" />
+                <div class="flex flex-col">
+                    <p class="font-semibold text-[#757575] text-[12px]">
+                        Total Mahasiswa JTI
+                    </p>
+                    <p class="font-bold"><?= $data['statistik']['total_mahasiswa'] ?></p>
+                </div>
+            </div>
+        </div>
 
-		<!-- rata rata -->
-		<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-			<div class="flex justify-start space-x-4">
-				<img src="../../../public/img/rata_rata.png" alt="logo" class="w-auto h-12" />
-				<div class="flex-col">
-					<p class="font-semibold text-[#757575] text-[12px]">
-						Rata-rata Per Tahun
-					</p>
-					<p class="font-bold"><?= round($data['statistik']['rata_rata']) ?></p>
-				</div>
-			</div>
-		</div>
+        <!-- Rata-rata Per Tahun -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border">
+            <div class="flex justify-start space-x-4">
+                <img src="../../../public/img/rata_rata.png" alt="logo" class="w-auto h-12" />
+                <div class="flex flex-col">
+                    <p class="font-semibold text-[#757575] text-[12px]">
+                        Rata-rata Per Tahun
+                    </p>
+                    <p class="font-bold"><?= round($data['statistik']['rata_rata']) ?></p>
+                </div>
+            </div>
+        </div>
 
-		<!-- total mapres -->
-		<div class="bg-white p-4 rounded-lg shadow-lg border w-1/4">
-			<div class="flex justify-start space-x-4">
-				<img src="../../../public/img/maPres.png" alt="logo" class="w-auto h-12" />
-				<div class="flex-col">
-					<p class="font-semibold text-[#757575] text-[12px]">
-						Total MaPres
-					</p>
-					<p class="font-bold"><?= $data['statistik']['total_mapres'] ?></p>
-				</div>
-			</div>
-		</div>
-	</section>
+        <!-- Total MaPres -->
+        <div class="bg-white p-4 rounded-lg shadow-lg border">
+            <div class="flex justify-start space-x-4">
+                <img src="../../../public/img/maPres.png" alt="logo" class="w-auto h-12" />
+                <div class="flex flex-col">
+                    <p class="font-semibold text-[#757575] text-[12px]">
+                        Total MaPres
+                    </p>
+                    <p class="font-bold"><?= $data['statistik']['total_mapres'] ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 	<!-- judul -->
 	<section class="flex-col justify-start pl-6">
@@ -92,7 +95,7 @@
 			<p class="font-semibold text-2xl">Diagram Lingkaran Analisis</p>
 		</div>
 
-		<div class="w-1/2 h-auto mx-auto flex justify-center items-center">
+		<div class="w-full md:w-1/2 h-auto mx-auto flex justify-center items-center">
 			<canvas id="DiagramLingkar"></canvas>
 		</div>
 	</section>
@@ -448,6 +451,6 @@
 		});
 
 	</script>
-	// Script Chart Diagram
+
 	<!-- <script src="../../app/components/Diagram.js"></script> -->
 </section>

@@ -48,7 +48,7 @@ class Mahasiswa extends Controller
         try {
             $this->checkMethod("GET");
             $this->checkRole("Admin", "Super Admin");
-            $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
+            $data['prodi'] = $this->model("ProdiModel")->getProdi();
             $this->view("Admin/Mahasiswa/create", $data);
         } catch (Exception $e) {
             $this->view('exception', $e);
@@ -94,7 +94,7 @@ class Mahasiswa extends Controller
             $this->checkMethod("GET");
             $this->checkRole("Admin", "Super Admin");
             $data['mahasiswa'] = $this->model("MahasiswaModel")->getMahasiswaById($id_mahasiswa);
-            $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
+            $data['prodi'] = $this->model("ProdiModel")->getProdi();
             $this->view("Admin/Mahasiswa/edit", $data);
         } catch (Exception $e) {
             $this->view('exception', $e);
@@ -168,8 +168,8 @@ class Mahasiswa extends Controller
         try {
             $this->checkMethod("GET");
             $this->checkRole("Admin", "Super Admin");
-            $data['mhs'] = $this->model("MahasiswaModel")->getAllDataMahasiswa();
-            $data['prodi'] = $this->model("ProdiModel")->getAllProdi();
+            $data['mhs'] = $this->model("MahasiswaModel")->getMahasiswa();
+            $data['prodi'] = $this->model("ProdiModel")->getProdi();
             $data['peranMhs'] = $this->model("PeranMahasiswaModel")->getPeranMhs();
             $this->view("Admin/Mahasiswa/index", $data);
         } catch (Exception $e) {

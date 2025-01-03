@@ -3,7 +3,7 @@
 	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- Data Mahasiswa-->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Data Mahasiswa</p>
 	</section>
 
@@ -89,16 +89,8 @@
 			Daftar Mahasiswa
 		</div>
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
-			<!-- btn tambah -->
-			<section class="flex justify-end pr-6">
-				<a href="<?= BASEURL; ?>/Mahasiswa/create">
-					<button
-						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
-						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
-						<p>Tambah</p>
-					</button>
-				</a>
-			</section>
+			
+			
 
 			<!-- cari -->
 			<section class="flex justify-between p-6">
@@ -107,6 +99,14 @@
 					<img src="../../../public/img/Search (1).png" alt="logo" class="w-5 h-5" />
 					<input type="text" id="mhsSearch" placeholder="" class="bg-white flex focus:outline-none w-full" />
 				</div>
+				<!-- btn tambah -->
+				<a href="<?= BASEURL; ?>/Mahasiswa/create">
+					<button
+						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
+						<p>Tambah</p>
+					</button>
+				</a>
 			</section>
 
 			<!-- table  -->
@@ -141,22 +141,25 @@
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nim'] ?></td>
 								<td class="py-2 px-4 border border-blue-950 text-left"><?= $mhs['nama_prodi'] ?></td>
 								<td class="py-2 px-4 border border-blue-950">
-									<a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
-										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-											<img src="../../../public/img/Aksi.png" alt="Edit" class="" />
-										</button>
-									</a>
-									<a href="<?= BASEURL; ?>/Mahasiswa/edit/<?= $mhs['id_mahasiswa'] ?>">
-										<button class="bg-[#132145] py-2 px-2 rounded-md mr-2">
-											<img src="../../../public/img/Edit_fill.png" alt="logo" class="">
-										</button>
-									</a>
-									<a href="<?= BASEURL; ?>/Mahasiswa/delete/<?= $mhs['id_mahasiswa'] ?>">
-										<button class="bg-[#FF3B30] py-2 px-2 rounded-md">
-											<img src="../../../public/img/Trash.png" alt="logo" class="">
-										</button>
-									</a>
-								</td>
+    <div class="flex flex-col justify-center sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+        <a href="<?= BASEURL; ?>/Mahasiswa/show/<?= $mhs['id_mahasiswa'] ?>">
+            <button class="bg-[#132145] py-2 px-2 rounded-md">
+                <img src="../../../public/img/Aksi.png" alt="Edit" />
+            </button>
+        </a>
+        <a href="<?= BASEURL; ?>/Mahasiswa/edit/<?= $mhs['id_mahasiswa'] ?>">
+            <button class="bg-[#132145] py-2 px-2 rounded-md">
+                <img src="../../../public/img/Edit_fill.png" alt="Edit" />
+            </button>
+        </a>
+        <a href="<?= BASEURL; ?>/Mahasiswa/delete/<?= $mhs['id_mahasiswa'] ?>">
+            <button class="bg-[#FF3B30] py-2 px-2 rounded-md">
+                <img src="../../../public/img/Trash.png" alt="Delete" />
+            </button>
+        </a>
+    </div>
+</td>
+
 							</tr>
 							<?php
 							$no++;

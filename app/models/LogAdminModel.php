@@ -2,81 +2,82 @@
 
 class LogAdminModel extends Connection
 {
-    public function getAllLogAdmin($offset = 0, $limit = 10)
+    public function getLogAdmin($offset = 0, $limit = 10)
     {
-        $stmt = "SELECT l.*, a.nama FROM log_admin l
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("SELECT l.*, a.nama FROM log_admin l
                  JOIN admin a ON a.id_admin = l.id_admin
                  ORDER BY l.timestamp DESC
-                 OFFSET ? ROWS 
-                 FETCH NEXT ? ROWS ONLY;";
-        $params = array($offset, $limit);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-    
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+                 OFFSET :offset ROWS 
+                 FETCH NEXT :limit ROWS ONLY;");
+            } else {
+                $stmt = "SELECT l.*, a.nama FROM log_admin l
+                 JOIN admin a ON a.id_admin = l.id_admin
+                 ORDER BY l.timestamp DESC
+                 LIMIT :offset, :limit;";
+            }
+
+            $stmt->execute([
+                ':offset' => $offset,
+                ':limit' => $limit
+            ]);
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-    
-        $data = [];
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-    
-        if (empty($data)) {
-            return [];
-        }
-    
-        return $data;
     }
-    
+
     public function countLogs()
     {
-        $stmt = "SELECT COUNT(*) AS total FROM log_admin;";
-        $result = sqlsrv_query($this->conn, $stmt);
-    
-        if ($result === false) {
-            die(print_r(sqlsrv_errors(), true));
+        try {
+            $stmt = $this->pdo->prepare("SELECT COUNT(*) as total FROM log_admin");
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['total'] ?? 0;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-    
-        return $data['total'];
     }
-    
+
 
     public function getLogAdminByIdAdmin($id_admin)
     {
-
-        $stmt = "SELECT l.*, a.nama FROM log_admin l
+        try {
+            $stmt = $this->pdo->prepare("SELECT l.*, a.nama FROM log_admin l
                 JOIN admin a ON a.id_admin = l.id_admin 
-                WHERE l.id_admin = ?";
-        $params = array(
-            $id_admin
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+                WHERE l.id_admin = :id_admin");
+            $stmt->execute([':id_admin' => $id_admin]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function storeAdminLog($aksi, $keterangan)
     {
-        $stmt = "INSERT INTO log_admin(id_admin, aksi, keterangan, timestamp) VALUES(?, ?, ?, GETDATE())";
-        $params = array(
-            $_SESSION['user']['id_admin'],
-            $aksi,
-            $keterangan
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("INSERT INTO log_admin(id_admin, aksi, keterangan, timestamp) VALUES(:id_admin, :aksi, :keterangan, GETDATE())");
+            } else {
+                $stmt = $this->pdo->prepare("INSERT INTO log_admin(id_admin, aksi, keterangan, timestamp) VALUES(:id_admin, :aksi, :keterangan, NOW())");
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            $stmt->execute([
+                ':id_admin' => $_SESSION['admin']['id_admin'],
+                ':aksi' => $aksi,
+                ':keterangan' => $keterangan
+            ]);
+
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

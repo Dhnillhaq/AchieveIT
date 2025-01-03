@@ -4,82 +4,70 @@ class TingkatPenyelenggaraModel extends Connection
 {
     public function getTingkatPenyelenggara()
     {
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM tingkat_penyelenggara");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = "SELECT * FROM tingkat_penyelenggara";
-        $result = sqlsrv_query($this->conn, $stmt);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getTingkatPenyelenggaraById($id)
     {
-        $stmt = "SELECT * FROM tingkat_penyelenggara WHERE id_tingkat_penyelenggara = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM tingkat_penyelenggara WHERE id_tingkat_penyelenggara = :id_tingkat_penyelenggara");
+            $stmt->execute(['id_tingkat_penyelenggara' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO tingkat_penyelenggara(tingkat_penyelenggara, poin) VALUES(?, ?)";
-        $params = array(
-            $data['tingkat_penyelenggara'],
-            $data['poin']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO tingkat_penyelenggara (tingkat_penyelenggara, poin) VALUES (:tingkat_penyelenggara, :poin)");
+            $stmt->execute([
+                'tingkat_penyelenggara' => $data['tingkat_penyelenggara'],
+                'poin' => $data['poin']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE tingkat_penyelenggara SET tingkat_penyelenggara = ?, poin = ? WHERE id_tingkat_penyelenggara = ?";
-        $params = array(
-            $data['tingkat_penyelenggara'],
-            $data['poin'],
-            $data['id_tingkat_penyelenggara']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE tingkat_penyelenggara SET tingkat_penyelenggara = :tingkat_penyelenggara, poin = :poin WHERE id_tingkat_penyelenggara = :id_tingkat_penyelenggara");
+            $stmt->execute([
+                'tingkat_penyelenggara' => $data['tingkat_penyelenggara'],
+                'poin' => $data['poin'],
+                'id_tingkat_penyelenggara' => $data['id_tingkat_penyelenggara']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id)
     {
-        $stmt = "DELETE FROM tingkat_penyelenggara WHERE id_tingkat_penyelenggara = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM tingkat_penyelenggara WHERE id_tingkat_penyelenggara = :id_tingkat_penyelenggara");
+            $stmt->execute(['id_tingkat_penyelenggara' => $id]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

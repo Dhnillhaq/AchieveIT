@@ -5,75 +5,71 @@ class DosenModel extends Connection
     // Get All Dosen
     public function getDosen()
     {
-        $stmt = "SELECT * FROM dosen";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM dosen");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getDosenById($id)
     {
-        $stmt = "SELECT * FROM dosen WHERE id_dosen = ?";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM dosen WHERE id_dosen = :id");
+            $stmt->execute([':id' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO dosen(nama, nip) VALUES(?, ?)";
-        $params = array($data['nama'], $data['nip']);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO dosen (nip, nama) VALUES (:nip, :nama)");
+            $stmt->execute([
+                ':nip' => $data['nip'],
+                ':nama' => $data['nama']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_dosen)
     {
-        $stmt = "DELETE FROM dosen WHERE id_dosen = ?";
-        $params = array($id_dosen);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM dosen WHERE id_dosen = :id_dosen");
+            $stmt->execute([':id_dosen' => $id_dosen]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE dosen SET nip = ?, nama = ? WHERE id_dosen = ?";
-        $params = array(
-            $data['nip'],
-            $data['nama'],
-            $data['id_dosen']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE dosen SET nip = :nip, nama = :nama WHERE id_dosen = :id_dosen");
+            $stmt->execute([
+                ':id_dosen' => $data['id_dosen'],
+                ':nip' => $data['nip'],
+                ':nama' => $data['nama']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }
 

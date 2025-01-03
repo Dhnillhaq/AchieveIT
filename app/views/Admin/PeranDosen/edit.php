@@ -8,7 +8,7 @@
 	</section>
 
 	<!-- btn back -->
-	<section class="flex justify-end pr-6">
+	<section class="flex justify-end pt-20 md:pt-0 pr-6">
 		<a href="<?= BASEURL; ?>/Dosen/index">
 			<button
 				class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">

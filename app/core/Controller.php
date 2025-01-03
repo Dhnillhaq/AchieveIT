@@ -2,6 +2,12 @@
 
 require_once 'Validator.php';
 
+function clearSessionsOnShutdown()
+{
+    session_unset();
+    session_destroy();
+}
+
 class Controller
 {
     private $models = [];
@@ -13,6 +19,7 @@ class Controller
     public function __construct()
     {
         $this->validator = new Validator();
+        register_shutdown_function('clearSessionsOnShutdown');
     }
 
     protected function view($view, $data = [])

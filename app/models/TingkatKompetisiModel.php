@@ -4,81 +4,70 @@ class TingkatKompetisiModel extends Connection
 {
     public function getTingkatKompetisi()
     {
-        $stmt = "SELECT * FROM tingkat_kompetisi";
-        $result = sqlsrv_query($this->conn, $stmt);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM tingkat_kompetisi");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getTingkatKompetisiById($id)
     {
-        $stmt = "SELECT * FROM tingkat_kompetisi WHERE id_tingkat_kompetisi = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM tingkat_kompetisi WHERE id_tingkat_kompetisi = :id_tingkat_kompetisi");
+            $stmt->execute(['id_tingkat_kompetisi' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO tingkat_kompetisi(tingkat_kompetisi, poin) VALUES(?, ?)";
-        $params = array(
-            $data['tingkat_kompetisi'],
-            $data['poin']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO tingkat_kompetisi (tingkat_kompetisi, poin) VALUES (:tingkat_kompetisi, :poin)");
+            $stmt->execute([
+                'tingkat_kompetisi' => $data['tingkat_kompetisi'],
+                'poin' => $data['poin']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE tingkat_kompetisi SET tingkat_kompetisi = ?, poin = ? WHERE id_tingkat_kompetisi = ?";
-        $params = array(
-            $data['tingkat_kompetisi'],
-            $data['poin'],
-            $data['id_tingkat_kompetisi']
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("UPDATE tingkat_kompetisi SET tingkat_kompetisi = :tingkat_kompetisi, poin = :poin WHERE id_tingkat_kompetisi = :id_tingkat_kompetisi");
+            $stmt->execute([
+                'tingkat_kompetisi' => $data['tingkat_kompetisi'],
+                'poin' => $data['poin'],
+                'id_tingkat_kompetisi' => $data['id_tingkat_kompetisi']
+            ]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id)
     {
-        $stmt = "DELETE FROM tingkat_kompetisi WHERE id_tingkat_kompetisi = ?";
-        $params = array(
-            $id
-        );
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM tingkat_kompetisi WHERE id_tingkat_kompetisi = :id_tingkat_kompetisi");
+            $stmt->execute(['id_tingkat_kompetisi' => $id]);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 }

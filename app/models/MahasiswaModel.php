@@ -4,50 +4,44 @@ class MahasiswaModel extends Connection
 {
 
     // Get All Mahasiswa
-    public function getAllDataMahasiswa()
+    public function getMahasiswa()
     {
-        $stmt = "SELECT m.*, 
-		            p.*
-                    FROM mahasiswa m
-                    JOIN program_studi p ON m.id_prodi = p.id_prodi";
-        $result = sqlsrv_query($this->conn, $stmt);
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
+        try {
+            $stmt = $this->pdo->prepare("SELECT m.*, p.* FROM mahasiswa m JOIN program_studi p ON m.id_prodi = p.id_prodi");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-        return $data ?? [];
     }
 
     public function getMahasiswaByNim($nim, $status = "Valid")
     {
-        $stmt = "SELECT m.*, 
+        try {
+            $stmt = $this->pdo->prepare("SELECT m.*, 
 		            p.*
                     FROM mahasiswa m
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
-                    WHERE nim = ?
-                    AND status = ?";
-        $params = array($nim, $status);
+                    WHERE nim = :nim
+                    AND status = :status");
+            $stmt->execute(['nim' => $nim, 'status' => $status]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            if ($status == "Valid") {
+                $data[] = $this->getStatistikMhs($nim);
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data[] = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        if ($status == "Valid") {
-            $data[] = $this->getStatistikMhs($nim);
-        }
-
-        return $data;
     }
     public function getPrestasiMahasiswaByNim($nim)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 p.id_prestasi,
                 p.nama_kompetisi,
@@ -63,25 +57,23 @@ class MahasiswaModel extends Connection
                 JOIN kategori k ON p.id_kategori = k.id_kategori
                 JOIN juara j ON p.id_juara = j.id_juara
                 JOIN tingkat_kompetisi tk ON p.id_tingkat_kompetisi = tk.id_tingkat_kompetisi
-            WHERE m.nim = ?
+            WHERE m.nim = :nim
             ORDER BY p.created_at DESC;
-        ";
-        $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);    
+        ");
+            $stmt->execute(['nim' => $nim]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     // Get Prestasi ber-Anggota kan Mahasiswa   
     public function getStatistikMhs($nim)
     {
-        $stmt = "
+        try {
+            $stmt = $this->pdo->prepare("
             SELECT
                 total_prestasi,
                 total_poin,
@@ -99,226 +91,204 @@ class MahasiswaModel extends Connection
 			GROUP BY m.nim,
 			total_poin
             ) AS RankedMahasiswa
-            WHERE nim = ?;
-        ";
-        $params = array($nim, $nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+            WHERE nim = :nim;");
+            $stmt->execute(['nim' => $nim]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function countPrestMhs($nim)
     {
-        $stmt = "SELECT dbo.fn_HitungTotalPrestasi(?) AS total";
-        $params = array($nim);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+        try {
+            if (CONNECTION_TYPE == "sqlsrv") {
+                $stmt = $this->pdo->prepare("SELECT dbo.fn_HitungTotalPrestasi(:nim) AS total");
+            } else {
+                $stmt = $this->pdo->prepare("SELECT fn_HitungTotalPrestasi(:nim) AS total");
+            }
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            $stmt->execute(['nim' => $nim]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $data['total'] ?? 0;
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
     public function getMahasiswaById($id)
     {
-        $stmt = "SELECT m.*, 
+        try {
+            $stmt = $this->pdo->prepare("SELECT m.*, 
 		            p.*
                     FROM mahasiswa m
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
-                    WHERE id_mahasiswa = ?";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+                    WHERE id_mahasiswa = :id_mahasiswa");
+            $stmt->execute(['id_mahasiswa' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
     }
 
-    public function store($data, $validate = 'Valid')
+    public function store($data)
     {
-        $stmt = "INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, status, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $params = array(
-            $data['id_prodi'],
-            $data['nim'],
-            $data['nama'],
-            $data['tempat_lahir'],
-            $data['tanggal_lahir'],
-            $data['agama'],
-            $data['jenis_kelamin'],
-            $data['no_telepon'],
-            $data['email'],
-            $validate,
-            $data['password']
-        );
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO mahasiswa (id_prodi, nim, nama, tempat_lahir, tanggal_lahir, agama, jenis_kelamin, no_telepon, email, status, password) VALUES (:id_prodi, :nim, :nama, :tempat_lahir, :tanggal_lahir, :agama, :jenis_kelamin, :no_telepon, :email, :status, :password)");
+            $stmt->execute([
+                'id_prodi' => $data['id_prodi'],
+                'nim' => $data['nim'],
+                'nama' => $data['nama'],
+                'tempat_lahir' => $data['tempat_lahir'],
+                'tanggal_lahir' => $data['tanggal_lahir'],
+                'agama' => $data['agama'],
+                'jenis_kelamin' => $data['jenis_kelamin'],
+                'no_telepon' => $data['no_telepon'],
+                'email' => $data['email'],
+                'status' => $data['status'],
+                'password' => $data['password']
+            ]);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function delete($id_mahasiswa)
     {
-        $stmt = "DELETE FROM mahasiswa WHERE id_mahasiswa = ?";
-        $params = array($id_mahasiswa);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM mahasiswa WHERE id_mahasiswa = :id_mahasiswa");
+            $stmt->execute(['id_mahasiswa' => $id_mahasiswa]);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function update($data)
     {
-        $stmt = "UPDATE mahasiswa
+        try {
+            $stmt = $this->pdo->prepare("UPDATE mahasiswa
             SET
-                id_prodi = ?,
-                nim = ?,
-                nama = ?,
-                tempat_lahir = ?,
-                tanggal_lahir = ?,
-                agama = ?,
-                jenis_kelamin = ?,
-                no_telepon = ?,
-                email = ?, 
-                password = ? 
-            WHERE id_mahasiswa = ?;";
-        $params = array(
-            $data['id_prodi'],
-            $data['nim'],
-            $data['nama'],
-            $data['tempat_lahir'],
-            $data['tanggal_lahir'],
-            $data['agama'],
-            $data['jenis_kelamin'],
-            $data['no_telepon'],
-            $data['email'],
-            $data['password'],
-            $data['id_mahasiswa']
-        );
+                id_prodi = :id_prodi,
+                nim = :nim,
+                nama = :nama,
+                tempat_lahir = :tempat_lahir,
+                tanggal_lahir = :tanggal_lahir,
+                agama = :agama,
+                jenis_kelamin = :jenis_kelamin,
+                no_telepon = :no_telepon,
+                email = :email,
+                password = :password
+            WHERE id_mahasiswa = :id_mahasiswa");
+            $stmt->execute([
+                'id_prodi' => $data['id_prodi'],
+                'nim' => $data['nim'],
+                'nama' => $data['nama'],
+                'tempat_lahir' => $data['tempat_lahir'],
+                'tanggal_lahir' => $data['tanggal_lahir'],
+                'agama' => $data['agama'],
+                'jenis_kelamin' => $data['jenis_kelamin'],
+                'no_telepon' => $data['no_telepon'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'id_mahasiswa' => $data['id_mahasiswa']
+            ]);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function updateAccount($data)
     {
-        $status = "Not Validated";
-        $stmt = "UPDATE mahasiswa
+        try {
+            $status = "Not Validated";
+            $stmt = $this->pdo->prepare("UPDATE mahasiswa
             SET
-                id_prodi = ?,
-                nim = ?,
-                nama = ?,
-                tempat_lahir = ?,
-                tanggal_lahir = ?,
-                agama = ?,
-                jenis_kelamin = ?,
-                no_telepon = ?,
-                email = ?, 
-                password = ?,
-                status = ? 
-            WHERE nim = ?;";
-        $params = array(
-            $data['id_prodi'],
-            $data['nim'],
-            $data['nama'],
-            $data['tempat_lahir'],
-            $data['tanggal_lahir'],
-            $data['agama'],
-            $data['jenis_kelamin'],
-            $data['no_telepon'],
-            $data['email'],
-            $data['password'],
-            $status,
-            $data['nim']
-        );
+                id_prodi = :id_prodi,
+                nim = :nim,
+                nama = :nama,
+                tempat_lahir = :tempat_lahir,
+                tanggal_lahir = :tanggal_lahir,
+                agama = :agama,
+                jenis_kelamin = :jenis_kelamin,
+                no_telepon = :no_telepon,
+                email = :email,
+                password = :password,
+                status = :status
+            WHERE nim = :nim");
+            $stmt->execute([
+                'id_prodi' => $data['id_prodi'],
+                'nim' => $data['nim'],
+                'nama' => $data['nama'],
+                'tempat_lahir' => $data['tempat_lahir'],
+                'tanggal_lahir' => $data['tanggal_lahir'],
+                'agama' => $data['agama'],
+                'jenis_kelamin' => $data['jenis_kelamin'],
+                'no_telepon' => $data['no_telepon'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'status' => $status
+            ]);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function validate($id_mahasiswa, $id_admin, $status)
     {
-        $stmt = "UPDATE mahasiswa SET status = ?, id_admin = ?, validated_at = GETDATE() WHERE id_mahasiswa = ?";
-        $params = [
-            $status,
-            $id_admin,
-            $id_mahasiswa
-        ];
+        try {
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt = $this->pdo->prepare("UPDATE mahasiswa SET status = :status, id_admin = :id_admin, validated_at = GETDATE() WHERE id_mahasiswa = :id_mahasiswa");
+            } else {
+                $stmt = $this->pdo->prepare("UPDATE mahasiswa SET status = :status, id_admin = :id_admin, validated_at = NOW() WHERE id_mahasiswa = :id_mahasiswa");
+            }
+            $stmt->execute(['id_mahasiswa' => $id_mahasiswa, 'id_admin' => $id_admin, 'status' => $status]);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function getNotValidatedMahasiswa()
     {
-        $stmt = "SELECT m.*, 
+        try {
+            $stmt = $this->pdo->prepare("SELECT m.*, 
 		            p.*
                     FROM mahasiswa m
-                    JOIN program_studi p ON m.id_prodi = p.id_prodi WHERE m.status = 'Not Validated'";
-        $result = sqlsrv_query($this->conn, $stmt);
+                    JOIN program_studi p ON m.id_prodi = p.id_prodi WHERE m.status = 'Not Validated'");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-        return $data ?? [];
     }
 
     public function getNotValidatedMahasiswaById($id)
     {
-        $stmt = "SELECT m.*, 
+        $stmt = $this->pdo->prepare("SELECT m.*, 
 		            p.*
                     FROM mahasiswa m
                     JOIN program_studi p ON m.id_prodi = p.id_prodi
-                    WHERE id_mahasiswa = ? AND m.status = 'Not Validated'";
-        $params = array($id);
-        $result = sqlsrv_query($this->conn, $stmt, $params);
+                    WHERE id_mahasiswa = :id_mahasiswa AND m.status = 'Not Validated'");
+        $stmt->execute(['id_mahasiswa' => $id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
-        }
-
-        $data = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ?? [];
-
-        return $data;
+        return $data ?? [];
     }
 }
 ?>

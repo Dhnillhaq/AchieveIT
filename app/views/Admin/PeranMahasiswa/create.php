@@ -3,7 +3,7 @@
 	<?php require_once __DIR__ .'../../../templates/profiles.php'; ?>
 
 	<!-- Tambah Peran Mahasiswa-->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Tambah Peran Mahasiswa</p>
 	</section>
 

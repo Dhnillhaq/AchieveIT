@@ -5,41 +5,32 @@ class FilesModel extends Connection
 
     public function getFileById($id)
     {
-        $stmt = "SELECT * FROM files WHERE id_file = ?";
-        $params = array(
-            $id
-        );
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM files WHERE id_file = :id");
+            $stmt->execute([':id' => $id]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $result = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($result === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        return $result;
     }
 
     public function store($data)
     {
-        $stmt = "INSERT INTO files(nama_file, nama_asli, ukuran, tipe, path) OUTPUT INSERTED.id_file VALUES(?, ?, ?, ?, ?)";
-        $params = array(
-            $data['nama_file'],
-            $data['nama_asli'],
-            $data['ukuran'],
-            $data['tipe'],
-            $data['path']
-        );
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO files(nama_file, nama_asli, ukuran, tipe, path) VALUES(:nama_file, :nama_asli, :ukuran, :tipe, :path)");
+            $stmt->execute([
+                ':nama_file' => $data['nama_file'],
+                ':nama_asli' => $data['nama_asli'],
+                ':ukuran' => $data['ukuran'],
+                ':tipe' => $data['tipe'],
+                ':path' => $data['path']
+            ]);
 
-        $idResource = sqlsrv_query($this->conn, $stmt, $params);
-
-        if ($idResource === false) {
-            throw new Exception("Database Error: " . print_r(sqlsrv_errors(), true));
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
         }
-
-        // Fetch the inserted ID
-        $idRow = sqlsrv_fetch_array($idResource, SQLSRV_FETCH_NUMERIC);
-        $insertedId = $idRow[0]; // ID of the inserted row
-
-        return (int) $insertedId;
     }
 }

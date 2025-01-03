@@ -3,7 +3,7 @@
 	<?php require_once __DIR__ . '../../../templates/profiles.php'; ?>
 
 	<!-- data dosen-->
-	<section class="flex-col justify-start pl-6">
+	<section class="flex-col justify-start pt-20 md:pt-0 pl-6">
 		<p class="font-bold text-3xl">Data Dosen</p>
 	</section>
 
@@ -16,16 +16,7 @@
 			Data Dosen
 		</div>
 		<div class="static mt-5 p-6 bg-white border-2 rounded-lg border-[#FEC01A] space-y-2">
-			<!-- btn tambah -->
-			<section class="flex justify-end pr-6">
-				<a href="<?= BASEURL; ?>/Dosen/Create">
-					<button
-						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
-						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
-						<p>Tambah</p>
-					</button>
-				</a>
-			</section>
+			
 
 			<!-- cari -->
 			<section class="flex justify-between p-6">
@@ -35,7 +26,19 @@
 					<input type="text" id="dosenSearch" placeholder=""
 						class="bg-white flex focus:outline-none w-full" />
 				</div>
+
+				<!-- btn tambah -->
+				<a href="<?= BASEURL; ?>/Dosen/Create">
+					<button
+						class="flex items-center font-semibold space-x-2 py-2 px-6 text-white bg-[#132145] rounded-lg w-auto">
+						<img src="../../../public/img/add.png" alt="logo" class="w-5 h-5" />
+						<p>Tambah</p>
+					</button>
+				</a>
 			</section>
+			
+			
+
 
 			<!-- table -->
 			<div class="mt-10 overflow-x-auto bg-white shadow-md rounded-2xl">
