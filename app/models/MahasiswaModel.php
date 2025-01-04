@@ -81,7 +81,7 @@ class MahasiswaModel extends Connection
             FROM (
                 SELECT
                     nim,
-                    dbo.fn_HitungTotalPrestasi(?) AS total_prestasi,
+                    dbo.fn_HitungTotalPrestasi(:nim) AS total_prestasi,
                     total_poin,
                     RANK() OVER (ORDER BY total_poin DESC) AS 
                     peringkat_mapres

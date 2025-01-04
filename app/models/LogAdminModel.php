@@ -18,10 +18,9 @@ class LogAdminModel extends Connection
                  LIMIT :offset, :limit;";
             }
 
-            $stmt->execute([
-                ':offset' => $offset,
-                ':limit' => $limit
-            ]);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -70,7 +69,7 @@ class LogAdminModel extends Connection
             }
 
             $stmt->execute([
-                ':id_admin' => $_SESSION['admin']['id_admin'],
+                ':id_admin' => $_SESSION['user']['id_admin'],
                 ':aksi' => $aksi,
                 ':keterangan' => $keterangan
             ]);

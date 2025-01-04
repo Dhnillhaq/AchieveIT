@@ -19,7 +19,7 @@ class AuthModel extends Connection
     public function getAdmin()
     {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM mahasiswa");
+            $stmt = $this->pdo->prepare("SELECT * FROM admin");
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
