@@ -82,6 +82,7 @@
 				<option value="kategori">Kategori</option>
 				<option value="tingkat_kompetisi">Tingkat Kompetisi</option>
 				<option value="tingkat_penyelenggara">Tingkat Penyelenggara</option>
+				<option value="juara">Juara</option>
 			</select>
 		</div>
 	</section>
@@ -365,13 +366,15 @@
 								data: dataLingkaran.map(item => item.jumlah_prestasi),
 								borderWidth: 1,
 								backgroundColor: [
+									"#E3F2FD", // Lebih Muda
+									// "#B3D8F4", // Lebih Muda
 									"#C6E0F7",
 									"#70B1EA",
 									"#3F84D9",
 									"#3063C5",
 									"#274A9D",
+									"#13294B",
 									"#1D2C40",
-									"#CFE6FA",
 								],
 							},
 						],
@@ -388,13 +391,15 @@
 							data: dataPerTahun.map(item => item[selectedData[selected]]),
 							borderWidth: 1,
 							backgroundColor: [
+								"#E3F2FD", // Lebih Muda
+								// "#B3D8F4", // Lebih Muda
 								"#C6E0F7",
 								"#70B1EA",
 								"#3F84D9",
 								"#3063C5",
 								"#274A9D",
+								"#13294B",
 								"#1D2C40",
-								"#CFE6FA",
 							][index % 7],
 						})),
 					},
@@ -420,13 +425,15 @@
 							data: dataPerBulan.map(item => item[selectedData[selected]]),
 							borderWidth: 1,
 							backgroundColor: [
+								"#E3F2FD", // Lebih Muda
+								// "#B3D8F4", // Lebih Muda
 								"#C6E0F7",
 								"#70B1EA",
 								"#3F84D9",
 								"#3063C5",
 								"#274A9D",
+								"#13294B",
 								"#1D2C40",
-								"#CFE6FA",
 							][index % 7],
 						})),
 					},
