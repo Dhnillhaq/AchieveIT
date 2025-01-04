@@ -15,7 +15,10 @@ class Auth extends Controller
             if (!empty($user)) {
                 self::setSession($user);
                 Flasher::setFlash("Login", "Selamat Datang " . $_SESSION['user']['nama'], "success", $_SESSION['user']['role'] == "Admin" || $_SESSION['user']['role'] == "Super Admin" ? "Admin/index" : ($_SESSION['user']['role'] == "Ketua Jurusan" ? "Kajur/index" : "Mahasiswa/index"));
-                $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
+                if ($_SESSION['user']['role'] !== "Mahasiswa") {
+                    $this->model("LogAdminModel")->storeAdminLog("Login", "Sukses");
+                }
+
             } else {
                 $data["message"] = "Username atau password yang anda masukkan tidak ditemukan!";
                 Flasher::setFlash("Gagal", "Akun tidak ditemukan", "error");
@@ -26,17 +29,17 @@ class Auth extends Controller
 
     public function authenticateUser($username, $password)
     {
-        if (strlen($username) >= 10) {
+        if (strlen($username) <= 10) {
             $users = $this->model("AuthModel")->getMahasiswa();
             foreach ($users as $user) {
-                if ($user['nim'] == $username && $user['password'] == $password) {
+                if ($user['nim'] === $username && $user['password'] === $password) {
                     return $user;
                 }
             }
         } else {
             $users = $this->model("AuthModel")->getAdmin();
             foreach ($users as $user) {
-                if ($user['nip'] == $username && $user['password'] == $password) {
+                if ($user['nip'] === $username && $user['password'] === $password) {
                     return $user;
                 }
             }
@@ -131,7 +134,7 @@ class Auth extends Controller
                 "jenis_kelamin" => $user['jenis_kelamin'],
                 "no_telepon" => $user['no_telepon'],
                 "email" => $user['email'],
-                "prodi" => $user['nama_prodi'],
+                "prodi" => $user['id_prodi'],
                 "role" => "Mahasiswa"
             ];
         }

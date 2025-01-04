@@ -8,9 +8,9 @@ class Connection
     {
         try {
             if (CONNECTION_TYPE == 'sqlsrv') {
-                $this->pdo = new PDO(CONNECTION_TYPE . ":Server=" . SERVER_NAME . ";Database=" . DATABASE_NAME . ";CharacterSet=UTF-8", DB_USERNAME, DB_PASS);
+                $this->pdo = new PDO(CONNECTION_TYPE . ":Server=" . SERVER_NAME . ";Database=" . DATABASE_NAME . ";TrustServerCertificate=true");
             } else {
-                $this->pdo = new PDO(CONNECTION_TYPE . ":host=" . DB_HOST . ";dbname=" . DATABASE_NAME . ";charset=utf8mb4", DB_USERNAME, DB_PASS);
+                $this->pdo = new PDO(CONNECTION_TYPE . ":host=" . DB_HOST . ";dbname=" . DATABASE_NAME, DB_USERNAME, DB_PASS);
             }
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
