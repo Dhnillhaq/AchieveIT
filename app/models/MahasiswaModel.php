@@ -84,6 +84,7 @@ class MahasiswaModel extends Connection
                     dbo.fn_HitungTotalPrestasi(?) AS total_prestasi,
                     SUM(p.poin_prestasi) AS total_poin,
                     RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS 
+
                     peringkat_mapres
                 FROM mahasiswa m
             JOIN prestasi_mahasiswa pm ON m.id_mahasiswa = pm.id_mahasiswa
