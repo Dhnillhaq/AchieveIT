@@ -60,11 +60,11 @@
             <div class="flex flex-col space-y-4">
                 <div class="flex flex-col justify-start items-start pt-5">
                     <p class="text-[#757575]">Tanggal Mulai Kompetisi</p>
-                    <p class="font-semibold"><?= $data['prestasi']['tanggal_mulai_kompetisi']->format("d-m-Y") ?></p>
+                    <p class="font-semibold"><?= $data['prestasi']['tanggal_mulai_kompetisi']?></p>
                 </div>
                 <div class="flex flex-col justify-start items-start pt-5">
                     <p class="text-[#757575]">Tanggal Selesai Kompetisi</p>
-                    <p class="font-semibold"><?= $data['prestasi']['tanggal_selesai_kompetisi']->format("d-m-Y") ?></p>
+                    <p class="font-semibold"><?= $data['prestasi']['tanggal_selesai_kompetisi']?></p>
                 </div>
                 <div class="flex flex-col justify-start items-start pt-5">
                     <p class="text-[#757575]">Tempat Kompetisi</p>

@@ -31,13 +31,13 @@
             </div>
             <div class="flex flex-col justify-start items-start pt-5">
                 <p class="text-[#757575]">Total Poin</p>
-                <p class="font-semibold"><?= $_SESSION['user']['total_poin'] ?></p>
+                <p class="font-semibold"><?= $data['statistik']['total_poin'] ?></p>
             </div>
         </div>
         <div class="flex flex-col space-y-4">
             <div class="flex flex-col justify-start items-start pt-5">
                 <p class="text-[#757575]">Tanggal Lahir</p>
-                <p class="font-semibold"><?= $_SESSION['user']['tanggal_lahir']->format('d-m-Y') ?></p>
+                <p class="font-semibold"><?= $_SESSION['user']['tanggal_lahir']?></p>
             </div>
             <div class="flex flex-col justify-start items-start pt-5">
                 <p class="text-[#757575]">Tempat Lahir</p>

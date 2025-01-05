@@ -67,14 +67,14 @@
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tanggal Mulai Kompetisi <span
 						class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_mulai" required
-					value="<?= $data['prestasi']['tanggal_mulai_kompetisi']->format("Y-m-d") ?>"
+					value="<?= $data['prestasi']['tanggal_mulai_kompetisi'] ?>"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/2 lg:w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- tanggal selesai -->
 				<label for="nama" class="block text-gray-700 font-medium pt-6">Tanggal Selesai Kompetisi
 					<span class="text-red-600">*</span></label>
 				<input type="date" name="tanggal_selesai" required
-					value="<?= $data['prestasi']['tanggal_selesai_kompetisi']->format("Y-m-d") ?>"
+					value="<?= $data['prestasi']['tanggal_selesai_kompetisi'] ?>"
 					class="placeholder-black border rounded-lg px-2 py-1 w-1/2 lg:w-1/6 bg-white shadow-gray-400 shadow-sm" />
 
 				<!-- penyelenggara -->

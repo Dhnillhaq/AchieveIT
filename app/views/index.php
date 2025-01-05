@@ -113,9 +113,9 @@
           <span class="text-sm md:text-base">entri</span>
           <select id="yearSelect" name="year" class="ml-2 border rounded-lg px-2 py-1 text-sm bg-white shadow-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="all">Seluruh Waktu</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
+            <?php foreach ($data['tahun'] as $tahun) { ?>
+								<option value="<?= $tahun['tahun']; ?>"><?= $tahun['tahun']; ?></option>
+							<?php } ?>
           </select>
         </div>
       </div>

@@ -47,9 +47,9 @@ class Admin extends Controller
         header('Content-Type: application/json');
         echo json_encode([
             'data' => $data,
-            'total' => $totalPrestasi,   // Total data untuk menghitung pagination
-            'page' => $page,             // Halaman saat ini
-            'limit' => $limit            // Jumlah data per halaman
+            'total' => $totalPrestasi,   
+            'page' => $page,             
+            'limit' => $limit            
         ]);
     }
 
@@ -131,13 +131,8 @@ class Admin extends Controller
     public function profil()
     {
         $this->checkMethod("GET");
-        $this->checkRole("Admin", "Super Admin");
-        if ($_SESSION['user']['role'] == "Super Admin") {
-            $data['log'] = $this->model("LogAdminModel")->getLogAdmin();
-        } else {
-            $data['log'] = $this->model("LogAdminModel")->getLogAdminByIdAdmin($_SESSION['user']['id_admin']);
-        }
-        $this->view("Admin/profilAdmin", $data);
+        $this->checkRole("Admin", "Super Admin");        
+        $this->view("Admin/profilAdmin");
     }
 
     public function getLogs($pages, $limits = 10)

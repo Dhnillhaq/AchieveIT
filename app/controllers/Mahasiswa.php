@@ -9,6 +9,7 @@ class Mahasiswa extends Controller
             $this->checkRole("Mahasiswa");
             $data = [
                 'mhs' => $this->model('MahasiswaModel')->getMahasiswaByNim($_SESSION['user']['nim']),
+                'statistik' => $this->model('MahasiswaModel')->getStatistikMhs($_SESSION['user']['nim']),
                 'tahun' => $this->model('PrestasiModel')->getTahunPrestasi()
             ];
 
@@ -39,7 +40,8 @@ class Mahasiswa extends Controller
     {
         $this->checkMethod("GET");
         $this->checkRole("Mahasiswa");
-        $this->view('Mahasiswa/profilMahasiswa');
+        $data['statistik' ] = $this->model('MahasiswaModel')->getStatistikMhs($_SESSION['user']['nim']);
+        $this->view('Mahasiswa/profilMahasiswa', $data);
 
     }
 

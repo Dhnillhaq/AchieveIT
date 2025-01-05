@@ -30,8 +30,8 @@
                 <p class="font-semibold"><?= $data['nama_prodi']?></p>
             </div>
             <div class="flex flex-col justify-start items-start">
-                <p class="text-[#757575]">Total Poin</p>
-                <p class="font-semibold"><?= $data['total_poin']?></p>
+                <p class="text-[#757575]">No Telepon</p>
+                <p class="font-semibold"><?= $data['no_telepon']?></p>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
         <div class="flex flex-col space-y-4">
             <div class="flex flex-col justify-start items-start">
                 <p class="text-[#757575]">Tanggal Lahir</p>
-                <p class="font-semibold"><?= $data['tanggal_lahir']->format('d-m-Y')?></p>
+                <p class="font-semibold"><?= $data['tanggal_lahir']?></p>
             </div>
             <div class="flex flex-col justify-start items-start">
                 <p class="text-[#757575]">Tempat Lahir</p>
@@ -56,11 +56,7 @@
         </div>
 
         <!-- Kolom 3 -->
-        <div class="flex flex-col space-y-4">
-            <div class="flex flex-col justify-start items-start">
-                <p class="text-[#757575]">No Telepon</p>
-                <p class="font-semibold"><?= $data['no_telepon']?></p>
-            </div>
+        <div class="flex flex-col space-y-4">            
             <div class="flex flex-col justify-start items-start">
                 <p class="text-[#757575]">Email</p>
                 <p class="font-semibold"><?= $data['email']?></p>

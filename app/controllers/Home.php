@@ -5,7 +5,8 @@ class Home extends Controller
     public function index()
     {
         $this->checkMethod("GET");
-        $this->view('index');
+        $data['tahun'] = $this->model('PrestasiModel')->getTahunPrestasi();
+        $this->view('index', $data);
     }
 
     public function getDataRankingPrestasi()
