@@ -7,7 +7,7 @@
 		<p class="font-bold text-3xl">Tambah prestasi</p>
 	</section>
 
-	<form action="<?= BASEURL; ?>/Prestasi/store " method="POST" enctype="multipart/form-data">
+	<form action="<?= BASEURL; ?>/Prestasi/store " method="POST" enctype="multipart/form-data" id="myForm">
 		<!-- form -->
 		<section class="relative p-6">
 			<!-- Static parent -->
@@ -119,9 +119,10 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-1" name="surat_tugas" required>
+						<input type="file" class="hidden" id="file-input-1" name="surat_tugas">
 					</label>
 				</div>
+				<span id="error-message-1" class="text-red-600 text-xs mt-1"></span>
 
 				<!-- poster -->
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Poster <span
@@ -146,9 +147,10 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-2" name="poster" required>
+						<input type="file" class="hidden" id="file-input-2" name="poster">
 					</label>
 				</div>
+				<span id="error-message-2" class="text-red-600 text-xs mt-1"></span>
 
 				<!-- foto -->
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">
@@ -174,9 +176,10 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-3" name="foto_juara" required>
+						<input type="file" class="hidden" id="file-input-3" name="foto_juara">
 					</label>
 				</div>
+				<span id="error-message-3" class="text-red-600 text-xs mt-1"></span>
 
 				<!-- sertif -->
 				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Sertifikat <span
@@ -203,12 +206,13 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-4" name="sertifikat" required>
+						<input type="file" class="hidden" id="file-input-4" name="sertifikat">
 					</label>
 				</div>
+				<span id="error-message-4" class="text-red-600 text-xs mt-1"></span>
 
 				<!-- proposal -->
-				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal
+				<label for=" nama" class="block text-gray-700 font-medium pt-6">File Proposal (Optional)
 				</label>
 				<div class="flex items-center ">
 					<label
@@ -232,7 +236,7 @@
 							</div>
 							<p class="text-xs text-gray-500">maksimal ukuran : 5mb</p>
 						</div>
-						<input type="file" class="hidden" id="file-input-5" name="proposal" required>
+						<input type="file" class="hidden" id="file-input-5" name="proposal">
 					</label>
 				</div>
 			</div>
@@ -539,13 +543,15 @@
 }`;
 	document.head.appendChild(style);
 
-
-	const uploadAreas = document.querySelectorAll('.upload-areas'); // Mengambil semua label yang berfungsi sebagai area upload
+	const form = document.getElementById('myForm');
+	const uploadAreas = document.querySelectorAll('.upload-areas');
 
 	uploadAreas.forEach((uploadArea, index) => {
 		const fileInput = uploadArea.querySelector('input[type="file"]');
 		const fileNameDisplay = document.getElementById(`file-name-${index + 1}`);
+		const errorMessage = document.getElementById(`error-message-${index + 1}`); // Ambil elemen pesan error
 
+		// Klik untuk membuka input file
 		uploadArea.addEventListener('click', () => {
 			fileInput.click();
 		});
@@ -563,13 +569,41 @@
 			e.preventDefault();
 			uploadArea.classList.remove('active');
 			const files = e.dataTransfer.files;
-			handleFiles(files, fileNameDisplay, fileInput); 
+			handleFiles(files, fileNameDisplay, fileInput);
 		});
 
 		fileInput.addEventListener('change', (e) => {
 			const files = e.target.files;
-			handleFiles(files, fileNameDisplay, fileInput); 
+			handleFiles(files, fileNameDisplay, fileInput);
 		});
+	});
+
+	// Validasi saat submit form
+	form.addEventListener('submit', (e) => {
+		let isValid = true; // Flag untuk menandakan validasi
+
+		uploadAreas.forEach((uploadArea, index) => {
+			const fileInput = uploadArea.querySelector('input[type="file"]');
+			const errorMessage = document.getElementById(`error-message-${index + 1}`);
+
+			if (errorMessage) {
+				// Reset pesan error
+				errorMessage.textContent = '';
+				
+				// Cek apakah fileInput kosong
+				if (!fileInput.files.length) {
+					isValid = false; // Set flag ke false jika ada input file yang kosong
+					errorMessage.textContent = '*File harus diunggah.'; // Tampilkan pesan error
+				} else {
+					errorMessage.textContent = '';
+				}
+			}
+		});
+
+		// Jika tidak valid, hentikan submit
+		if (!isValid) {
+			e.preventDefault(); // Hentikan submit form
+		}
 	});
 
 	function handleFiles(files, fileNameDisplay, fileInput) {
@@ -585,8 +619,9 @@
 					const nameWithoutExt = fileName.substring(0, maxLength); // Potong nama
 					fileName = nameWithoutExt + '...' + ext; // Tambahkan elipsis sebelum ekstensi
 				}
-
+				
 				fileNameDisplay.textContent = fileName; // Menampilkan nama file yang dipotong
+				
 
 				// Mengisi input file dengan file yang didrop
 				const dataTransfer = new DataTransfer();
@@ -595,7 +630,7 @@
 			}
 		}
 	}
-
+	// Fungsi validasi file
 	function validateFile(file) {
 		const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png'];
 		const maxSize = 5 * 1024 * 1024; // 5MB
@@ -612,6 +647,4 @@
 
 		return true;
 	}
-
-
 </script>
