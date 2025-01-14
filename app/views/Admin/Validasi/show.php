@@ -42,7 +42,7 @@
     <div class="flex flex-col space-y-4 w-full md:w-1/3">
         <div class="flex flex-col justify-start items-start pt-5">
             <p class="text-[#757575]">Tanggal Lahir</p>
-            <p class="font-semibold"><?= $data['tanggal_lahir']->format('d-m-Y') ?></p>
+            <p class="font-semibold"><?= $data['tanggal_lahir'] ?></p>
         </div>
 
         <div class="flex flex-col justify-start items-start pt-5">

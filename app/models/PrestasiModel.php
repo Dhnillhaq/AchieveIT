@@ -204,8 +204,11 @@ class PrestasiModel extends Connection
                 )
                 SELECT COUNT(*) as total
                 FROM Ranking
-				WHERE nama LIKE :keyword OR nim LIKE :keyword;");
-            $stmt->execute(['keyword' => "%" . $keyword . "%"]);
+				WHERE nama LIKE :keyword1 OR nim LIKE :keyword2;");
+            $stmt->execute([
+                'keyword1' => "%" . $keyword . "%",
+                'keyword2' => "%" . $keyword . "%"
+            ]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $data['total'] ?? 0;
@@ -238,8 +241,13 @@ class PrestasiModel extends Connection
             )
             SELECT COUNT(*) as total
             FROM Ranking
-            WHERE nama LIKE :keyword OR nim LIKE :keyword;");
-            $stmt->execute(['keyword' => "%" . $keyword . "%", 'year' => $year]);
+            WHERE nama LIKE :keyword1 OR nim LIKE :keyword2;");
+            $stmt->execute([
+                'keyword1' => "%" . $keyword . "%",
+                'keyword2' => "%" . $keyword . "%",
+                'year' => $year
+            ]);
+            // $stmt->execute(['keyword' => "%" . $keyword . "%", 'year' => $year]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $data['total'] ?? 0;
@@ -251,8 +259,13 @@ class PrestasiModel extends Connection
     public function getRankingPrestasi($keyword = "", $limit = 60, $offset = 0)
     {
         try {
+            // Pastikan nilai limit dan offset adalah integer
+            $limit = (int) $limit;
+            $offset = (int) $offset;
+    
             if (CONNECTION_TYPE === 'sqlsrv') {
-                $stmt = $this->pdo->prepare("WITH Ranking AS (
+                // Query untuk SQL Server
+                $query = "WITH Ranking AS (
                     SELECT
                         m.nama,
                         m.nim,
@@ -270,110 +283,142 @@ class PrestasiModel extends Connection
                 )
                 SELECT *
                 FROM Ranking
-                WHERE nama LIKE :keyword OR nim LIKE :keyword
+                WHERE nama LIKE :keyword1 OR nim LIKE :keyword2
                 ORDER BY rank
-                OFFSET :offset ROWS
-                FETCH NEXT :limit ROWS ONLY;");
-
+                OFFSET $offset ROWS
+                FETCH NEXT $limit ROWS ONLY;";
             } else {
-                $stmt = $this->pdo->prepare("WITH Ranking AS (
-                SELECT
-                    m.nama,
-                    m.nim,
-                    prodi.nama_prodi,
-                    SUM(p.poin_prestasi) AS total_poin,
-                    RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
-                FROM prestasi_mahasiswa pm
-                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
-                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
-                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                GROUP BY
-                    m.nama,
-                    m.nim,
-                    prodi.nama_prodi
-            )
-            SELECT *
-            FROM Ranking
-            WHERE nama LIKE :keyword OR nim LIKE :keyword
-            ORDER BY rank
-            LIMIT :offset, :limit;"
-                );
-            }
-
-            $stmt->execute(['keyword' => "%" . $keyword . "%", 'limit' => $limit, 'offset' => $offset]);
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            return $data ?? [];
-        } catch (PDOException $e) {
-            throw new Exception("Database Error: " . $e->getMessage());
-        }
-    }
-
-    public function getRankingPrestasiPerTahun($keyword, $year, $limit, $offset)
-    {
-        try {
-            if (CONNECTION_TYPE === 'sqlsrv') {
-                $stmt = $this->pdo->prepare("WITH Ranking AS (
+                // Query untuk MySQL
+                $query = "WITH Ranking AS (
                     SELECT
-                    	m.nama,
-                    	m.nim,
-                    	prodi.nama_prodi,
-                    	SUM(p.poin_prestasi) AS total_poin,
-                    	YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        SUM(p.poin_prestasi) AS total_poin,
                         RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
                     FROM prestasi_mahasiswa pm
                     JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
                     JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
                     JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                    WHERE YEAR(p.tanggal_selesai_kompetisi) = ? 
                     GROUP BY
-                    	m.nama,
-                    	m.nim,
-                    	prodi.nama_prodi,
-                    	YEAR(p.tanggal_selesai_kompetisi)
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi
                 )
                 SELECT *
                 FROM Ranking
-                WHERE nim LIKE :keyword OR nama LIKE :keyword
+                WHERE nama LIKE :keyword1 OR nim LIKE :keyword2
                 ORDER BY rank
-                OFFSET :offset ROWS
-                FETCH NEXT :limit ROWS ONLY;");
-            } else {
-                $stmt = $this->pdo->prepare("WITH Ranking AS (
-                SELECT
-                    m.nama,
-                    m.nim,
-                    prodi.nama_prodi,
-                    SUM(p.poin_prestasi) AS total_poin,
-                    YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
-                    RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
-                FROM prestasi_mahasiswa pm
-                JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
-                JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
-                JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
-                WHERE YEAR(p.tanggal_selesai_kompetisi) = :year
-                GROUP BY
-                    m.nama,
-                    m.nim,
-                    prodi.nama_prodi,
-                    YEAR(p.tanggal_selesai_kompetisi)
-            )
-            SELECT *
-            FROM Ranking
-            WHERE nim LIKE :keyword OR nama LIKE :keyword
-            ORDER BY rank
-            LIMIT :offset, :limit;");
+                LIMIT :limit OFFSET :offset;";
             }
-
-            $stmt->execute(['keyword' => "%" . $keyword . "%", 'year' => $year, 'limit' => $limit, 'offset' => $offset]);
+    
+            // Eksekusi query dengan parameter binding
+            $stmt = $this->pdo->prepare($query);
+    
+            // Bind parameter
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $stmt->execute([
+                    'keyword1' => "%" . $keyword . "%",
+                    'keyword2' => "%" . $keyword . "%"
+                ]);
+            } else {
+                $stmt->execute([
+                    'keyword1' => "%" . $keyword . "%",
+                    'keyword2' => "%" . $keyword . "%",
+                    'limit' => $limit,
+                    'offset' => $offset
+                ]);
+            }
+    
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    
             return $data ?? [];
-
         } catch (PDOException $e) {
             throw new Exception("Database Error: " . $e->getMessage());
         }
     }
+    
+
+
+    public function getRankingPrestasiPerTahun($keyword, $year, $limit, $offset)
+    {
+        try {
+            // Pastikan nilai limit dan offset adalah integer
+            $limit = (int) $limit;
+            $offset = (int) $offset;
+    
+            if (CONNECTION_TYPE === 'sqlsrv') {
+                $query = "WITH Ranking AS (
+                    SELECT
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        SUM(p.poin_prestasi) AS total_poin,
+                        YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    WHERE YEAR(p.tanggal_selesai_kompetisi) = :year
+                    GROUP BY
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        YEAR(p.tanggal_selesai_kompetisi)
+                )
+                SELECT *
+                FROM Ranking
+                WHERE nim LIKE :keyword1 OR nama LIKE :keyword2
+                ORDER BY rank
+                OFFSET :offset ROWS
+                FETCH NEXT :limit ROWS ONLY;";
+            } else {
+                $query = "WITH Ranking AS (
+                    SELECT
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        SUM(p.poin_prestasi) AS total_poin,
+                        YEAR(p.tanggal_selesai_kompetisi) AS tahun_prestasi,
+                        RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS rank
+                    FROM prestasi_mahasiswa pm
+                    JOIN mahasiswa m ON pm.id_mahasiswa = m.id_mahasiswa
+                    JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+                    JOIN program_studi prodi ON m.id_prodi = prodi.id_prodi
+                    WHERE YEAR(p.tanggal_selesai_kompetisi) = :year
+                    GROUP BY
+                        m.nama,
+                        m.nim,
+                        prodi.nama_prodi,
+                        YEAR(p.tanggal_selesai_kompetisi)
+                )
+                SELECT *
+                FROM Ranking
+                WHERE nim LIKE :keyword1 OR nama LIKE :keyword2
+                ORDER BY rank
+                LIMIT :offset, :limit;";
+            }
+    
+            // Eksekusi query dengan parameter binding
+            $stmt = $this->pdo->prepare($query);
+    
+            // Bind parameter untuk kedua jenis koneksi
+            $stmt->bindValue(':year', $year, PDO::PARAM_INT);
+            $stmt->bindValue(':keyword1', "%" . $keyword . "%", PDO::PARAM_STR);
+            $stmt->bindValue(':keyword2', "%" . $keyword . "%", PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $data ?? [];
+        } catch (PDOException $e) {
+            throw new Exception("Database Error: " . $e->getMessage());
+        }
+    }
+    
 
     public function getStatistikPrestasi()
     {

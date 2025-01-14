@@ -19,7 +19,7 @@
 	</section>
 
 	<?php 
-	$tanggal = $data['mahasiswa']['tanggal_lahir']->format('Y-m-d');
+	$tanggal = $data['mahasiswa']['tanggal_lahir'];
 	?>
 
 	<!-- Form -->
