@@ -81,11 +81,15 @@ class MahasiswaModel extends Connection
             FROM (
                 SELECT
                     nim,
-                    dbo.fn_HitungTotalPrestasi(:nim) AS total_prestasi,
-                    total_poin,
-                    RANK() OVER (ORDER BY total_poin DESC) AS 
+                    dbo.fn_HitungTotalPrestasi(m.nim) AS total_prestasi,
+                    SUM(p.poin_prestasi) AS total_poin,
+                    RANK() OVER (ORDER BY SUM(p.poin_prestasi) DESC) AS 
                     peringkat_mapres
-                FROM mahasiswa
+                FROM mahasiswa m
+            JOIN prestasi_mahasiswa pm ON m.id_mahasiswa = pm.id_mahasiswa
+            JOIN prestasi p ON pm.id_prestasi = p.id_prestasi
+			GROUP BY m.nim,
+			total_poin
             ) AS RankedMahasiswa
             WHERE nim = :nim;");
             $stmt->execute(['nim' => $nim]);
